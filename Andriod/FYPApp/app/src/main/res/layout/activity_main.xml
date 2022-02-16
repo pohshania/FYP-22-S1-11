@@ -96,10 +96,9 @@
         android:textColor="#FFB900"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        app:layout_constraintVertical_bias="0.452" />
+        app:layout_constraintVertical_bias="0.266" />
 
     <Button
         android:id="@+id/signupButton"
@@ -113,7 +112,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpTextView"
-        app:layout_constraintVertical_bias="0.324" />
+        app:layout_constraintVertical_bias="0.242" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

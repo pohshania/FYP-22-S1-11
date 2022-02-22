@@ -57,56 +57,62 @@
 
     <EditText
         android:id="@+id/nameEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="35dp"
+        android:background="@drawable/back"
         android:ems="10"
         android:gravity="center"
         android:hint="Enter Your Name"
         android:inputType="textPersonName"
-        android:textColor="#FFB900"
+        android:textColor="#061551"
+        android:textColorHint="#061551"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.823"
+        app:layout_constraintHorizontal_bias="0.801"
         app:layout_constraintStart_toEndOf="@+id/nameTextView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.342" />
+        app:layout_constraintVertical_bias="0.35" />
 
     <EditText
         android:id="@+id/editTextTextPersonName3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="35dp"
         android:layout_marginTop="15dp"
+        android:background="@drawable/back"
         android:ems="10"
         android:gravity="center"
         android:hint="Enter Your Email"
         android:inputType="textPersonName"
-        android:textColor="#FFB900"
+        android:textColor="#061551"
+        android:textColorHint="#061551"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.811"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toEndOf="@+id/emailTextView"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.029" />
 
     <EditText
         android:id="@+id/pwEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="35dp"
         android:layout_marginTop="15dp"
+        android:background="@drawable/back"
         android:ems="10"
         android:gravity="center"
         android:hint="Enter Password"
         android:inputType="textPersonName"
-        android:textColor="#FFB900"
+        android:textColor="#061551"
+        android:textColorHint="#061551"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintHorizontal_bias="0.681"
         app:layout_constraintStart_toEndOf="@+id/pwTextView"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.034" />
 
     <Button
         android:id="@+id/signNowButton"

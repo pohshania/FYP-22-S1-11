@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -30,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     SettingsFragment settingsFragment = new SettingsFragment();
 
     // 1 -> admin,  0 -> client
-    private int admin = 1;
+    private int admin = 0;
 
 
     @Override
@@ -76,5 +80,24 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+        // MJ - Top toolbar ------------------------------------------------------------------------------------
+        ImageView logoIcon = findViewById(R.id.logo);
+        ImageView accountIcon = findViewById(R.id.account);
+        TextView title = findViewById(R.id.toolbar_title);
+
+        logoIcon.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Toast.makeText( HomeActivity.this, "You clicked in the logo icon", Toast.LENGTH_SHORT).show();
+                // Go to Homepage when logo is clicked
+            }
+        });
+        accountIcon.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Toast.makeText( HomeActivity.this, "You clicked in the account icon", Toast.LENGTH_SHORT).show();
+            }
+        });
+        title.setText("Creeping Donut");
     }
 }

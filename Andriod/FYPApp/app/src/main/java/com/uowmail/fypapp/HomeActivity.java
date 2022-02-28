@@ -33,8 +33,8 @@ public class HomeActivity extends AppCompatActivity {
     NotificationFragment notificationFragment = new NotificationFragment();
     SettingsFragment settingsFragment = new SettingsFragment();
 
-    // 1 -> admin,  0 -> client
-    private int admin = 0;
+    // true -> admin,  false -> client
+    private boolean admin;
 
 
     @Override
@@ -46,8 +46,13 @@ public class HomeActivity extends AppCompatActivity {
         // MJ - bottom nav bar -------------------------------------------------------------------------------
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+        if (getIntent().getSerializableExtra("adminbool").toString().equals("admin"))
+            admin = true;
+        else
+            admin = false;
+
         // replace fragment (id = container) with admin/clientHomeFragment
-        if (admin == 1)
+        if (admin == true)
             getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
         else
             getSupportFragmentManager().beginTransaction().replace(R.id.container, clientHomeFragment).commit();
@@ -62,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected( MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.home:
-                        if (admin == 1){
+                        if (admin == true){
                             getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
                         }
                         else

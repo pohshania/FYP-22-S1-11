@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#061551"
     android:padding="16dp">
 
@@ -24,6 +26,7 @@
             android:textSize="20sp"
             android:textColor="@color/white"
             android:text="My Application"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,6 +34,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_baseline_person_24"/>
+
     </RelativeLayout>
 
 </RelativeLayout>

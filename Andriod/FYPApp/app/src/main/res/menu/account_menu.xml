@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/usertype"
+        android:title="user type"
+        android:icon="@drawable/ic_baseline_home_24"
+        />
+
+    <item
+    android:id="@+id/username"
+    android:title="user name"
+    android:icon="@drawable/ic_baseline_home_24"
+    />
+<item
+    android:id="@+id/settings"
+    android:title="settings"
+    android:icon="@drawable/ic_baseline_notifications_24"
+    />
+<item
+    android:id="@+id/logout"
+    android:title="logout"
+    android:icon="@drawable/ic_baseline_insert_drive_file_24"
+    />
+</menu>

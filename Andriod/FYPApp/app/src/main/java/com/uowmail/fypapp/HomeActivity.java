@@ -1,11 +1,16 @@
 package com.uowmail.fypapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class HomeActivity extends AppCompatActivity {
+
 
     BottomNavigationView bottomNavigationView;
 
@@ -100,9 +106,34 @@ public class HomeActivity extends AppCompatActivity {
         accountIcon.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                showMenu(v);
                 Toast.makeText( HomeActivity.this, "You clicked in the account icon", Toast.LENGTH_SHORT).show();
             }
         });
         title.setText("Creeping Donut");
     }
+
+    // MJ - account menu
+    private void showMenu(View v){
+        PopupMenu popupMenu = new PopupMenu(HomeActivity.this, v);
+        popupMenu.getMenuInflater().inflate(R.menu.account_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if(menuItem.getItemId() == R.id.usertype)
+                    Toast.makeText( HomeActivity.this, "You clicked in the usertype", Toast.LENGTH_SHORT).show();
+                if(menuItem.getItemId() == R.id.username)
+                    Toast.makeText( HomeActivity.this, "You clicked in the username", Toast.LENGTH_SHORT).show();
+                if(menuItem.getItemId() == R.id.settings)
+                    Toast.makeText( HomeActivity.this, "You clicked in the settings", Toast.LENGTH_SHORT).show();
+                if(menuItem.getItemId() == R.id.logout)
+                    startActivity(new Intent(HomeActivity.this,MainActivity.class));
+
+                return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+
 }

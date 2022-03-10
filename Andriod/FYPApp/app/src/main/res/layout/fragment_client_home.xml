@@ -6,10 +6,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ClientHomeFragment">
 
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="4dp"
+        android:gravity="center"
+        android:text="GRAPH"
+        android:textOff="donut"
+        android:textOn="line"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:thumb="@drawable/sw_thumb"
+        app:showText="true"
+        app:track="@drawable/sw_track" />
+
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/piechart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp" />
+        android:visibility="gone"/>
+<!--        android:layout_below="@id/switchButton"/>-->
 
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/linechart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        android:visibility="gone"
+        android:layout_below="@id/switchButton"/>
 </RelativeLayout>

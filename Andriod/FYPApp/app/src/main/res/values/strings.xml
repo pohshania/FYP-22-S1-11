@@ -1,17 +1,35 @@
 <resources>
     <string name="app_name">FYPApp</string>
-    <string name="title_activity_home">HomeActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="logs">Logs</string>
     <string name="rules">Rules</string>
+    <string-array name="systemType">
+        <item>email system</item>
+        <item>System Type 1</item>
+        <item>System Type 2</item>
+        <item>System Type 3</item>
+        <item>System Type 4</item>
+    </string-array>
+    <string-array name="rules_email">
+        <item>rules 1</item>
+        <item>rules 2</item>
+        <item>rules 3</item>
+        <item>rules 4</item>
+        <item>rules 5</item>
+        <item>rules 6</item>
+        <item>rules 7</item>
+
+    </string-array>
+    <string-array name="rules_1">
+        <item>rules 11</item>
+        <item>rules 22</item>
+        <item>rules 33</item>
+        <item>rules 44</item>
+        <item>rules 55</item>
+    </string-array>
+
     <string name="log_out">Log out</string>
 </resources>

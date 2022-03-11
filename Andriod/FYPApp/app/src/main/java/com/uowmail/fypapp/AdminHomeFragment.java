@@ -23,6 +23,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class AdminHomeFragment extends Fragment {
+    RulesFragment rulesFragment = new RulesFragment();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,11 +35,10 @@ public class AdminHomeFragment extends Fragment {
         // MJ - Buttons for admins
         Button rulesButton = v.findViewById(R.id.buttonRules);
 
-        // MJ - open RulesActivity when button is clicked
+        // MJ - open RulesFragment when button is clicked
         rulesButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), RulesActivity.class);
-                startActivity(intent);
+                getParentFragmentManager().beginTransaction().replace(R.id.container, rulesFragment).commit();
             }
         });
 

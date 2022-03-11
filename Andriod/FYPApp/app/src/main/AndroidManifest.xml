@@ -10,12 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FYPApp">
         <activity
-            android:name=".RulesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AdminRulesActivity"
-            android:exported="false" />
-        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity

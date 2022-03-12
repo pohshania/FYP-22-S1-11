@@ -31,6 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginLeft="5dp"
                 android:text="Last Detected"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
@@ -71,6 +72,13 @@
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
 
         </TableRow>
 
@@ -123,6 +131,12 @@
                 android:text="192.02.123"
                 android:visibility="visible" />
 
+            <Button
+                android:id="@+id/Select"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                />
+
 
         </TableRow>
 
@@ -172,6 +186,12 @@
                 android:layout_weight="1"
                 android:padding="5sp"
                 android:text="194.96.321" />
+
+            <Button
+                android:id="@+id/Select2"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                />
 
 
         </TableRow>
@@ -225,6 +245,12 @@
                 android:text="182.02.183"
                 android:visibility="visible" />
 
+            <Button
+                android:id="@+id/Select3"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                />
+
         </TableRow>
 
         <TableRow
@@ -274,6 +300,12 @@
                 android:padding="5sp"
                 android:text="154.77.321" />
 
+            <Button
+                android:id="@+id/Select4"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                />
+
         </TableRow>
 
     </TableLayout>
@@ -290,6 +322,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_container">
+
+    </FrameLayout>
 
 
 

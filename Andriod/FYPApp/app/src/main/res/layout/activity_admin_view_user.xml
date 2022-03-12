@@ -91,9 +91,9 @@
 
             <Button
                 android:id="@+id/Select1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center" />
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                />
         </TableRow>
 
         <TableRow
@@ -121,9 +121,8 @@
 
             <Button
                 android:id="@+id/Select2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center" />
+                android:layout_width="30dp"
+                android:layout_height="40dp" />
         </TableRow>
 
         <TableRow
@@ -154,9 +153,8 @@
 
             <Button
                 android:id="@+id/Select3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center" />
+                android:layout_width="30dp"
+                android:layout_height="40dp" />
         </TableRow>
 
         <TableRow
@@ -184,9 +182,8 @@
 
             <Button
                 android:id="@+id/Select4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center" />
+                android:layout_width="30dp"
+                android:layout_height="40dp" />
         </TableRow>
 
         <TableRow
@@ -217,9 +214,8 @@
 
             <Button
                 android:id="@+id/Select5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center" />
+                android:layout_width="30dp"
+                android:layout_height="40dp"/>
 
         </TableRow>
 
@@ -248,9 +244,8 @@
 
         <Button
             android:id="@+id/Select6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center" />
+            android:layout_width="30dp"
+            android:layout_height="40dp" />
         </TableRow>
 
     </TableLayout>

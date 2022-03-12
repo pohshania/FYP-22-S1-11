@@ -13,7 +13,6 @@
         <entry key="..\:/Users/leeyt/FYPApp/app/src/main/res/layout/activity_sign_up.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/back.xml" value="0.1555" />
-        <entry key="app/src/main/res/drawable/button_custom.xml" value="0.1845" />
         <entry key="app/src/main/res/drawable/ic_baseline_circle_notifications_24.xml" value="0.2355" />
         <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.1555" />
@@ -22,23 +21,22 @@
         <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/ic_notification_circle.xml" value="0.2355" />
+        <entry key="app/src/main/res/drawable/rounded_corner.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/sw_thumb.xml" value="0.207" />
         <entry key="app/src/main/res/drawable/sw_track.xml" value="0.207" />
         <entry key="app/src/main/res/layout/activity_admin_rules.xml" value="0.2609375" />
-        <entry key="app/src/main/res/layout/activity_admin_view_user.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_admin_view_user_logs.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/activity_admin_view_user.xml" value="0.24791666666666667" />
+        <entry key="app/src/main/res/layout/activity_admin_view_user_logs.xml" value="0.26268115942028986" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_home_admin.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/activity_home_admin.xml" value="0.10471750895182291" />
         <entry key="app/src/main/res/layout/activity_home_client.xml" value="0.19947916666666668" />
-        <entry key="app/src/main/res/layout/activity_logs.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_rules.xml" value="0.247320692497939" />
         <entry key="app/src/main/res/layout/fragment_admin_home.xml" value="0.21550699869791667" />
-        <entry key="app/src/main/res/layout/fragment_admin_view_user.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/fragment_admin_view_user_logs.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/fragment_admin_view_user.xml" value="0.24791666666666667" />
+        <entry key="app/src/main/res/layout/fragment_admin_view_user_logs.xml" value="0.26268115942028986" />
         <entry key="app/src/main/res/layout/fragment_client_home.xml" value="0.19870554606119792" />
-        <entry key="app/src/main/res/layout/fragment_log_details.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/fragment_logs.xml" value="0.23201141357421878" />
+        <entry key="app/src/main/res/layout/fragment_logs.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/fragment_rules.xml" value="0.2963302612304688" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.3182291666666667" />

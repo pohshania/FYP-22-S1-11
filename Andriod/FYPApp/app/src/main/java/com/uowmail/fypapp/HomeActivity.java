@@ -104,8 +104,13 @@ public class HomeActivity extends AppCompatActivity {
         logoIcon.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Toast.makeText( HomeActivity.this, "You clicked in the logo icon", Toast.LENGTH_SHORT).show();
+//                Toast.makeText( HomeActivity.this, "You clicked in the logo icon", Toast.LENGTH_SHORT).show();
                 // Go to Homepage when logo is clicked
+                if (admin == true)
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
+                else
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, clientHomeFragment).commit();
+
             }
         });
         accountIcon.setOnClickListener(new View.OnClickListener(){

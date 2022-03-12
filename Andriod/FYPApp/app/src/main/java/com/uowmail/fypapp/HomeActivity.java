@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         {
           setContentView(R.layout.activity_home_admin);
             getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
-            bottomNavigationView = findViewById(R.id.bottom_navigation_admin);
+//            bottomNavigationView = findViewById(R.id.bottom_navigation_admin);
         }
         else
         {
@@ -59,38 +59,43 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         // badge notification alert
-        BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.notification);
-        badgeDrawable.setVisible(true);
-        badgeDrawable.setNumber(8);
+        if (bottomNavigationView !=null){
+            BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.notification);
+            badgeDrawable.setVisible(true);
+            badgeDrawable.setNumber(8);
 
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected( MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.home:
-                        if (admin == true){
-                            getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
-                        }
-                        else
-                            getSupportFragmentManager().beginTransaction().replace(R.id.container, clientHomeFragment).commit();
-                        return true;
+            bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected( MenuItem item) {
+                    switch (item.getItemId()){
+                        case R.id.home:
+                            if (admin == true){
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
+                            }
+                            else
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container, clientHomeFragment).commit();
+                            return true;
 
-                    case R.id.notification:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, notificationFragment).commit();
-                        return true;
+                        case R.id.notification:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, notificationFragment).commit();
+                            return true;
 
-                    case R.id.settings:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, settingsFragment).commit();
-                        return true;
+                        case R.id.settings:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, settingsFragment).commit();
+                            return true;
 
-                    case R.id.logs:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, logsFragment).commit();
-                        return true;
+                        case R.id.logs:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, logsFragment).commit();
+                            return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
+
+
+
         // MJ - Top toolbar ------------------------------------------------------------------------------------
         ImageView logoIcon = findViewById(R.id.logo);
         ImageView accountIcon = findViewById(R.id.account);
@@ -107,7 +112,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showMenu(v);
-                Toast.makeText( HomeActivity.this, "You clicked in the account icon", Toast.LENGTH_SHORT).show();
+//                Toast.makeText( HomeActivity.this, "You clicked in the account icon", Toast.LENGTH_SHORT).show();
             }
         });
         title.setText("Creeping Donut");

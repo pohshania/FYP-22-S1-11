@@ -1,15 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClientHomeFragment">
-
-    <TextView
-        android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="56dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Notification Fragment"
         android:textSize="25dp"
-        android:layout_centerInParent="true"/>
+        android:background="#306d6d8f"
+        android:color="@color/black"
+        android:orientation="horizontal">
 
-</RelativeLayout>
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:layout_marginRight="0dp"
+            android:src="@drawable/ic_virus_24"
+            app:tint="#061551" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Game Server is attacked!"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/alert_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxHeight="50dp"
+                    android:text="02 Feb 2022\n15:22"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textSize="11sp"
+                    android:textColor="#868688"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/alert_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="BurgerAnomaly.com is attacked\nfrom United States"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

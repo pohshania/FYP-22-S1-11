@@ -3,24 +3,11 @@ package com.uowmail.fypapp;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.material.badge.BadgeDrawable;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 public class AdminHomeFragment extends Fragment {
     RulesFragment rulesFragment = new RulesFragment();
@@ -34,11 +21,17 @@ public class AdminHomeFragment extends Fragment {
 
         // MJ - Buttons for admins
         Button rulesButton = v.findViewById(R.id.buttonRules);
+        Button logoutButton = v.findViewById(R.id.buttonLogOut);
 
         // MJ - open RulesFragment when button is clicked
         rulesButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 getParentFragmentManager().beginTransaction().replace(R.id.container, rulesFragment).commit();
+            }
+        });
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),MainActivity.class));
             }
         });
 

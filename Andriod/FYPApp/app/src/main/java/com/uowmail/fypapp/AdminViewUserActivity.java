@@ -9,22 +9,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AdminViewUserActivity extends AppCompatActivity {
 
-    LogsFragment logsFragment = new LogsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_admin_view_user);
-        TextView userName = (TextView) findViewById(R.id.Username);
+        TextView userName = (TextView) findViewById(R.id.Select1);
 
         //Sets action for sign up button
         //
         userName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                startActivity(new Intent(AdminViewUserActivity.this, LogsFragment.class));
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container, logsFragment).commit();
-
+                startActivity(new Intent(AdminViewUserActivity.this, AdminViewUserLogsActivity.class));
+  //              getSupportFragmentManager().beginTransaction().replace(R.id.container, adminViewUserLogsActivity).commit();
             }
         });
     }

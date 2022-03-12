@@ -36,10 +36,10 @@ public class AdminHomeFragment extends Fragment {
                 getParentFragmentManager().beginTransaction().replace(R.id.container, rulesFragment).commit();
             }
         });
-        // MJ - open Login page (MaingActivity) when button is clicked
+
         logoutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MainActivity.class));
+                startActivity(new Intent(getActivity(), AdminViewUserActivity.class));
             }
         });
 

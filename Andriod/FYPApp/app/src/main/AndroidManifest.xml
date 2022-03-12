@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FYPApp">
         <activity
+            android:name=".AdminViewUserLogsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminViewUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity

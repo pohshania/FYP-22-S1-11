@@ -22,16 +22,24 @@ public class AdminHomeFragment extends Fragment {
         // MJ - Buttons for admins
         Button rulesButton = v.findViewById(R.id.buttonRules);
         Button logoutButton = v.findViewById(R.id.buttonLogOut);
+        Button logsButton = v.findViewById(R.id.buttonLogs);
 
+
+        logsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AdminViewUserActivity.class));
+            }
+        });
         // MJ - open RulesFragment when button is clicked
         rulesButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 getParentFragmentManager().beginTransaction().replace(R.id.container, rulesFragment).commit();
             }
         });
+        // MJ - open Login page (MaingActivity) when button is clicked
         logoutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),MainActivity.class));
+                startActivity(new Intent(getActivity(), MainActivity.class));
             }
         });
 

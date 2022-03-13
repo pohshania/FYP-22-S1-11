@@ -39,9 +39,11 @@ public class AdminHomeFragment extends Fragment {
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), AdminViewUserActivity.class));
+                startActivity(new Intent(getActivity(), MainActivity.class));
             }
         });
+
+
 
         return v;
     }

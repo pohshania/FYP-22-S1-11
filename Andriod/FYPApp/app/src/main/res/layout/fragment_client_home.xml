@@ -4,37 +4,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ClientHomeFragment">
+    tools:context=".ClientHomeFragment"
+    android:layout_marginTop="60dp">
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:overScrollMode="never">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="4dp"
+                    android:gravity="center"
+                    android:textOff="donut"
+                    android:textOn="line"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:thumb="@drawable/sw_thumb"
+                    app:showText="true"
+                    app:track="@drawable/sw_track"
+                    android:checked="false"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="600dp"
+                        android:orientation="vertical">
 
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="4dp"
-        android:gravity="center"
-        android:textOff="donut"
-        android:textOn="line"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:thumb="@drawable/sw_thumb"
-        app:showText="true"
-        app:track="@drawable/sw_track" />
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/piechart"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_weight="1"
+                            android:visibility="gone"/>
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/piechart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
-<!--        android:layout_below="@id/switchButton"/>-->
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/linechart"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:layout_marginTop="70dp"
+                            android:visibility="gone"/>
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/linechart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:visibility="gone"
-        android:layout_below="@id/switchButton"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:text="hello this is end of page" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </RelativeLayout>

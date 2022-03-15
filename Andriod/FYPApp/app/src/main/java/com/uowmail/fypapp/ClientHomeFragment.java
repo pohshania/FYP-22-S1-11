@@ -1,11 +1,14 @@
 package com.uowmail.fypapp;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.ipsec.ike.exceptions.InvalidMajorVersionException;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +36,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ClientHomeFragment extends Fragment  {
+    // MJ - swipte to refresh
+    SwipeRefreshLayout refreshLayout;
+    Integer num = 0;
+
     private PieChart pieChart;
 
     // MJ - LINE CHART
@@ -81,6 +88,24 @@ public class ClientHomeFragment extends Fragment  {
                 }
             }
         });
+
+
+
+        // MJ - Swipe to refresh
+        refreshLayout = v.findViewById(R.id.refreshLayout);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // update graph data
+                num++;
+                loadPieChartData();
+                loadLineChartData();
+
+                refreshLayout.setRefreshing(false);
+            }
+        });
+
+
         return v;
     }
 
@@ -107,33 +132,64 @@ public class ClientHomeFragment extends Fragment  {
 
     private void loadPieChartData() {
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(0.2f, "User Login"));
-        entries.add(new PieEntry(0.15f, "User Logout"));
-        entries.add(new PieEntry(0.10f, "PolicyScopeChange"));
-        entries.add(new PieEntry(0.25f, "FileDataWrite"));
-        entries.add(new PieEntry(0.15f, "MachineLogin"));
-        entries.add(new PieEntry(0.15f, "MachineLogoff"));
+        if (num==0){
+            entries.add(new PieEntry(0.2f, "User Login"));
+            entries.add(new PieEntry(0.15f, "User Logout"));
+            entries.add(new PieEntry(0.10f, "PolicyScopeChange"));
+            entries.add(new PieEntry(0.25f, "FileDataWrite"));
+            entries.add(new PieEntry(0.15f, "MachineLogin"));
+            entries.add(new PieEntry(0.15f, "MachineLogoff"));
 
-        // add colors to the pieChart
-        ArrayList<Integer> colors = new ArrayList<>();
-        for (int color: ColorTemplate.MATERIAL_COLORS) {
-            colors.add(color);
+            // add colors to the pieChart
+            ArrayList<Integer> colors = new ArrayList<>();
+            for (int color: ColorTemplate.MATERIAL_COLORS) {
+                colors.add(color);
+            }
+            for (int color: ColorTemplate.VORDIPLOM_COLORS){
+                colors.add(color);
+            }
+            PieDataSet dataSet = new PieDataSet(entries, "Expense Category");
+            dataSet.setColors(colors);
+
+            PieData data = new PieData(dataSet);
+            data.setDrawValues(true);
+            data.setValueFormatter(new PercentFormatter(pieChart));
+            data.setValueTextSize(12f);
+            data.setValueTextColor(Color.BLACK);
+
+            pieChart.setData(data);
         }
-        for (int color: ColorTemplate.VORDIPLOM_COLORS){
-            colors.add(color);
+        else
+        {
+            entries.add(new PieEntry(0.5f, "User Login"));
+            entries.add(new PieEntry(0.05f, "PolicyScopeChange"));
+            entries.add(new PieEntry(0.30f, "FileDataWrite"));
+            entries.add(new PieEntry(0.15f, "MachineLogin"));
+
+
+            // add colors to the pieChart
+            ArrayList<Integer> colors = new ArrayList<>();
+            for (int color: ColorTemplate.MATERIAL_COLORS) {
+                colors.add(color);
+            }
+            for (int color: ColorTemplate.VORDIPLOM_COLORS){
+                colors.add(color);
+            }
+            PieDataSet dataSet = new PieDataSet(entries, "Expense Category");
+            dataSet.setColors(colors);
+
+            PieData data = new PieData(dataSet);
+            data.setDrawValues(true);
+            data.setValueFormatter(new PercentFormatter(pieChart));
+            data.setValueTextSize(12f);
+            data.setValueTextColor(Color.BLACK);
+
+            pieChart.setData(data);
         }
-        PieDataSet dataSet = new PieDataSet(entries, "Expense Category");
-        dataSet.setColors(colors);
-
-        PieData data = new PieData(dataSet);
-        data.setDrawValues(true);
-        data.setValueFormatter(new PercentFormatter(pieChart));
-        data.setValueTextSize(12f);
-        data.setValueTextColor(Color.BLACK);
-
-        pieChart.setData(data);
         pieChart.invalidate();
     }
+
+
     // MJ - adding Linechart-------------------------------------------------------------------------------
     private void setupLineChart() {
         mChart.setDragEnabled(true);
@@ -141,30 +197,58 @@ public class ClientHomeFragment extends Fragment  {
     }
     private void loadLineChartData() {
         ArrayList<Entry> yValues = new ArrayList<>();
-
-        yValues.add(new Entry(0, 60f));
-        yValues.add(new Entry(1, 50f));
-        yValues.add(new Entry(2, 70f));
-        yValues.add(new Entry(3, 30f));
-        yValues.add(new Entry(4, 50f));
-        yValues.add(new Entry(5, 60f));
-        yValues.add(new Entry(6, 65f));
-
-
-        LineDataSet set1 = new LineDataSet(yValues, "Data set 1");
-
-        set1.setFillAlpha(110);
-        set1.setColors(Color.RED);
-        set1.setLineWidth(3f);
-        set1.setValueTextSize(10f);
-        set1.setValueTextColor(Color.GREEN);
+        if(num==0)
+        {
+            yValues.add(new Entry(0, 60f));
+            yValues.add(new Entry(1, 50f));
+            yValues.add(new Entry(2, 70f));
+            yValues.add(new Entry(3, 30f));
+            yValues.add(new Entry(4, 50f));
+            yValues.add(new Entry(5, 60f));
+            yValues.add(new Entry(6, 65f));
 
 
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
+            LineDataSet set1 = new LineDataSet(yValues, "Data set 1");
 
-        LineData data = new LineData(dataSets);
-        mChart.setData(data);
+            set1.setFillAlpha(110);
+            set1.setColors(Color.RED);
+            set1.setLineWidth(3f);
+            set1.setValueTextSize(10f);
+            set1.setValueTextColor(Color.GREEN);
+
+
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set1);
+
+            LineData data = new LineData(dataSets);
+            mChart.setData(data);
+        }
+        else
+        {
+            yValues.add(new Entry(0, 60f));
+            yValues.add(new Entry(1, 50f));
+            yValues.add(new Entry(2, 70f));
+            yValues.add(new Entry(3, 30f));
+            yValues.add(new Entry(4, 50f));
+            yValues.add(new Entry(5, 60f));
+            yValues.add(new Entry(6, 65f));
+            yValues.add(new Entry(7, 9f));
+
+            LineDataSet set1 = new LineDataSet(yValues, "Data set 1");
+
+            set1.setFillAlpha(110);
+            set1.setColors(Color.RED);
+            set1.setLineWidth(3f);
+            set1.setValueTextSize(10f);
+            set1.setValueTextColor(Color.GREEN);
+
+
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set1);
+
+            LineData data = new LineData(dataSets);
+            mChart.setData(data);
+        }
     }
 
 }

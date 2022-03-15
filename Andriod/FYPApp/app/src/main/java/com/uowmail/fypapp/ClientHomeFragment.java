@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -46,6 +47,10 @@ public class ClientHomeFragment extends Fragment  {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_client_home, container, false);
+
+        // MJ - set title of the page
+        TextView title = (TextView)getActivity().findViewById(R.id.toolbar_title);
+        title.setText("Creeping Donut");
 
         // MJ - adding pieChart-------------------------------------------------------------------------------
         pieChart = v.findViewById(R.id.piechart);

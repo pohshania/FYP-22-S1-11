@@ -22,6 +22,11 @@ public class LogsFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_logs, container, false);
+
+        // MJ - set title of the page
+        TextView title = (TextView)getActivity().findViewById(R.id.toolbar_title);
+        title.setText("Logs");
+
         Button selectBtn = (Button)v.findViewById(R.id.Select);
 
         selectBtn.setOnClickListener(new View.OnClickListener() {

@@ -32,7 +32,8 @@
                 android:text="Last Detected"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:layout_marginStart="10dp"/>
 
             <TextView
                 android:id="@+id/DomainName"
@@ -125,11 +126,10 @@
                 android:text="192.02.123"
                 android:visibility="visible" />
 
-            <RadioButton
-                android:id="@+id/radioButton"
+            <CheckBox
+                android:id="@+id/checkboxButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
         </TableRow>
 
         <TableRow
@@ -179,8 +179,8 @@
                 android:padding="5sp"
                 android:text="194.96.321" />
 
-            <RadioButton
-                android:id="@+id/radioButton2"
+            <CheckBox
+                android:id="@+id/checkboxButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -235,8 +235,8 @@
                 android:text="182.02.183"
                 android:visibility="visible" />
 
-            <RadioButton
-                android:id="@+id/radioButton3"
+            <CheckBox
+                android:id="@+id/checkboxButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -289,8 +289,8 @@
                 android:padding="5sp"
                 android:text="154.77.321" />
 
-            <RadioButton
-                android:id="@+id/radioButton4"
+            <CheckBox
+                android:id="@+id/checkboxButton4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

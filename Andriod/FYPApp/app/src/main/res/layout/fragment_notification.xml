@@ -5,14 +5,22 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_marginTop="56dp"
+    android:orientation="vertical"
+    android:overScrollMode="never">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
+<!--    1st Notification -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25dp"
         android:background="#306d6d8f"
         android:color="@color/black"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/notification1">
 
         <ImageView
             android:layout_width="44dp"
@@ -64,4 +72,504 @@
                 />
         </LinearLayout>
     </LinearLayout>
+
+
+<!--    2nd notification -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:background="#306d6d8f"
+        android:color="@color/black"
+        android:orientation="horizontal"
+        android:id="@+id/notification2">
+
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:layout_marginRight="0dp"
+            android:src="@drawable/ic_virus_24"
+            app:tint="#061551" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Database Server is attacked! -"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/alert_time2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxHeight="50dp"
+                    android:text="01 Feb 2022\n09:12"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textSize="11sp"
+                    android:textColor="#868688"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/alert_details2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="CraftyTurkey.com is attacked\nfrom Singapore"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--    3rd notification -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:background="#306d6d8f"
+        android:color="@color/black"
+        android:orientation="horizontal"
+        android:id="@+id/notification3">
+
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:layout_marginRight="0dp"
+            android:src="@drawable/ic_virus_24"
+            app:tint="#061551" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/title3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Web Server is attacked!"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/alert_time3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxHeight="50dp"
+                    android:text="01 Feb 2022\n00:14"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textSize="11sp"
+                    android:textColor="#868688"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/alert_details3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="BurgerAnomaly.com is attacked\nfrom United States"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--    4th notification -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:background="#306d6d8f"
+        android:color="@color/black"
+        android:orientation="horizontal"
+        android:id="@+id/notification4">
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:layout_marginRight="0dp"
+            android:src="@drawable/ic_virus_24"
+            app:tint="#061551" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/title4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Game Server is attacked!"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/alert_time4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxHeight="50dp"
+                    android:text="31 Jan 2022\n20:20"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textSize="11sp"
+                    android:textColor="#868688"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/alert_details4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="BaconCheese.com.com is attacked\nfrom Philippines"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!--    5th notification -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:background="#306d6d8f"
+        android:color="@color/black"
+        android:orientation="horizontal"
+        android:id="@+id/notification5">
+
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:layout_marginRight="0dp"
+            android:src="@drawable/ic_virus_24"
+            app:tint="#061551" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/title5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Files Server is attacked!"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/alert_time5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxHeight="50dp"
+                    android:text="30 Jan 2022\n10:19"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textSize="11sp"
+                    android:textColor="#868688"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/alert_details5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="BurgerAnomaly.com is attacked\nfrom United States"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!--    6th notification -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:background="#306d6d8f"
+        android:color="@color/black"
+        android:orientation="horizontal"
+        android:id="@+id/notification6">
+
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:layout_marginRight="0dp"
+            android:src="@drawable/ic_virus_24"
+            app:tint="#061551" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/title6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Database Server is attacked!"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/alert_time6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxHeight="50dp"
+                    android:text="16 Jab 2022\n13:12"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textSize="11sp"
+                    android:textColor="#868688"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/alert_details6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="BurgerAnomaly.com is attacked\nfrom United States"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    <!--    7th notification -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:background="#306d6d8f"
+        android:color="@color/black"
+        android:orientation="horizontal"
+        android:id="@+id/notification7">
+
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:layout_marginRight="0dp"
+            android:src="@drawable/ic_virus_24"
+            app:tint="#061551" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/title7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Game Server is attacked!"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/alert_time7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxHeight="50dp"
+                    android:text="13 Jan 2022\n10:20"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textSize="11sp"
+                    android:textColor="#868688"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/alert_details7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="BurgerAnomaly.com is attacked\nfrom United States"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!--    8th notification -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:background="#306d6d8f"
+        android:color="@color/black"
+        android:orientation="horizontal"
+        android:id="@+id/notification8">
+
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:layout_marginRight="0dp"
+            android:src="@drawable/ic_virus_24"
+            app:tint="#061551" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/title8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Game Server is attacked!"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/alert_time8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxHeight="50dp"
+                    android:text="04 Feb 2022\n14:12"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textSize="11sp"
+                    android:textColor="#868688"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/alert_details8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="BurgerAnomaly.com is attacked\nfrom United States"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!--    9th notification -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:background="#306d6d8f"
+        android:color="@color/black"
+        android:orientation="horizontal"
+        android:id="@+id/notification9">
+
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:layout_marginRight="0dp"
+            android:src="@drawable/ic_virus_24"
+            app:tint="#061551" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/title9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Web Server is attacked!"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/alert_time9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxHeight="50dp"
+                    android:text="12 Dec 2021\n12:25"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textSize="11sp"
+                    android:textColor="#868688"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/alert_details9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="BurgerAnomaly.com is attacked\nfrom United States"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
 </ScrollView>

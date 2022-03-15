@@ -34,12 +34,14 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_home_admin.xml" value="0.24490305582682292" />
         <entry key="app/src/main/res/layout/activity_home_client.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/layout/activity_logs_detail.xml" value="0.2546875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_rules.xml" value="0.247320692497939" />
         <entry key="app/src/main/res/layout/fragment_admin_home.xml" value="0.21550699869791667" />
         <entry key="app/src/main/res/layout/fragment_admin_view_user.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/layout/fragment_admin_view_user_logs.xml" value="0.26268115942028986" />
         <entry key="app/src/main/res/layout/fragment_client_home.xml" value="0.19870554606119792" />
+        <entry key="app/src/main/res/layout/fragment_log_details.xml" value="0.26875" />
         <entry key="app/src/main/res/layout/fragment_logs.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/fragment_rules.xml" value="0.2963302612304688" />

@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 public class LogsFragment extends Fragment  {
 
-    LogsDetailFragment logsDetailFragment = new LogsDetailFragment();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -31,8 +30,8 @@ public class LogsFragment extends Fragment  {
 
         selectBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                getParentFragmentManager().beginTransaction().replace(R.id.container, logsDetailFragment).commit();
-
+//                getParentFragmentManager().beginTransaction().replace(R.id.container, logsDetailFragment).commit();
+                startActivity(new Intent(getActivity(), LogsDetailActivity.class));
             }
         });
         return v;

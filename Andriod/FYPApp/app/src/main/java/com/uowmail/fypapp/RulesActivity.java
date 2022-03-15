@@ -47,7 +47,7 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
             @Override
             public void onClick(View v){
                 // define save button here!
-//                createNewContactDialog();
+                createNewContactDialog();
 //                Toast.makeText( RulesActivity.this, "You clicked save change button", Toast.LENGTH_SHORT).show();
             }
         });
@@ -113,25 +113,25 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
-//    // MJ - Popup window to enter password --------------------------------------------------------------------------------------
-//    public void createNewContactDialog(){
-//        dialogBuilder = new AlertDialog.Builder(this);
-//        final View passwordPopupView = getLayoutInflater().inflate(R.layout.pwdpopup, null);
-//
-//        saveChange = (Button) passwordPopupView.findViewById(R.id.saveButton);
-//        cancelBtn = (Button) passwordPopupView.findViewById(R.id.cancelButton);
-//
-//        dialogBuilder.setView(passwordPopupView);
-//        dialog = dialogBuilder.create();
-//        dialog.show();
-//
-//        saveChange.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v){
-//                // define save button here!
-//                dialog.dismiss();
-//            }
-//        });
-//
-//    }
+    // MJ - Popup window to enter password --------------------------------------------------------------------------------------
+    public void createNewContactDialog(){
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View passwordPopupView = getLayoutInflater().inflate(R.layout.pwdpopup, null);
+
+        saveChange = (Button) passwordPopupView.findViewById(R.id.saveButton);
+        cancelBtn = (Button) passwordPopupView.findViewById(R.id.cancelButton);
+
+        dialogBuilder.setView(passwordPopupView);
+        dialog = dialogBuilder.create();
+        dialog.show();
+
+        saveChange.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // define save button here!
+                dialog.dismiss();
+            }
+        });
+
+    }
 }

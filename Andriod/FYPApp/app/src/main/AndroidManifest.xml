@@ -10,16 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FYPApp">
         <activity
+            android:name=".LogsDetailActivity"
+            android:exported="false"/>
+        <activity
             android:name=".RulesActivity"
             android:exported="false" />
         <activity
             android:name=".AdminViewUserLogsActivity"
             android:exported="false"
-            android:parentActivityName=".AdminViewUserActivity"/>
-        />
+            android:parentActivityName=".AdminViewUserActivity" />
         <activity
             android:name=".AdminViewUserActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".HomeActivity"
             android:exported="false" />

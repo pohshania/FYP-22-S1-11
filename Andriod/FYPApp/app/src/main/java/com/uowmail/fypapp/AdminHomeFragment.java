@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class AdminHomeFragment extends Fragment {
 
@@ -20,6 +21,9 @@ public class AdminHomeFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_admin_home, container, false);
+
+
+
 
         // MJ - Buttons for admins
         Button rulesButton = v.findViewById(R.id.buttonRules);

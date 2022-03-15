@@ -30,12 +30,12 @@
             android:textSize="20sp" />
 
         <ImageView
-            android:id="@+id/account"
+            android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_baseline_person_24" />
+            android:src="@drawable/ic_baseline_logout_24" />
 
     </RelativeLayout>
 

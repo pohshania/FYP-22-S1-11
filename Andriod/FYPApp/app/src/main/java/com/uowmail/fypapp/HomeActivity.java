@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         if (admin)
         {
           setContentView(R.layout.activity_home_admin);
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
+          getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
 //            bottomNavigationView = findViewById(R.id.bottom_navigation_admin);
         }
         else
@@ -97,30 +97,44 @@ public class HomeActivity extends AppCompatActivity {
 
 
         // MJ - Top toolbar ------------------------------------------------------------------------------------
-        ImageView logoIcon = findViewById(R.id.logo);
-        ImageView accountIcon = findViewById(R.id.account);
-        TextView title = findViewById(R.id.toolbar_title);
+        if(admin){
+            ImageView logoutBtn = findViewById(R.id.logout);
+            TextView title = findViewById(R.id.toolbar_title);
+            logoutBtn.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(HomeActivity.this,MainActivity.class));
+                }
+            });
+            title.setText("Creeping Donut");
+        }
+        else{
 
-        logoIcon.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
+            ImageView logoIcon = findViewById(R.id.logo);
+            ImageView accountIcon = findViewById(R.id.account);
+            TextView title = findViewById(R.id.toolbar_title);
+
+            logoIcon.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
 //                Toast.makeText( HomeActivity.this, "You clicked in the logo icon", Toast.LENGTH_SHORT).show();
-                // Go to Homepage when logo is clicked
-                if (admin == true)
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
-                else
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, clientHomeFragment).commit();
+                    // Go to Homepage when logo is clicked
+                    if (admin == true)
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
+                    else
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, clientHomeFragment).commit();
 
-            }
-        });
-        accountIcon.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                showMenu(v);
+                }
+            });
+            accountIcon.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    showMenu(v);
 //                Toast.makeText( HomeActivity.this, "You clicked in the account icon", Toast.LENGTH_SHORT).show();
-            }
-        });
-        title.setText("Creeping Donut");
+                }
+            });
+            title.setText("Creeping Donut");
+        }
     }
 
     // MJ - account menu

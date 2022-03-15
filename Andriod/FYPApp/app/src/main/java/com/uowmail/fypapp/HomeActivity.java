@@ -146,4 +146,10 @@ public class HomeActivity extends AppCompatActivity {
         popupMenu.show();
     }
 
+    // MJ - disabled gg back to MainActivity unless you cllick on logout button
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(false);
+    }
+
 }

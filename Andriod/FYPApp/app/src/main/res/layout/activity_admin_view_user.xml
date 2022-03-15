@@ -7,10 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".AdminViewUserActivity"
     >
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" >
+    </FrameLayout>
 
 
     <TableLayout

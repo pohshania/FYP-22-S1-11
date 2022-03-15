@@ -12,7 +12,12 @@ public class AdminViewUserLogsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_user_logs);
 
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("User Logs");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
+
+
 }

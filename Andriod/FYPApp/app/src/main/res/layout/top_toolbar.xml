@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#061551"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:id="@+id/toolbar">
 
     <RelativeLayout
         android:layout_width="match_parent"

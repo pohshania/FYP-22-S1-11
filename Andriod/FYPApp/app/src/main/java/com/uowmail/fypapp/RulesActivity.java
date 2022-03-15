@@ -30,9 +30,9 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rules);
 
+        // MJ - set actionBar
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Rules" +
-                "");
+        actionBar.setTitle("Rules");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         spinner = findViewById(R.id.spinner_systemType);

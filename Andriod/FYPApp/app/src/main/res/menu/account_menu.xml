@@ -12,12 +12,12 @@
     android:title="user name"
     android:icon="@drawable/ic_baseline_home_24"
     />
-<item
+    <item
     android:id="@+id/settings"
     android:title="settings"
     android:icon="@drawable/ic_baseline_notifications_24"
     />
-<item
+    <item
     android:id="@+id/logout"
     android:title="logout"
     android:icon="@drawable/ic_baseline_insert_drive_file_24"

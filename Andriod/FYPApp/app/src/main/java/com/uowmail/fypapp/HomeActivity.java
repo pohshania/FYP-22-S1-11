@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private Menu menu;
 
     BottomNavigationView bottomNavigationView;
 
@@ -139,8 +141,10 @@ public class HomeActivity extends AppCompatActivity {
 
     // MJ - account menu
     private void showMenu(View v){
+
         PopupMenu popupMenu = new PopupMenu(HomeActivity.this, v);
         popupMenu.getMenuInflater().inflate(R.menu.account_menu, popupMenu.getMenu());
+
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -158,6 +162,13 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         popupMenu.show();
+
+        //MenuItem item = menu.getItem(R.id.username);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
     }
 
     // MJ - disabled gg back to MainActivity unless you cllick on logout button

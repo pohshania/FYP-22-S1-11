@@ -14,6 +14,8 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
+    public String userName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
         //Declare login username and password edittext
         EditText loginusrnameTxt = (EditText) findViewById(R.id.loginusrnameTxt);
         EditText loginpwdTxt = (EditText) findViewById(R.id.loginpwdTxt);
+
+        userName = loginusrnameTxt.getText().toString();
+
         //Declare signup button and login button
         Button loginButton = (Button) findViewById(R.id.loginButton);
         Button signupButton = (Button) findViewById(R.id.signupButton);

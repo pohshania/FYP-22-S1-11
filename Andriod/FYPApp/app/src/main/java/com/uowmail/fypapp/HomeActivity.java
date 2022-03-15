@@ -38,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         // MJ - bottom nav bar -------------------------------------------------------------------------------
         if (getIntent().getSerializableExtra("adminbool").toString().equals("admin"))
@@ -168,6 +168,12 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater() ;
+        inflater.inflate(R.menu.example_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.item1);
+        item.setTitle("abc");
+
         return true;
     }
 

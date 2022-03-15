@@ -5,13 +5,8 @@
       <map>
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_admin_view_user.xml" value="0.2259963768115942" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_admin_view_user_logs.xml" value="0.264" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_main.xml" value="0.16510416666666666" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_client_home.xml" value="0.2259963768115942" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_log_details.xml" value="0.2259963768115942" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_settings.xml" value="0.16510416666666666" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/top_toolbar.xml" value="0.10989583333333333" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/menu/account_menu.xml" value="0.16510416666666666" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/menu/example_menu.xml" value="0.1" />
         <entry key="..\:/Users/leeyt/Documents/GitHub/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/drawable/back.xml" value="0.1915" />
         <entry key="..\:/Users/leeyt/Documents/GitHub/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/leeyt/Documents/GitHub/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
@@ -63,6 +58,7 @@
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.33604278564453127" />
         <entry key="app/src/main/res/menu/bottom_nav_menu_admin.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/menu/bottom_nav_menu_client.xml" value="0.3280766805013021" />
+        <entry key="app/src/main/res/menu/example_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

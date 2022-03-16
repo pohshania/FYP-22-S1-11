@@ -11,9 +11,10 @@
         android:theme="@style/Theme.FYPApp">
         <activity
             android:name=".UserSettingsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_user_settings"
-            android:theme="@style/Theme.FYPApp.NoActionBar" />
+            android:exported="false" />
+        <activity
+            android:name=".UserRulesActivity"
+            android:exported="false" />
         <activity
             android:name=".LogsDetailActivity"
             android:exported="false" />

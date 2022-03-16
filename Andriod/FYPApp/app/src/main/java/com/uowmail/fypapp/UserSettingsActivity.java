@@ -1,44 +1,26 @@
 package com.uowmail.fypapp;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.uowmail.fypapp.databinding.ActivityUserSettingsBinding;
-
 public class UserSettingsActivity extends AppCompatActivity {
-
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityUserSettingsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user_settings);
 
-        binding = ActivityUserSettingsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        setSupportActionBar(binding.toolbar);
-
-        //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_user_settings);
-        //appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        //Implement volume on and off below
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("User Settings");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Implement email system
         EditText email;
@@ -70,12 +52,15 @@ public class UserSettingsActivity extends AppCompatActivity {
                 }
             }
         });
-    }
+        //rules view
+        Button rButton;
+        rButton = (Button) findViewById(R.id.rulesButton);
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_user_settings);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+        //Sets action for rulesButton
+        rButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(UserSettingsActivity.this, UserRulesActivity.class));
+            }
+        });
     }
 }

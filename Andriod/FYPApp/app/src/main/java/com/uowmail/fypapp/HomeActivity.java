@@ -1,8 +1,11 @@
 package com.uowmail.fypapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -141,6 +144,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     // MJ - account menu
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     private void showMenu(View v){
 
         PopupMenu popupMenu = new PopupMenu(HomeActivity.this, v);
@@ -149,7 +153,7 @@ public class HomeActivity extends AppCompatActivity {
         // shania
         MainActivity main = new MainActivity();
         popupMenu.getMenu().findItem(R.id.username).setTitle("Username: " + main.getUserName());
-
+        popupMenu.setForceShowIcon(true);
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override

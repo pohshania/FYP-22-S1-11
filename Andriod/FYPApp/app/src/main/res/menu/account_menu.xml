@@ -5,17 +5,17 @@
     <item
         android:id="@+id/username"
         android:title="user name"
-        android:icon="@drawable/ic_baseline_home_24"
+        android:icon="@drawable/ic_android_black_24dp"
         />
     <item
         android:id="@+id/settings"
-        android:title="settings"
+        android:title="Settings"
         android:icon="@drawable/ic_baseline_notifications_24"
         />
 
     <item
         android:id="@+id/logout"
-        android:title="logout"
+        android:title="Logout"
         android:icon="@drawable/ic_baseline_insert_drive_file_24"
         />
 </menu>

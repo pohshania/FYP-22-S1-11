@@ -21,8 +21,8 @@ public class NotificationFragment extends Fragment {
         TextView title = (TextView)getActivity().findViewById(R.id.toolbar_title);
         title.setText("Notification");
 
-        TextView txt = (TextView)getActivity().findViewById(R.id.toolbartxt);
-        txt.setText("Notifications");
+        //TextView txt = (TextView)getActivity().findViewById(R.id.toolbartxt);
+        //txt.setText("Notifications");
 
 
         return v;

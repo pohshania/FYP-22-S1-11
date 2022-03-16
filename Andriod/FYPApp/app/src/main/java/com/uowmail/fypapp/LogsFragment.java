@@ -26,8 +26,8 @@ public class LogsFragment extends Fragment  {
         TextView title = (TextView)getActivity().findViewById(R.id.toolbar_title);
         title.setText("Logs");
 
-        TextView txt = (TextView)getActivity().findViewById(R.id.toolbartxt);
-        txt.setText("Logs");
+        //TextView txt = (TextView)getActivity().findViewById(R.id.toolbartxt);
+        //txt.setText("Logs");
 
         Button selectBtn = (Button)v.findViewById(R.id.Select);
 

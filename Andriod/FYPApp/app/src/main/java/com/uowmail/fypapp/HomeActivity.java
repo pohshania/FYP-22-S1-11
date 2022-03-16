@@ -140,14 +140,6 @@ public class HomeActivity extends AppCompatActivity {
             title.setText("Creeping Donut");
 
 
-            TextView txt = findViewById(R.id.toolbartxt);
-            txt.setText("Home");
-
-            // new toolbar
-            //Toolbar toolbar;
-            //toolbar = findViewById(R.id.toolbar);
-            //setSupportActionBar(toolbar);
-
         } // user end
     }
 
@@ -157,15 +149,19 @@ public class HomeActivity extends AppCompatActivity {
         PopupMenu popupMenu = new PopupMenu(HomeActivity.this, v);
         popupMenu.getMenuInflater().inflate(R.menu.account_menu, popupMenu.getMenu());
 
+        // shania
+        MainActivity main = new MainActivity();
+        popupMenu.getMenu().findItem(R.id.username).setTitle("Username: " + main.getUserName());
+
+
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                if(menuItem.getItemId() == R.id.usertype)
-                    Toast.makeText( HomeActivity.this, "You clicked in the usertype", Toast.LENGTH_SHORT).show();
                 if(menuItem.getItemId() == R.id.username)
                     Toast.makeText( HomeActivity.this, "You clicked in the username", Toast.LENGTH_SHORT).show();
                 if(menuItem.getItemId() == R.id.settings)
                     Toast.makeText( HomeActivity.this, "You clicked in the settings", Toast.LENGTH_SHORT).show();
+                // update: yongteng later u link yr new settings activity page here
                 if(menuItem.getItemId() == R.id.logout)
                     startActivity(new Intent(HomeActivity.this,MainActivity.class));
 
@@ -175,7 +171,6 @@ public class HomeActivity extends AppCompatActivity {
 
         popupMenu.show();
 
-        //MenuItem item = menu.getItem(R.id.username);
     }
 
     /*
@@ -190,10 +185,11 @@ public class HomeActivity extends AppCompatActivity {
         return true;
     }*/
 
-
+    /*
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.user_home_menu, menu);
+
         MenuItem item = menu.findItem(R.id.item_1);
         MainActivity main = new MainActivity();
         //Log.d("username", main.getUserName());
@@ -201,12 +197,16 @@ public class HomeActivity extends AppCompatActivity {
         MenuItem menuItem = ((Toolbar)findViewById(R.id.toolbar)).getMenu().findItem(R.id.item_1);
         menuItem.setTitle("Username: " + main.getUserName());
 
-        return super.onCreateOptionsMenu(menu);
+
+        return true;
     }
+     */
+
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("menu", "selected!");
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.item_2:

@@ -21,7 +21,7 @@ public class AdminHomeFragment extends Fragment {
 
         // MJ - Buttons for admins
         Button rulesButton = v.findViewById(R.id.buttonRules);
-        Button logoutButton = v.findViewById(R.id.buttonLogOut);
+        //Button logoutButton = v.findViewById(R.id.buttonLogOut);
         Button logsButton = v.findViewById(R.id.buttonLogs);
 
 
@@ -38,11 +38,12 @@ public class AdminHomeFragment extends Fragment {
             }
         });
 
+        /*
         logoutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), MainActivity.class));
             }
-        });
+        });*/
 
 
         return v;

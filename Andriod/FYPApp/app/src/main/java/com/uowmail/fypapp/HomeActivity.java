@@ -205,6 +205,21 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.item_2:
+                // yongteng later u link yr new settings activity page here
+                return true;
+            case R.id.item_3:
+                startActivity(new Intent(HomeActivity.this,MainActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     // MJ - disabled gg back to MainActivity unless you cllick on logout button
     @Override
     public void onBackPressed() {

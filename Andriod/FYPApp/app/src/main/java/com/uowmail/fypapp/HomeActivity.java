@@ -2,6 +2,7 @@ package com.uowmail.fypapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getSupportActionBar().hide();
+        getSupportActionBar().hide();
 
         // MJ - bottom nav bar -------------------------------------------------------------------------------
         if (getIntent().getSerializableExtra("adminbool").toString().equals("admin"))
@@ -81,6 +82,7 @@ public class HomeActivity extends AppCompatActivity {
 
                         case R.id.notification:
                             getSupportFragmentManager().beginTransaction().replace(R.id.container, notificationFragment).commit();
+
                             return true;
 
                         case R.id.settings:
@@ -110,7 +112,7 @@ public class HomeActivity extends AppCompatActivity {
             });
             title.setText("Creeping Donut");
         }
-        else{
+        else{ // user
 
             ImageView logoIcon = findViewById(R.id.logo);
             ImageView accountIcon = findViewById(R.id.account);
@@ -136,7 +138,17 @@ public class HomeActivity extends AppCompatActivity {
                 }
             });
             title.setText("Creeping Donut");
-        }
+
+
+            TextView txt = findViewById(R.id.toolbartxt);
+            txt.setText("Home");
+
+            // new toolbar
+            //Toolbar toolbar;
+            //toolbar = findViewById(R.id.toolbar);
+            //setSupportActionBar(toolbar);
+
+        } // user end
     }
 
     // MJ - account menu
@@ -166,6 +178,7 @@ public class HomeActivity extends AppCompatActivity {
         //MenuItem item = menu.getItem(R.id.username);
     }
 
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater() ;
@@ -175,7 +188,22 @@ public class HomeActivity extends AppCompatActivity {
         item.setTitle("abc");
 
         return true;
+    }*/
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.user_home_menu, menu);
+        MenuItem item = menu.findItem(R.id.item_1);
+        MainActivity main = new MainActivity();
+        //Log.d("username", main.getUserName());
+        //item.setTitle("meow");
+        MenuItem menuItem = ((Toolbar)findViewById(R.id.toolbar)).getMenu().findItem(R.id.item_1);
+        menuItem.setTitle("Username: " + main.getUserName());
+
+        return super.onCreateOptionsMenu(menu);
     }
+
 
     // MJ - disabled gg back to MainActivity unless you cllick on logout button
     @Override

@@ -10,8 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FYPApp">
         <activity
+            android:name=".UserSettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_user_settings"
+            android:theme="@style/Theme.FYPApp.NoActionBar" />
+        <activity
             android:name=".LogsDetailActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".RulesActivity"
             android:exported="false" />

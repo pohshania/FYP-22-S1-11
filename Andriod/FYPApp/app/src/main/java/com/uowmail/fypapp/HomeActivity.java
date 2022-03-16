@@ -1,14 +1,11 @@
 package com.uowmail.fypapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -160,8 +157,9 @@ public class HomeActivity extends AppCompatActivity {
                 if(menuItem.getItemId() == R.id.username)
                     Toast.makeText( HomeActivity.this, "You clicked in the username", Toast.LENGTH_SHORT).show();
                 if(menuItem.getItemId() == R.id.settings)
+                    // YT open page to user settings
+                    startActivity(new Intent(HomeActivity.this, UserSettingsActivity.class));
                     Toast.makeText( HomeActivity.this, "You clicked in the settings", Toast.LENGTH_SHORT).show();
-                // update: yongteng later u link yr new settings activity page here
                 if(menuItem.getItemId() == R.id.logout)
                     startActivity(new Intent(HomeActivity.this,MainActivity.class));
 

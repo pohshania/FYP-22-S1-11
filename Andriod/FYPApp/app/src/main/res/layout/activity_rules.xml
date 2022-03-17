@@ -10,13 +10,6 @@
         android:layout_height="match_parent"
         tools:context=".RulesActivity">
 
-
-<!--        <include-->
-<!--            android:id="@+id/include"-->
-<!--            layout="@layout/top_toolbar" />-->
-
-        <!--            app:layout_constraintTop_toBottomOf="@+id/include" />-->
-
         <Spinner
             android:id="@+id/spinner_systemType"
             android:layout_width="345dp"
@@ -52,7 +45,8 @@
             android:layout_marginTop="60dp"
             android:text="Save Change"
             app:layout_constraintTop_toBottomOf="@+id/ruleContainer"
-            tools:layout_editor_absoluteX="16dp" />
+            tools:layout_editor_absoluteX="16dp"
+            android:visibility="visible"/>
 
 
 

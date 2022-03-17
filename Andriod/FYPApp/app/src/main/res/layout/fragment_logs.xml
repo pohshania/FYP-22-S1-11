@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="?android:attr/actionBarSize">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -19,7 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="50dp"
             android:background="#0078F8"
             android:gravity="center"
             app:layout_constraintBottom_toTopOf="@+id/refreshButton"

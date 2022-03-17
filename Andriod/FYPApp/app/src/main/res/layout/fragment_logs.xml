@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="56dp"
+    android:orientation="vertical"
+    android:overScrollMode="never"
+    android:fillViewport="true"
+    tools:context=".LogsFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".LogsFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
 
         <TableLayout
@@ -19,7 +21,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="50dp"
             android:background="#0078F8"
             android:gravity="center"
             app:layout_constraintBottom_toTopOf="@+id/refreshButton"
@@ -37,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:text="Last Detected"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
@@ -1013,8 +1014,5 @@
 
         </FrameLayout>
 
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

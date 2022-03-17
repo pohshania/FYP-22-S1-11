@@ -3,15 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< Updated upstream
-=======
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_admin_view_user.xml" value="0.2259963768115942" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_admin_view_user_logs.xml" value="0.264" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_home_admin.xml" value="0.18070652173913043" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_client_home.xml" value="0.2259963768115942" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_log_details.xml" value="0.2259963768115942" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/menu/user_home_menu.xml" value="0.1953125" />
->>>>>>> Stashed changes
         <entry key="..\:/Users/leeyt/Documents/GitHub/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/drawable/back.xml" value="0.1915" />
         <entry key="..\:/Users/leeyt/Documents/GitHub/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/leeyt/Documents/GitHub/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
@@ -40,21 +31,23 @@
         <entry key="app/src/main/res/layout/activity_home_admin.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/activity_home_client.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/activity_logs.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_logs_detail.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_rules.xml" value="0.247320692497939" />
         <entry key="app/src/main/res/layout/fragment_admin_home.xml" value="0.21550699869791667" />
         <entry key="app/src/main/res/layout/fragment_admin_view_user.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_admin_view_user_logs.xml" value="0.15520833333333334" />
-        <entry key="app/src/main/res/layout/fragment_client_home.xml" value="0.19870554606119792" />
+        <entry key="app/src/main/res/layout/fragment_client_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_log_details.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_logs.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.3182291666666667" />
+        <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.20699708454810495" />
         <entry key="app/src/main/res/layout/fragment_rules.xml" value="0.2963302612304688" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/popup.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/pwd_popup.xml" value="0.1" />
         <entry key="app/src/main/res/layout/pwdpopup.xml" value="0.2609375" />
         <entry key="app/src/main/res/layout/top_toolbar.xml" value="0.26395263671875" />
+        <entry key="app/src/main/res/layout/top_toolbar_admin.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/menu/account_menu.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.33604278564453127" />
         <entry key="app/src/main/res/menu/bottom_nav_menu_admin.xml" value="0.25052083333333336" />

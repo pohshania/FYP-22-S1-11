@@ -22,9 +22,9 @@ public class LogsFragment extends Fragment  {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_logs, container, false);
 
-        // MJ - set title of the page
-        TextView title = (TextView)getActivity().findViewById(R.id.toolbar_title);
-        title.setText("Logs");
+//        // MJ - set title of the page
+//        TextView title = (TextView)getActivity().findViewById(R.id.toolbar_title);
+//        title.setText("Logs");
 
         //TextView txt = (TextView)getActivity().findViewById(R.id.toolbartxt);
         //txt.setText("Logs");
@@ -37,6 +37,10 @@ public class LogsFragment extends Fragment  {
                 startActivity(new Intent(getActivity(), LogsDetailActivity.class));
             }
         });
+
+        // MJ - set title of the page
+        TextView title = (TextView)getActivity().findViewById(R.id.toolbar_title);
+        title.setText("Logs");
         return v;
     }
 

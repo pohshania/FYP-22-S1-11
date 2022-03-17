@@ -1,5 +1,7 @@
 package com.uowmail.fypapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.ipsec.ike.exceptions.InvalidMajorVersionException;
@@ -14,8 +16,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -54,6 +58,24 @@ public class ClientHomeFragment extends Fragment  {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_client_home, container, false);
+
+        // JH - Implement Alert Button
+        Button alertButton = (Button) v.findViewById(R.id.AlertButton);
+        alertButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                alert.setMessage("ATTACK DETECTED!\n Incoming attack on Game Server!");
+                alert.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext(), "Alert viewed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                alert.show();
+            }
+        });
 
         // MJ - set title of the page
         TextView title = (TextView)getActivity().findViewById(R.id.toolbar_title);

@@ -28,7 +28,6 @@ public class HomeActivity extends AppCompatActivity {
     ClientHomeFragment clientHomeFragment = new ClientHomeFragment();
     AdminHomeFragment adminHomeFragment = new AdminHomeFragment();
     NotificationFragment notificationFragment = new NotificationFragment();
-    SettingsFragment settingsFragment = new SettingsFragment();
     LogsFragment logsFragment = new LogsFragment();
 
     // true -> admin,  false -> client
@@ -82,10 +81,6 @@ public class HomeActivity extends AppCompatActivity {
                         case R.id.notification:
                             getSupportFragmentManager().beginTransaction().replace(R.id.container, notificationFragment).commit();
 
-                            return true;
-
-                        case R.id.settings:
-                            getSupportFragmentManager().beginTransaction().replace(R.id.container, settingsFragment).commit();
                             return true;
 
                         case R.id.logs:

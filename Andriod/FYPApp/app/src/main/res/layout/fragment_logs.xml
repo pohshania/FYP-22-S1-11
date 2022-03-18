@@ -1,1020 +1,1047 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="?android:attr/actionBarSize">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLogsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:fillViewport="true"
         tools:context=".LogsFragment">
 
-
-        <TableLayout
-            android:id="@+id/table"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="#0078F8"
-            android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@+id/refreshButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/DateTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5dp"
-                    android:text="Last Detected"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="Domain Name"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/Location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="Location"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/Server"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="IP Address"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
-            </TableRow>
+            <TableLayout
+                android:id="@+id/table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#0078F8"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TableRow
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/DateTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="5dp"
+                        android:text="Last Detected"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="Domain Name"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/Location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="Location"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/Server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="IP Address"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="30 seconds ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="BurgerAnomaly.com" />
+
+                    <TextView
+                        android:id="@+id/Location1"
+                        android:layout_width="137dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="United Kingdom" />
+
+                    <TextView
+                        android:id="@+id/Server1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="192.02.123"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/Select"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="2 minutes ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="CraftyTurkey.com" />
+
+                    <TextView
+                        android:id="@+id/Location2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="South Africa"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/Server2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="194.96.321" />
+
+                    <ImageView
+                        android:id="@+id/Select2"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="3 hours ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="BaconCheese.com" />
+
+                    <TextView
+                        android:id="@+id/Location3"
+                        android:layout_width="137dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="United States" />
+
+                    <TextView
+                        android:id="@+id/Server3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="182.02.183"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/Select3"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="5 hours ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="WalkingBagel.com" />
+
+                    <TextView
+                        android:id="@+id/Location4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="Ireland"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/Server4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="154.77.321" />
+
+                    <ImageView
+                        android:id="@+id/Select4"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="5 hours ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="Google.com" />
+
+                    <TextView
+                        android:id="@+id/Location5"
+                        android:layout_width="137dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="Brazil" />
+
+                    <TextView
+                        android:id="@+id/Server5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="182.02.133"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/Select5"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="6 hours ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="Gimmick.com" />
+
+                    <TextView
+                        android:id="@+id/Location6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="China"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/Server6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="155.36.321" />
+
+                    <ImageView
+                        android:id="@+id/Select6"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="6 hours ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="Banned.com" />
+
+                    <TextView
+                        android:id="@+id/Location7"
+                        android:layout_width="137dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="United Kingdom" />
+
+                    <TextView
+                        android:id="@+id/Server7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="144.02.483"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/Select7"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="5 hours ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="WalkingBagel.com" />
+
+                    <TextView
+                        android:id="@+id/Location8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="Ireland"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/Server8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="154.77.321" />
+
+                    <ImageView
+                        android:id="@+id/Select8"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="30 seconds ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="BurgerAnomaly.com" />
+
+                    <TextView
+                        android:id="@+id/Location9"
+                        android:layout_width="137dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="United Kingdom" />
+
+                    <TextView
+                        android:id="@+id/Server9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="192.02.123"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/Select9"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="2 minutes ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="CraftyTurkey.com" />
+
+                    <TextView
+                        android:id="@+id/Location10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="South Africa"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/Server10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="194.96.321" />
+
+                    <ImageView
+                        android:id="@+id/Select10"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="3 hours ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="BaconCheese.com" />
+
+                    <TextView
+                        android:id="@+id/Location11"
+                        android:layout_width="137dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="United States" />
+
+                    <TextView
+                        android:id="@+id/Server11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="182.02.183"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/Select11"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="5 hours ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="WalkingBagel.com" />
+
+                    <TextView
+                        android:id="@+id/Location12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="Ireland"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/Server12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="154.77.321" />
+
+                    <ImageView
+                        android:id="@+id/Select12"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="30 seconds ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="BurgerAnomaly.com" />
+
+                    <TextView
+                        android:id="@+id/Location13"
+                        android:layout_width="137dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="United Kingdom" />
+
+                    <TextView
+                        android:id="@+id/Server13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="192.02.123"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/Select13"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="2 minutes ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="CraftyTurkey.com" />
+
+                    <TextView
+                        android:id="@+id/Location14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="South Africa"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/Server14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="194.96.321" />
+
+                    <ImageView
+                        android:id="@+id/Select14"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="3 hours ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="BaconCheese.com" />
+
+                    <TextView
+                        android:id="@+id/Location15"
+                        android:layout_width="137dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="United States" />
+
+                    <TextView
+                        android:id="@+id/Server15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="5sp"
+                        android:text="182.02.183"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/Select15"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:id="@+id/DateTime16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="5 hours ago"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/DomainName16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="WalkingBagel.com" />
+
+                    <TextView
+                        android:id="@+id/Location16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="Ireland"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/Server16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:padding="5sp"
+                        android:text="154.77.321" />
+
+                    <ImageView
+                        android:id="@+id/Select16"
+                        android:src="@drawable/arrow_circle_right"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        app:tint="#061551"
+                        />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF">
+                android:id="@+id/fragment_container">
 
-                <TextView
-                    android:id="@+id/DateTime1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="30 seconds ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="BurgerAnomaly.com" />
-
-                <TextView
-                    android:id="@+id/Location1"
-                    android:layout_width="137dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="United Kingdom" />
-
-                <TextView
-                    android:id="@+id/Server1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="192.02.123"
-                    android:visibility="visible" />
-
-                <Button
-                    android:id="@+id/Select"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="2 minutes ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="CraftyTurkey.com" />
-
-                <TextView
-                    android:id="@+id/Location2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="South Africa"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/Server2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="194.96.321" />
-
-                <Button
-                    android:id="@+id/Select2"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="3 hours ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="BaconCheese.com" />
-
-                <TextView
-                    android:id="@+id/Location3"
-                    android:layout_width="137dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="United States" />
-
-                <TextView
-                    android:id="@+id/Server3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="182.02.183"
-                    android:visibility="visible" />
-
-                <Button
-                    android:id="@+id/Select3"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="5 hours ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="WalkingBagel.com" />
-
-                <TextView
-                    android:id="@+id/Location4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="Ireland"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/Server4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="154.77.321" />
-
-                <Button
-                    android:id="@+id/Select4"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="5 hours ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="Google.com" />
-
-                <TextView
-                    android:id="@+id/Location5"
-                    android:layout_width="137dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="Brazil" />
-
-                <TextView
-                    android:id="@+id/Server5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="182.02.133"
-                    android:visibility="visible" />
-
-                <Button
-                    android:id="@+id/Select5"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="6 hours ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="Gimmick.com" />
-
-                <TextView
-                    android:id="@+id/Location6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="China"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/Server6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="155.36.321" />
-
-                <Button
-                    android:id="@+id/Select6"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="6 hours ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="Banned.com" />
-
-                <TextView
-                    android:id="@+id/Location7"
-                    android:layout_width="137dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="United Kingdom" />
-
-                <TextView
-                    android:id="@+id/Server7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="144.02.483"
-                    android:visibility="visible" />
-
-                <Button
-                    android:id="@+id/Select7"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="5 hours ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="WalkingBagel.com" />
-
-                <TextView
-                    android:id="@+id/Location8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="Ireland"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/Server8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="154.77.321" />
-
-                <Button
-                    android:id="@+id/Select8"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="30 seconds ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="BurgerAnomaly.com" />
-
-                <TextView
-                    android:id="@+id/Location9"
-                    android:layout_width="137dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="United Kingdom" />
-
-                <TextView
-                    android:id="@+id/Server9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="192.02.123"
-                    android:visibility="visible" />
-
-                <Button
-                    android:id="@+id/Select9"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="2 minutes ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="CraftyTurkey.com" />
-
-                <TextView
-                    android:id="@+id/Location10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="South Africa"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/Server10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="194.96.321" />
-
-                <Button
-                    android:id="@+id/Select10"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="3 hours ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="BaconCheese.com" />
-
-                <TextView
-                    android:id="@+id/Location11"
-                    android:layout_width="137dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="United States" />
-
-                <TextView
-                    android:id="@+id/Server11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="182.02.183"
-                    android:visibility="visible" />
-
-                <Button
-                    android:id="@+id/Select11"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="5 hours ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="WalkingBagel.com" />
-
-                <TextView
-                    android:id="@+id/Location12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="Ireland"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/Server12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="154.77.321" />
-
-                <Button
-                    android:id="@+id/Select12"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="30 seconds ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="BurgerAnomaly.com" />
-
-                <TextView
-                    android:id="@+id/Location13"
-                    android:layout_width="137dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="United Kingdom" />
-
-                <TextView
-                    android:id="@+id/Server13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="192.02.123"
-                    android:visibility="visible" />
-
-                <Button
-                    android:id="@+id/Select13"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="2 minutes ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="CraftyTurkey.com" />
-
-                <TextView
-                    android:id="@+id/Location14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="South Africa"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/Server14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="194.96.321" />
-
-                <Button
-                    android:id="@+id/Select14"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="3 hours ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="BaconCheese.com" />
-
-                <TextView
-                    android:id="@+id/Location15"
-                    android:layout_width="137dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="United States" />
-
-                <TextView
-                    android:id="@+id/Server15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:padding="5sp"
-                    android:text="182.02.183"
-                    android:visibility="visible" />
-
-                <Button
-                    android:id="@+id/Select15"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/DateTime16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="5 hours ago"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/DomainName16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="WalkingBagel.com" />
-
-                <TextView
-                    android:id="@+id/Location16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="Ireland"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/Server16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_weight="1"
-                    android:padding="5sp"
-                    android:text="154.77.321" />
-
-                <Button
-                    android:id="@+id/Select16"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    />
-
-            </TableRow>
-
-        </TableLayout>
-
-        <Button
-            android:id="@+id/refreshButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="148dp"
-            android:foregroundGravity="bottom"
-            android:gravity="bottom|center"
-            android:text="Refresh"
-            app:iconGravity="textEnd|end"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/fragment_container">
-
-        </FrameLayout>
-
-
+            </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+    </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

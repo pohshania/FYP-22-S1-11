@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -29,7 +30,7 @@ public class LogsFragment extends Fragment  {
         //TextView txt = (TextView)getActivity().findViewById(R.id.toolbartxt);
         //txt.setText("Logs");
 
-        Button selectBtn = (Button)v.findViewById(R.id.Select);
+        ImageView selectBtn = (ImageView)v.findViewById(R.id.Select);
 
         selectBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

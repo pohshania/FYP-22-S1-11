@@ -48,7 +48,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:text="Username"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:layout_weight="1"
                     android:visibility="visible" />
 
@@ -62,7 +62,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/white"
                     android:text="Email"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:visibility="visible" />
 
                 <TextView
@@ -98,11 +98,14 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select1"
+                <ImageView
+                    android:id="@+id/Next1"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
                     android:layout_height="40dp"
+                    app:tint="#061551"
                     />
+
             </TableRow>
 
             <TableRow
@@ -128,10 +131,14 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select2"
+                <ImageView
+                    android:id="@+id/Next2"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
+
             </TableRow>
 
             <TableRow
@@ -160,10 +167,13 @@
                 android:textSize="18dp"
                 android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select3"
+                <ImageView
+                    android:id="@+id/Next3"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
             </TableRow>
 
             <TableRow
@@ -189,10 +199,14 @@
                 android:textSize="18dp"
                 android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select4"
+                <ImageView
+                    android:id="@+id/Next4"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
+
             </TableRow>
 
             <TableRow
@@ -221,10 +235,13 @@
                 android:textSize="18dp"
                 android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select5"
+                <ImageView
+                    android:id="@+id/Next5"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp"/>
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
 
             </TableRow>
 
@@ -251,10 +268,14 @@
                 android:textSize="18dp"
                 android:visibility="visible" />
 
-            <Button
-                android:id="@+id/Select6"
-                android:layout_width="30dp"
-                android:layout_height="40dp" />
+                <ImageView
+                    android:id="@+id/Next6"
+                    android:src="@drawable/logs_detail"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
+
             </TableRow>
 
             <TableRow
@@ -283,11 +304,14 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select7"
+                <ImageView
+                    android:id="@+id/Next7"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
                     android:layout_height="40dp"
+                    app:tint="#061551"
                     />
+
             </TableRow>
 
             <TableRow
@@ -313,10 +337,14 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select8"
+                <ImageView
+                    android:id="@+id/Next8"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
+
             </TableRow>
 
             <TableRow
@@ -345,10 +373,14 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select9"
+                <ImageView
+                    android:id="@+id/Next9"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
+
             </TableRow>
 
             <TableRow
@@ -374,10 +406,14 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select10"
+                <ImageView
+                    android:id="@+id/Next10"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
+
             </TableRow>
 
             <TableRow
@@ -406,10 +442,13 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select11"
+                <ImageView
+                    android:id="@+id/Next11"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp"/>
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
 
             </TableRow>
 
@@ -436,10 +475,14 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select12"
+                <ImageView
+                    android:id="@+id/Next12"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
+
             </TableRow>
 
             <TableRow
@@ -468,11 +511,14 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select13"
+                <ImageView
+                    android:id="@+id/Next13"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
                     android:layout_height="40dp"
+                    app:tint="#061551"
                     />
+
             </TableRow>
 
             <TableRow
@@ -498,10 +544,14 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select14"
+                <ImageView
+                    android:id="@+id/Next14"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
+
             </TableRow>
 
             <TableRow
@@ -530,10 +580,13 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select15"
+                <ImageView
+                    android:id="@+id/Next15"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
             </TableRow>
 
             <TableRow
@@ -559,10 +612,13 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select16"
+                <ImageView
+                    android:id="@+id/Next16"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -587,10 +643,13 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select17"
+                <ImageView
+                    android:id="@+id/Next17"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
             </TableRow>
 
             <TableRow
@@ -619,10 +678,13 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select18"
+                <ImageView
+                    android:id="@+id/Next18"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp"/>
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
 
             </TableRow>
 
@@ -649,10 +711,13 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select19"
+                <ImageView
+                    android:id="@+id/Next19"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
             </TableRow>
 
             <TableRow
@@ -681,10 +746,12 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select20"
+                <ImageView
+                    android:id="@+id/Next20"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
                     android:layout_height="40dp"
+                    app:tint="#061551"
                     />
             </TableRow>
 
@@ -711,10 +778,13 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select21"
+                <ImageView
+                    android:id="@+id/Next21"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
             </TableRow>
 
             <TableRow
@@ -743,10 +813,13 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select22"
+                <ImageView
+                    android:id="@+id/Next22"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
             </TableRow>
 
             <TableRow
@@ -772,10 +845,13 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select23"
+                <ImageView
+                    android:id="@+id/Next23"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
             </TableRow>
 
             <TableRow
@@ -804,10 +880,13 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select24"
+                <ImageView
+                    android:id="@+id/Next24"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp"/>
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
 
             </TableRow>
 
@@ -834,10 +913,13 @@
                     android:textSize="18dp"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/Select25"
+                <ImageView
+                    android:id="@+id/Next25"
+                    android:src="@drawable/logs_detail"
                     android:layout_width="30dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    app:tint="#061551"
+                    />
             </TableRow>
 
 

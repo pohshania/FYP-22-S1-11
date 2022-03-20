@@ -3,22 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="56dp">
+    android:layout_height="match_parent">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshLogsLayout"
+        android:id="@+id/adminRefreshLogsLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="56dp"
             android:orientation="vertical"
             android:overScrollMode="never"
             android:fillViewport="true"
-            tools:context=".LogsFragment">
+            tools:context=".AdminViewUserLogsActivity">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -148,7 +146,7 @@
                             android:visibility="visible" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton1"
+                            android:id="@+id/checkButton1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:onClick="onCheckboxClicked" />
@@ -204,7 +202,7 @@
                             android:text="194.96.321" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton2"
+                            android:id="@+id/checkButton2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -261,7 +259,7 @@
                             android:visibility="visible" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton3"
+                            android:id="@+id/checkButton3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -316,7 +314,7 @@
                             android:text="154.77.321" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton4"
+                            android:id="@+id/checkButton4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -373,7 +371,7 @@
                             android:visibility="visible" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton5"
+                            android:id="@+id/checkButton5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -428,7 +426,7 @@
                             android:text="155.36.321" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton6"
+                            android:id="@+id/checkButton6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -486,7 +484,7 @@
                             android:visibility="visible" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton7"
+                            android:id="@+id/checkButton7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -541,7 +539,7 @@
                             android:text="154.77.321" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton8"
+                            android:id="@+id/checkButton8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -598,7 +596,7 @@
                             android:visibility="visible" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton9"
+                            android:id="@+id/checkButton9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -654,7 +652,7 @@
                             android:text="194.96.321" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton10"
+                            android:id="@+id/checkButton10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -712,7 +710,7 @@
                             android:visibility="visible" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton11"
+                            android:id="@+id/checkButton11"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -767,7 +765,7 @@
                             android:text="154.77.321" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton12"
+                            android:id="@+id/checkButton12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -824,7 +822,7 @@
                             android:visibility="visible" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton13"
+                            android:id="@+id/checkButton13"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -880,7 +878,7 @@
                             android:text="194.96.321" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton14"
+                            android:id="@+id/checkButton14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -938,7 +936,7 @@
                             android:visibility="visible" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton15"
+                            android:id="@+id/checkButton15"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -993,7 +991,7 @@
                             android:text="154.77.321" />
 
                         <CheckBox
-                            android:id="@+id/checkboxButton16"
+                            android:id="@+id/checkButton16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -1015,7 +1013,7 @@
                     android:text="Delete"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/table" />
+                    app:layout_constraintTop_toBottomOf="@+id/admin_view_user_logs_table" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

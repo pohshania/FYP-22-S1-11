@@ -53,6 +53,7 @@ public class LogsFragment extends Fragment  {
             @SuppressLint("ResourceType")
             @Override
             public void onRefresh() {
+                // Creating a new log
                 TableRow row = new TableRow(getActivity());
                 row.setBackgroundColor(Color.WHITE);
                 row.setLayoutParams(new TableRow.LayoutParams(
@@ -83,6 +84,7 @@ public class LogsFragment extends Fragment  {
                 arrow.setImageResource(R.drawable.arrow_circle_right);
                 row.addView(arrow);
 
+                // Add to the top row
                 logsTable.addView(row, 1);
 
                 refreshLogsLayout.setRefreshing(false);

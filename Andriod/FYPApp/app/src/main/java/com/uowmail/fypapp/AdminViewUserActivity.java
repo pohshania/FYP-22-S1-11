@@ -14,6 +14,7 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 public class AdminViewUserActivity extends AppCompatActivity  {
 
@@ -31,7 +32,7 @@ public class AdminViewUserActivity extends AppCompatActivity  {
 
 
 
-        TextView userName = (TextView) findViewById(R.id.Select1);
+        ImageView userName = (ImageView) findViewById(R.id.Next1);
 
         userName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -50,4 +51,27 @@ public class AdminViewUserActivity extends AppCompatActivity  {
         return super.onOptionsItemSelected(item);
     }
 
+    // Search User function
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+
+        getMenuInflater().inflate(R.menu.search_user, menu);
+        MenuItem menuItem = menu.findItem(R.id.user_search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Seach User");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Set table layout for search here
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
 }

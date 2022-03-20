@@ -125,6 +125,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
             });
             accountIcon.setOnClickListener(new View.OnClickListener(){
+                @RequiresApi(api = Build.VERSION_CODES.Q)
                 @Override
                 public void onClick(View v) {
                     showMenu(v);

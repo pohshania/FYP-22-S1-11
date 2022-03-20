@@ -157,7 +157,7 @@ public class ClientHomeFragment extends Fragment  {
         if (num==0){
             entries.add(new PieEntry(0.2f, "User Login"));
             entries.add(new PieEntry(0.15f, "User Logout"));
-            entries.add(new PieEntry(0.10f, "PolicyScopeChange"));
+            entries.add(new PieEntry(0.10f,"PolicyScopeChange"));
             entries.add(new PieEntry(0.25f, "FileDataWrite"));
             entries.add(new PieEntry(0.15f, "MachineLogin"));
             entries.add(new PieEntry(0.15f, "MachineLogoff"));

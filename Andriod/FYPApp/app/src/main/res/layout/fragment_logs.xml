@@ -28,7 +28,7 @@
 
 
             <TableLayout
-                android:id="@+id/table"
+                android:id="@+id/logs_table"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -102,7 +102,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow1">
 
                     <TextView
                         android:id="@+id/DateTime1"
@@ -161,7 +162,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow2">
 
                     <TextView
                         android:id="@+id/DateTime2"
@@ -218,7 +220,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow3">
 
                     <TextView
                         android:id="@+id/DateTime3"
@@ -277,7 +280,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow4">
 
                     <TextView
                         android:id="@+id/DateTime4"
@@ -334,7 +338,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow5">
 
                     <TextView
                         android:id="@+id/DateTime5"
@@ -393,7 +398,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow6">
 
                     <TextView
                         android:id="@+id/DateTime6"
@@ -451,7 +457,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow7">
 
                     <TextView
                         android:id="@+id/DateTime7"
@@ -510,7 +517,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow8">
 
                     <TextView
                         android:id="@+id/DateTime8"
@@ -567,7 +575,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow9">
 
                     <TextView
                         android:id="@+id/DateTime9"
@@ -627,7 +636,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow10">
 
                     <TextView
                         android:id="@+id/DateTime10"
@@ -685,7 +695,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow11">
 
                     <TextView
                         android:id="@+id/DateTime11"
@@ -744,7 +755,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow12">
 
                     <TextView
                         android:id="@+id/DateTime12"
@@ -801,7 +813,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow13">
 
                     <TextView
                         android:id="@+id/DateTime13"
@@ -861,7 +874,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow14">
 
                     <TextView
                         android:id="@+id/DateTime14"
@@ -919,7 +933,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow15">
 
                     <TextView
                         android:id="@+id/DateTime15"
@@ -978,7 +993,8 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:id="@+id/TableRow16">
 
                     <TextView
                         android:id="@+id/DateTime16"

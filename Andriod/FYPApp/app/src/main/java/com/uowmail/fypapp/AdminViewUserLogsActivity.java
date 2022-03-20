@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 public class AdminViewUserLogsActivity extends AppCompatActivity {
 
@@ -27,10 +28,12 @@ public class AdminViewUserLogsActivity extends AppCompatActivity {
 
         // MJ - btn to save rules
         Button deleteBtn = (Button) findViewById(R.id.deleteButton);
+        CheckBox checkBoxBtn = (CheckBox) findViewById(R.id.checkboxButton1);
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 // define save button here!
+
                 createNewContactDialog();
 //                Toast.makeText( RulesActivity.this, "You clicked save change button", Toast.LENGTH_SHORT).show();
             }

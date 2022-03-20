@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FYPApp">
         <activity
+            android:name=".LogsActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserSettingsActivity"
             android:exported="false" />
         <activity

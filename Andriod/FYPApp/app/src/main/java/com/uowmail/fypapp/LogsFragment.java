@@ -54,7 +54,6 @@ public class LogsFragment extends Fragment  {
             @Override
             public void onRefresh() {
                 TableRow row = new TableRow(getActivity());
-                row.setId(5);
                 row.setBackgroundColor(Color.WHITE);
                 row.setLayoutParams(new TableRow.LayoutParams(
                         TableRow.LayoutParams.MATCH_PARENT,
@@ -62,33 +61,29 @@ public class LogsFragment extends Fragment  {
 
                 TextView time = new TextView(getActivity());
                 time.setText("1 second ago");
+                time.setPadding(5, 5, 5, 5);
                 row.addView(time);
 
                 TextView domain = new TextView(getActivity());
                 domain.setText("MineCraft.com");
+                domain.setPadding(5, 5, 5, 5);
                 row.addView(domain);
 
                 TextView loc = new TextView(getActivity());
                 loc.setText("China");
+                loc.setPadding(5, 5, 5, 5);
                 row.addView(loc);
 
                 TextView ip = new TextView(getActivity());
                 ip.setText("137.46.762");
+                ip.setPadding(5, 5, 5, 5);
                 row.addView(ip);
 
                 ImageView arrow = new ImageView(getActivity());
                 arrow.setImageResource(R.drawable.arrow_circle_right);
                 row.addView(arrow);
-                //add your new row to the TableLayout:
-//                TableLayout table = (TableLayout) findViewById(R.id.tableLayout1);
-                logsTable.addView(row);
-//
-//                ImageView label_arrow = new ImageView(getActivity());
-//                label_arrow.setImageResource(R.drawable.arrow_circle_right);
 
-//                logsTable.addView(row, new TableLayout.LayoutParams(
-//                        TableRow.LayoutParams.MATCH_PARENT,
-//                        TableRow.LayoutParams.MATCH_PARENT, 0));
+                logsTable.addView(row, 1);
 
                 refreshLogsLayout.setRefreshing(false);
             }

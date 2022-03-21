@@ -35,13 +35,14 @@
 
     <EditText
         android:id="@+id/email_et"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="222dp"
+        android:layout_height="27dp"
         android:layout_marginTop="4dp"
         android:background="#808080"
         android:ems="10"
-        android:hint="Enter admin's email"
         android:inputType="textPersonName"
+        android:text="CreepingDonut@gmail.com"
+        android:focusable="false"
         android:textColor="#DEDEDE"
         app:layout_constraintEnd_toEndOf="@+id/rules_et"
         app:layout_constraintHorizontal_bias="0.0"
@@ -62,7 +63,7 @@
 
     <EditText
         android:id="@+id/subject_et"
-        android:layout_width="wrap_content"
+        android:layout_width="222dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="#808080"

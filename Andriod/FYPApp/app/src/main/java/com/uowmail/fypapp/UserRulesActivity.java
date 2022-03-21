@@ -16,7 +16,7 @@ import java.util.List;
 
 public class UserRulesActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
-    String[] system = { "system 1", "system 2", "system 3"};
+    String[] network = { "network 1", "network 2", "network 3"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class UserRulesActivity extends AppCompatActivity implements
         spin.setOnItemSelectedListener(this);
 
         //Creating the ArrayAdapter instance having the country list
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,system);
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,network);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         spin.setAdapter(aa);
@@ -41,7 +41,7 @@ public class UserRulesActivity extends AppCompatActivity implements
     //Performing action onItemSelected and onNothing selected
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-        Toast.makeText(getApplicationContext(),system[position] , Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),network[position] , Toast.LENGTH_LONG).show();
     }
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {

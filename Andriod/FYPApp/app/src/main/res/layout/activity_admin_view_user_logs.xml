@@ -148,8 +148,8 @@
                         <CheckBox
                             android:id="@+id/checkButton1"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:onClick="onCheckboxClicked" />
+                            android:layout_height="wrap_content"/>
+<!--                            android:onClick="onCheckboxClicked" />-->
 
                     </TableRow>
 

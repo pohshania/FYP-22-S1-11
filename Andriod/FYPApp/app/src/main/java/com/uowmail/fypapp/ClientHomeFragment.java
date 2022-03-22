@@ -236,7 +236,7 @@ public class ClientHomeFragment extends Fragment  {
             set1.setColors(Color.RED);
             set1.setLineWidth(3f);
             set1.setValueTextSize(10f);
-            set1.setValueTextColor(Color.GREEN);
+            set1.setValueTextColor(Color.BLUE);
 
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
@@ -262,7 +262,7 @@ public class ClientHomeFragment extends Fragment  {
             set1.setColors(Color.RED);
             set1.setLineWidth(3f);
             set1.setValueTextSize(10f);
-            set1.setValueTextColor(Color.GREEN);
+            set1.setValueTextColor(Color.BLUE);
 
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();

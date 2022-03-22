@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 
 public class LogsFragment extends Fragment  {
-    SwipeRefreshLayout refreshLogsLayout;
+    //SwipeRefreshLayout refreshLogsLayout;
     TableLayout logsTable;
     TableRow logsRow;
 
@@ -46,12 +46,15 @@ public class LogsFragment extends Fragment  {
         TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
         title.setText("Logs");
 
+        /*
         // MJ - Swipe to refresh
         refreshLogsLayout = v.findViewById(R.id.refreshLogsLayout);
         logsTable = (TableLayout) v.findViewById(R.id.logs_table);
         refreshLogsLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @SuppressLint("ResourceType")
             @Override
+
+            // Jess
             public void onRefresh() {
                 // Creating a new log
                 TableRow row = new TableRow(getActivity());
@@ -89,7 +92,7 @@ public class LogsFragment extends Fragment  {
 
                 refreshLogsLayout.setRefreshing(false);
             }
-        });
+        });*/
 
 
         return v;

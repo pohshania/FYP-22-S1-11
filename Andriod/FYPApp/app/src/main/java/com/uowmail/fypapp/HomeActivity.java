@@ -158,7 +158,6 @@ public class HomeActivity extends AppCompatActivity {
                 if(menuItem.getItemId() == R.id.settings)
                     // YT open page to user settings
                     startActivity(new Intent(HomeActivity.this, UserSettingsActivity.class));
-                    Toast.makeText( HomeActivity.this, "You clicked in the settings", Toast.LENGTH_SHORT).show();
                 if(menuItem.getItemId() == R.id.logout)
                     startActivity(new Intent(HomeActivity.this,MainActivity.class));
 

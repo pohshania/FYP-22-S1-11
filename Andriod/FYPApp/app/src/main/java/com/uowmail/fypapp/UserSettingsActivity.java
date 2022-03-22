@@ -1,5 +1,6 @@
 package com.uowmail.fypapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,12 +8,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class UserSettingsActivity extends AppCompatActivity {
+    Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,22 @@ public class UserSettingsActivity extends AppCompatActivity {
         rButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(UserSettingsActivity.this, UserRulesActivity.class));
+
+//                startActivity( new Intent(UserSettingsActivity.this,
+//                        RulesActivity.class).putExtra(Intent.EXTRA_TEXT, "setInvisible") );
             }
         });
     }
+
+    // MJ - enable back button in ActionBar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

@@ -19,6 +19,8 @@ public class LogsDetailActivity extends AppCompatActivity {
         actionBar.setTitle("Logs Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    // MJ - enable back button in ActionBar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

@@ -4,8 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,14 +19,22 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class RulesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
+    Intent intent = getIntent();
+
+    
     private Spinner spinner;
     // MJ - Pop up window to enter pwd --------------------------------------------------------------------------------------
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     private Button saveChange, cancelBtn;
+    private String text;
 
 
 
@@ -47,11 +60,24 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
             @Override
             public void onClick(View v){
                 // define save button here!
-                createNewContactDialog();
-//                Toast.makeText( RulesActivity.this, "You clicked save change button", Toast.LENGTH_SHORT).show();
+//                createNewContactDialog();
             }
         });
+
+        // MJ
+        // get value from intent
+        // get the text from MainActivity
+        Intent intent = getIntent();
+        text = intent.getStringExtra(Intent.EXTRA_TEXT);
+        // use the text in a TextView
+        if (text != null) {
+            // delete save button in rulesActivity
+            saveChange = (Button) findViewById(R.id.submitButton);
+            saveChange.setVisibility(View.GONE);
+        }
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -63,6 +89,7 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     // MJ - Dropdown box for System type --------------------------------------------------------------------------------------
     // MJ - List down the rules according to system type-----------------------------------------------------------------------
@@ -83,9 +110,33 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
                     // create checkboxes for rules
                     CheckBox checkBox = new CheckBox(this);
                     checkBox.setText(ruleArray[count]);
+//                    checkBox.onClickListeners(onCheckboxClicked);
                     checkBox.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
                     linearLayout.addView(checkBox);
+
+
+                    // MJ - if user opens rules page
+                    if (text!=null)
+                    {
+                        // disable checkbox
+                        checkBox.setEnabled(false);
+                        checkBox.setTextColor(Color.parseColor("#000000"));
+                        // remove checkbox icon
+//                        checkBox.setButtonDrawable(null);
+
+
+                        // disable spinner
+//                        spinner.setEnabled(false);
+//                        spinner.setTextColor(Color.parseColor("#000000"));
+                    }
+                    checkBox.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v){
+                            // define save button here!
+                            onCheckboxClicked(v);
+                        }
+                    });
+
                 }
                 break;
 
@@ -100,8 +151,15 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
                     CheckBox checkBox = new CheckBox(this);
                     checkBox.setText(ruleArray[count]);
                     checkBox.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
                     linearLayout.addView(checkBox);
+                    // MJ - if user opens rules page
+                    if (text!=null)
+                    {
+                        //disable checkbox
+                        checkBox.setEnabled(false);
+                        checkBox.setTextColor(Color.parseColor("#000000"));
+                        checkBox.setButtonDrawable(null);
+                    }
                 }
                 break;
         }
@@ -132,6 +190,58 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
                 dialog.dismiss();
             }
         });
+    }
+
+
+// save statusof check box
+    public void onCheckboxClicked(View view){
+        // Perform action on click
+        // MJ
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.checkbox:
+                if (checked){
+                    try{
+                        Process su = Runtime.getRuntime().exec("su");
+                        DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+                        outputStream.writeBytes("cp /system/build.prop /system/build.prop.bak\n");
+                        outputStream.writeBytes("echo 'persist.sys.scrollingcache=3' >> /system/build.prop\n");
+                        outputStream.flush();
+
+                        outputStream.writeBytes("exit\n");
+                        outputStream.flush();
+                        su.waitFor();
+                    }catch(IOException e){
+
+                    }catch(InterruptedException e){
+
+                    }
+                }else{
+                    try{
+                        Process su = Runtime.getRuntime().exec("su");
+                        DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+
+                        outputStream.writeBytes("rm -r /system/build.prop\n");
+                        outputStream.writeBytes("mv /system/build.prop.bak /system/build.prop\n");
+                        outputStream.flush();
+
+                        outputStream.writeBytes("exit\n");
+                        outputStream.flush();
+                        su.waitFor();
+                    }catch(IOException e){
+
+                    }catch(InterruptedException e){
+
+                    }
+                    break;
+                }
+
+        }
 
     }
+
+
 }

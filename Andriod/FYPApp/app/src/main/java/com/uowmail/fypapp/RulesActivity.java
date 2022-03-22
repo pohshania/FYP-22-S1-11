@@ -60,7 +60,7 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
             @Override
             public void onClick(View v){
                 // define save button here!
-//                createNewContactDialog();
+                createNewContactDialog();
             }
         });
 

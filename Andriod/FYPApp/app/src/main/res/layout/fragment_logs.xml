@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:background="#0078F8"
+                android:background="#061551"
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:padding="5sp"
-                        android:text="Domain Name"
+                        android:text="Activity Name"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
                         android:visibility="visible" />
@@ -525,7 +525,7 @@
                         android:layout_marginBottom="1dp"
                         android:layout_weight="1"
                         android:padding="5sp"
-                        android:text="5 hours ago"
+                        android:text="7 hours ago"
                         android:visibility="visible" />
 
                     <TextView
@@ -584,7 +584,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:padding="5sp"
-                        android:text="30 seconds ago"
+                        android:text="7 hours ago"
                         android:visibility="visible" />
 
                     <TextView
@@ -644,7 +644,7 @@
                         android:layout_marginBottom="1dp"
                         android:layout_weight="1"
                         android:padding="5sp"
-                        android:text="2 minutes ago"
+                        android:text="8 hours ago"
                         android:visibility="visible" />
 
                     <TextView
@@ -704,7 +704,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:padding="5sp"
-                        android:text="3 hours ago"
+                        android:text="12 hours ago"
                         android:visibility="visible" />
 
                     <TextView
@@ -763,7 +763,7 @@
                         android:layout_marginBottom="1dp"
                         android:layout_weight="1"
                         android:padding="5sp"
-                        android:text="5 hours ago"
+                        android:text="14 hours ago"
                         android:visibility="visible" />
 
                     <TextView
@@ -822,7 +822,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:padding="5sp"
-                        android:text="30 seconds ago"
+                        android:text="1 day ago"
                         android:visibility="visible" />
 
                     <TextView
@@ -882,7 +882,7 @@
                         android:layout_marginBottom="1dp"
                         android:layout_weight="1"
                         android:padding="5sp"
-                        android:text="2 minutes ago"
+                        android:text="1 day ago"
                         android:visibility="visible" />
 
                     <TextView
@@ -942,7 +942,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:padding="5sp"
-                        android:text="3 hours ago"
+                        android:text="1 day ago"
                         android:visibility="visible" />
 
                     <TextView
@@ -1001,7 +1001,7 @@
                         android:layout_marginBottom="1dp"
                         android:layout_weight="1"
                         android:padding="5sp"
-                        android:text="5 hours ago"
+                        android:text="2 days ago"
                         android:visibility="visible" />
 
                     <TextView

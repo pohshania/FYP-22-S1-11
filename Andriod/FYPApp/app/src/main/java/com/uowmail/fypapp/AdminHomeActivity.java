@@ -17,6 +17,7 @@ public class AdminHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
 
+        /*
         logoutBtn = findViewById(R.id.userHome_logout_btn);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,5 +25,6 @@ public class AdminHomeActivity extends AppCompatActivity {
                 fAuth.signOut();
             }
         });
+         */
     }
 }

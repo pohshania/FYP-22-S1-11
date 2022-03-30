@@ -111,7 +111,9 @@ public class Login extends AppCompatActivity {
                 if(documentSnapshot.getBoolean("isAdmin") == true){
                     startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
                     finish();
-                }else{ // user type is user, go to user homepage
+                }
+                // user type is user, go to user homepage
+                if(documentSnapshot.getBoolean("isAdmin") == false){
                     startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
                     finish();
                 }

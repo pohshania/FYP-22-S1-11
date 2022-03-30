@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class Login extends AppCompatActivity {
     EditText loginEmail, loginPassword;
@@ -87,8 +89,8 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT);
-                        startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-                        //checkUserAccessLevel(authResult.getUser().getUid());
+                        //startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
+                        checkUserAccessLevel(authResult.getUser().getUid());
                     }
                 });
             }
@@ -96,7 +98,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void checkUserAccessLevel(String uid) {
-        Log.d("debug", "HELLLLLLLLLLLLLLLO OI");
+        Log.d("debug", "HELLLLLLLLLLLLLLLO OI !!!!!!!!!! :DDDDDDDDDDDDDDDDDDD");
         DocumentReference df = fStore.collection("Users").document(uid);
 
         // extract data from the document
@@ -105,11 +107,22 @@ public class Login extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Log.d("CHECKUSERACCESSLEVEL","onSuccess: " + documentSnapshot.getData());
 
+                // if user type is admin, go to admin homepage
                 if(documentSnapshot.getBoolean("isAdmin") == true){
+                    startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
+                    finish();
+                }else{ // user type is user, go to user homepage
                     startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
                     finish();
                 }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("FIREBASE LOGIN FAILURE: ", e.toString());
             }
         });
+
     }
 }

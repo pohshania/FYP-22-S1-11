@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Login extends AppCompatActivity {
@@ -86,9 +88,27 @@ public class Login extends AppCompatActivity {
                     public void onSuccess(AuthResult authResult) {
                         Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT);
                         startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-                        
+                        //checkUserAccessLevel(authResult.getUser().getUid());
                     }
                 });
+            }
+        });
+    }
+
+    private void checkUserAccessLevel(String uid) {
+        Log.d("debug", "HELLLLLLLLLLLLLLLO OI");
+        DocumentReference df = fStore.collection("Users").document(uid);
+
+        // extract data from the document
+        df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Log.d("CHECKUSERACCESSLEVEL","onSuccess: " + documentSnapshot.getData());
+
+                if(documentSnapshot.getBoolean("isAdmin") == true){
+                    startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
+                    finish();
+                }
             }
         });
     }

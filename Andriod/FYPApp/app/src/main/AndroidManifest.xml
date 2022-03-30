@@ -9,36 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_cd_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FYPApp">
+
         <activity
-            android:name=".LogsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".UserSettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".UserRulesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LogsDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RulesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AdminViewUserLogsActivity"
-            android:exported="false"
-            android:parentActivityName=".AdminViewUserActivity" />
-        <activity
-            android:name=".AdminViewUserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SignUpActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,6 +19,48 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".LogsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".UserSettingsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".UserRulesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".LogsDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".RulesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AdminViewUserLogsActivity"
+            android:exported="false"
+            android:parentActivityName=".AdminViewUserActivity" />
+
+        <activity
+            android:name=".AdminViewUserActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+
     </application>
 
 </manifest>

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,17 +18,14 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class Login extends AppCompatActivity {
     // XML variables
@@ -65,9 +61,9 @@ public class Login extends AppCompatActivity {
         // set the user types drop down spinner
         loginUserTypeSpinner = (Spinner) findViewById(R.id.login_userType);
         String[] userTypes = getResources().getStringArray(R.array.user_types);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, userTypes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_textcolor_layout, userTypes);
         loginUserTypeSpinner.setAdapter(adapter);
-
+        adapter.setDropDownViewResource(R.layout.spinner_selected_item_layout);
 
         loginUserTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

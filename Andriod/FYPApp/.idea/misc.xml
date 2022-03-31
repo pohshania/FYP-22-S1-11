@@ -5,7 +5,7 @@
       <map>
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_admin_home.xml" value="0.1" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_create_new_user.xml" value="0.264" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_login.xml" value="0.176" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_logs.xml" value="0.17708333333333334" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_rules.xml" value="0.1" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_user.xml" value="0.18802083333333333" />
@@ -41,11 +41,13 @@
         <entry key="app/src/main/res/drawable/ic_logo_icon.xml" value="0.15245080566406252" />
         <entry key="app/src/main/res/drawable/ic_logo_icon_2.xml" value="0.1705" />
         <entry key="app/src/main/res/drawable/ic_notification_circle.xml" value="0.2355" />
+        <entry key="app/src/main/res/drawable/my_border.xml" value="0.1605" />
         <entry key="app/src/main/res/drawable/press state btn.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/press_state_btn.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/refresh_logs.xml" value="0.185" />
         <entry key="app/src/main/res/drawable/right_arrow.xml" value="0.1325" />
         <entry key="app/src/main/res/drawable/rounded_corner.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/search_icon.xml" value="0.1605" />
         <entry key="app/src/main/res/drawable/sw_thumb.xml" value="0.207" />
         <entry key="app/src/main/res/drawable/sw_track.xml" value="0.207" />
         <entry key="app/src/main/res/layout/activity_admin_home.xml" value="0.1" />
@@ -55,13 +57,15 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_home_admin.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_home_client.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.18288269042968752" />
         <entry key="app/src/main/res/layout/activity_logs.xml" value="0.153118896484375" />
         <entry key="app/src/main/res/layout/activity_logs2.xml" value="0.3388888888888889" />
         <entry key="app/src/main/res/layout/activity_logs_detail.xml" value="0.15070921985815602" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19689788818359377" />
         <entry key="app/src/main/res/layout/activity_rules.xml" value="0.247320692497939" />
         <entry key="app/src/main/res/layout/activity_user_home.xml" value="0.13793334960937498" />
         <entry key="app/src/main/res/layout/activity_user_settings.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/color_spinner_layout.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/fragment_admin_home.xml" value="0.21550699869791667" />
         <entry key="app/src/main/res/layout/fragment_admin_view_user.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_admin_view_user_logs.xml" value="0.15520833333333334" />
@@ -74,6 +78,8 @@
         <entry key="app/src/main/res/layout/popup.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/pwd_popup.xml" value="0.1" />
         <entry key="app/src/main/res/layout/pwdpopup.xml" value="0.2609375" />
+        <entry key="app/src/main/res/layout/spinner_selected_item_layout.xml" value="0.2625" />
+        <entry key="app/src/main/res/layout/spinner_textcolor_layout.xml" value="0.2625" />
         <entry key="app/src/main/res/layout/top_toolbar.xml" value="0.2850397180627894" />
         <entry key="app/src/main/res/layout/top_toolbar_admin.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/menu/account_menu.xml" value="0.19947916666666668" />

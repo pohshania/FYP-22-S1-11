@@ -25,7 +25,7 @@ public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-    ClientHomeFragment clientHomeFragment = new ClientHomeFragment();
+    UserHomeFragment userHomeFragment = new UserHomeFragment();
     AdminHomeFragment adminHomeFragment = new AdminHomeFragment();
     NotificationFragment notificationFragment = new NotificationFragment();
     LogsFragment logsFragment = new LogsFragment();
@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
         else
         {
             setContentView(R.layout.activity_home_client);
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, clientHomeFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, userHomeFragment).commit();
             bottomNavigationView = findViewById(R.id.bottom_navigation_client);
         }
 
@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
                                 getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
                             }
                             else
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container, clientHomeFragment).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container, userHomeFragment).commit();
                             return true;
 
                         case R.id.notification:
@@ -120,7 +120,7 @@ public class HomeActivity extends AppCompatActivity {
                     if (admin == true)
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
                     else
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, clientHomeFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, userHomeFragment).commit();
 
                 }
             });

@@ -39,7 +39,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class ClientHomeFragment extends Fragment  {
+public class UserHomeFragment extends Fragment  {
     // MJ - swipte to refresh
     SwipeRefreshLayout refreshLayout;
     Integer num = 0;

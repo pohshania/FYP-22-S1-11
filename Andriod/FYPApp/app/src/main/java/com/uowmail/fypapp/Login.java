@@ -28,11 +28,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class Login extends AppCompatActivity {
+    // XML variables
     EditText loginEmail, loginPassword;
     Button loginBtn;
     ProgressBar loginProgressBar;
+
+    // firebase variables
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,6 @@ public class Login extends AppCompatActivity {
         loginPassword    = findViewById(R.id.login_password);
         loginBtn         = findViewById(R.id.login_btn);
         loginProgressBar = findViewById(R.id.login_progressBar);
-
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,20 +70,22 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                // hide the key board
-                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-
-                // show progress bar
-                loginProgressBar.setVisibility(View.VISIBLE);
+                toggleKeyboardAndProgressBar(false, true);
 
 
                 fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT);
+                        Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                         //startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
                         checkUserAccessLevel(authResult.getUser().getUid());
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
+                        Log.d("!!!!!! UNSUCCESSFUL LOGIN", "oi unsuccessful la");
+                        toggleKeyboardAndProgressBar(true, false);
                     }
                 });
             }
@@ -115,6 +120,25 @@ public class Login extends AppCompatActivity {
                 Log.d("FIREBASE LOGIN FAILURE: ", e.toString());
             }
         });
+    }
 
+    private void toggleKeyboardAndProgressBar(boolean keyboard, boolean progressbar){
+        if(keyboard == true && progressbar == false){
+            // show the key board
+            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+
+            // hide progress bar
+            loginProgressBar.setVisibility(View.INVISIBLE);
+        }
+
+        if(keyboard == false && progressbar == true){
+            // hide the key board
+            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+            // show progress bar
+            loginProgressBar.setVisibility(View.VISIBLE);
+        }
     }
 }

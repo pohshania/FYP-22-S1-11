@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
     public static String email, password;
 
     // user types boolean, true == Admin, false == User
-    boolean userTypeBool = true;
+    boolean userTypeBool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,24 +68,29 @@ public class Login extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, userTypes);
         loginUserTypeSpinner.setAdapter(adapter);
 
+
         loginUserTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getApplicationContext(), "UserType Selected: " + item, Toast.LENGTH_SHORT).show();
+                String item = adapterView.getItemAtPosition(i).toString().trim();
 
-                if(item == "Admin"){
+
+                if(item.equals("Admin")){
                     userTypeBool = true;
-
-                }else if(item == "User"){
-                    userTypeBool = false;
+                    Toast.makeText(getApplicationContext(), "UserType Selected: " + item + userTypeBool, Toast.LENGTH_SHORT).show();
                 }
+                if(item.equals("User")){
+                    userTypeBool = false;
+                    Toast.makeText(getApplicationContext(), "UserType Selected: " + item + userTypeBool, Toast.LENGTH_SHORT).show();
+                }
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
+
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +155,11 @@ public class Login extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
                         finish();
                     }
+                    // user type is user, go to user homepage
+                    if(documentSnapshot.getBoolean("isAdmin") == false){
+                        startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
+                        finish();
+                    }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -170,11 +180,17 @@ public class Login extends AppCompatActivity {
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     Log.d("CHECKUSERACCESSLEVEL","onSuccess: " + documentSnapshot.getData());
 
+                    // if user type is admin, go to admin homepage
+                    if(documentSnapshot.getBoolean("isAdmin") == true){
+                        startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
+                        finish();
+                    }
                     // user type is user, go to user homepage
                     if(documentSnapshot.getBoolean("isAdmin") == false){
                         startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
                         finish();
                     }
+
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

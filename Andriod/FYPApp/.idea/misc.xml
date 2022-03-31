@@ -3,14 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_admin_home.xml" value="0.1" />
+        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_admin_home.xml" value="0.2" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_create_new_user.xml" value="0.264" />
+        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_delete_user.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_login.xml" value="0.176" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_logs.xml" value="0.17708333333333334" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_rules.xml" value="0.1" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_user.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_user_home.xml" value="0.11354166666666667" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_admin_home.xml" value="0.4" />
+        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_admin_home.xml" value="0.14556962025316456" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_logs.xml" value="0.1518324607329843" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_notification.xml" value="0.11911231884057971" />
         <entry key="..\:/Users/leeyt/Documents/GitHub/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/drawable/back.xml" value="0.1915" />

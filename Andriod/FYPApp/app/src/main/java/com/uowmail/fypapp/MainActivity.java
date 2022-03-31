@@ -45,14 +45,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //Sets action for login button
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-                intent.putExtra("adminbool", loginusrnameTxt.getText().toString());
-                userName = loginusrnameTxt.getText().toString();
-                startActivity(intent);
-            }
-        });
+//        loginButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+//                intent.putExtra("adminbool", loginusrnameTxt.getText().toString());
+//                userName = loginusrnameTxt.getText().toString();
+//                startActivity(intent);
+//            }
+//        });
 
     }
 

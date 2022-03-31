@@ -3,12 +3,15 @@ package com.uowmail.fypapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ import java.util.Map;
 public class CreateNewUserActivity extends AppCompatActivity {
     EditText createUserFullName, createUserEmail, createUserOrgID, createUserPassword;
     Button createAccBtn;
+    ProgressBar createUserProgressBar;
 
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -42,6 +46,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
         createUserOrgID    = findViewById(R.id.createUser_organisationID);
         createUserPassword = findViewById(R.id.createUser_password);
         createAccBtn       = findViewById(R.id.createUser_createAcc_btn);
+        createUserProgressBar = findViewById(R.id.createUser_progressBar);
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -56,7 +61,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
                 String password = createUserPassword.getText().toString().trim();
 
                 if(TextUtils.isEmpty(fullName)){
-                    createUserEmail.setError("Full Name is required!");
+                    createUserFullName.setError("Full Name is required!");
                     return;
                 }
                 if(TextUtils.isEmpty(email)){
@@ -64,7 +69,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
                     return;
                 }
                 if(TextUtils.isEmpty(orgID)){
-                    createUserEmail.setError("Organisation ID is required!");
+                    createUserOrgID.setError("Organisation ID is required!");
                     return;
                 }
                 if(TextUtils.isEmpty(password)){
@@ -76,6 +81,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
                     return;
                 }
 
+                toggleKeyboardAndProgressBar(false, true);
 
                 // register the user into Firebase
                 fAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -97,15 +103,38 @@ public class CreateNewUserActivity extends AppCompatActivity {
 
                         // store the user info into firestore
                         df.set(userInfo);
+
+                        createUserProgressBar.setVisibility(View.INVISIBLE);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(CreateNewUserActivity.this, "Not successful!" + e.toString(), Toast.LENGTH_SHORT).show();
+                        toggleKeyboardAndProgressBar(true, false);
                     }
                 });
             }
         });
 
+    }
+
+    private void toggleKeyboardAndProgressBar(boolean keyboard, boolean progressbar) {
+        if (keyboard == true && progressbar == false) {
+            // show the key board
+            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+
+            // hide progress bar
+            createUserProgressBar.setVisibility(View.INVISIBLE);
+        }
+
+        if (keyboard == false && progressbar == true) {
+            // hide the key board
+            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+            // show progress bar
+            createUserProgressBar.setVisibility(View.VISIBLE);
+        }
     }
 }

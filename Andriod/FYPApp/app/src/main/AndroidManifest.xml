@@ -32,7 +32,8 @@
 
         <activity
             android:name=".CreateNewUserActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".AdminHomeActivity"/>
         <!--
         <activity
             android:name=".CreateNewUserActivity"

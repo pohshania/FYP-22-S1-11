@@ -4,31 +4,35 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminHomeActivity extends AppCompatActivity {
-    Button createUserBtn, logoutBtn;
+//    Button createUserBtn, logoutBtn;
+
+    private Menu menu;
+    AdminHomeFragment adminHomeFragment = new AdminHomeFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_admin_home);
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
 
-
-        createUserBtn = findViewById(R.id.adminHome_createUser_btn);
-        createUserBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), CreateNewUserActivity.class));
-            }
-        });
-
-
-        logoutBtn = findViewById(R.id.adminHome_logout_btn);
+        // tool bar
+        TextView title = findViewById(R.id.toolbar_title);
+        title.setText("Creeping Donut");
+        // log out button
+        ImageView logoutBtn = findViewById(R.id.logout);
+//        logoutBtn = findViewById(R.id.adminHome_logout_btn);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,6 +42,15 @@ public class AdminHomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+//        createUserBtn = findViewById(R.id.adminHome_createUser_btn);
+//        createUserBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getApplicationContext(), CreateNewUserActivity.class));
+//            }
+//        });
 
     }
 }

@@ -26,7 +26,7 @@ public class AdminHomeFragment extends Fragment {
 
         // Shania
         createUserBtn = v.findViewById(R.id.createUser_btn);
-        deleteUserBtn = v.findViewById(R.id.adminHome_deleteUser_btn);
+//        deleteUserBtn = v.findViewById(R.id.adminHome_deleteUser_btn);
 
 
         logsButton.setOnClickListener(new View.OnClickListener() {
@@ -56,12 +56,12 @@ public class AdminHomeFragment extends Fragment {
             }
         });
 
-        deleteUserBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), DeleteUserActivity.class));
-            }
-        });
+//        deleteUserBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getActivity(), DeleteUserActivity.class));
+//            }
+//        });
 
 
         return v;

@@ -5,18 +5,17 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UserHomeFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
 
     <Button
         android:id="@+id/buttonLogs"
         android:layout_width="186dp"
         android:layout_height="79dp"
-        android:layout_above="@+id/buttonRules"
-        android:layout_centerInParent="true"
-        android:layout_margin="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_corner"
         android:text="Users Logs" />
 
@@ -24,45 +23,32 @@
         android:id="@+id/buttonRules"
         android:layout_width="186dp"
         android:layout_height="79dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/buttonLogs"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/rounded_corner"
         android:text="@string/rules" />
 
     <Button
         android:id="@+id/createUser_btn"
-        android:layout_width="148dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="449dp"
-        android:layout_marginEnd="131dp"
-        android:layout_marginBottom="220dp"
+        android:layout_width="186dp"
+        android:layout_height="79dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/buttonRules"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rounded_corner"
         android:text="Create User" />
 
-    <Button
-        android:id="@+id/adminHome_deleteUser_btn"
-        android:layout_width="148dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="131dp"
-        android:layout_marginTop="552dp"
-        android:layout_marginEnd="130dp"
-        android:layout_marginBottom="117dp"
-        android:background="@drawable/rounded_corner"
-        android:text="Delete User" />
+<!--        <Button-->
+<!--            android:id="@+id/adminHome_deleteUser_btn"-->
+<!--            android:layout_width="186dp"-->
+<!--            android:layout_height="79dp"-->
+<!--            android:layout_below="@+id/createUser_btn"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:background="@drawable/rounded_corner"-->
+<!--            android:text="Delete User" />-->
 
+    </RelativeLayout>
 
 </RelativeLayout>

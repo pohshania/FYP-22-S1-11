@@ -1,6 +1,7 @@
 package com.uowmail.fypapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -39,6 +40,10 @@ public class CreateNewUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // MJ - ActionBar setting
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Create New User");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_create_new_user);
 
         createUserFullName = findViewById(R.id.createUser_fullname);

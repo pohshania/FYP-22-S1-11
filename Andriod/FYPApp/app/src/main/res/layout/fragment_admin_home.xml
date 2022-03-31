@@ -32,4 +32,21 @@
         android:background="@drawable/rounded_corner"
         android:text="@string/rules" />
 
+    <Button
+        android:id="@+id/adminHome_createUser_btn"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="449dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="220dp"
+        android:background="@drawable/rounded_corner"
+        android:text="Crease User" />
+
+
 </RelativeLayout>

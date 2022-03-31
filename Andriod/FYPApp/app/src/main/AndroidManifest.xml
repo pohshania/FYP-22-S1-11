@@ -11,12 +11,33 @@
         android:roundIcon="@mipmap/ic_launcher_cd_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FYPApp">
+
+        <!--
+        <activity
+            android:name=".CreateNewUserActivity"
+            android:exported="false" />
+         -->
+        <activity
+            android:name=".CreateNewUserActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+
         <activity
             android:name=".AdminHomeActivity"
             android:exported="false" />
         <activity
             android:name=".UserHomeActivity"
             android:exported="false" />
+
+
+        <!--
         <activity
             android:name=".Login"
             android:exported="true">
@@ -26,6 +47,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        -->
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+
+
+
         <activity
             android:name=".LogsActivity"
             android:exported="false" />

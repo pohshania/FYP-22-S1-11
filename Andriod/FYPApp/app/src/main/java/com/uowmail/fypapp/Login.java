@@ -37,6 +37,8 @@ public class Login extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
 
+    // userName and passsword
+    public static String email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +56,8 @@ public class Login extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = loginEmail.getText().toString().trim();
-                String password = loginPassword.getText().toString().trim();
+                email = loginEmail.getText().toString().trim();
+                password = loginPassword.getText().toString().trim();
 
                 if(TextUtils.isEmpty(email)){
                     loginEmail.setError("Email is required!");
@@ -141,4 +143,7 @@ public class Login extends AppCompatActivity {
             loginProgressBar.setVisibility(View.VISIBLE);
         }
     }
+
+    public String getUserName(){ return email; }
+
 }

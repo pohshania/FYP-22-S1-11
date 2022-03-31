@@ -11,9 +11,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +25,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,6 +36,7 @@ public class Login extends AppCompatActivity {
     EditText loginEmail, loginPassword;
     Button loginBtn;
     ProgressBar loginProgressBar;
+    Spinner loginUserTypeSpinner;
 
     // firebase variables
     FirebaseAuth fAuth;
@@ -39,6 +44,9 @@ public class Login extends AppCompatActivity {
 
     // userName and passsword
     public static String email, password;
+
+    // user types boolean, true == Admin, false == User
+    boolean userTypeBool = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +61,31 @@ public class Login extends AppCompatActivity {
         loginPassword    = findViewById(R.id.login_password);
         loginBtn         = findViewById(R.id.login_btn);
         loginProgressBar = findViewById(R.id.login_progressBar);
+
+        // set the user types drop down spinner
+        loginUserTypeSpinner = (Spinner) findViewById(R.id.login_userType);
+        String[] userTypes = getResources().getStringArray(R.array.user_types);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, userTypes);
+        loginUserTypeSpinner.setAdapter(adapter);
+
+        loginUserTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(getApplicationContext(), "UserType Selected: " + item, Toast.LENGTH_SHORT).show();
+
+                if(item == "Admin"){
+                    userTypeBool = true;
+
+                }else if(item == "User"){
+                    userTypeBool = false;
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +114,7 @@ public class Login extends AppCompatActivity {
                     public void onSuccess(AuthResult authResult) {
                         Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                         //startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-                        checkUserAccessLevel(authResult.getUser().getUid());
+                        checkUserAccessLevel(authResult.getUser().getUid(), userTypeBool);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -95,34 +128,61 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private void checkUserAccessLevel(String uid) {
+    private void checkUserAccessLevel(String uid, Boolean userType) {
         Log.d("debug", "HELLLLLLLLLLLLLLLO OI !!!!!!!!!! :DDDDDDDDDDDDDDDDDDD");
-        DocumentReference df = fStore.collection("Users").document(uid);
 
-        // extract data from the document
-        df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Log.d("CHECKUSERACCESSLEVEL","onSuccess: " + documentSnapshot.getData());
+        FirebaseUser user = fAuth.getCurrentUser();
 
-                // if user type is admin, go to admin homepage
-                if(documentSnapshot.getBoolean("isAdmin") == true){
-                    startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
-                    finish();
+        // Admin
+        if(userType == true){
+            DocumentReference df = fStore
+                    .collection("Admins").document(user.getEmail())
+                    .collection("Profile").document("Details");
+
+            // extract data from the document
+            df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    Log.d("CHECKUSERACCESSLEVEL","onSuccess: " + documentSnapshot.getData());
+
+                    // if user type is admin, go to admin homepage
+                    if(documentSnapshot.getBoolean("isAdmin") == true){
+                        startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
+                        finish();
+                    }
                 }
-                // user type is user, go to user homepage
-                if(documentSnapshot.getBoolean("isAdmin") == false){
-                    startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-                    finish();
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("FIREBASE LOGIN FAILURE: ", e.toString());
                 }
+            });
+        }
+        // User
+        else if(userType == false){
+            DocumentReference df = fStore
+                    .collection("Users").document(user.getEmail())
+                    .collection("Profile").document("Details");
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("FIREBASE LOGIN FAILURE: ", e.toString());
-            }
-        });
+            // extract data from the document
+            df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    Log.d("CHECKUSERACCESSLEVEL","onSuccess: " + documentSnapshot.getData());
+
+                    // user type is user, go to user homepage
+                    if(documentSnapshot.getBoolean("isAdmin") == false){
+                        startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
+                        finish();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("FIREBASE LOGIN FAILURE: ", e.toString());
+                }
+            });
+        }
     }
 
     private void toggleKeyboardAndProgressBar(boolean keyboard, boolean progressbar){

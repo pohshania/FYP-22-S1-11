@@ -15,8 +15,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminHomeActivity extends AppCompatActivity {
-//    Button createUserBtn, logoutBtn;
-
     private Menu menu;
     AdminHomeFragment adminHomeFragment = new AdminHomeFragment();
 
@@ -30,9 +28,9 @@ public class AdminHomeActivity extends AppCompatActivity {
         // tool bar
         TextView title = findViewById(R.id.toolbar_title);
         title.setText("Creeping Donut");
+
         // log out button
         ImageView logoutBtn = findViewById(R.id.logout);
-//        logoutBtn = findViewById(R.id.adminHome_logout_btn);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,15 +40,5 @@ public class AdminHomeActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-//        createUserBtn = findViewById(R.id.adminHome_createUser_btn);
-//        createUserBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getApplicationContext(), CreateNewUserActivity.class));
-//            }
-//        });
-
     }
 }

@@ -97,8 +97,9 @@ public class CreateNewUserActivity extends AppCompatActivity {
                         // getting info of the user that was just created
                         FirebaseUser user = fAuth.getCurrentUser();
 
-                        // store user info into firestore
-                        DocumentReference df = fStore.collection("Users").document(user.getUid());
+                        DocumentReference df = fStore
+                                .collection("Users").document(user.getEmail())
+                                .collection("Profile").document("Details");
                         Map<String,Object> userInfo = new HashMap<>();
                         userInfo.put("Full Name", createUserFullName.getText().toString().trim());
                         userInfo.put("Email", createUserEmail.getText().toString().trim());

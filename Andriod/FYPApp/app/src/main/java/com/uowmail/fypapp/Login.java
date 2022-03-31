@@ -3,13 +3,17 @@ package com.uowmail.fypapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +30,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class Login extends AppCompatActivity {
     EditText loginEmail, loginPassword;
     Button loginBtn;
+    ProgressBar loginProgressBar;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
 
@@ -40,6 +45,7 @@ public class Login extends AppCompatActivity {
         loginEmail       = findViewById(R.id.login_email);
         loginPassword    = findViewById(R.id.login_password);
         loginBtn         = findViewById(R.id.login_btn);
+        loginProgressBar = findViewById(R.id.login_progressBar);
 
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -61,30 +67,14 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                /*
-                fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT);
-                        //startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
-                    }
-                });*/
+                // hide the key board
+                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
-                /*
-                fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        // check if the login is successful or not
-                        if(task.isSuccessful()){
-                            Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-                        }else{ // unsucessful login
-                            Toast.makeText(Login.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                */
+                // show progress bar
+                loginProgressBar.setVisibility(View.VISIBLE);
+
+
                 fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {

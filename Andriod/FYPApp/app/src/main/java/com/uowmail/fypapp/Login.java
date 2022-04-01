@@ -93,11 +93,9 @@ public class Login extends AppCompatActivity {
 
                 if(item.equals("Admin")){
                     selectedUserType = UserTypes.ADMIN;
-                    //Toast.makeText(getApplicationContext(), "UserType Selected: " + item + " " + selectedUserType.toString(), Toast.LENGTH_SHORT).show();
                 }
                 if(item.equals("User")){
                     selectedUserType = UserTypes.USER;
-                    //Toast.makeText(getApplicationContext(), "UserType Selected: " + item + " " + selectedUserType.toString(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -112,7 +110,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //toggleKeyboardAndProgressBar(false, true);
+                toggleKeyboardAndProgressBar(false, true);
 
                 email = loginEmail.getText().toString().trim();
                 password = loginPassword.getText().toString().trim();
@@ -175,6 +173,7 @@ public class Login extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
                                 Log.d("FIREBASE QUERY => ", email + " Admin exists!");
+                                toggleKeyboardAndProgressBar(false, true);
                                 userExists = true;
                                 fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                     @Override
@@ -187,12 +186,14 @@ public class Login extends AppCompatActivity {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
+                                        toggleKeyboardAndProgressBar(true, false);
                                     }
                                 });
                             }
                             else {
                                 Log.d("FIREBASE QUERY => ", "Admin does not exist!");
                                 Toast.makeText(Login.this, "You have either selected the wrong user type or the user email does not exists.", Toast.LENGTH_SHORT).show();
+                                toggleKeyboardAndProgressBar(true, false);
                                 userExists = false;
                             }
                         }
@@ -211,6 +212,7 @@ public class Login extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
                                 Log.d("FIREBASE QUERY => ", email + " User exists!");
+                                toggleKeyboardAndProgressBar(false, true);
                                 userExists = true;
                                 fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                     @Override
@@ -223,12 +225,14 @@ public class Login extends AppCompatActivity {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
+                                        toggleKeyboardAndProgressBar(true, false);
                                     }
                                 });
                             }
                             else {
                                 Log.d("FIREBASE QUERY => ", " User does not exist!");
                                 Toast.makeText(Login.this, "You have either selected the wrong user type or the user email does not exists.", Toast.LENGTH_SHORT).show();
+                                toggleKeyboardAndProgressBar(true, false);
                                 userExists = false;
                             }
                         }

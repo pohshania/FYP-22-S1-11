@@ -106,7 +106,7 @@ public class UserHomeActivity extends AppCompatActivity {
                     startActivity(new Intent(UserHomeActivity.this, UserSettingsActivity.class));
                 if(menuItem.getItemId() == R.id.logout)
                 {
-                    Toast.makeText(UserHomeActivity.this, "USER CLICK ON LOGOUT", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(UserHomeActivity.this, "USER CLICK ON LOGOUT", Toast.LENGTH_SHORT).show();
                     FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(getApplicationContext(), Login.class));
                     finish();

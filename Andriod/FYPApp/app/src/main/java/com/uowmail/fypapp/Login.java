@@ -78,7 +78,6 @@ public class Login extends AppCompatActivity {
         loginPassword    = findViewById(R.id.login_password);
         loginBtn         = findViewById(R.id.login_btn);
         loginProgressBar = findViewById(R.id.login_progressBar);
-        loginTestFirebaseQueryBtn = findViewById(R.id.login_testFirebase_btn);
 
         // set the user types drop down spinner
         loginUserTypeSpinner = (Spinner) findViewById(R.id.login_userType);
@@ -112,6 +111,9 @@ public class Login extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //toggleKeyboardAndProgressBar(false, true);
+
                 email = loginEmail.getText().toString().trim();
                 password = loginPassword.getText().toString().trim();
 
@@ -127,97 +129,40 @@ public class Login extends AppCompatActivity {
                     loginPassword.setError("Password must be >= 6 characters!");
                     return;
                 }
-
-                toggleKeyboardAndProgressBar(false, true);
-
-
-                fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-                        checkUserAccessLevel(authResult.getUser().getUid(), userTypeBool);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
-                        Log.d("!!!!!! UNSUCCESSFUL LOGIN", "oi unsuccessful la");
-                        toggleKeyboardAndProgressBar(true, false);
-                    }
-                });
-            }
-        });
-
-
-        // Firebase quering testing & debuggin
-        loginTestFirebaseQueryBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                email = loginEmail.getText().toString().trim();
-                password = loginPassword.getText().toString().trim();
-
-                if(TextUtils.isEmpty(email)){
-                    loginEmail.setError("Email is required!");
-                    return;
-                }
-                if(TextUtils.isEmpty(password)){
-                    loginPassword.setError("Password is required!");
-                    return;
-                }
-                if(password.length() < 6){
-                    loginPassword.setError("Password must be >= 6 characters!");
-                    return;
-                }
-
-                toggleKeyboardAndProgressBar(false, true);
 
                 // check if the current selected user type is correct
-                checkUserType(fStore, email, selectedUserType);
-                if(userExists == true){
-                    Log.d("CHECK USERTYPE", "DATS RIGHT");
-
-                    // sign in
-                    fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-                            //checkUserAccessLevel(authResult.getUser().getUid(), userTypeBool);
-                            //checkUserAccessLevel2(fStore, email, selectedUserType);
-
-                            switch(selectedUserType){
-                                case ADMIN:
-                                    startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
-                                    finish();
-                                    break;
-                                case USER:
-                                    startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-                                    finish();
-                                    break;
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
-                            //Log.d("!!!!!! UNSUCCESSFUL LOGIN", "oi unsuccessful la");
-                            //toggleKeyboardAndProgressBar(true, false);
-                        }
-                    });
-                }
-                else{
-                    Log.d("CHECK USERTYPE", "FUCK U RETYPE LOGIN DETAILS");
-                    loginProgressBar.setVisibility(View.INVISIBLE);
-                    //toggleKeyboardAndProgressBar(true, false);
-                }
-
-
+                checkUserType(fStore, email, password, selectedUserType);
             }
         });
     }
 
-    private boolean checkUserType(FirebaseFirestore db, String email, UserTypes selectedUserType){
+    private void signIn(FirebaseAuth fAuth, String email, String password, UserTypes selectedUserType){
+        // sign in
+        fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
+
+                switch(selectedUserType){
+                    case ADMIN:
+                        startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
+                        finish();
+                        break;
+                    case USER:
+                        startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
+                        finish();
+                        break;
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private boolean checkUserType(FirebaseFirestore db, String email, String password, UserTypes selectedUserType){
         DocumentReference docIdRef;
 
         switch(selectedUserType){
@@ -231,10 +176,23 @@ public class Login extends AppCompatActivity {
                             if (document.exists()) {
                                 Log.d("FIREBASE QUERY => ", email + " Admin exists!");
                                 userExists = true;
+                                fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                    @Override
+                                    public void onSuccess(AuthResult authResult) {
+                                        Toast.makeText(Login.this, "Logged in successfully to Admin.", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
+                                        finish();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                             else {
                                 Log.d("FIREBASE QUERY => ", "Admin does not exist!");
-                                Toast.makeText(Login.this, "Nigga either you selected the wrong user type or user does not exists.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, "You have either selected the wrong user type or the user email does not exists.", Toast.LENGTH_SHORT).show();
                                 userExists = false;
                             }
                         }
@@ -254,10 +212,23 @@ public class Login extends AppCompatActivity {
                             if (document.exists()) {
                                 Log.d("FIREBASE QUERY => ", email + " User exists!");
                                 userExists = true;
+                                fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                    @Override
+                                    public void onSuccess(AuthResult authResult) {
+                                        Toast.makeText(Login.this, "Logged in successfully to User.", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
+                                        finish();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                             else {
                                 Log.d("FIREBASE QUERY => ", " User does not exist!");
-                                Toast.makeText(Login.this, "Nigga either you selected the wrong user type or user does not exists.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, "You have either selected the wrong user type or the user email does not exists.", Toast.LENGTH_SHORT).show();
                                 userExists = false;
                             }
                         }
@@ -270,123 +241,6 @@ public class Login extends AppCompatActivity {
             default:
         }
         return userExists;
-    }
-
-    private void checkUserAccessLevel2(FirebaseFirestore db, String uid, UserTypes selectedUserType){
-        FirebaseUser user = fAuth.getCurrentUser();
-        DocumentReference df;
-
-        switch(selectedUserType){
-            case ADMIN:
-                df = db.collection("Admins Profile").document(user.getEmail());
-                df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Log.d("CHECKUSERACCESSLEVEL","onSuccess: " + documentSnapshot.getData());
-
-                        // if user type is admin, go to admin homepage
-                        if(documentSnapshot.getBoolean("isAdmin") == true){
-                            startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
-                            finish();
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("FIREBASE LOGIN FAILURE: ", e.toString());
-                    }
-                });
-                break;
-            case USER:
-                df = db.collection("Users Profile").document(user.getEmail());
-                df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Log.d("CHECKUSERACCESSLEVEL","onSuccess: " + documentSnapshot.getData());
-
-                        // if user type is admin, go to admin homepage
-                        if(documentSnapshot.getBoolean("isAdmin") == true){
-                            startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-                            finish();
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("FIREBASE LOGIN FAILURE: ", e.toString());
-                    }
-                });
-                break;
-            default:
-        }
-    }
-
-    private void checkUserAccessLevel(String uid, Boolean userType) {
-        Log.d("debug", "HELLLLLLLLLLLLLLLO OI !!!!!!!!!! :DDDDDDDDDDDDDDDDDDD");
-
-        FirebaseUser user = fAuth.getCurrentUser();
-
-        // Admin
-        if(userType == true){
-            DocumentReference df = fStore
-                    .collection("Admins").document(user.getEmail())
-                    .collection("Profile").document("Details");
-
-            // extract data from the document
-            df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    Log.d("CHECKUSERACCESSLEVEL","onSuccess: " + documentSnapshot.getData());
-
-                    // if user type is admin, go to admin homepage
-                    if(documentSnapshot.getBoolean("isAdmin") == true){
-                        startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
-                        finish();
-                    }
-                    // user type is user, go to user homepage
-                    if(documentSnapshot.getBoolean("isAdmin") == false){
-                        startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-                        finish();
-                    }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d("FIREBASE LOGIN FAILURE: ", e.toString());
-                }
-            });
-        }
-        // User
-        else if(userType == false){
-            DocumentReference df = fStore
-                    .collection("Users").document(user.getEmail())
-                    .collection("Profile").document("Details");
-
-            // extract data from the document
-            df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    Log.d("CHECKUSERACCESSLEVEL","onSuccess: " + documentSnapshot.getData());
-
-                    // if user type is admin, go to admin homepage
-                    if(documentSnapshot.getBoolean("isAdmin") == true){
-                        startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
-                        finish();
-                    }
-                    // user type is user, go to user homepage
-                    if(documentSnapshot.getBoolean("isAdmin") == false){
-                        startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-                        finish();
-                    }
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d("FIREBASE LOGIN FAILURE: ", e.toString());
-                }
-            });
-        }
     }
 
     private void toggleKeyboardAndProgressBar(boolean keyboard, boolean progressbar){

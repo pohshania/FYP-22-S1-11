@@ -23,9 +23,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -97,6 +99,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
                         // getting info of the user that was just created
                         FirebaseUser user = fAuth.getCurrentUser();
 
+                        /*
                         DocumentReference df = fStore
                                 .collection("Users").document(user.getEmail())
                                 .collection("Profile").document("Details");
@@ -109,6 +112,17 @@ public class CreateNewUserActivity extends AppCompatActivity {
 
                         // store the user info into firestore
                         df.set(userInfo);
+                        */
+
+                        CollectionReference usersProfile = fStore.collection("Users Profile");
+
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("Full Name", createUserFullName.getText().toString().trim());
+                        data.put("Email", createUserEmail.getText().toString().trim());
+                        data.put("Organisation ID", createUserOrgID.getText().toString().trim());
+                        data.put("isAdmin", false);
+                        data.put("Phone Number", Arrays.asList("000", "001"));
+                        usersProfile.document(user.getEmail()).set(data);
 
                         createUserProgressBar.setVisibility(View.INVISIBLE);
                     }

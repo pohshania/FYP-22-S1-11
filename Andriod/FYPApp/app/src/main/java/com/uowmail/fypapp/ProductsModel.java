@@ -1,11 +1,13 @@
 package com.uowmail.fypapp;
 
+import java.util.Map;
+
 public class ProductsModel {
 
     private String item_id;
-
     private String name;
     private long price;
+    private Map<String, Long> item_map;
 
     // empty constructor for firebase
     private ProductsModel(){}

@@ -16,16 +16,18 @@ import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.SnapshotParser;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 
-public class UserLogsFragment extends Fragment implements FirestoreAdapter.OnListItemClick{
+public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnListItemClick{
     
     private RecyclerView mFirestoreList;
     private FirebaseFirestore firebaseFirestore;
-    private FirestoreAdapter adapter;
+    private UserLogsAdapter adapter;
 
     
     @Override
@@ -43,29 +45,34 @@ public class UserLogsFragment extends Fragment implements FirestoreAdapter.OnLis
         mFirestoreList = view.findViewById(R.id.firestore_list); // this is for the recyclerview
 
 
+        // testing query
+
+
+
+
 
         // Query from firebase
-        Query query = firebaseFirestore.collection("Products");
+        Query query = firebaseFirestore.collection("UOW_log");
 
 
         // Recycler options
-        FirestoreRecyclerOptions<ProductsModel> options = new FirestoreRecyclerOptions.Builder<ProductsModel>()
+        FirestoreRecyclerOptions<UserLogsModel> options = new FirestoreRecyclerOptions.Builder<UserLogsModel>()
                 .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<ProductsModel>() {
+                .setQuery(query, new SnapshotParser<UserLogsModel>() {
                     @NonNull
                     @Override
-                    public ProductsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        ProductsModel productsModel = snapshot.toObject(ProductsModel.class);
-                        String itemId = snapshot.getId();
-                        productsModel.setItem_id(itemId);
-                        return productsModel;
+                    public UserLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
+                        UserLogsModel userLogsModel = snapshot.toObject(UserLogsModel.class);
+                        String docId = snapshot.getId();
+                        userLogsModel.setDocument_id(docId);
+                        return userLogsModel;
                     }
                 })
                 .build();
 
 
         // Create recycler adapter
-        adapter = new FirestoreAdapter(options, this);
+        adapter = new UserLogsAdapter(options, this);
 
         mFirestoreList.setHasFixedSize(true);
         mFirestoreList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -91,8 +98,8 @@ public class UserLogsFragment extends Fragment implements FirestoreAdapter.OnLis
      */
 
     @Override
-    public void onItemClick(ProductsModel snapshot, int position) {
-        Log.d("ITEM_CLICK", "Clicked the item: " + position + " and the ID is: " + snapshot.getItem_id());
+    public void onItemClick(UserLogsModel snapshot, int position) {
+        Log.d("ITEM_CLICK", "Clicked the item: " + position + " and the ID is: " + snapshot.getDocument_id());
         startActivity(new Intent(getActivity(), LogsDetailActivity.class));
     }
 }

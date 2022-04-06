@@ -35,7 +35,7 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ProductsModel, Fi
         return new ProductsViewHolder(view);
     }
 
-    // Viewholder class
+    // Viewholder class for products
     protected class ProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView list_id;
         private TextView list_name;

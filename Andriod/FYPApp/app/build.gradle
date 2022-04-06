@@ -46,4 +46,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     // MJ - dependency for pieChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // FirebaseUI for Cloud Firestore
+    implementation 'com.firebaseui:firebase-ui-firestore:8.0.1'
 }

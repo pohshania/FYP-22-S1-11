@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -113,6 +114,12 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
 //                    checkBox.onClickListeners(onCheckboxClicked);
                     checkBox.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                     linearLayout.addView(checkBox);
+
+//                  add the text box here
+                    EditText editText = new EditText(this);
+                    editText.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    editText.getLayoutParams().width = 300;
+                    linearLayout.addView(editText);
 
 
                     // MJ - if user opens rules page

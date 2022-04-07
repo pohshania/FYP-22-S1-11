@@ -9,17 +9,17 @@ public class UserLogDetailsModel {
     private Timestamp date;
     private String disk_read;
     private String disk_write;
-    private Map<String, Long> idling;
+    private Map<String, Float> idling;
     private String net_recv;
     private String net_send;
-    private Map<String, Long> sys;
-    private Map<String, Long> usr;
+    private Map<String, Float> sys;
+    private Map<String, Float> usr;
 
     public UserLogDetailsModel(){}
 
     public UserLogDetailsModel(Timestamp date, String disk_read,
-                               String disk_write, Map<String, Long> idling, String net_recv,
-                               String net_send, Map<String, Long> sys, Map<String, Long> usr) {
+                               String disk_write, Map<String, Float> idling, String net_recv,
+                               String net_send, Map<String, Float> sys, Map<String, Float> usr) {
         this.date = date;
         this.disk_read = disk_read;
         this.disk_write = disk_write;
@@ -54,11 +54,11 @@ public class UserLogDetailsModel {
         this.disk_write = disk_write;
     }
 
-    public Map<String, Long> getIdling() {
+    public Map<String, Float> getIdling() {
         return idling;
     }
 
-    public void setIdling(Map<String, Long> idling) {
+    public void setIdling(Map<String, Float> idling) {
         this.idling = idling;
     }
 
@@ -78,19 +78,19 @@ public class UserLogDetailsModel {
         this.net_send = net_send;
     }
 
-    public Map<String, Long> getSys() {
+    public Map<String, Float> getSys() {
         return sys;
     }
 
-    public void setSys(Map<String, Long> sys) {
+    public void setSys(Map<String, Float> sys) {
         this.sys = sys;
     }
 
-    public Map<String, Long> getUsr() {
+    public Map<String, Float> getUsr() {
         return usr;
     }
 
-    public void setUsr(Map<String, Long> usr) {
+    public void setUsr(Map<String, Float> usr) {
         this.usr = usr;
     }
 

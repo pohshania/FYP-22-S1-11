@@ -23,7 +23,11 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
 
     @Override
     protected void onBindViewHolder(@NonNull UserLogsViewHolder holder, int position, @NonNull UserLogsModel model) {
-        holder.doc_id.setText(model.getDocument_id());
+
+        if(position != RecyclerView.NO_POSITION){
+            // Do your binding here
+            holder.doc_id.setText(model.getDocument_id());
+        }
 
     }
 

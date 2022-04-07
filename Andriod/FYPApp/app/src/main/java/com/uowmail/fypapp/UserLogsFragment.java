@@ -90,10 +90,21 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 
 
-        transaction.hide(getActivity().getSupportFragmentManager().findFragmentByTag("user_logs_fragment"));
-        transaction.add(R.id.container, fragment);
+
+        //transaction.hide(getActivity().getSupportFragmentManager().findFragmentByTag("user_logs_fragment"));
+        transaction.replace(R.id.container, fragment, "user_log_details_fragment");
+        //transaction.add(R.id.container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+
+
+
+        /*
+        transaction.replace(android.R.id.content, fragment);
+        transaction.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
+        // Commit the transaction
+        transaction.commit();
+        */
 
 
 

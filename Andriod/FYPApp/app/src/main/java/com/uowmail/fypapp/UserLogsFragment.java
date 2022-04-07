@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -80,6 +82,20 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
     @Override
     public void onItemClick(UserLogsModel snapshot, int position) {
         Log.d("ITEM_CLICK", "Clicked the item: " + position + " and the ID is: " + snapshot.getDocument_id());
-        startActivity(new Intent(getActivity(), LogsDetailActivity.class));
+        //startActivity(new Intent(getActivity(), LogsDetailActivity.class));
+
+
+
+        Fragment fragment = UserLogDetailsFragment.newInstance(snapshot.getDocument_id());
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+
+        transaction.hide(getActivity().getSupportFragmentManager().findFragmentByTag("user_logs_fragment"));
+        transaction.add(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+
+
     }
 }

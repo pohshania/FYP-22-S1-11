@@ -53,7 +53,7 @@ public class UserHomeActivity extends AppCompatActivity {
                             return true;
 
                         case R.id.logs:
-                            getSupportFragmentManager().beginTransaction().replace(R.id.container, userLogsFragment).commit();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, userLogsFragment, "user_logs_fragment").commit();
                             return true;
                     }
                     return false;

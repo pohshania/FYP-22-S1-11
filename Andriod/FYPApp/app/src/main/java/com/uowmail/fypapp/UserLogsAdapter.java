@@ -41,7 +41,7 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
         public UserLogsViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            doc_id = itemView.findViewById(R.id.list_id);
+            doc_id = itemView.findViewById(R.id.userLogs_recyView_docId);
 
 
             itemView.setOnClickListener(this);

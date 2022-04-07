@@ -45,14 +45,9 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         mFirestoreList = view.findViewById(R.id.firestore_list); // this is for the recyclerview
 
 
-        // testing query
-
-
-
-
-
         // Query from firebase
-        Query query = firebaseFirestore.collection("UOW_log");
+        Query query = firebaseFirestore.collection("UOW_log") // TODO: filter by organisation ID
+                .orderBy("date", Query.Direction.DESCENDING);
 
 
         // Recycler options
@@ -81,21 +76,6 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
 
         return view;
     }
-
-    /*
-    @Override
-    public void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
-     */
 
     @Override
     public void onItemClick(UserLogsModel snapshot, int position) {

@@ -44,9 +44,7 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ProductsModel, Fi
         public ProductsViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            list_id = itemView.findViewById(R.id.list_id);
-            list_name = itemView.findViewById(R.id.list_name);
-            list_price = itemView.findViewById(R.id.list_price);
+            list_id = itemView.findViewById(R.id.userLogs_recyView_docId);
 
             itemView.setOnClickListener(this);
         }

@@ -156,20 +156,44 @@ public class UserLogDetailsFragment extends Fragment {
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                downloadFile();
+                downloadFile(date.getText().toString(), disk_read.getText().toString(), disk_write.getText().toString(),
+                        idling.getText().toString() + " " + idling_avg.getText().toString() + " " + idling_min.getText().toString() + " " + idling_max.getText().toString(),
+                        net_recv.getText().toString(), net_send.getText().toString(),
+                        sys.getText().toString() + " " + sys_avg.getText().toString() + " " + sys_min.getText().toString() + " " + sys_max.getText().toString(),
+                        usr.getText().toString() + " " + usr_avg.getText().toString() + " " + usr_min.getText().toString() + " " + usr_max.getText().toString());
             }
         });
 
         return view;
     }
 
-    private void downloadFile(){
+    private void downloadFile(String date, String disk_read, String disk_write,
+                              String idling, String net_recv, String net_send,
+                              String sys, String usr){
+
+
         FILE_NAME = mParam1;
-        String text = "texteext";
+        String nl = "\n";
 
         try{
             fos = getContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-            fos.write(text.getBytes(StandardCharsets.UTF_8));
+
+            fos.write(date.getBytes(StandardCharsets.UTF_8));
+            fos.write(nl.getBytes(StandardCharsets.UTF_8));
+            fos.write(disk_read.getBytes(StandardCharsets.UTF_8));
+            fos.write(nl.getBytes(StandardCharsets.UTF_8));
+            fos.write(disk_write.getBytes(StandardCharsets.UTF_8));
+            fos.write(nl.getBytes(StandardCharsets.UTF_8));
+            fos.write(idling.getBytes(StandardCharsets.UTF_8));
+            fos.write(nl.getBytes(StandardCharsets.UTF_8));
+            fos.write(net_recv.getBytes(StandardCharsets.UTF_8));
+            fos.write(nl.getBytes(StandardCharsets.UTF_8));
+            fos.write(net_send.getBytes(StandardCharsets.UTF_8));
+            fos.write(nl.getBytes(StandardCharsets.UTF_8));
+            fos.write(sys.getBytes(StandardCharsets.UTF_8));
+            fos.write(nl.getBytes(StandardCharsets.UTF_8));
+            fos.write(usr.getBytes(StandardCharsets.UTF_8));
+
 
             Toast.makeText(getContext(), "Saved to " + getContext().getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
         }catch (FileNotFoundException e){

@@ -1,5 +1,6 @@
 package com.uowmail.fypapp;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,12 +9,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +41,10 @@ public class UserLogDetailsFragment extends Fragment {
     private TextView net_send;
     private TextView sys, sys_avg, sys_min, sys_max;
     private TextView usr, usr_avg, usr_min, usr_max;
+    private Button download;
 
+    private String FILE_NAME;
+    private FileOutputStream fos;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -139,7 +151,39 @@ public class UserLogDetailsFragment extends Fragment {
             }
         });
 
+        // download
+        download = view.findViewById(R.id.userLogsDetails_download);
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                downloadFile();
+            }
+        });
 
         return view;
+    }
+
+    private void downloadFile(){
+        FILE_NAME = mParam1;
+        String text = "texteext";
+
+        try{
+            fos = getContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+            fos.write(text.getBytes(StandardCharsets.UTF_8));
+
+            Toast.makeText(getContext(), "Saved to " + getContext().getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

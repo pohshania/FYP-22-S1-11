@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +37,7 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
     private AlertDialog dialog;
     private Button saveChange, cancelBtn;
     private String text;
+    private EditText currentAdminEmai;
 
 
 
@@ -193,6 +195,8 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
         saveChange.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
+
                 // define save button here!
                 dialog.dismiss();
             }

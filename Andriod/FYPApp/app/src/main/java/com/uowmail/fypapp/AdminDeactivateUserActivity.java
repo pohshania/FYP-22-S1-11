@@ -1,6 +1,7 @@
 package com.uowmail.fypapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -30,6 +31,11 @@ public class AdminDeactivateUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // MJ - ActionBar setting
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Deactivate User Account");
+
         setContentView(R.layout.activity_admin_deactivate_user);
 
         fStore = FirebaseFirestore.getInstance();

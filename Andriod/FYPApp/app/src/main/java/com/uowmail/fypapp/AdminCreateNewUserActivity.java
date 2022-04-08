@@ -40,6 +40,7 @@ public class AdminCreateNewUserActivity extends AppCompatActivity {
         // MJ - ActionBar setting
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Create New User");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_admin_create_new_user);
 

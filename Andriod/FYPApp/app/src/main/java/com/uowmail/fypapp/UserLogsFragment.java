@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
     private RecyclerView mFirestoreList;
     private FirebaseFirestore firebaseFirestore;
     private UserLogsAdapter adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +48,6 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
 
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-
 
         // Query from firebase
         Query query = firebaseFirestore.collection("UOW_log") // TODO: filter by organisation ID
@@ -77,6 +78,18 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
                 LinearLayoutManager.VERTICAL, false));
         mFirestoreList.setAdapter(adapter);
         adapter.notifyItemRangeChanged(0, adapter.getItemCount());
+        adapter.notifyItemChanged(0);
+
+
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mFirestoreList.setAdapter(adapter);
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
 
 

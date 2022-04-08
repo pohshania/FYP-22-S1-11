@@ -39,15 +39,17 @@
         android:background="@drawable/rounded_corner"
         android:text="Create User" />
 
-<!--        <Button-->
-<!--            android:id="@+id/adminHome_deleteUser_btn"-->
-<!--            android:layout_width="186dp"-->
-<!--            android:layout_height="79dp"-->
-<!--            android:layout_below="@+id/createUser_btn"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:background="@drawable/rounded_corner"-->
-<!--            android:text="Delete User" />-->
+    <Button
+        android:id="@+id/adminHome_deactivateUser_btn"
+        android:layout_width="186dp"
+        android:layout_height="79dp"
+        android:layout_below="@id/createUser_btn"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_corner"
+        android:text="Deactivate User"/>
+
+
 
     </RelativeLayout>
 

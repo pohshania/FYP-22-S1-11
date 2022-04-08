@@ -5,7 +5,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,25 +12,21 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CreateNewUserActivity extends AppCompatActivity {
+public class AdminCreateNewUserActivity extends AppCompatActivity {
     EditText createUserFullName, createUserEmail, createUserOrgID, createUserPassword;
     Button createAccBtn;
     ProgressBar createUserProgressBar;
@@ -46,7 +41,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Create New User");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setContentView(R.layout.activity_create_new_user);
+        setContentView(R.layout.activity_admin_create_new_user);
 
         createUserFullName = findViewById(R.id.createUser_fullname);
         createUserEmail    = findViewById(R.id.createUser_email);
@@ -94,7 +89,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
                 fAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(CreateNewUserActivity.this, "User created successfully!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminCreateNewUserActivity.this, "User created successfully!", Toast.LENGTH_SHORT).show();
 
                         // getting info of the user that was just created
                         FirebaseUser user = fAuth.getCurrentUser();
@@ -121,6 +116,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
                         data.put("Email", createUserEmail.getText().toString().trim());
                         data.put("Organisation ID", createUserOrgID.getText().toString().trim());
                         data.put("isAdmin", false);
+                        data.put("isActive", true);
                         data.put("Phone Number", Arrays.asList("000", "001"));
                         usersProfile.document(user.getEmail()).set(data);
 
@@ -129,7 +125,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(CreateNewUserActivity.this, "Not successful!" + e.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminCreateNewUserActivity.this, "Not successful!" + e.toString(), Toast.LENGTH_SHORT).show();
                         toggleKeyboardAndProgressBar(true, false);
                     }
                 });

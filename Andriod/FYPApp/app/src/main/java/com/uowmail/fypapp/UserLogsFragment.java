@@ -76,9 +76,10 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         mFirestoreList.setHasFixedSize(true);
         mFirestoreList.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false));
-        mFirestoreList.setAdapter(adapter);
+        //mFirestoreList.setAdapter(adapter);
         adapter.notifyItemRangeChanged(0, adapter.getItemCount());
         adapter.notifyItemChanged(0);
+        mFirestoreList.setAdapter(adapter);
 
 
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);

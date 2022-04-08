@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class AdminHomeFragment extends Fragment {
-    Button createUserBtn, deleteUserBtn;
+    Button createUserBtn, deactivateUseBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,7 +26,7 @@ public class AdminHomeFragment extends Fragment {
 
         // Shania
         createUserBtn = v.findViewById(R.id.createUser_btn);
-//        deleteUserBtn = v.findViewById(R.id.adminHome_deleteUser_btn);
+        deactivateUseBtn = v.findViewById(R.id.adminHome_deactivateUser_btn);
 
 
         logsButton.setOnClickListener(new View.OnClickListener() {
@@ -52,16 +52,18 @@ public class AdminHomeFragment extends Fragment {
         createUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), CreateNewUserActivity.class));
+                startActivity(new Intent(getActivity(), AdminCreateNewUserActivity.class));
             }
         });
 
-//        deleteUserBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getActivity(), DeleteUserActivity.class));
-//            }
-//        });
+
+
+        deactivateUseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), AdminDeactivateUserActivity.class));
+            }
+        });
 
 
         return v;

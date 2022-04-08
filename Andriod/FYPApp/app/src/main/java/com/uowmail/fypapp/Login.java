@@ -123,14 +123,17 @@ public class Login extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(email)){
                     loginEmail.setError("Email is required!");
+                    toggleKeyboardAndProgressBar(false, false);
                     return;
                 }
                 if(TextUtils.isEmpty(password)){
                     loginPassword.setError("Password is required!");
+                    toggleKeyboardAndProgressBar(false, false);
                     return;
                 }
                 if(password.length() < 6){
                     loginPassword.setError("Password must be >= 6 characters!");
+                    toggleKeyboardAndProgressBar(false, false);
                     return;
                 }
 
@@ -192,14 +195,14 @@ public class Login extends AppCompatActivity {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
-                                        toggleKeyboardAndProgressBar(true, false);
+                                        toggleKeyboardAndProgressBar(false, false);
                                     }
                                 });
                             }
                             else {
                                 Log.d("FIREBASE QUERY => ", "Admin does not exist!");
                                 Toast.makeText(Login.this, "You have either selected the wrong user type or the user email does not exists.", Toast.LENGTH_SHORT).show();
-                                toggleKeyboardAndProgressBar(true, false);
+                                toggleKeyboardAndProgressBar(false, false);
                                 userExists = false;
                             }
                         }
@@ -220,6 +223,17 @@ public class Login extends AppCompatActivity {
                                 Log.d("FIREBASE QUERY => ", email + " User exists!");
                                 toggleKeyboardAndProgressBar(false, true);
                                 userExists = true;
+
+                                // check if the use account is active, to allow them to sign in
+                                boolean isActive = document.getBoolean("isActive");
+                                Log.d("CURRENT USER ACCOUNT STATUS", String.valueOf(isActive));
+
+                                if(isActive == false){
+                                    Toast.makeText(Login.this, "Your account has been deactivated.", Toast.LENGTH_SHORT).show();
+                                    toggleKeyboardAndProgressBar(false, false);
+                                    return;
+                                }
+
                                 fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
@@ -232,14 +246,14 @@ public class Login extends AppCompatActivity {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
-                                        toggleKeyboardAndProgressBar(true, false);
+                                        toggleKeyboardAndProgressBar(false, false);
                                     }
                                 });
                             }
                             else {
                                 Log.d("FIREBASE QUERY => ", " User does not exist!");
                                 Toast.makeText(Login.this, "You have either selected the wrong user type or the user email does not exists.", Toast.LENGTH_SHORT).show();
-                                toggleKeyboardAndProgressBar(true, false);
+                                toggleKeyboardAndProgressBar(false, false);
                                 userExists = false;
                             }
                         }
@@ -255,6 +269,31 @@ public class Login extends AppCompatActivity {
     }
 
     private void toggleKeyboardAndProgressBar(boolean keyboard, boolean progressbar){
+
+        if(keyboard == true){
+            // show the key board
+            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+        }
+
+        if(keyboard == false){
+            // hide the key board
+            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        }
+
+        if(progressbar == true){
+            // show progress bar
+            loginProgressBar.setVisibility(View.VISIBLE);
+        }
+
+        if(progressbar == false){
+            // hide progress bar
+            loginProgressBar.setVisibility(View.INVISIBLE);
+        }
+
+
+        /*
         if(keyboard == true && progressbar == false){
             // show the key board
             InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -272,6 +311,17 @@ public class Login extends AppCompatActivity {
             // show progress bar
             loginProgressBar.setVisibility(View.VISIBLE);
         }
+
+        if(keyboard == false && progressbar == false){
+            // hide the key board
+            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+            // hide progress bar
+            loginProgressBar.setVisibility(View.INVISIBLE);
+
+        }
+         */
     }
 
     public String getUserName(){ return email; }
@@ -320,6 +370,10 @@ public class Login extends AppCompatActivity {
         return adminExists;
     }
 
+    private void getCurrentUserActiveStatus(){
+
+    }
+
     private void setCurrentUserInfo(FirebaseAuth fAuth, FirebaseFirestore fStore){
         Intent i = new Intent(Login.this, UserHomeActivity.class);
 
@@ -338,6 +392,9 @@ public class Login extends AppCompatActivity {
                     boolean isActive = document.getBoolean("isActive");
 
                     currentUserInfo = new CurrentUserInfo(fullName, email, orgID, isAdmin, isActive);
+
+                    Log.d("USER_INFO", currentUserInfo.getFullName() + currentUserInfo.getEmail() +
+                            currentUserInfo.getOrgID() + currentUserInfo.isAdmin() + currentUserInfo.isActive());
 
                     i.putExtra("userInfo", currentUserInfo);
                     startActivity(i);
@@ -365,6 +422,10 @@ public class Login extends AppCompatActivity {
         });
     }
 */
+
+
+
+
 
 
 /*=======================================================FOR TESTING=======================================================*/

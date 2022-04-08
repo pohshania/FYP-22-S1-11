@@ -18,7 +18,10 @@ import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.SnapshotParser;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,13 +33,12 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
     private RecyclerView mFirestoreList;
     private FirebaseFirestore firebaseFirestore;
     private UserLogsAdapter adapter;
-
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_user_logs, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_logs2, container, false);
 
         // MJ - set title of the page
         TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
@@ -44,7 +46,6 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
 
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        mFirestoreList = view.findViewById(R.id.firestore_list); // this is for the recyclerview
 
 
         // Query from firebase
@@ -70,10 +71,13 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
 
         // Create recycler adapter
         adapter = new UserLogsAdapter(options, this);
-
+        mFirestoreList = view.findViewById(R.id.firestore_list2);
         mFirestoreList.setHasFixedSize(true);
-        mFirestoreList.setLayoutManager(new LinearLayoutManager(getContext()));
+        mFirestoreList.setLayoutManager(new LinearLayoutManager(getContext(),
+                LinearLayoutManager.VERTICAL, false));
         mFirestoreList.setAdapter(adapter);
+        adapter.notifyItemRangeChanged(0, adapter.getItemCount());
+
 
 
         return view;
@@ -108,5 +112,17 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
 
 
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 }

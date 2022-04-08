@@ -1,5 +1,6 @@
 package com.uowmail.fypapp;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,15 +27,23 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
 
         if(position != RecyclerView.NO_POSITION){
             // Do your binding here
-            holder.doc_id.setText(model.getDocument_id());
+            //holder.doc_id.setText(model.getDocument_id());
+
         }
+
+        holder.doc_id.setText(model.getDocument_id());
+        Log.d("POSITION","Position: " + position);
+
+
+
+
 
     }
 
     @NonNull
     @Override
     public UserLogsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_logs_list_item_single, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_logs_list_item_single2, parent, false);
         return new UserLogsViewHolder(view);
     }
 
@@ -45,7 +54,7 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
         public UserLogsViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            doc_id = itemView.findViewById(R.id.userLogs_recyView_docId);
+            doc_id = itemView.findViewById(R.id.userLogs_recyView_docId2);
 
 
             itemView.setOnClickListener(this);

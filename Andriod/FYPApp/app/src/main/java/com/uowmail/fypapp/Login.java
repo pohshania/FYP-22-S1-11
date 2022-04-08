@@ -43,7 +43,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     // XML variables
     EditText loginEmail, loginPassword;
-    Button loginBtn, loginTestFirebaseQueryBtn;
+    Button loginBtn;
     ProgressBar loginProgressBar;
     Spinner loginUserTypeSpinner;
 
@@ -64,6 +64,8 @@ public class Login extends AppCompatActivity {
         USER
     }
     UserTypes selectedUserType;
+
+    public CurrentUserInfo currentUserInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,7 +224,8 @@ public class Login extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
                                         Toast.makeText(Login.this, "Logged in successfully to User.", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
+                                        //startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
+                                        setCurrentUserInfo(fAuth, fStore);
                                         finish();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -316,6 +319,52 @@ public class Login extends AppCompatActivity {
         });
         return adminExists;
     }
+
+    private void setCurrentUserInfo(FirebaseAuth fAuth, FirebaseFirestore fStore){
+        Intent i = new Intent(Login.this, UserHomeActivity.class);
+
+        String currentUserEmail = fAuth.getCurrentUser().getEmail();
+        DocumentReference docRef = fStore.collection("Users Profile").document(currentUserEmail);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+
+                    String fullName = document.getString("Full Name");
+                    String email = document.getString("Email");
+                    String orgID = document.getString("Organisation ID");
+                    boolean isAdmin = document.getBoolean("isAdmin");
+                    boolean isActive = document.getBoolean("isActive");
+
+                    currentUserInfo = new CurrentUserInfo(fullName, email, orgID, isAdmin, isActive);
+
+                    i.putExtra("userInfo", currentUserInfo);
+                    startActivity(i);
+                }
+            }
+        });
+    }
+
+
+/*
+    public void getCurrentUserOrgID(FirebaseAuth fAuth, FirebaseFirestore fStore){
+        // get the current's user organisation ID, so that program will only retrieve docs from that organisation
+        String currentUserEmail = fAuth.getCurrentUser().getEmail();
+        DocumentReference docRef = fStore.collection("Users Profile").document(currentUserEmail);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    String orgIDValue = document.getString("Organisation ID");
+                    Log.d("TEST_QUERY", orgIDValue);
+                    setCurrentUserOrgID(orgIDValue);
+                }
+            }
+        });
+    }
+*/
 
 
 /*=======================================================FOR TESTING=======================================================*/

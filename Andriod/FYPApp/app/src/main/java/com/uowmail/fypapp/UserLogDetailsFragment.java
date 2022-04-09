@@ -1,10 +1,18 @@
 package com.uowmail.fypapp;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +26,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -172,6 +181,64 @@ public class UserLogDetailsFragment extends Fragment {
                               String sys, String usr){
 
 
+
+
+        // Get the input from EditText
+       String filepath = "MyFileDir";
+       String filename = mParam1;
+
+        // Check for Storage Permission
+        if(isStoragePermissionGranted()){
+
+            // To access app-specific files from external storage, you can call
+            // getExternalFilesDir() method. It returns the path to
+            // storage > emulated > 0 > Android > data > [package_name] > files > MyFileDir
+            // or,
+            // storage > self > Android > data > [package_name] > files > MyFileDir
+            // directory on the SD card. Once the app is uninstalled files here also get
+            // deleted.
+            // Create a File object like this.
+            File myExternalFile = new File(getContext().getExternalFilesDir(filepath), filename);
+            // Create an object of FileOutputStream for writing data to myFile.txt
+            FileOutputStream fos = null;
+            try {
+                // Instantiate the FileOutputStream object and pass myExternalFile in constructor
+                fos = new FileOutputStream(myExternalFile);
+
+
+                // Write to the file
+                String nl = "\n";
+                fos.write(date.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                fos.write(disk_read.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                fos.write(disk_write.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                fos.write(idling.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                fos.write(net_recv.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                fos.write(net_send.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                fos.write(sys.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                fos.write(usr.getBytes(StandardCharsets.UTF_8));
+
+
+                // Close the stream
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            // Show a Toast message to inform the user that the operation has been successfully completed.
+            Toast.makeText(getContext(), "Information saved to SD card.", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+        /*
         FILE_NAME = mParam1;
         String nl = "\n";
 
@@ -209,5 +276,39 @@ public class UserLogDetailsFragment extends Fragment {
                 }
             }
         }
+         */
+
     }
+
+
+    public boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (getContext().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                //Permission is granted
+                return true;
+            } else {
+                //Permission is revoked
+                ActivityCompat.requestPermissions((Activity) getContext(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else {
+            //permission is automatically granted on sdk<23 upon installation
+            //Permission is granted
+            return true;
+        }
+    }
+
+    private boolean isExternalStorageAvailableForRW() {
+        // Check if the external storage is available for read and write by calling
+        // Environment.getExternalStorageState() method. If the returned state is MEDIA_MOUNTED,
+        // then you can read and write files. So, return true in that case, otherwise, false.
+        String extStorageState = Environment.getExternalStorageState();
+        if(extStorageState.equals(Environment.MEDIA_MOUNTED)){
+            return true;
+        }
+        return false;
+    }
+
 }

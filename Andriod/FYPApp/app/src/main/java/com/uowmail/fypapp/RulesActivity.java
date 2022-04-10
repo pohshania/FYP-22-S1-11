@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
@@ -22,6 +23,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -38,6 +45,7 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
     private Button saveChange, cancelBtn;
     private String text;
     private EditText currentAdminEmai;
+    private FirebaseFirestore db;
 
 
 
@@ -45,6 +53,10 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rules);
+        Button testbutton = findViewById(R.id.test_button);
+        testbutton.setOnClickListener(testButtonListener);
+
+        db = FirebaseFirestore.getInstance();
 
         // MJ - set actionBar
         ActionBar actionBar = getSupportActionBar();
@@ -79,7 +91,62 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
             saveChange.setVisibility(View.GONE);
         }
 
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.ruleContainer);
+        // remove all the views first
+        linearLayout.removeAllViews();
+        // save rules of email system into array
+        String[] ruleArray = getResources().getStringArray(R.array.rules_email);
+
+        for (int count = 0; count < ruleArray.length; count++) {
+            // create checkboxes for rules
+            CheckBox checkBox = new CheckBox(this);
+            checkBox.setText(ruleArray[count]);
+//                    checkBox.onClickListeners(onCheckboxClicked);
+            checkBox.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            linearLayout.addView(checkBox);
+
+//                  add the text box here
+            EditText editText = new EditText(this);
+            editText.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            editText.getLayoutParams().width = 300;
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+            linearLayout.addView(editText);
+
+
+            // MJ - if user opens rules page
+            if (text!=null)
+            {
+                // disable checkbox
+                checkBox.setEnabled(false);
+                checkBox.setTextColor(Color.parseColor("#000000"));
+                // remove checkbox icon
+//                        checkBox.setButtonDrawable(null);
+
+
+                // disable spinner
+//                        spinner.setEnabled(false);
+//                        spinner.setTextColor(Color.parseColor("#000000"));
+            }
+            checkBox.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    // define save button here!
+                    onCheckboxClicked(v);
+                }
+            });
+
+        }
+
     }
+
+    private final View.OnClickListener testButtonListener =
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    getRulesList();
+                }
+            };
 
 
     @Override
@@ -91,6 +158,7 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -121,6 +189,7 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
                     EditText editText = new EditText(this);
                     editText.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                     editText.getLayoutParams().width = 300;
+                    editText.setInputType(InputType.TYPE_CLASS_NUMBER);
                     linearLayout.addView(editText);
 
 
@@ -254,5 +323,31 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
+
+    public String[] getRulesList()
+    {
+
+        DocumentReference docRef = db.collection("UOW_detection").document("rules");
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    if (doc.exists()) {
+                        Log.d("RULES", "Rules data: " + doc.getData());
+                    }
+                    else {
+                        Log.d("RULES", "No such document");
+                    }
+                }
+                else {
+                    Log.d("RULES", "get failed with ", task.getException());
+                }
+            }
+        });
+
+        String[] a = {"123"};
+        return a;
+    }
 
 }

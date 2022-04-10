@@ -14,13 +14,12 @@
         <item>System Type 4</item>
     </string-array>
     <string-array name="rules_email">
-        <item>rules 1</item>
-        <item>rules 2</item>
-        <item>rules 3</item>
-        <item>rules 4</item>
-        <item>rules 5</item>
-        <item>rules 6</item>
-        <item>rules 7</item>
+        <item>CPU max usage</item>
+        <!-- <item>CPU average usage</item> -->
+        <item>Disk max write</item>
+        <item>Disk max reads</item>
+        <item>Network max receive</item>
+        <item>Network max send</item>
 
     </string-array>
     <string-array name="rules_1">

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -37,6 +38,8 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
     private UserLogsAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private FirestoreRecyclerOptions<UserLogsModel> options;
+    public static ProgressBar progressBar;
+    public static TextView loadingText;
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +51,9 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
         title.setText("Logs");
 
+
+        progressBar = (ProgressBar) view.findViewById(R.id.userLogs_progress_bar);
+        loadingText = view.findViewById(R.id.userLogs_loadingText);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -129,6 +135,11 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
 
 
 
+    }
+
+    public static void disableProgressBar(){
+        progressBar.setVisibility(View.INVISIBLE);
+        loadingText.setVisibility(View.INVISIBLE);
     }
 
     @Override

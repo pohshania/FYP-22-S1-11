@@ -233,7 +233,7 @@ public class UserLogDetailsFragment extends Fragment {
                 e.printStackTrace();
             }
             // Show a Toast message to inform the user that the operation has been successfully completed.
-            Toast.makeText(getContext(), "Information saved to SD card.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Information saved to " + getContext().getExternalFilesDir(filepath), Toast.LENGTH_SHORT).show();
         }
 
 

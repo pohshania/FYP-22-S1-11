@@ -34,10 +34,6 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
         holder.doc_id.setText(model.getDocument_id());
         Log.d("POSITION","Position: " + position);
 
-
-
-
-
     }
 
     @NonNull
@@ -45,6 +41,12 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
     public UserLogsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_logs_list_item_single2, parent, false);
         return new UserLogsViewHolder(view);
+    }
+
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        UserLogsFragment.disableProgressBar();
     }
 
     // Viewholder class for user logs

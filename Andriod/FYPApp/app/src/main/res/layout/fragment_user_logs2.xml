@@ -7,6 +7,21 @@
     android:layout_marginTop="?android:attr/actionBarSize">
 
 
+    <ProgressBar
+        android:id="@+id/userLogs_progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/userLogs_loadingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Retriving data..."
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"/>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
@@ -16,6 +31,8 @@
         android:id="@+id/firestore_list2"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

@@ -55,7 +55,6 @@ public class Login extends AppCompatActivity {
     public static String email, password;
 
     // user types boolean, true == Admin, false == User
-    boolean userTypeBool;
     boolean userExists;
     boolean adminExists;
 
@@ -66,6 +65,8 @@ public class Login extends AppCompatActivity {
     UserTypes selectedUserType;
 
     public CurrentUserInfo currentUserInfo;
+    private Button testFirestoreQuery;
+    private static TestFirestoreQuery testQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +77,18 @@ public class Login extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
-
         //insertTestData(fStore);
         //testQuery(fStore);
+        // testing firestore queries - to be deleted
+        testFirestoreQuery = findViewById(R.id.testFirestoreQuery_btn);
+        testFirestoreQuery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testQuery = new TestFirestoreQuery();
+                testQuery.query();
+            }
+        });
+
 
         loginEmail       = findViewById(R.id.login_email);
         loginPassword    = findViewById(R.id.login_password);

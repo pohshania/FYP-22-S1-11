@@ -5,12 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.common.ChangeEventType;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.auth.User;
 
 public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, UserLogsAdapter.UserLogsViewHolder> {
 
@@ -47,6 +51,22 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
     public void onDataChanged() {
         super.onDataChanged();
         UserLogsFragment.disableProgressBar();
+        UserLogsFragment.showDatePickerButton();
+
+        if(getItemCount() == 0)
+        {
+            UserLogsFragment.showNoDataFoundText();
+        }else{
+            UserLogsFragment.hideNoDateFoundText();
+        }
+
+    }
+
+    @Override
+    public void updateOptions(@NonNull FirestoreRecyclerOptions<UserLogsModel> options) {
+        super.updateOptions(options);
+        UserLogsFragment.hideNoDateFoundText();
+        UserLogsFragment.enableProgressBar();
     }
 
     // Viewholder class for user logs

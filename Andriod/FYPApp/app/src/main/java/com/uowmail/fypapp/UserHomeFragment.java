@@ -2,22 +2,20 @@ package com.uowmail.fypapp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.ipsec.ike.exceptions.InvalidMajorVersionException;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,19 +30,31 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserHomeFragment extends Fragment  {
+
+    // MJ - testing ----------------------------------------------------------------------------------------
+    FirebaseFirestore fStore;
+    Task<QuerySnapshot> qs;
+    float idling, sys, usr;
+
+
     // MJ - swipte to refresh
     SwipeRefreshLayout refreshLayout;
     Integer num = 0;
 
-    private PieChart pieChart;
+    private PieChart pieChart, pieChart_network, pieChart_disk;
 
     // MJ - LINE CHART
     private static final String TAG = "MainActivity";
@@ -59,9 +69,46 @@ public class UserHomeFragment extends Fragment  {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_client_home, container, false);
 
+        // MJ - testing ----------------------------------------------------------------------------------------
+        fStore = FirebaseFirestore.getInstance();
+        getPieChartData();
+//        qs = fStore.collection("UOW_log")
+//                .orderBy("date", Query.Direction.DESCENDING)
+//                .limit(1).get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            QuerySnapshot querySnapshot = task.getResult();
+//        //                    String value = documentSnapshot.get("idling").toString();
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+////                                Log.d(TAG, document.getId() + " => " + document.get("idling"));
+//                                String str;
+//                                // Idling
+//                                str = document.get("idling").toString();
+//                                idling = Float.parseFloat(str.substring(str.indexOf("avg=")+4, str.indexOf(",")));
+//                                // sys
+//                                str = document.get("sys").toString();
+//                                sys = Float.parseFloat(str.substring(str.indexOf("avg=")+4, str.indexOf(",")));
+//                                //usr
+//                                str = document.get("usr").toString();
+//                                usr = Float.parseFloat(str.substring(str.indexOf("avg=")+4, str.indexOf(",")));
+//
+//                                // load data
+//                                loadPieChartData(idling, sys, usr);
+//                            }
+//                        }
+//                        else
+//                        {
+//                            System.out.println("hello it's failed");
+//                        }
+//                    }
+//                });
+
+
         // JH - Implement Alert Button
         Button alertButton = (Button) v.findViewById(R.id.AlertButton);
-        alertButton.setOnClickListener(new View.OnClickListener(){
+        alertButton.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v) {
 
@@ -84,7 +131,7 @@ public class UserHomeFragment extends Fragment  {
         // MJ - adding pieChart-------------------------------------------------------------------------------
         pieChart = v.findViewById(R.id.piechart);
         setupPieChart();
-        loadPieChartData();
+//        loadPieChartData();
 
         // MJ - LINE CHART ------------------------------------------------------------------------------
         mChart = (LineChart) v.findViewById(R.id.linechart);
@@ -95,7 +142,7 @@ public class UserHomeFragment extends Fragment  {
         switchCompat = v.findViewById(R.id.switchButton);
         // main graph = donut graph shows on default
         pieChart.setVisibility(View.VISIBLE);
-        switchCompat.setOnClickListener(new View.OnClickListener(){
+        switchCompat.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){
                 if (switchCompat.isChecked()){
@@ -119,8 +166,8 @@ public class UserHomeFragment extends Fragment  {
             @Override
             public void onRefresh() {
                 // update graph data
-                num++;
-                loadPieChartData();
+//                num++;
+                loadPieChartData(idling, sys, usr);
                 loadLineChartData();
 
                 refreshLayout.setRefreshing(false);
@@ -151,63 +198,75 @@ public class UserHomeFragment extends Fragment  {
         l.setDrawInside(false);
         l.setEnabled(true);
     }
+    private  void getPieChartData(){
+        qs = fStore.collection("UOW_log")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            QuerySnapshot querySnapshot = task.getResult();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String str;
+                                Matcher m;
+                                Pattern pat = Pattern.compile("avg=[-]?[0-9]*\\.?[0-9]+");
 
-    private void loadPieChartData() {
+                                // Idling
+                                str = document.get("idling").toString();
+                                m = pat.matcher(str);
+                                while(m.find()) {
+                                    idling = Float.parseFloat(m.group().toString().substring(4));
+                                }
+                                // sys
+                                str = document.get("sys").toString();
+                                m = pat.matcher(str);
+                                while(m.find()) {
+                                    sys = Float.parseFloat(m.group().toString().substring(4));
+                                }
+                                // usr
+                                str = document.get("usr").toString();
+                                m = pat.matcher(str);
+                                while(m.find()) {
+                                    usr = Float.parseFloat(m.group().toString().substring(4));
+                                }
+                                System.out.println(document.getId()+"--->"+ idling +"=" +sys+"="  +usr+"<----");
+                                // load data
+                                loadPieChartData(idling, sys, usr);
+                            }
+                        }
+                        else
+                        {
+                            System.out.println("hello it's failed");
+                        }
+                    }
+                });
+    }
+    private void loadPieChartData(float idling, float sys, float usr) {
         ArrayList<PieEntry> entries = new ArrayList<>();
-        if (num==0){
-            entries.add(new PieEntry(0.2f, "User Login"));
-            entries.add(new PieEntry(0.15f, "User Logout"));
-            entries.add(new PieEntry(0.10f,"PolicyScopeChange"));
-            entries.add(new PieEntry(0.25f, "FileDataWrite"));
-            entries.add(new PieEntry(0.15f, "MachineLogin"));
-            entries.add(new PieEntry(0.15f, "MachineLogoff"));
+        entries.add(new PieEntry(idling, "idling"));
+        entries.add(new PieEntry(sys, "sys"));
+        entries.add(new PieEntry(usr,"usr"));
 
-            // add colors to the pieChart
-            ArrayList<Integer> colors = new ArrayList<>();
-            for (int color: ColorTemplate.MATERIAL_COLORS) {
-                colors.add(color);
-            }
-            for (int color: ColorTemplate.VORDIPLOM_COLORS){
-                colors.add(color);
-            }
-            PieDataSet dataSet = new PieDataSet(entries, "Expense Category");
-            dataSet.setColors(colors);
 
-            PieData data = new PieData(dataSet);
-            data.setDrawValues(true);
-            data.setValueFormatter(new PercentFormatter(pieChart));
-            data.setValueTextSize(12f);
-            data.setValueTextColor(Color.BLACK);
-
-            pieChart.setData(data);
+        // add colors to the pieChart
+        ArrayList<Integer> colors = new ArrayList<>();
+        for (int color: ColorTemplate.MATERIAL_COLORS) {
+            colors.add(color);
         }
-        else
-        {
-            entries.add(new PieEntry(0.5f, "User Login"));
-            entries.add(new PieEntry(0.05f, "PolicyScopeChange"));
-            entries.add(new PieEntry(0.30f, "FileDataWrite"));
-            entries.add(new PieEntry(0.15f, "MachineLogin"));
-
-
-            // add colors to the pieChart
-            ArrayList<Integer> colors = new ArrayList<>();
-            for (int color: ColorTemplate.MATERIAL_COLORS) {
-                colors.add(color);
-            }
-            for (int color: ColorTemplate.VORDIPLOM_COLORS){
-                colors.add(color);
-            }
-            PieDataSet dataSet = new PieDataSet(entries, "Expense Category");
-            dataSet.setColors(colors);
-
-            PieData data = new PieData(dataSet);
-            data.setDrawValues(true);
-            data.setValueFormatter(new PercentFormatter(pieChart));
-            data.setValueTextSize(12f);
-            data.setValueTextColor(Color.BLACK);
-
-            pieChart.setData(data);
+        for (int color: ColorTemplate.VORDIPLOM_COLORS){
+            colors.add(color);
         }
+        PieDataSet dataSet = new PieDataSet(entries, "Expense Category");
+        dataSet.setColors(colors);
+
+        PieData data = new PieData(dataSet);
+        data.setDrawValues(true);
+        data.setValueFormatter(new PercentFormatter(pieChart));
+        data.setValueTextSize(12f);
+        data.setValueTextColor(Color.BLACK);
+
+        pieChart.setData(data);
         pieChart.invalidate();
     }
 

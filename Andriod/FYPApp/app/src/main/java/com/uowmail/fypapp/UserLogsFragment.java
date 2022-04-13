@@ -140,10 +140,6 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         datePickerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //showDatePickerDialog();
-
-                //mFirestoreList.setAdapter(null);
-
                 final Calendar newCalendar = Calendar.getInstance();
                 final DatePickerDialog  datePickerDialog = new DatePickerDialog(datePickerbtn.getContext(), new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -170,8 +166,6 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
 
                 }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
                 datePickerDialog.show();
-
-                //queryByDate(view, chosenDate1, chosenDate2);
             }
         });
 

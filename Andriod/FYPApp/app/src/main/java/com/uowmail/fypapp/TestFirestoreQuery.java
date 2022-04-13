@@ -58,7 +58,8 @@ public class TestFirestoreQuery {
             // 2018-05-12
              */
 
-            // TODAY - 2022/04/12
+
+/*            // TODAY - 2022/04/12
             LocalDateTime ldt_today = LocalDateTime.now();
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             String str_today = format.format(ldt_today);
@@ -79,7 +80,17 @@ public class TestFirestoreQuery {
             String myDate2 = "2022/04/12";
             Log.d("=====FIRESTORE_DATE_myDate1=====", myDate2);
             SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd");
-            endDate = sdf2.parse(str_tmr);
+            endDate = sdf2.parse(str_tmr);*/
+
+
+
+            String myDate1 = "2022/04/11 01:00:00";
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            startDate = sdf.parse(myDate1);
+
+            String myDate2 = "2022/04/12";
+            SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd");
+            endDate = sdf2.parse(myDate2);
 
 
         } catch (java.text.ParseException e) {
@@ -91,7 +102,7 @@ public class TestFirestoreQuery {
 
 
 
-        fStore.collection("UOW_log")
+        fStore.collection("test_queries")
                 //.whereEqualTo("date", ts)
                 .whereGreaterThanOrEqualTo("date", startDate)
                 .whereLessThan("date", endDate)

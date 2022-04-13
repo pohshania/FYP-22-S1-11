@@ -41,11 +41,23 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="600dp"
-                        android:orientation="vertical">
-
+                        android:orientation="vertical"
+                        android:id="@+id/layoutForGraphs">
 
                         <com.github.mikephil.charting.charts.PieChart
-                            android:id="@+id/piechart"
+                            android:id="@+id/piechart_cpu"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_weight="1"
+                            android:visibility="gone" />
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/piechart_network"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_weight="1"
+                            android:visibility="gone" />
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/piechart_disk"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:layout_weight="1"
@@ -54,26 +66,57 @@
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/linechart"
                             android:layout_width="match_parent"
-                            android:layout_height="300dp"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="70dp"
                             android:visibility="gone" />
 
+
                     </LinearLayout>
 
-                    <Button
-                        android:id="@+id/AlertButton"
-                        android:layout_width="100dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginStart="130dp"
-                        android:layout_marginEnd="130dp"
-                        android:layout_marginBottom="552dp"
-                        android:layout_weight="1"
-                        android:onClick="showAlertDialog"
-                        android:text="Alert"
-                        />
+                        android:orientation="horizontal"
+                        android:id="@+id/layoutForButtons"
+                        android:layout_below="@+id/layoutForGraphs">
+
+
+                        <Button
+                            android:id="@+id/cpuButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="CPU" />
+
+                        <Button
+                            android:id="@+id/networkButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_weight="1"
+                            android:text="Network" />
+
+                        <Button
+                            android:id="@+id/diskButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Disk" />
+                    </LinearLayout>
+<!--                    <Button-->
+<!--                        android:id="@+id/AlertButton"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentStart="true"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_alignParentBottom="true"-->
+<!--                        android:layout_marginStart="130dp"-->
+<!--                        android:layout_marginEnd="130dp"-->
+<!--                        android:layout_marginBottom="552dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:onClick="showAlertDialog"-->
+<!--                        android:text="Alert"-->
+<!--                        />-->
 
                 </RelativeLayout>
             </ScrollView>

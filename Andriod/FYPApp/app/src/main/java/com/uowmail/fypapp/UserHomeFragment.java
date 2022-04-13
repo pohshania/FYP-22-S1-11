@@ -38,7 +38,9 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,18 +49,21 @@ public class UserHomeFragment extends Fragment  {
     // MJ - testing ----------------------------------------------------------------------------------------
     FirebaseFirestore fStore;
     Task<QuerySnapshot> qs;
-    float idling, sys, usr;
-
+    float idling, sys, usr, net_recv, net_send, disk_read, disk_write;
 
     // MJ - swipte to refresh
     SwipeRefreshLayout refreshLayout;
     Integer num = 0;
 
-    private PieChart pieChart, pieChart_network, pieChart_disk;
+    // MJ - PieChart
+    private PieChart pieChart_cpu, pieChart_network, pieChart_disk;
+    Button cpuBtn, networkBtn, diskBtn;
 
     // MJ - LINE CHART
     private static final String TAG = "MainActivity";
     private LineChart mChart;
+    ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+
 
     // MJ - switch
     SwitchCompat switchCompat;
@@ -69,58 +74,53 @@ public class UserHomeFragment extends Fragment  {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_client_home, container, false);
 
-        // MJ - testing ----------------------------------------------------------------------------------------
+        // MJ - to fetch data from database
         fStore = FirebaseFirestore.getInstance();
-        getPieChartData();
-//        qs = fStore.collection("UOW_log")
-//                .orderBy("date", Query.Direction.DESCENDING)
-//                .limit(1).get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if(task.isSuccessful()){
-//                            QuerySnapshot querySnapshot = task.getResult();
-//        //                    String value = documentSnapshot.get("idling").toString();
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-////                                Log.d(TAG, document.getId() + " => " + document.get("idling"));
-//                                String str;
-//                                // Idling
-//                                str = document.get("idling").toString();
-//                                idling = Float.parseFloat(str.substring(str.indexOf("avg=")+4, str.indexOf(",")));
-//                                // sys
-//                                str = document.get("sys").toString();
-//                                sys = Float.parseFloat(str.substring(str.indexOf("avg=")+4, str.indexOf(",")));
-//                                //usr
-//                                str = document.get("usr").toString();
-//                                usr = Float.parseFloat(str.substring(str.indexOf("avg=")+4, str.indexOf(",")));
-//
-//                                // load data
-//                                loadPieChartData(idling, sys, usr);
-//                            }
-//                        }
-//                        else
-//                        {
-//                            System.out.println("hello it's failed");
-//                        }
-//                    }
-//                });
 
 
         // JH - Implement Alert Button
-        Button alertButton = (Button) v.findViewById(R.id.AlertButton);
-        alertButton.setOnClickListener(new OnClickListener(){
+//        Button alertButton = (Button) v.findViewById(R.id.AlertButton);
+        cpuBtn = (Button) v.findViewById(R.id.cpuButton);
+        networkBtn = (Button) v.findViewById(R.id.networkButton);
+        diskBtn = (Button) v.findViewById(R.id.diskButton);
+
+//        alertButton.setOnClickListener(new OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+//                alert.setMessage("ATTACK DETECTED!\n Incoming attack on Game Server!");
+//                alert.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        Toast.makeText(getContext(), "Alert viewed", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
+//                alert.show();
+//            }
+//        });
+        cpuBtn.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v) {
-
-                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-                alert.setMessage("ATTACK DETECTED!\n Incoming attack on Game Server!");
-                alert.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getContext(), "Alert viewed", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                alert.show();
+                pieChart_cpu.setVisibility(View.VISIBLE);
+                pieChart_network.setVisibility(View.GONE);
+                pieChart_disk.setVisibility(View.GONE);
+            }
+        });
+        networkBtn.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                pieChart_cpu.setVisibility(View.GONE);
+                pieChart_network.setVisibility(View.VISIBLE);
+                pieChart_disk.setVisibility(View.GONE);
+            }
+        });
+        diskBtn.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                pieChart_cpu.setVisibility(View.GONE);
+                pieChart_network.setVisibility(View.GONE);
+                pieChart_disk.setVisibility(View.VISIBLE);
             }
         });
 
@@ -129,47 +129,69 @@ public class UserHomeFragment extends Fragment  {
         title.setText("Creeping Donut");
 
         // MJ - adding pieChart-------------------------------------------------------------------------------
-        pieChart = v.findViewById(R.id.piechart);
-        setupPieChart();
-//        loadPieChartData();
+        pieChart_cpu = v.findViewById(R.id.piechart_cpu);
+        getPieChartData(pieChart_cpu, "cpu");
+        setupPieChart(pieChart_cpu, "CPU Usage");
+
+        pieChart_network = v.findViewById(R.id.piechart_network);
+        getPieChartData(pieChart_network, "network");
+        setupPieChart(pieChart_network, "Network Usage");
+
+        pieChart_disk = v.findViewById(R.id.piechart_disk);
+        getPieChartData(pieChart_disk, "disk");
+        setupPieChart(pieChart_disk, "Disk Usage");
 
         // MJ - LINE CHART ------------------------------------------------------------------------------
         mChart = (LineChart) v.findViewById(R.id.linechart);
         setupLineChart();
-        loadLineChartData();
+        getLineChartDate("cpu", "idling");
+        getLineChartDate("cpu", "sys");
+        getLineChartDate("cpu", "usr");
+        getLineChartDate("network", "net_send");
+        getLineChartDate("network", "net_recv");
+        getLineChartDate("disk", "disk_read");
+        getLineChartDate("disk", "disk_write");
+
 
         // MJ - Switch ------------------------------------------------------------------------------
         switchCompat = v.findViewById(R.id.switchButton);
         // main graph = donut graph shows on default
-        pieChart.setVisibility(View.VISIBLE);
+        pieChart_cpu.setVisibility(View.VISIBLE);
         switchCompat.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){
                 if (switchCompat.isChecked()){
                     // set it as line graph
-                    pieChart.setVisibility(View.GONE);
+                    pieChart_cpu.setVisibility(View.GONE);
+                    pieChart_network.setVisibility(View.GONE);
+                    pieChart_disk.setVisibility(View.GONE);
+                    cpuBtn.setVisibility(View.GONE);
+                    networkBtn.setVisibility(View.GONE);
+                    diskBtn.setVisibility(View.GONE);
                     mChart.setVisibility(View.VISIBLE);
 
                 }else{
                     // set it as donut graph
-                    pieChart.setVisibility(View.VISIBLE);
+                    pieChart_cpu.setVisibility(View.VISIBLE);
+                    pieChart_network.setVisibility(View.GONE);
+                    pieChart_disk.setVisibility(View.GONE);
+                    cpuBtn.setVisibility(View.VISIBLE);
+                    networkBtn.setVisibility(View.VISIBLE);
+                    diskBtn.setVisibility(View.VISIBLE);
                     mChart.setVisibility(View.GONE);
                 }
             }
         });
 
-
+        // button to change pieChart graph info (cpu, network or disk)
 
         // MJ - Swipe to refresh
         refreshLayout = v.findViewById(R.id.refreshLayout);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // update graph data
-//                num++;
-                loadPieChartData(idling, sys, usr);
-                loadLineChartData();
-
+                getPieChartData(pieChart_cpu, "cpu");
+//                getLineChartDate();
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -180,12 +202,12 @@ public class UserHomeFragment extends Fragment  {
 
 
     // MJ - adding pieChart-------------------------------------------------------------------------------
-    private void setupPieChart(){
+    private void setupPieChart(PieChart pieChart, String info){
         // Donut not pie
         pieChart.setDrawHoleEnabled(true);
         pieChart.setUsePercentValues(true);
         pieChart.setEntryLabelColor(Color.BLACK);
-        pieChart.setCenterText("All events by Event Type");
+        pieChart.setCenterText(info);
         pieChart.setCenterTextSize(24);
         pieChart.getDescription().setEnabled(false);
         pieChart.setTouchEnabled(false);
@@ -198,7 +220,10 @@ public class UserHomeFragment extends Fragment  {
         l.setDrawInside(false);
         l.setEnabled(true);
     }
-    private  void getPieChartData(){
+    private void getPieChartData(PieChart pieChart, final String dataType){
+        ArrayList<Float> dataValueList = new ArrayList<Float>();
+        ArrayList<String> dataNameList = new ArrayList<String>();
+
         qs = fStore.collection("UOW_log")
                 .orderBy("date", Query.Direction.DESCENDING)
                 .limit(1).get()
@@ -211,28 +236,67 @@ public class UserHomeFragment extends Fragment  {
                                 String str;
                                 Matcher m;
                                 Pattern pat = Pattern.compile("avg=[-]?[0-9]*\\.?[0-9]+");
+                                if (dataType == "cpu")
+                                {
+                                    // Idling
+                                    str = document.get("idling").toString();
+                                    m = pat.matcher(str);
+                                    while(m.find()) {
+                                        dataValueList.add(Float.parseFloat(m.group().toString().substring(4)));
+                                        dataNameList.add("idling");
+                                    }
+                                    // sys
+                                    str = document.get("sys").toString();
+                                    m = pat.matcher(str);
+                                    while(m.find()) {
+                                        dataValueList.add(Float.parseFloat(m.group().toString().substring(4)));
+                                        dataNameList.add("sys");
+                                    }
+                                    // usr
+                                    str = document.get("usr").toString();
+                                    m = pat.matcher(str);
+                                    while(m.find()) {
+                                        dataValueList.add(Float.parseFloat(m.group().toString().substring(4)));
+                                        dataNameList.add("usr");
+                                    }
+                                }
 
-                                // Idling
-                                str = document.get("idling").toString();
-                                m = pat.matcher(str);
-                                while(m.find()) {
-                                    idling = Float.parseFloat(m.group().toString().substring(4));
+                                else if (dataType == "network")
+                                {
+                                    // net_recv
+                                    str = document.get("net_recv").toString();
+                                    str = str.trim().substring(0, str.length()-1);
+                                    dataValueList.add(Float.parseFloat(str));
+                                    dataNameList.add("net_recv");
+
+                                    // net_send
+                                    str = document.get("net_send").toString();
+                                    str = str.trim().substring(0, str.length()-1);
+                                    dataValueList.add(Float.parseFloat(str));
+                                    dataNameList.add("net_send");
                                 }
-                                // sys
-                                str = document.get("sys").toString();
-                                m = pat.matcher(str);
-                                while(m.find()) {
-                                    sys = Float.parseFloat(m.group().toString().substring(4));
+
+                                else if (dataType == "disk")
+                                {
+                                    // disk_read
+                                    str = document.get("disk_read").toString();
+                                    str = str.trim().substring(0, str.length()-1);
+                                    dataValueList.add(Float.parseFloat(str));
+                                    dataNameList.add("disk_read");
+
+                                    // disk_write
+                                    str = document.get("disk_write").toString();
+                                    str = str.trim().substring(0, str.length()-1);
+                                    dataValueList.add(Float.parseFloat(str));
+                                    dataNameList.add("disk_write");
                                 }
-                                // usr
-                                str = document.get("usr").toString();
-                                m = pat.matcher(str);
-                                while(m.find()) {
-                                    usr = Float.parseFloat(m.group().toString().substring(4));
-                                }
-                                System.out.println(document.getId()+"--->"+ idling +"=" +sys+"="  +usr+"<----");
-                                // load data
-                                loadPieChartData(idling, sys, usr);
+
+                                System.out.println(document.getId()+"--->"+ idling +"=" +sys+
+                                        "="  +usr+" = "+net_recv+net_send+disk_read+disk_write+"<----");
+
+                                //load data graph
+                                loadPieChartData(pieChart, dataValueList, dataNameList);
+                                System.out.println(dataType);
                             }
                         }
                         else
@@ -242,12 +306,14 @@ public class UserHomeFragment extends Fragment  {
                     }
                 });
     }
-    private void loadPieChartData(float idling, float sys, float usr) {
+    private void loadPieChartData(PieChart pieChart, ArrayList<Float> dataVal,
+                                  ArrayList<String> dataName) {
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(idling, "idling"));
-        entries.add(new PieEntry(sys, "sys"));
-        entries.add(new PieEntry(usr,"usr"));
+        for(int i=0; i<dataVal.size(); i++)
+        {
+            entries.add(new PieEntry(dataVal.get(i), dataName.get(i)));
 
+        }
 
         // add colors to the pieChart
         ArrayList<Integer> colors = new ArrayList<>();
@@ -276,60 +342,163 @@ public class UserHomeFragment extends Fragment  {
         mChart.setDragEnabled(true);
         mChart.setScaleEnabled(false);
     }
-    private void loadLineChartData() {
+
+    private void getLineChartDate(String dataType, String dataName){
+        ArrayList<Long> dateValueList = new ArrayList<Long>();
+        ArrayList<Float> dataValueList = new ArrayList<Float>();
+        ArrayList<String> dataNameList = new ArrayList<String>();
+
+        qs = fStore.collection("UOW_log")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(5).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            System.out.println("LineGraph-------->");
+                            QuerySnapshot querySnapshot = task.getResult();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String str;
+                                Matcher m;
+                                Pattern pat = Pattern.compile("avg=[-]?[0-9]*\\.?[0-9]+");
+                                if (dataType == "cpu")
+                                {
+                                    // Idling
+                                    if(dataName=="idling")
+                                    {
+                                        str = document.get("idling").toString();
+                                        m = pat.matcher(str);
+                                        while(m.find()) {
+                                            dataValueList.add(Float.parseFloat(m.group().toString().substring(4)));
+                                            dateValueList.add(Long.valueOf(document.getId()));
+                                            dataNameList.add("idling");
+                                        }
+                                    }
+
+                                    // sys
+                                    if(dataName=="sys")
+                                    {
+                                        str = document.get("sys").toString();
+                                        m = pat.matcher(str);
+                                        while(m.find()) {
+                                            dataValueList.add(Float.parseFloat(m.group().toString().substring(4)));
+                                            dateValueList.add(Long.valueOf(document.getId()));
+                                            dataNameList.add("sys");
+                                        }
+                                    }
+
+                                    // usr
+                                    if(dataName=="usr")
+                                    {
+                                        str = document.get("usr").toString();
+                                        m = pat.matcher(str);
+                                        while(m.find()) {
+                                            dataValueList.add(Float.parseFloat(m.group().toString().substring(4)));
+                                            dateValueList.add(Long.valueOf(document.getId()));
+                                            dataNameList.add("usr");
+                                        }
+                                    }
+                                }
+
+                                else if (dataType == "network")
+                                {
+                                    // net_recv
+                                    if(dataName == "net_recv"){
+                                        str = document.get("net_recv").toString();
+                                        str = str.trim().substring(0, str.length()-1);
+                                        dataValueList.add(Float.parseFloat(str));
+                                        dateValueList.add(Long.valueOf(document.getId()));
+                                        dataNameList.add("net_recv");
+                                    }
+                                    // net_send
+                                    else if(dataName == "net_send"){
+                                        str = document.get("net_send").toString();
+                                        str = str.trim().substring(0, str.length()-1);
+                                        dataValueList.add(Float.parseFloat(str));
+                                        dateValueList.add(Long.valueOf(document.getId()));
+                                        dataNameList.add("net_send");
+                                    }
+                                }
+
+                                else if (dataType == "disk")
+                                {
+                                    // disk_read
+                                    if(dataName == "disk_read"){
+                                        str = document.get("disk_read").toString();
+                                        str = str.trim().substring(0, str.length()-1);
+                                        dataValueList.add(Float.parseFloat(str));
+                                        dateValueList.add(Long.valueOf(document.getId()));
+                                        dataNameList.add("disk");
+                                    }
+                                    // disk_write
+                                    if(dataName=="disk_write"){
+                                        str = document.get("disk_write").toString();
+                                        str = str.trim().substring(0, str.length()-1);
+                                        dataValueList.add(Float.parseFloat(str));
+                                        dateValueList.add(Long.valueOf(document.getId()));
+                                        dataNameList.add("disk_write");
+                                    }
+
+                                }
+
+                                //load data graph
+//                                loadLineChartData(dataNameList.get(0), dateValueList, dataValueList);
+//                                System.out.println(dataType);
+                            }
+                            for(int i=0; i<dataNameList.size(); i++)
+                            {
+                                System.out.print(dataNameList.get(i) + "=");
+                            }
+                            loadLineChartData(dataNameList.get(0), dateValueList, dataValueList);
+                        }
+                        else
+                        {
+                            System.out.println("hello it's failed");
+                        }
+                    }
+                });
+    }
+    private void loadLineChartData(String info, ArrayList<Long> dateVal , ArrayList<Float> dataVal) {
+        for (int i = 0; i < dateVal.size();i++)
+        {
+            System.out.print(dateVal.get(i) + " ~ ");
+            System.out.print(dataVal.get(i) + " ~ ");
+
+        }
+
         ArrayList<Entry> yValues = new ArrayList<>();
-        if(num==0)
+
+        for(int i=0; i<dataVal.size(); i++)
         {
-            yValues.add(new Entry(0, 60f));
-            yValues.add(new Entry(1, 50f));
-            yValues.add(new Entry(2, 70f));
-            yValues.add(new Entry(3, 30f));
-            yValues.add(new Entry(4, 50f));
-            yValues.add(new Entry(5, 60f));
-            yValues.add(new Entry(6, 65f));
+            yValues.add(new Entry(i, dataVal.get(i)));
 
-
-            LineDataSet set1 = new LineDataSet(yValues, "Data set 1");
-
-            set1.setFillAlpha(110);
-            set1.setColors(Color.RED);
-            set1.setLineWidth(3f);
-            set1.setValueTextSize(10f);
-            set1.setValueTextColor(Color.BLUE);
-
-
-            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-            dataSets.add(set1);
-
-            LineData data = new LineData(dataSets);
-            mChart.setData(data);
         }
-        else
-        {
-            yValues.add(new Entry(0, 60f));
-            yValues.add(new Entry(1, 50f));
-            yValues.add(new Entry(2, 70f));
-            yValues.add(new Entry(3, 30f));
-            yValues.add(new Entry(4, 50f));
-            yValues.add(new Entry(5, 60f));
-            yValues.add(new Entry(6, 65f));
-            yValues.add(new Entry(7, 9f));
+//        yValues.add(new Entry(0, 60f));
+//        yValues.add(new Entry(1, 50f));
+//        yValues.add(new Entry(2, 70f));
+//        yValues.add(new Entry(3, 30f));
+//        yValues.add(new Entry(4, 50f));
+//        yValues.add(new Entry(5, 60f));
+//        yValues.add(new Entry(6, 65f));
 
-            LineDataSet set1 = new LineDataSet(yValues, "Data set 1");
+        // set title of the line graph
+        LineDataSet set1 = new LineDataSet(yValues, info);
 
-            set1.setFillAlpha(110);
-            set1.setColors(Color.RED);
-            set1.setLineWidth(3f);
-            set1.setValueTextSize(10f);
-            set1.setValueTextColor(Color.BLUE);
+        set1.setFillAlpha(110);
+        set1.setColors(Color.RED);
+        set1.setLineWidth(3f);
+        set1.setValueTextSize(10f);
+        set1.setValueTextColor(Color.BLUE);
+
+//        LineDataSet set2 = new LineDataSet(yValues, "info");
+
+//        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+//        dataSets.add(set2);
 
 
-            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-            dataSets.add(set1);
-
-            LineData data = new LineData(dataSets);
-            mChart.setData(data);
-        }
+        LineData data = new LineData(dataSets);
+        mChart.setData(data);
     }
 
 }

@@ -6,7 +6,7 @@
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_admin_deactivate_user.xml" value="0.2078125" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_admin_home.xml" value="0.1" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_create_new_user.xml" value="0.264" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_logs.xml" value="0.17708333333333334" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_logs_detail.xml" value="0.1" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_rules.xml" value="0.1" />
@@ -18,7 +18,7 @@
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_user_log_details.xml" value="0.264" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_user_log_details2.xml" value="0.1585144927536232" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_user_logs.xml" value="0.1" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_user_logs2.xml" value="0.1585144927536232" />
+        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_user_logs2.xml" value="0.1" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/pwdpopup.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/user_logs_list_item_single.xml" value="0.1" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/user_logs_list_item_single2.xml" value="0.2" />
@@ -71,7 +71,7 @@
         <entry key="app/src/main/res/layout/activity_logs2.xml" value="0.3388888888888889" />
         <entry key="app/src/main/res/layout/activity_logs_detail.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19689788818359377" />
-        <entry key="app/src/main/res/layout/activity_rules.xml" value="0.247320692497939" />
+        <entry key="app/src/main/res/layout/activity_rules.xml" value="0.21351351351351353" />
         <entry key="app/src/main/res/layout/activity_user_home.xml" value="0.13793334960937498" />
         <entry key="app/src/main/res/layout/activity_user_settings.xml" value="0.1" />
         <entry key="app/src/main/res/layout/color_spinner_layout.xml" value="0.25052083333333336" />

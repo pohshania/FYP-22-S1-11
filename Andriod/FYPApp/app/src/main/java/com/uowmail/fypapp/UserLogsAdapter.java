@@ -5,12 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.common.ChangeEventType;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.auth.User;
 
 public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, UserLogsAdapter.UserLogsViewHolder> {
 
@@ -34,10 +38,6 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
         holder.doc_id.setText(model.getDocument_id());
         Log.d("POSITION","Position: " + position);
 
-
-
-
-
     }
 
     @NonNull
@@ -45,6 +45,28 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
     public UserLogsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_logs_list_item_single2, parent, false);
         return new UserLogsViewHolder(view);
+    }
+
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        UserLogsFragment.disableProgressBar();
+        UserLogsFragment.showDatePickerButton();
+
+        if(getItemCount() == 0)
+        {
+            UserLogsFragment.showNoDataFoundText();
+        }else{
+            UserLogsFragment.hideNoDateFoundText();
+        }
+
+    }
+
+    @Override
+    public void updateOptions(@NonNull FirestoreRecyclerOptions<UserLogsModel> options) {
+        super.updateOptions(options);
+        UserLogsFragment.hideNoDateFoundText();
+        UserLogsFragment.enableProgressBar();
     }
 
     // Viewholder class for user logs

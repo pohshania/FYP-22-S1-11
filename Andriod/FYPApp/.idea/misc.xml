@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/drawable/bottom_sheet_background.xml" value="0.187" />
+        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/drawable/user_logs_bottom_sheet.xml" value="0.128" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_admin_deactivate_user.xml" value="0.2078125" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_admin_home.xml" value="0.1" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_create_new_user.xml" value="0.264" />
@@ -19,9 +21,11 @@
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_user_log_details2.xml" value="0.1585144927536232" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_user_logs.xml" value="0.1" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_user_logs2.xml" value="0.264" />
+        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/fragment_user_logs_filter_bottom_sheet.xml" value="0.35023584905660377" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/pwdpopup.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/spinner_selected_item_layout.xml" value="0.2" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/spinner_textcolor_layout.xml" value="0.1" />
+        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/user_logs_bottom_sheet.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/user_logs_list_item_single.xml" value="0.1" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/user_logs_list_item_single2.xml" value="0.2" />
         <entry key="..\:/Users/leeyt/Documents/GitHub/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/drawable/back.xml" value="0.1915" />

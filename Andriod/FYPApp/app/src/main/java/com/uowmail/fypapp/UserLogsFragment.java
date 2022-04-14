@@ -290,8 +290,32 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
             filterDateTimeSummaryText.setTextColor(Color.parseColor("#FF0000"));
             return true;
         }
+        if(compareTime(startTimeTxt, endTimeTxt)==false){
+            filterDateTimeSummaryText.setText("End time is larger than start time!");
+            filterDateTimeSummaryText.setTextColor(Color.parseColor("#FF0000"));
+            return true;
+        }
 
         return false;
+    }
+
+    private boolean compareTime(String start, String end){
+        SimpleDateFormat sdformat = new SimpleDateFormat("hh:mm aa");
+        Date d1 = new Date();
+        Date d2 = new Date();
+
+        try {
+            d1 = sdformat.parse(start);
+            d2 = sdformat.parse(end);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if(d1.compareTo(d2) > 0) {
+            return false;
+        }
+
+        return true;
     }
 
     /* ================================== FIRESTORE FUNCTIONS ================================== */

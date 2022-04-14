@@ -1,7 +1,5 @@
 package com.uowmail.fypapp;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -17,7 +15,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -38,9 +35,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -98,13 +93,12 @@ public class UserHomeFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.fragment_client_home, container, false);
+        View v =  inflater.inflate(R.layout.fragment_user_home, container, false);
 
         // MJ - to fetch data from database
         fStore = FirebaseFirestore.getInstance();
 
-
-        // JH - Implement Alert Button
+        
 //        Button alertButton = (Button) v.findViewById(R.id.AlertButton);
         cpuBtn = (Button) v.findViewById(R.id.cpuButton);
         networkBtn = (Button) v.findViewById(R.id.networkButton);

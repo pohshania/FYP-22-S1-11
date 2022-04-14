@@ -59,7 +59,13 @@ import java.util.Locale;
 
 
 public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnListItemClick{
-    
+
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+
     private RecyclerView mFirestoreList;
     private FirebaseFirestore firebaseFirestore;
     private UserLogsAdapter adapter;
@@ -71,7 +77,27 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
     public static TextView noDataFoundText;
     private TextView filterDateText, filterStartTimeText, filterEndTimeText, filterDateTimeSummaryText;
     private int startTimeHour, startTimeMinute, endTimeHour, endTimeMinute;
-    
+
+    public UserLogsFragment() {
+        // Required empty public constructor
+    }
+
+    public static UserLogsFragment newInstance(String param1) {
+        UserLogsFragment fragment = new UserLogsFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            Log.d("===== INSIDE LOGS FRAG ===== ", mParam1);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -285,7 +311,8 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
     // display ALL the logs from firestore
     private void firestoreQueryAllLogs(View view){
         // Query from firebase
-        Query query = firebaseFirestore.collection("UOW_log") // TODO: filter by organisation ID
+        String path = mParam1 + "_log";
+        Query query = firebaseFirestore.collection(path)
                 .orderBy("date", Query.Direction.DESCENDING);
 
 
@@ -353,7 +380,8 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
 
 
         // Query from firebase
-        Query query = firebaseFirestore.collection("UOW_log") // TODO: filter by organisation ID
+        String path = mParam1 + "_log";
+        Query query = firebaseFirestore.collection(path)
                 .orderBy("date", Query.Direction.DESCENDING)
                 .whereGreaterThanOrEqualTo("date", startDate)
                 .whereLessThan("date", endDate)
@@ -379,7 +407,8 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
     // display CHOOSEN DATE & TIME logs from firestore
     private void firestoreQueryLogsByDateTime(Date startDateTime, Date endDateTime){
         // Query from firebase
-        Query query = firebaseFirestore.collection("UOW_log") // TODO: filter by organisation ID
+        String path = mParam1 + "_log";
+        Query query = firebaseFirestore.collection(path) // TODO: filter by organisation ID
                 .orderBy("date", Query.Direction.DESCENDING)
                 .whereGreaterThanOrEqualTo("date", startDateTime)
                 .whereLessThanOrEqualTo("date", endDateTime);

@@ -2,10 +2,13 @@ package com.uowmail.fypapp;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +20,9 @@ import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserInfo;
+
+import java.util.ArrayList;
 
 public class UserHomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -24,6 +30,8 @@ public class UserHomeActivity extends AppCompatActivity {
     AdminHomeFragment adminHomeFragment = new AdminHomeFragment();
     NotificationFragment notificationFragment = new NotificationFragment();
     UserLogsFragment userLogsFragment = new UserLogsFragment();
+
+    public CurrentUserInfo currentUserInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,14 @@ public class UserHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_home);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, userHomeFragment).commit();
         bottomNavigationView = findViewById(R.id.bottom_navigation_client);
+
+        // pass current user's info
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            currentUserInfo = (CurrentUserInfo) extras.getSerializable("userInfo");
+            Log.d("====CURRENT USER'S ORG ID====", currentUserInfo.getOrgID());
+        }
+
 
         // badge notification alert
         if (bottomNavigationView !=null){
@@ -53,7 +69,14 @@ public class UserHomeActivity extends AppCompatActivity {
                             return true;
 
                         case R.id.logs:
-                            getSupportFragmentManager().beginTransaction().replace(R.id.container, userLogsFragment, "user_logs_fragment").commit();
+                            //Fragment fragment = UserLogsFragment.newInstance(currentUserInfo.getOrgID());
+                            //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, "user_logs_fragment").commit();
+
+                            Fragment logsFragment = UserLogsFragment.newInstance(currentUserInfo.getOrgID());
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, logsFragment, "user_log_fragment");
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             return true;
                     }
                     return false;

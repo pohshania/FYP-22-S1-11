@@ -14,6 +14,7 @@
         android:padding="5dp" >
 
         <TextView
+            android:id="@+id/userLogs_filterTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Filter date and time"
@@ -22,13 +23,13 @@
             android:padding="15dp" />
 
         <Button
-            android:id="@+id/userLogs_filterDone_btn"
+            android:id="@+id/userLogs_applyFilter_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Done"
+            android:text="Apply"
             android:layout_marginStart="120dp"/>
-
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,11 +38,19 @@
         android:padding="5dp" >
 
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/userLogs_filterPickDate_btn"
+            android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:text="Pick Date" />
 
+        <TextView
+            android:id="@+id/userLogs_filterDate_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="date"
+            android:layout_marginStart="10dp"/>
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,16 +59,57 @@
         android:padding="5dp" >
 
         <Button
+            android:id="@+id/userLogs_filterStartTime_btn"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:text="Start Time " />
+
+        <TextView
+            android:id="@+id/userLogs_filterStartTime_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pick Time " />
-
+            android:text="start time"
+            android:layout_marginStart="10dp"/>
     </LinearLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/userLogs_filterEndTime_btn"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:text="End Time " />
+
+        <TextView
+            android:id="@+id/userLogs_filterEndTime_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="end time"
+            android:layout_marginStart="10dp"/>
+    </LinearLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="5dp" >
 
+        <TextView
+            android:id="@+id/userLogs_filterSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="summary"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 
 

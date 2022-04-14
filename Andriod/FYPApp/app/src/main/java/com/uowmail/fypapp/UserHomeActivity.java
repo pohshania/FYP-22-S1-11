@@ -20,15 +20,12 @@ import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.UserInfo;
-
-import java.util.ArrayList;
 
 public class UserHomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     UserHomeFragment userHomeFragment = new UserHomeFragment();
     AdminHomeFragment adminHomeFragment = new AdminHomeFragment();
-    NotificationFragment notificationFragment = new NotificationFragment();
+    UserNotificationFragment userNotificationFragment = new UserNotificationFragment();
     UserLogsFragment userLogsFragment = new UserLogsFragment();
 
     public CurrentUserInfo currentUserInfo;
@@ -81,7 +78,7 @@ public class UserHomeActivity extends AppCompatActivity {
                             return true;
 
                         case R.id.notification:
-                            getSupportFragmentManager().beginTransaction().replace(R.id.container, notificationFragment).commit();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, userNotificationFragment).commit();
                             return true;
 
                         case R.id.logs:

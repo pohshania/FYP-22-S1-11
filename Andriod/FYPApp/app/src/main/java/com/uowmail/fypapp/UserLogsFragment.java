@@ -408,8 +408,8 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         Query query = firebaseFirestore.collection(path)
                 .orderBy("date", Query.Direction.DESCENDING)
                 .whereGreaterThanOrEqualTo("date", startDate)
-                .whereLessThan("date", endDate)
-                .limit(20);
+                .whereLessThan("date", endDate);
+                //.limit(20);
 
 
         // FirebaseRecyclerOptions

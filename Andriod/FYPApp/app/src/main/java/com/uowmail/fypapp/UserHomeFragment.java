@@ -98,7 +98,7 @@ public class UserHomeFragment extends Fragment  {
         // MJ - to fetch data from database
         fStore = FirebaseFirestore.getInstance();
 
-        
+
 //        Button alertButton = (Button) v.findViewById(R.id.AlertButton);
         cpuBtn = (Button) v.findViewById(R.id.cpuButton);
         networkBtn = (Button) v.findViewById(R.id.networkButton);

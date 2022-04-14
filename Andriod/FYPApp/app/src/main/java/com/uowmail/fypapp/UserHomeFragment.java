@@ -46,6 +46,11 @@ import java.util.regex.Pattern;
 
 public class UserHomeFragment extends Fragment  {
 
+    // shania
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private String mParam1;
+
     // MJ - testing ----------------------------------------------------------------------------------------
     FirebaseFirestore fStore;
     Task<QuerySnapshot> qs;
@@ -67,6 +72,27 @@ public class UserHomeFragment extends Fragment  {
 
     // MJ - switch
     SwitchCompat switchCompat;
+
+    // shania
+    public UserHomeFragment() {
+        // Required empty public constructor
+    }
+    // shania
+    public static UserHomeFragment newInstance(String param1) {
+        UserHomeFragment fragment = new UserHomeFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        fragment.setArguments(args);
+        return fragment;
+    }
+    // shania
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            Log.d("===== INSIDE USER DASHBOARD FRAG ===== ", mParam1);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -224,7 +250,9 @@ public class UserHomeFragment extends Fragment  {
         ArrayList<Float> dataValueList = new ArrayList<Float>();
         ArrayList<String> dataNameList = new ArrayList<String>();
 
-        qs = fStore.collection("UOW_log")
+        // shania
+        String path = mParam1 + "_log";
+        qs = fStore.collection(path)
                 .orderBy("date", Query.Direction.DESCENDING)
                 .limit(1).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

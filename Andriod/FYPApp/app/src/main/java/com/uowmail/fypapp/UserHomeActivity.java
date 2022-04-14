@@ -38,16 +38,27 @@ public class UserHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
 
-        setContentView(R.layout.activity_user_home);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, userHomeFragment).commit();
-        bottomNavigationView = findViewById(R.id.bottom_navigation_client);
-
         // pass current user's info
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             currentUserInfo = (CurrentUserInfo) extras.getSerializable("userInfo");
             Log.d("====CURRENT USER'S ORG ID====", currentUserInfo.getOrgID());
         }
+
+
+        //getSupportFragmentManager().beginTransaction().replace(R.id.container, userHomeFragment).commit();
+
+        // shania
+        Fragment homeFragment = UserHomeFragment.newInstance(currentUserInfo.getOrgID());
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, homeFragment, "user_home_fragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+        setContentView(R.layout.activity_user_home);
+        bottomNavigationView = findViewById(R.id.bottom_navigation_client);
+
+
 
 
         // badge notification alert
@@ -61,7 +72,12 @@ public class UserHomeActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected( MenuItem item) {
                     switch (item.getItemId()){
                         case R.id.home:
-                            getSupportFragmentManager().beginTransaction().replace(R.id.container, userHomeFragment).commit();
+                            //getSupportFragmentManager().beginTransaction().replace(R.id.container, userHomeFragment).commit();
+                            Fragment homeFragment = UserHomeFragment.newInstance(currentUserInfo.getOrgID());
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.container, homeFragment, "user_home_fragment");
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                             return true;
 
                         case R.id.notification:
@@ -73,10 +89,10 @@ public class UserHomeActivity extends AppCompatActivity {
                             //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, "user_logs_fragment").commit();
 
                             Fragment logsFragment = UserLogsFragment.newInstance(currentUserInfo.getOrgID());
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            transaction.replace(R.id.container, logsFragment, "user_log_fragment");
-                            transaction.addToBackStack(null);
-                            transaction.commit();
+                            FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+                            transaction2.replace(R.id.container, logsFragment, "user_log_fragment");
+                            transaction2.addToBackStack(null);
+                            transaction2.commit();
                             return true;
                     }
                     return false;

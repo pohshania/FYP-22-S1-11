@@ -14,24 +14,25 @@
         android:padding="8dp" >
 
         <TextView
-            android:id="@+id/userLogs_recyView_docId2"
+            android:id="@+id/userLogs_recyclerView_docID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="title"
-            android:layout_toStartOf="@id/userLogs_goToLogDetails"
             android:layout_alignParentStart="true"
             android:maxLines="1"
             android:ellipsize="end"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/userLogs_goToLogDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/userLogs_recyclerView_docID"
+            android:src="@drawable/logs_detail"
+            android:layout_marginStart="150dp"
+            android:scaleY="1.2"
+            android:scaleX="1.2"/>
 
     </RelativeLayout>
 

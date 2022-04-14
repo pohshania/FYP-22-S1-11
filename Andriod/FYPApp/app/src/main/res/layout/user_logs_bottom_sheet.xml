@@ -24,7 +24,7 @@
 
         <Button
             android:id="@+id/userLogs_applyFilter_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Apply"
             android:layout_marginStart="120dp"/>
@@ -47,8 +47,7 @@
             android:id="@+id/userLogs_filterDate_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="date"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginStart="10dp" />
     </LinearLayout>
 
 
@@ -68,7 +67,6 @@
             android:id="@+id/userLogs_filterStartTime_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="start time"
             android:layout_marginStart="10dp"/>
     </LinearLayout>
 
@@ -89,7 +87,6 @@
             android:id="@+id/userLogs_filterEndTime_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="end time"
             android:layout_marginStart="10dp"/>
     </LinearLayout>
 

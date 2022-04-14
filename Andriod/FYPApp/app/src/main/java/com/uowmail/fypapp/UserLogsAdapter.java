@@ -16,6 +16,11 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.auth.User;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, UserLogsAdapter.UserLogsViewHolder> {
 
     private OnListItemClick onListItemClick;
@@ -35,9 +40,34 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
 
         }
 
-        holder.doc_id.setText(model.getDocument_id());
+        //holder.doc_id.setText(model.getDocument_id());
+        //holder.doc_id.setText("HEEHEE");
+        holder.doc_id.setText(formatDocumentID(model.getDocument_id()));
         Log.d("POSITION","Position: " + position);
 
+    }
+
+    private String formatDocumentID(String modelDocID){
+        Date date = new Date();
+        String output = null;
+
+        //Format of the date defined in the input String
+        DateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
+
+        //Desired format: 24 hour format: Change the pattern as per the need
+        DateFormat outputformat = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
+
+
+        try {
+            //Converting the input String to Date
+            date = df.parse(modelDocID);
+            //Changing the format of date and storing it in String
+            output = outputformat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return output;
     }
 
     @NonNull
@@ -51,7 +81,7 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
     public void onDataChanged() {
         super.onDataChanged();
         UserLogsFragment.disableProgressBar();
-        UserLogsFragment.showDatePickerButton();
+        UserLogsFragment.enableFilterButton();
 
         if(getItemCount() == 0)
         {
@@ -67,6 +97,7 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
         super.updateOptions(options);
         UserLogsFragment.hideNoDateFoundText();
         UserLogsFragment.enableProgressBar();
+        UserLogsFragment.disableFilterButton();
     }
 
     // Viewholder class for user logs
@@ -76,7 +107,7 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
         public UserLogsViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            doc_id = itemView.findViewById(R.id.userLogs_recyView_docId2);
+            doc_id = itemView.findViewById(R.id.userLogs_recyclerView_docID);
 
 
             itemView.setOnClickListener(this);

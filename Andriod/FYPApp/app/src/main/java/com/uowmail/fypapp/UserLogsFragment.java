@@ -15,14 +15,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -63,9 +67,7 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
     private FirestoreRecyclerOptions<UserLogsModel> options;
     public static ProgressBar progressBar;
     public static TextView loadingText;
-    public static Button datePickerbtn, logsFilterBtn;
-    public static TextView dateText;
-    private static String chosenDate1, chosenDate2;
+    public static Button logsFilterBtn;
     public static TextView noDataFoundText;
     private TextView filterDateText, filterStartTimeText, filterEndTimeText, filterDateTimeSummaryText;
     private int startTimeHour, startTimeMinute, endTimeHour, endTimeMinute;
@@ -87,12 +89,8 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         // XML variables
         progressBar = (ProgressBar) view.findViewById(R.id.userLogs_progress_bar);
         loadingText = view.findViewById(R.id.userLogs_loadingText);
-        datePickerbtn = (Button) view.findViewById(R.id.userLogs_datePicker);
-        dateText = view.findViewById(R.id.userLogs_dateText);
         noDataFoundText = view.findViewById(R.id.userLogs_noDataText);
         logsFilterBtn = (Button) view.findViewById(R.id.userLogs_filter_btn);
-        //filterDatePickerBtn = view.findViewById(R.id.userLogs_filterPickDate_btn);
-
 
 
         // Call default firestore recyclerview query
@@ -107,38 +105,6 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         adapter.notifyItemChanged(0);
         mFirestoreList.setAdapter(adapter);
 
-        // date picker
-        datePickerbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Calendar newCalendar = Calendar.getInstance();
-                final DatePickerDialog  datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        Calendar newDate = Calendar.getInstance();
-                        newDate.set(year, monthOfYear, dayOfMonth);
-                        String pattern = "yyyy/MM/dd";
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-                        dateText.setText(simpleDateFormat.format(newDate.getTime()));
-                        chosenDate1 = simpleDateFormat.format(newDate.getTime());
-
-                        Calendar newDate2 = Calendar.getInstance();
-                        newDate2.set(year, monthOfYear, dayOfMonth+1);
-                        String pattern2 = "yyyy/MM/dd";
-                        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(pattern2);
-                        chosenDate2 = simpleDateFormat2.format(newDate2.getTime());
-
-
-                        Log.d("===CHOSENDATE1", chosenDate1);
-                        Log.d("===CHOSENDATE2", chosenDate2);
-
-                        //firestoreQueryLogsByDateTime2(view, chosenDate1, chosenDate2);
-
-                    }
-
-                }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-                datePickerDialog.show();
-            }
-        });
 
         // filter date & time bottom sheet
         logsFilterBtn.setOnClickListener(new View.OnClickListener() {
@@ -181,26 +147,28 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
                 bottomSheetView.findViewById(R.id.userLogs_applyFilter_btn).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getContext(), "Filters applied!", Toast.LENGTH_SHORT).show();
+                        // error handling: check if the filter are empty, if not cant apply
+                        if(checkFilterEmpty()==false){
+                            Toast.makeText(getContext(), "Filters applied!", Toast.LENGTH_SHORT).show();
 
-                        // formatting the selected date and time for firestore query
-                        Date startDateTime = new Date();
-                        startDateTime = formatFilteredDateAndStartTime(filterDateText.getText().toString(), filterStartTimeText.getText().toString());
-                        Date endDateTime = new Date();
-                        endDateTime = formatFilteredDateAndEndTime(filterDateText.getText().toString(), filterEndTimeText.getText().toString());
+                            // formatting the selected date and time for firestore query
+                            Date startDateTime = new Date();
+                            startDateTime = formatFilteredDateAndStartTime(filterDateText.getText().toString(), filterStartTimeText.getText().toString());
+                            Date endDateTime = new Date();
+                            endDateTime = formatFilteredDateAndEndTime(filterDateText.getText().toString(), filterEndTimeText.getText().toString());
 
-                        // start new query here
-                        firestoreQueryLogsByDateTime(startDateTime, endDateTime);
+                            // start new query here
+                            firestoreQueryLogsByDateTime(startDateTime, endDateTime);
 
-                        // dismiss the bottom sheet
-                        bottomSheetDialog.dismiss();
+                            // dismiss the bottom sheet
+                            bottomSheetDialog.dismiss();
+                        }
                     }
                 });
                 bottomSheetDialog.setContentView(bottomSheetView);
                 bottomSheetDialog.show();
             }
         });
-
 
 
         // Refresh
@@ -216,12 +184,6 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         return view;
     }
 
-    private Date formateTodayDate(){
-        Date date = new Date();
-
-
-        return date;
-    }
 
     private Date formatFilteredDateAndStartTime(String selectedDate, String selectedStartTime){
         Log.d("===== FORMAT DATE + START TIME ======", selectedDate + " " + selectedStartTime);
@@ -276,6 +238,34 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         }
 
         return endDateTime;
+    }
+
+    private boolean checkFilterEmpty(){
+
+        String dateTxt = filterDateText.getText().toString().trim();
+        String startTimeTxt = filterStartTimeText.getText().toString().trim();
+        String endTimeTxt = filterEndTimeText.getText().toString().trim();
+
+        if(TextUtils.isEmpty(dateTxt)){
+            //filterDateText.setError("Date is required!");
+            filterDateTimeSummaryText.setText("Date is required!");
+            filterDateTimeSummaryText.setTextColor(Color.parseColor("#FF0000"));
+            return true;
+        }
+        if(TextUtils.isEmpty(startTimeTxt)){
+            //filterStartTimeText.setError("Start time is required!");
+            filterDateTimeSummaryText.setText("Start time is required!");
+            filterDateTimeSummaryText.setTextColor(Color.parseColor("#FF0000"));
+            return true;
+        }
+        if(TextUtils.isEmpty(endTimeTxt)){
+            //filterEndTimeText.setError("End time is required!");
+            filterDateTimeSummaryText.setText("End time is required!");
+            filterDateTimeSummaryText.setTextColor(Color.parseColor("#FF0000"));
+            return true;
+        }
+
+        return false;
     }
 
     /* ================================== FIRESTORE FUNCTIONS ================================== */
@@ -416,57 +406,6 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         mFirestoreList.setAdapter(adapter);
     }
 
-    // old
-    private void firestoreQueryLogsByDateTime2(View view,  String chosenDate, String choseDate2){
-        Date startDate = new Date();
-        Date endDate = new Date();
-
-        try {
-            String myDate1 = chosenDate;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-            startDate = sdf.parse(myDate1);
-
-            String myDate2 = choseDate2;
-            SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd");
-            endDate = sdf2.parse(myDate2);
-
-
-        } catch (java.text.ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-
-        // Query from firebase
-        Query query = firebaseFirestore.collection("UOW_log") // TODO: filter by organisation ID
-                .orderBy("date", Query.Direction.DESCENDING)
-                .whereGreaterThanOrEqualTo("date", startDate)
-                .whereLessThan("date", endDate)
-                .limit(30);
-
-
-        // FirebaseRecyclerOptions
-        FirestoreRecyclerOptions<UserLogsModel> new_options = new FirestoreRecyclerOptions.Builder<UserLogsModel>()
-                .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<UserLogsModel>() {
-                    @NonNull
-                    @Override
-                    public UserLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        UserLogsModel userLogsModel = snapshot.toObject(UserLogsModel.class);
-                        String docId = snapshot.getId();
-                        userLogsModel.setDocument_id(docId);
-                        return userLogsModel;
-                    }
-                })
-                .build();
-
-
-        // update recycler adapter
-        adapter.updateOptions(new_options);
-        mFirestoreList.setAdapter(adapter);
-    }
-
-
     /* ================================== LAYOUT DISPLAY TOGGLE FUNCTIONS ================================== */
     public void showDatePickerDialog(View view){
         final Calendar newCalendar = Calendar.getInstance();
@@ -540,6 +479,7 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
                             // set summary
                             filterDateTimeSummaryText.setText(filterDateText.getText() + ", FROM " +
                                     filterStartTimeText.getText() + " TO " + filterEndTimeText.getText());
+                            filterDateTimeSummaryText.setTextColor(Color.parseColor("#000000"));
 
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -555,6 +495,14 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
 
     }
 
+    public static void enableFilterButton(){
+        logsFilterBtn.setVisibility(View.VISIBLE);
+    }
+
+    public static void disableFilterButton(){
+        logsFilterBtn.setVisibility(View.INVISIBLE);
+    }
+
     public static void disableProgressBar(){
         progressBar.setVisibility(View.INVISIBLE);
         loadingText.setVisibility(View.INVISIBLE);
@@ -563,11 +511,6 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
     public static void enableProgressBar(){
         progressBar.setVisibility(View.VISIBLE);
         loadingText.setVisibility(View.VISIBLE);
-    }
-
-    public static void showDatePickerButton(){
-        datePickerbtn.setVisibility(View.VISIBLE);
-        dateText.setVisibility(View.VISIBLE);
     }
 
     public static void showNoDataFoundText(){

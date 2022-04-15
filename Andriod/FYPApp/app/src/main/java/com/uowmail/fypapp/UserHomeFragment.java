@@ -56,6 +56,8 @@ public class UserHomeFragment extends Fragment  {
     Integer num = 0;
 
     // MJ - PieChart
+    float usageValue = 0;
+    String valueWunit;
     private PieChart pieChart_cpu, pieChart_network, pieChart_disk;
     Button cpuBtn, networkBtn, diskBtn;
 
@@ -151,20 +153,20 @@ public class UserHomeFragment extends Fragment  {
         // MJ - adding pieChart-------------------------------------------------------------------------------
         pieChart_cpu = v.findViewById(R.id.piechart_cpu);
         getPieChartData(pieChart_cpu, "cpu");
-        setupPieChart(pieChart_cpu, "CPU Usage");
+//        setupPieChart(pieChart_cpu, "CPU", float usageValue);
 
         pieChart_network = v.findViewById(R.id.piechart_network);
         getPieChartData(pieChart_network, "network");
-        setupPieChart(pieChart_network, "Network Usage");
+//        setupPieChart(pieChart_network, "Network Usage");
 
         pieChart_disk = v.findViewById(R.id.piechart_disk);
         getPieChartData(pieChart_disk, "disk");
-        setupPieChart(pieChart_disk, "Disk Usage");
+//        setupPieChart(pieChart_disk, "Disk Usage");
 
         // MJ - LINE CHART ------------------------------------------------------------------------------
         mChart = (LineChart) v.findViewById(R.id.linechart);
         setupLineChart();
-        getLineChartDate("cpu", "idling");
+//        getLineChartDate("cpu", "idling");
         getLineChartDate("cpu", "sys");
         getLineChartDate("cpu", "usr");
         getLineChartDate("network", "net_send");
@@ -222,12 +224,12 @@ public class UserHomeFragment extends Fragment  {
 
 
     // MJ - adding pieChart-------------------------------------------------------------------------------
-    private void setupPieChart(PieChart pieChart, String info){
+    private void setupPieChart(PieChart pieChart, String info, String usageValue){
         // Donut not pie
         pieChart.setDrawHoleEnabled(true);
         pieChart.setUsePercentValues(true);
         pieChart.setEntryLabelColor(Color.BLACK);
-        pieChart.setCenterText(info);
+        pieChart.setCenterText(info+" Usage\n" + usageValue);
         pieChart.setCenterTextSize(24);
         pieChart.getDescription().setEnabled(false);
         pieChart.setTouchEnabled(false);
@@ -240,6 +242,7 @@ public class UserHomeFragment extends Fragment  {
         l.setDrawInside(false);
         l.setEnabled(true);
     }
+
     private void getPieChartData(PieChart pieChart, final String dataType){
         ArrayList<Float> dataValueList = new ArrayList<Float>();
         ArrayList<String> dataNameList = new ArrayList<String>();
@@ -252,6 +255,8 @@ public class UserHomeFragment extends Fragment  {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        // initialise usageValue to be zero
+                        usageValue = 0;
                         if(task.isSuccessful()){
                             QuerySnapshot querySnapshot = task.getResult();
                             for (QueryDocumentSnapshot document : task.getResult()) {
@@ -260,13 +265,13 @@ public class UserHomeFragment extends Fragment  {
                                 Pattern pat = Pattern.compile("avg=[-]?[0-9]*\\.?[0-9]+");
                                 if (dataType == "cpu")
                                 {
-                                    // Idling
-                                    str = document.get("idling").toString();
-                                    m = pat.matcher(str);
-                                    while(m.find()) {
-                                        dataValueList.add(Float.parseFloat(m.group().toString().substring(4)));
-                                        dataNameList.add("idling");
-                                    }
+//                                    // Idling
+//                                    str = document.get("idling").toString();
+//                                    m = pat.matcher(str);
+//                                    while(m.find()) {
+//                                        dataValueList.add(Float.parseFloat(m.group().toString().substring(4)));
+//                                        dataNameList.add("idling");
+//                                    }
                                     // sys
                                     str = document.get("sys").toString();
                                     m = pat.matcher(str);
@@ -281,6 +286,11 @@ public class UserHomeFragment extends Fragment  {
                                         dataValueList.add(Float.parseFloat(m.group().toString().substring(4)));
                                         dataNameList.add("usr");
                                     }
+                                    // finding total usage of each data type
+                                    for(float value : dataValueList){
+                                        usageValue += value;
+                                    }
+                                    valueWunit = usageValue + "%";
                                 }
 
                                 else if (dataType == "network")
@@ -296,6 +306,11 @@ public class UserHomeFragment extends Fragment  {
                                     str = str.trim().substring(0, str.length()-1);
                                     dataValueList.add(Float.parseFloat(str));
                                     dataNameList.add("net_send");
+
+                                    for(float value : dataValueList){
+                                        usageValue += value;
+                                    }
+                                    valueWunit = usageValue + "M";
                                 }
 
                                 else if (dataType == "disk")
@@ -311,13 +326,16 @@ public class UserHomeFragment extends Fragment  {
                                     str = str.trim().substring(0, str.length()-1);
                                     dataValueList.add(Float.parseFloat(str));
                                     dataNameList.add("disk_write");
-                                }
 
-                                System.out.println(document.getId()+"--->"+ idling +"=" +sys+
-                                        "="  +usr+" = "+net_recv+net_send+disk_read+disk_write+"<----");
+                                    for(float value : dataValueList){
+                                        usageValue += value;
+                                    }
+                                    valueWunit = usageValue + "M";
+                                }
 
                                 //load data graph
                                 loadPieChartData(pieChart, dataValueList, dataNameList);
+                                setupPieChart(pieChart, dataType, valueWunit);
                                 System.out.println(dataType);
                             }
                         }
@@ -327,6 +345,7 @@ public class UserHomeFragment extends Fragment  {
                         }
                     }
                 });
+
     }
     private void loadPieChartData(PieChart pieChart, ArrayList<Float> dataVal,
                                   ArrayList<String> dataName) {
@@ -450,7 +469,7 @@ public class UserHomeFragment extends Fragment  {
                                         str = str.trim().substring(0, str.length()-1);
                                         dataValueList.add(Float.parseFloat(str));
                                         dateValueList.add(Long.valueOf(document.getId()));
-                                        dataNameList.add("disk");
+                                        dataNameList.add("disk_read");
                                     }
                                     // disk_write
                                     if(dataName=="disk_write"){
@@ -471,7 +490,7 @@ public class UserHomeFragment extends Fragment  {
                             {
                                 System.out.print(dataNameList.get(i) + "=");
                             }
-                            loadLineChartData(dataNameList.get(0), dateValueList, dataValueList);
+                            loadLineChartData(dataNameList.get(0), dateValueList, dataValueList, dataType);
                         }
                         else
                         {
@@ -480,7 +499,7 @@ public class UserHomeFragment extends Fragment  {
                     }
                 });
     }
-    private void loadLineChartData(String info, ArrayList<Long> dateVal , ArrayList<Float> dataVal) {
+    private void loadLineChartData(String info, ArrayList<Long> dateVal , ArrayList<Float> dataVal, String dataType) {
         for (int i = 0; i < dateVal.size();i++)
         {
             System.out.print(dateVal.get(i) + " ~ ");
@@ -507,10 +526,19 @@ public class UserHomeFragment extends Fragment  {
         LineDataSet set1 = new LineDataSet(yValues, info);
 
         set1.setFillAlpha(110);
-        set1.setColors(Color.RED);
         set1.setLineWidth(3f);
         set1.setValueTextSize(10f);
         set1.setValueTextColor(Color.BLUE);
+
+        // set color of graph according to data type
+        if (dataType == "cpu")
+            set1.setColors(Color.RED);
+        else if (dataType == "network")
+            set1.setColors(Color.BLUE);
+        else if (dataType == "disk")
+            set1.setColors(Color.GREEN);
+
+
 
 //        LineDataSet set2 = new LineDataSet(yValues, "info");
 

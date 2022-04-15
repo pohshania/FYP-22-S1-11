@@ -1,5 +1,6 @@
 package com.uowmail.fypapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -16,10 +17,17 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class UserHomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -29,6 +37,8 @@ public class UserHomeActivity extends AppCompatActivity {
     UserLogsFragment userLogsFragment = new UserLogsFragment();
 
     public CurrentUserInfo currentUserInfo;
+    private FirebaseFirestore fStore;
+    //private static int numberOfIntrusion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +56,8 @@ public class UserHomeActivity extends AppCompatActivity {
         //getSupportFragmentManager().beginTransaction().replace(R.id.container, userHomeFragment).commit();
 
         // shania
+        fStore = FirebaseFirestore.getInstance();
+
         Fragment homeFragment = UserHomeFragment.newInstance(currentUserInfo.getOrgID());
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, homeFragment, "user_home_fragment");
@@ -60,9 +72,12 @@ public class UserHomeActivity extends AppCompatActivity {
 
         // badge notification alert
         if (bottomNavigationView !=null){
-            BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.notification);
+            /*BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.notification);
             badgeDrawable.setVisible(true);
-            badgeDrawable.setNumber(8);
+            badgeDrawable.setNumber(8);*/
+
+            // shania
+            queryForNumberOfIntrusion(currentUserInfo);
 
             bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
                 @Override
@@ -156,5 +171,34 @@ public class UserHomeActivity extends AppCompatActivity {
         });
 
         popupMenu.show();
+    }
+
+    // firestore get the number of notification
+    private void queryForNumberOfIntrusion(CurrentUserInfo currentUserInfo){
+        String path = currentUserInfo.getOrgID() + "_detection";
+
+        fStore.collection(path)
+                .orderBy("date", Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+
+                            int numberOfIntrusion = task.getResult().size();
+                            setNotificationBadgeDrawble(numberOfIntrusion);
+                            Log.d("=====FIRESTORE_QUERY=====", "COUNT: " + numberOfIntrusion);
+
+                        }else{
+                            Log.d("=====FIRESTORE_QUERR=====", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void setNotificationBadgeDrawble(int count){
+        BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.notification);
+        badgeDrawable.setVisible(true);
+        badgeDrawable.setNumber(count);
     }
 }

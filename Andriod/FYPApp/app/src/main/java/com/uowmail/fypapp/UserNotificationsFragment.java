@@ -23,6 +23,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 public class UserNotificationsFragment extends Fragment implements UserNotificationsAdapter.OnListItemClick{
+
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+
+
+
     private RecyclerView mFirestoreList;
     private FirebaseFirestore firebaseFirestore;
     private UserNotificationsAdapter adapter;
@@ -30,6 +39,25 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
     private FirestoreRecyclerOptions<UserNotificationsModel> options;
     public static ProgressBar progressBar;
 
+    public UserNotificationsFragment() {
+        // Required empty public constructor
+    }
+
+    public static UserNotificationsFragment newInstance(String param1) {
+        UserNotificationsFragment fragment = new UserNotificationsFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            Log.d("===== INSIDE NOTIIFICATIONS FRAG ===== ", mParam1);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,7 +118,7 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
         Log.d("ITEM_CLICK", "Clicked the item: " + position + " and the ID is: " + snapshot.getDocument_id());
         //startActivity(new Intent(getActivity(), LogsDetailActivity.class));
 
-        Fragment fragment = UserIntrusionDetectionDetailsFragment.newInstance(snapshot.getDocument_id());
+        Fragment fragment = UserIntrusionDetectionDetailsFragment.newInstance(snapshot.getDocument_id(), mParam1);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment, "user_intrusion_detecion_details_fragment");
         transaction.addToBackStack(null);

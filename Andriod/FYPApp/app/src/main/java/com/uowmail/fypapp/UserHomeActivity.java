@@ -78,7 +78,12 @@ public class UserHomeActivity extends AppCompatActivity {
                             return true;
 
                         case R.id.notification:
-                            getSupportFragmentManager().beginTransaction().replace(R.id.container, userNotificationsFragment).commit();
+                            //getSupportFragmentManager().beginTransaction().replace(R.id.container, userNotificationsFragment).commit();
+                            Fragment notificationsFragment = UserNotificationsFragment.newInstance(currentUserInfo.getOrgID());
+                            FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
+                            transaction3.replace(R.id.container, notificationsFragment, "user_notifications_fragment");
+                            transaction3.addToBackStack(null);
+                            transaction3.commit();
                             return true;
 
                         case R.id.logs:

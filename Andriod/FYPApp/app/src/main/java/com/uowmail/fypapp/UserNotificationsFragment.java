@@ -22,14 +22,42 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class UserNotificationFragment extends Fragment implements UserNotificationsAdapter.OnListItemClick{
+public class UserNotificationsFragment extends Fragment implements UserNotificationsAdapter.OnListItemClick{
+
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+
+
+
     private RecyclerView mFirestoreList;
     private FirebaseFirestore firebaseFirestore;
     private UserNotificationsAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private FirestoreRecyclerOptions<UserNotificationModel> options;
+    private FirestoreRecyclerOptions<UserNotificationsModel> options;
     public static ProgressBar progressBar;
 
+    public UserNotificationsFragment() {
+        // Required empty public constructor
+    }
+
+    public static UserNotificationsFragment newInstance(String param1) {
+        UserNotificationsFragment fragment = new UserNotificationsFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            Log.d("===== INSIDE NOTIIFICATIONS FRAG ===== ", mParam1);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +66,7 @@ public class UserNotificationFragment extends Fragment implements UserNotificati
          View view = inflater.inflate(R.layout.fragment_user_notification, container, false);
 
         TextView title = (TextView)getActivity().findViewById(R.id.toolbar_title);
-        title.setText("Notification");
+        title.setText("Intrusion Notifications");
 
 
         // Firestore
@@ -53,16 +81,16 @@ public class UserNotificationFragment extends Fragment implements UserNotificati
                 .orderBy("date", Query.Direction.DESCENDING);
 
         // FirebaseRecyclerOptions
-        options = new FirestoreRecyclerOptions.Builder<UserNotificationModel>()
+        options = new FirestoreRecyclerOptions.Builder<UserNotificationsModel>()
                 .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<UserNotificationModel>() {
+                .setQuery(query, new SnapshotParser<UserNotificationsModel>() {
                     @NonNull
                     @Override
-                    public UserNotificationModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        UserNotificationModel userNotificationModel = snapshot.toObject(UserNotificationModel.class);
+                    public UserNotificationsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
+                        UserNotificationsModel userNotificationsModel = snapshot.toObject(UserNotificationsModel.class);
                         String docId = snapshot.getId();
-                        userNotificationModel.setDocument_id(docId);
-                        return userNotificationModel;
+                        userNotificationsModel.setDocument_id(docId);
+                        return userNotificationsModel;
                     }
                 })
                 .build();
@@ -86,14 +114,14 @@ public class UserNotificationFragment extends Fragment implements UserNotificati
 
     // FirestoreRecyclerView onclick to log details
     @Override
-    public void onItemClick(UserNotificationModel snapshot, int position) {
+    public void onItemClick(UserNotificationsModel snapshot, int position) {
         Log.d("ITEM_CLICK", "Clicked the item: " + position + " and the ID is: " + snapshot.getDocument_id());
         //startActivity(new Intent(getActivity(), LogsDetailActivity.class));
 
-/*        Fragment fragment = UserLogDetailsFragment.newInstance(snapshot.getDocument_id());
+        Fragment fragment = UserIntrusionDetectionDetailsFragment.newInstance(snapshot.getDocument_id(), mParam1);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment, "user_log_details_fragment");
+        transaction.replace(R.id.container, fragment, "user_intrusion_detecion_details_fragment");
         transaction.addToBackStack(null);
-        transaction.commit();*/
+        transaction.commit();
     }
 }

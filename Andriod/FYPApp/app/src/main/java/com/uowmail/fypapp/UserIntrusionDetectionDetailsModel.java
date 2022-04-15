@@ -6,7 +6,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class UserDetectionDetailsModel {
+public class UserIntrusionDetectionDetailsModel {
 
     private ArrayList<String> abnormal;
     private Timestamp date;
@@ -18,11 +18,11 @@ public class UserDetectionDetailsModel {
     private Map<String, Float> sys;
     private Map<String, Float> usr;
 
-    public UserDetectionDetailsModel(){}
+    public UserIntrusionDetectionDetailsModel(){}
 
-    public UserDetectionDetailsModel(ArrayList<String> abnormal, Timestamp date, String disk_read,
-                                     String disk_write, Map<String, Float> idling, String net_recv,
-                                     String net_send, Map<String, Float> sys, Map<String, Float> usr) {
+    public UserIntrusionDetectionDetailsModel(ArrayList<String> abnormal, Timestamp date, String disk_read,
+                                              String disk_write, Map<String, Float> idling, String net_recv,
+                                              String net_send, Map<String, Float> sys, Map<String, Float> usr) {
         this.abnormal = abnormal;
         this.date = date;
         this.disk_read = disk_read;

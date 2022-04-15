@@ -1,17 +1,17 @@
 package com.uowmail.fypapp;
 
 
-public class UserNotificationModel {
+public class UserNotificationsModel {
 
     private String document_id;
 
     // for firebase
-    private UserNotificationModel(){
+    private UserNotificationsModel(){
 
     }
 
     // for us to receive data
-    private UserNotificationModel(String document_id){
+    private UserNotificationsModel(String document_id){
         this.document_id = document_id;
 
     }

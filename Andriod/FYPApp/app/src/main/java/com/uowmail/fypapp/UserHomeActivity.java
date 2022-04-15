@@ -25,7 +25,7 @@ public class UserHomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     UserHomeFragment userHomeFragment = new UserHomeFragment();
     AdminHomeFragment adminHomeFragment = new AdminHomeFragment();
-    UserNotificationFragment userNotificationFragment = new UserNotificationFragment();
+    UserNotificationsFragment userNotificationsFragment = new UserNotificationsFragment();
     UserLogsFragment userLogsFragment = new UserLogsFragment();
 
     public CurrentUserInfo currentUserInfo;
@@ -78,7 +78,7 @@ public class UserHomeActivity extends AppCompatActivity {
                             return true;
 
                         case R.id.notification:
-                            getSupportFragmentManager().beginTransaction().replace(R.id.container, userNotificationFragment).commit();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, userNotificationsFragment).commit();
                             return true;
 
                         case R.id.logs:

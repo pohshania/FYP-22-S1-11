@@ -38,7 +38,7 @@ public class AdminHomeFragment extends Fragment {
         rulesButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println("button clicked");
-                startActivity(new Intent(getActivity(), RulesActivity.class));
+                startActivity(new Intent(getActivity(), AdminRulesActivity.class));
             }
         });
 

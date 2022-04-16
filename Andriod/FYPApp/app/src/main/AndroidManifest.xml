@@ -72,10 +72,10 @@
             android:name=".UserSettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".UserRulesActivity"
+            android:name=".UserSettingsRulesActivity"
             android:exported="false" />
         <activity
-            android:name=".RulesActivity"
+            android:name=".AdminRulesActivity"
             android:exported="false" />
         <activity
             android:name=".AdminViewUserLogsActivity"            android:exported="false"

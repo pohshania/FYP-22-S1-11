@@ -5,7 +5,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -63,7 +62,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         //Sets action for rulesButton
         rButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(UserSettingsActivity.this, UserRulesActivity.class));
+                startActivity(new Intent(UserSettingsActivity.this, UserSettingsRulesActivity.class));
 
 //                startActivity( new Intent(UserSettingsActivity.this,
 //                        RulesActivity.class).putExtra(Intent.EXTRA_TEXT, "setInvisible") );

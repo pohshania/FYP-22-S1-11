@@ -30,7 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class RulesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class AdminRulesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     Intent intent = getIntent();
 
@@ -49,7 +49,7 @@ public class RulesActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rules);
+        setContentView(R.layout.activity_admin_rules);
         Button testbutton = findViewById(R.id.test_button);
         testbutton.setOnClickListener(testButtonListener);
 

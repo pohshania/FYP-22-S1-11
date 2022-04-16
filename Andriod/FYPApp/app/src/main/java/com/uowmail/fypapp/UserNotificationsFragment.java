@@ -116,7 +116,6 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
     @Override
     public void onItemClick(UserNotificationsModel snapshot, int position) {
         Log.d("ITEM_CLICK", "Clicked the item: " + position + " and the ID is: " + snapshot.getDocument_id());
-        //startActivity(new Intent(getActivity(), LogsDetailActivity.class));
 
         Fragment fragment = UserIntrusionDetectionDetailsFragment.newInstance(snapshot.getDocument_id(), mParam1);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

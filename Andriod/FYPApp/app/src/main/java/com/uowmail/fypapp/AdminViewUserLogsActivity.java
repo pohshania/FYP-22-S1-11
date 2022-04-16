@@ -4,17 +4,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 public class AdminViewUserLogsActivity extends AppCompatActivity {
 
@@ -105,7 +98,7 @@ public class AdminViewUserLogsActivity extends AppCompatActivity {
     // MJ - Popup window to enter password --------------------------------------------------------------------------------------
     public void createNewContactDialog(){
         dialogBuilder = new AlertDialog.Builder(this);
-        final View passwordPopupView = getLayoutInflater().inflate(R.layout.delete_logs_popup, null);
+        final View passwordPopupView = getLayoutInflater().inflate(R.layout.popup_for_delete_logs, null);
 
         saveChange = (Button) passwordPopupView.findViewById(R.id.saveButton);
         cancelBtn = (Button) passwordPopupView.findViewById(R.id.cancelButton);

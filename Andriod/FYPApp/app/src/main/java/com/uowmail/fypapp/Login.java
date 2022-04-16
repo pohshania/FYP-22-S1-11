@@ -619,7 +619,7 @@ public class Login extends AppCompatActivity {
          */
 
 
-        DocumentReference docRef = db.collection("cities").document("BJ");
+/*        DocumentReference docRef = db.collection("cities").document("BJ");
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -630,7 +630,7 @@ public class Login extends AppCompatActivity {
 
 
             }
-        });
+        });*/
 
 
         // retrieve all documents id

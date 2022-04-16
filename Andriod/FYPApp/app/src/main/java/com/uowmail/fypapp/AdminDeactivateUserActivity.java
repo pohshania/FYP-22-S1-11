@@ -5,7 +5,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -106,7 +105,7 @@ public class AdminDeactivateUserActivity extends AppCompatActivity {
     // MJ - Popup window to enter password --------------------------------------------------------------------------------------
     public void createNewContactDialog(){
         dialogBuilder = new AlertDialog.Builder(this);
-        final View passwordPopupView = getLayoutInflater().inflate(R.layout.pwdpopup, null);
+        final View passwordPopupView = getLayoutInflater().inflate(R.layout.popup_for_password, null);
 
         saveChange = (Button) passwordPopupView.findViewById(R.id.saveButton);
         cancelBtn = (Button) passwordPopupView.findViewById(R.id.cancelButton);

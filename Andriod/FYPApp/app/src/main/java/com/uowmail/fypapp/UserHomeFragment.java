@@ -18,7 +18,9 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -26,6 +28,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -212,8 +215,15 @@ public class UserHomeFragment extends Fragment  {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                // get pie chart
                 getPieChartData(pieChart_cpu, "cpu");
-//                getLineChartDate();
+                // get line graph
+                getLineChartDate("cpu", "sys");
+                getLineChartDate("cpu", "usr");
+                getLineChartDate("network", "net_send");
+                getLineChartDate("network", "net_recv");
+                getLineChartDate("disk", "disk_read");
+                getLineChartDate("disk", "disk_write");
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -381,7 +391,11 @@ public class UserHomeFragment extends Fragment  {
     // MJ - adding Linechart-------------------------------------------------------------------------------
     private void setupLineChart() {
         mChart.setDragEnabled(true);
-        mChart.setScaleEnabled(false);
+        mChart.setScaleEnabled(true);
+        // if disabled, scaling can be done on x- and y-axis separately
+        mChart.setPinchZoom(false);
+        mChart.animateXY(2000, 2000);
+
     }
 
     private void getLineChartDate(String dataType, String dataName){
@@ -486,10 +500,10 @@ public class UserHomeFragment extends Fragment  {
 //                                loadLineChartData(dataNameList.get(0), dateValueList, dataValueList);
 //                                System.out.println(dataType);
                             }
-                            for(int i=0; i<dataNameList.size(); i++)
-                            {
-                                System.out.print(dataNameList.get(i) + "=");
-                            }
+//                            for(int i=0; i<dataNameList.size(); i++)
+//                            {
+//                                System.out.print(dataNameList.get(i) + "=");
+//                            }
                             loadLineChartData(dataNameList.get(0), dateValueList, dataValueList, dataType);
                         }
                         else
@@ -507,12 +521,13 @@ public class UserHomeFragment extends Fragment  {
 
         }
 
+        // set y axis value
         ArrayList<Entry> yValues = new ArrayList<>();
 
         for(int i=0; i<dataVal.size(); i++)
         {
+//            yValues.add(new Entry(dateVal.get(i)+i, dataVal.get(i)));
             yValues.add(new Entry(i, dataVal.get(i)));
-
         }
 //        yValues.add(new Entry(0, 60f));
 //        yValues.add(new Entry(1, 50f));
@@ -549,6 +564,26 @@ public class UserHomeFragment extends Fragment  {
 
         LineData data = new LineData(dataSets);
         mChart.setData(data);
+
+        mChart.invalidate();
+
+
+//        // x axis
+//        final ArrayList<String> xAxisLabel = new ArrayList<>();
+//        for(int i=0; i<dateVal.size(); i++)
+//        {
+//            xAxisLabel.add(String.valueOf(dateVal.get(i)));
+//        }
+//        XAxis xAxis = mChart.getXAxis();
+//        xAxis.setGranularity(1f);
+////        xAxis.setLabelRotationAngle(-90);
+//        xAxis.setValueFormatter(new ValueFormatter() {
+//            @Override
+//            public String getFormattedValue(float value, AxisBase axis) {
+//                return xAxisLabel.get((int) value);
+//            }
+//        });
+
     }
 
 }

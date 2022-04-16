@@ -21,24 +21,35 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.protobuf.StringValue;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -252,7 +263,6 @@ public class UserHomeFragment extends Fragment  {
         l.setDrawInside(false);
         l.setEnabled(true);
     }
-
     private void getPieChartData(PieChart pieChart, final String dataType){
         ArrayList<Float> dataValueList = new ArrayList<Float>();
         ArrayList<String> dataNameList = new ArrayList<String>();
@@ -393,19 +403,21 @@ public class UserHomeFragment extends Fragment  {
         mChart.setDragEnabled(true);
         mChart.setScaleEnabled(true);
         // if disabled, scaling can be done on x- and y-axis separately
-        mChart.setPinchZoom(false);
+        mChart.setTouchEnabled(true);
+        mChart.setPinchZoom(true);
         mChart.animateXY(2000, 2000);
 
     }
 
     private void getLineChartDate(String dataType, String dataName){
-        ArrayList<Long> dateValueList = new ArrayList<Long>();
+        ArrayList<String> dateValueList = new ArrayList<String>();
         ArrayList<Float> dataValueList = new ArrayList<Float>();
         ArrayList<String> dataNameList = new ArrayList<String>();
 
         qs = fStore.collection("UOW_log")
-                .orderBy("date", Query.Direction.DESCENDING)
-                .limit(5).get()
+                .orderBy("date", Query.Direction.ASCENDING)
+                .limitToLast(5)
+                .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -425,7 +437,7 @@ public class UserHomeFragment extends Fragment  {
                                         m = pat.matcher(str);
                                         while(m.find()) {
                                             dataValueList.add(Float.parseFloat(m.group().toString().substring(4)));
-                                            dateValueList.add(Long.valueOf(document.getId()));
+                                            dateValueList.add(String.valueOf(document.getId()));
                                             dataNameList.add("idling");
                                         }
                                     }
@@ -437,7 +449,7 @@ public class UserHomeFragment extends Fragment  {
                                         m = pat.matcher(str);
                                         while(m.find()) {
                                             dataValueList.add(Float.parseFloat(m.group().toString().substring(4)));
-                                            dateValueList.add(Long.valueOf(document.getId()));
+                                            dateValueList.add(String.valueOf(document.getId()));
                                             dataNameList.add("sys");
                                         }
                                     }
@@ -449,7 +461,7 @@ public class UserHomeFragment extends Fragment  {
                                         m = pat.matcher(str);
                                         while(m.find()) {
                                             dataValueList.add(Float.parseFloat(m.group().toString().substring(4)));
-                                            dateValueList.add(Long.valueOf(document.getId()));
+                                            dateValueList.add(String.valueOf(document.getId()));
                                             dataNameList.add("usr");
                                         }
                                     }
@@ -462,7 +474,7 @@ public class UserHomeFragment extends Fragment  {
                                         str = document.get("net_recv").toString();
                                         str = str.trim().substring(0, str.length()-1);
                                         dataValueList.add(Float.parseFloat(str));
-                                        dateValueList.add(Long.valueOf(document.getId()));
+                                        dateValueList.add(String.valueOf(document.getId()));
                                         dataNameList.add("net_recv");
                                     }
                                     // net_send
@@ -470,7 +482,7 @@ public class UserHomeFragment extends Fragment  {
                                         str = document.get("net_send").toString();
                                         str = str.trim().substring(0, str.length()-1);
                                         dataValueList.add(Float.parseFloat(str));
-                                        dateValueList.add(Long.valueOf(document.getId()));
+                                        dateValueList.add(String.valueOf(document.getId()));
                                         dataNameList.add("net_send");
                                     }
                                 }
@@ -482,7 +494,7 @@ public class UserHomeFragment extends Fragment  {
                                         str = document.get("disk_read").toString();
                                         str = str.trim().substring(0, str.length()-1);
                                         dataValueList.add(Float.parseFloat(str));
-                                        dateValueList.add(Long.valueOf(document.getId()));
+                                        dateValueList.add(String.valueOf(document.getId()));
                                         dataNameList.add("disk_read");
                                     }
                                     // disk_write
@@ -490,7 +502,7 @@ public class UserHomeFragment extends Fragment  {
                                         str = document.get("disk_write").toString();
                                         str = str.trim().substring(0, str.length()-1);
                                         dataValueList.add(Float.parseFloat(str));
-                                        dateValueList.add(Long.valueOf(document.getId()));
+                                        dateValueList.add(String.valueOf(document.getId()));
                                         dataNameList.add("disk_write");
                                     }
 
@@ -513,17 +525,38 @@ public class UserHomeFragment extends Fragment  {
                     }
                 });
     }
-    private void loadLineChartData(String info, ArrayList<Long> dateVal , ArrayList<Float> dataVal, String dataType) {
+    private void loadLineChartData(String info, ArrayList<String> dateVal , ArrayList<Float> dataVal, String dataType) {
         for (int i = 0; i < dateVal.size();i++)
         {
             System.out.print(dateVal.get(i) + " ~ ");
             System.out.print(dataVal.get(i) + " ~ ");
 
         }
+        ////-->
+        XAxis xAxis = mChart.getXAxis();
+        YAxis yAxis = mChart.getAxisLeft();
+        XAxis.XAxisPosition position = XAxis.XAxisPosition.TOP;
+        xAxis.setPosition(position);
+        xAxis.setGranularity(1f);
+        xAxis.setValueFormatter(new ClaimsXAxisValueFormatter(dateVal));
+
+//        final ArrayList<String> xAxisLabel = new ArrayList<>();
+//        for(int i=0; i<dateVal.size(); i++)
+//        {
+//            xAxisLabel.add(String.valueOf(dateVal.get(i)));
+//        }
+//
+//        xAxis.setValueFormatter(new ValueFormatter() {
+//            @Override
+//            public String getFormattedValue(float value, AxisBase axis) {
+//                return xAxisLabel.get((int) value);
+//            }
+//        });
+
+        ////-->
 
         // set y axis value
         ArrayList<Entry> yValues = new ArrayList<>();
-
         for(int i=0; i<dataVal.size(); i++)
         {
 //            yValues.add(new Entry(dateVal.get(i)+i, dataVal.get(i)));
@@ -539,7 +572,6 @@ public class UserHomeFragment extends Fragment  {
 
         // set title of the line graph
         LineDataSet set1 = new LineDataSet(yValues, info);
-
         set1.setFillAlpha(110);
         set1.setLineWidth(3f);
         set1.setValueTextSize(10f);
@@ -554,36 +586,60 @@ public class UserHomeFragment extends Fragment  {
             set1.setColors(Color.GREEN);
 
 
-
-//        LineDataSet set2 = new LineDataSet(yValues, "info");
-
-//        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1);
-//        dataSets.add(set2);
 
 
         LineData data = new LineData(dataSets);
         mChart.setData(data);
-
         mChart.invalidate();
 
 
-//        // x axis
-//        final ArrayList<String> xAxisLabel = new ArrayList<>();
-//        for(int i=0; i<dateVal.size(); i++)
-//        {
-//            xAxisLabel.add(String.valueOf(dateVal.get(i)));
-//        }
-//        XAxis xAxis = mChart.getXAxis();
-//        xAxis.setGranularity(1f);
-////        xAxis.setLabelRotationAngle(-90);
-//        xAxis.setValueFormatter(new ValueFormatter() {
-//            @Override
-//            public String getFormattedValue(float value, AxisBase axis) {
-//                return xAxisLabel.get((int) value);
-//            }
-//        });
+
 
     }
 
+    public static long getDateInMilliSeconds(String givenDateString, String format) {
+        String DATE_TIME_FORMAT = format;
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_TIME_FORMAT, Locale.US);
+        long timeInMilliseconds = 1;
+        try {
+            Date mDate = sdf.parse(givenDateString);
+            timeInMilliseconds = mDate.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return timeInMilliseconds;
+    }
+
+    private class ClaimsXAxisValueFormatter extends ValueFormatter {
+        List<String> datesList;
+
+        public ClaimsXAxisValueFormatter(List<String> arrayOfDates) {
+                this.datesList = arrayOfDates;
+        }
+
+
+            @Override
+            public String getAxisLabel(float value, AxisBase axis) {
+/*
+Depends on the position number on the X axis, we need to display the label, Here, this is the logic to convert the float value to integer so that I can get the value from array based on that integer and can convert it to the required value here, month and date as value. This is required for my data to show properly, you can customize according to your needs.
+*/
+                Integer position = Math.round(value);
+                SimpleDateFormat sdf = new SimpleDateFormat("YYYY MMM dd");
+
+                if (value > 1 && value < 2) {
+                    position = 0;
+                } else if (value > 2 && value < 3) {
+                    position = 1;
+                } else if (value > 3 && value < 4) {
+                    position = 2;
+                } else if (value > 4 && value <= 5) {
+                    position = 3;
+                }
+                if (position < datesList.size())
+                    return datesList.get(position);
+//                    return sdf.format(new Date((getDateInMilliSeconds(datesList.get(position), "yyyy-MM-dd"))));
+                return "";
+            }
+        }
 }

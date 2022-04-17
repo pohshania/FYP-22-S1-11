@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
@@ -20,7 +21,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class TestFirestoreQuery {
 
@@ -84,6 +87,7 @@ public class TestFirestoreQuery {
 
 
 
+
             String myDate1 = "2022/04/11 01:00:00";
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             startDate = sdf.parse(myDate1);
@@ -91,6 +95,11 @@ public class TestFirestoreQuery {
             String myDate2 = "2022/04/12";
             SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd");
             endDate = sdf2.parse(myDate2);
+
+
+
+
+
 
 
         } catch (java.text.ParseException e) {
@@ -101,7 +110,7 @@ public class TestFirestoreQuery {
         //Timestamp ts = new Timestamp(date);
 
 
-
+        /*
         fStore.collection("test_queries")
                 //.whereEqualTo("date", ts)
                 .whereGreaterThanOrEqualTo("date", startDate)
@@ -122,6 +131,57 @@ public class TestFirestoreQuery {
                         }
                     }
                 });
+         */
+
+        // add();
+        update();
+
 
     }
+
+    public void add()
+    {
+        Map<String, Object> baseline_test = new HashMap<>();
+        Map<String, Object> weight1 = new HashMap<>();
+        weight1.put("weight", 1);
+        baseline_test.put("usr", weight1);
+
+        fStore.collection("UOW_detection").document("baseline_test")
+                .set(baseline_test)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("=====FIRESTORE_QUERR=====", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("=====FIRESTORE_QUERR=====", "Error writing document", e);
+                    }
+                });
+    }
+
+    public void update()
+    {
+        Map<String, Object> weight1 = new HashMap<>();
+        weight1.put("weight", 4);
+        fStore.collection("UOW_detection").document("baseline_test")
+                .update(
+                        "usr", weight1
+                )
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("=====FIRESTORE_QUERR=====", "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("=====FIRESTORE_QUERR=====", "Error updating document", e);
+                    }
+                });
+    }
+
 }

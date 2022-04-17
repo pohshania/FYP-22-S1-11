@@ -22,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -29,13 +31,22 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-public class AdminRulesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class AdminRulesActivity extends AppCompatActivity {
 
     Intent intent = getIntent();
 
+    // Steven - admin setting rules
+    private EditText cpumaxText;
+    private EditText netrecvText;
+    private EditText netsendText;
+    private EditText diskreadText;
+    private EditText diskwritText;
+
     
-    private Spinner spinner;
+    // private Spinner spinner;
     // MJ - Pop up window to enter pwd --------------------------------------------------------------------------------------
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
@@ -55,16 +66,20 @@ public class AdminRulesActivity extends AppCompatActivity implements AdapterView
 
         db = FirebaseFirestore.getInstance();
 
+        // Steven - set rules edittext
+        cpumaxText = findViewById(R.id.cpumaxText);
+        netrecvText = findViewById(R.id.netrecvText);
+        netsendText = findViewById(R.id.netsendText);
+        diskreadText = findViewById(R.id.diskreadText);
+        diskwritText = findViewById(R.id.diskwritText);
+
         // MJ - set actionBar
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Rules");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        spinner = findViewById(R.id.spinner_systemType);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.systemType, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
 
         // MJ - btn to save rules
         Button submitBtn = (Button) findViewById(R.id.submitButton);
@@ -88,52 +103,6 @@ public class AdminRulesActivity extends AppCompatActivity implements AdapterView
             saveChange.setVisibility(View.GONE);
         }
 
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.ruleContainer);
-        // remove all the views first
-        linearLayout.removeAllViews();
-        // save rules of email system into array
-        String[] ruleArray = getResources().getStringArray(R.array.rules_email);
-
-        for (int count = 0; count < ruleArray.length; count++) {
-            // create checkboxes for rules
-            CheckBox checkBox = new CheckBox(this);
-            checkBox.setText(ruleArray[count]);
-//                    checkBox.onClickListeners(onCheckboxClicked);
-            checkBox.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            linearLayout.addView(checkBox);
-
-//                  add the text box here
-            EditText editText = new EditText(this);
-            editText.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            editText.getLayoutParams().width = 300;
-            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-            linearLayout.addView(editText);
-
-
-            // MJ - if user opens rules page
-            if (text!=null)
-            {
-                // disable checkbox
-                checkBox.setEnabled(false);
-                checkBox.setTextColor(Color.parseColor("#000000"));
-                // remove checkbox icon
-//                        checkBox.setButtonDrawable(null);
-
-
-                // disable spinner
-//                        spinner.setEnabled(false);
-//                        spinner.setTextColor(Color.parseColor("#000000"));
-            }
-            checkBox.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    // define save button here!
-                    onCheckboxClicked(v);
-                }
-            });
-
-        }
-
     }
 
     private final View.OnClickListener testButtonListener =
@@ -141,7 +110,7 @@ public class AdminRulesActivity extends AppCompatActivity implements AdapterView
                 @Override
                 public void onClick(View v)
                 {
-                    getRulesList();
+                    updateRules();
                 }
             };
 
@@ -156,7 +125,7 @@ public class AdminRulesActivity extends AppCompatActivity implements AdapterView
         return super.onOptionsItemSelected(item);
     }
 
-
+    /*
     @SuppressLint("ResourceAsColor")
     @Override
     // MJ - Dropdown box for System type --------------------------------------------------------------------------------------
@@ -245,6 +214,7 @@ public class AdminRulesActivity extends AppCompatActivity implements AdapterView
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+    */
 
     // MJ - Popup window to enter password --------------------------------------------------------------------------------------
     public void createNewContactDialog(){
@@ -321,30 +291,75 @@ public class AdminRulesActivity extends AppCompatActivity implements AdapterView
     }
 
 
-    public String[] getRulesList()
+    public void updateRules()
     {
+        Map<String, Object> cpumax = new HashMap<>();
+        Map<String, Object> netrecv = new HashMap<>();
+        Map<String, Object> netsend = new HashMap<>();
+        Map<String, Object> diskread = new HashMap<>();
+        Map<String, Object> diskwrit = new HashMap<>();
+        String cpumaxvalue = cpumaxText.getText().toString();
+        String netrecvvalue = netrecvText.getText().toString();
+        String netsendvalue = netsendText.getText().toString();
+        String diskreadvalue = diskreadText.getText().toString();
+        String diskwritvalue = diskwritText.getText().toString();
 
-        DocumentReference docRef = db.collection("UOW_detection").document("rules");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        Log.d("RULES", "Rules data: " + doc.getData());
-                    }
-                    else {
-                        Log.d("RULES", "No such document");
-                    }
-                }
-                else {
-                    Log.d("RULES", "get failed with ", task.getException());
-                }
-            }
-        });
+        if (cpumaxvalue.equals(""))
+            cpumax.put("enabled", false);
+        else {
+            cpumax.put("enabled", true);
+            cpumax.put("maximum", Float.parseFloat(cpumaxvalue));
+        }
 
-        String[] a = {"123"};
-        return a;
+        if (netrecvvalue.equals(""))
+            netrecv.put("enabled", false);
+        else {
+            netrecv.put("enabled", true);
+            netrecv.put("value", String.format("%.2f M", Float.parseFloat(netrecvvalue)));
+        }
+        if (netsendvalue.equals(""))
+            netsend.put("enabled", false);
+        else {
+            netsend.put("enabled", true);
+            netsend.put("value", String.format("%.2f M", Float.parseFloat(netsendvalue)));
+        }
+
+        if (diskreadvalue.equals(""))
+            diskread.put("enabled", false);
+        else {
+            diskread.put("enabled", true);
+            diskread.put("value", String.format("%.2f M", Float.parseFloat(diskreadvalue)));
+        }
+        if (diskwritvalue.equals(""))
+            diskwrit.put("enabled", false);
+        else {
+            diskwrit.put("enabled", true);
+            diskwrit.put("value", String.format("%.2f M", Float.parseFloat(diskwritvalue)));
+        }
+
+        db.collection("UOW_detection").document("rules")
+                .update(
+                        "CPU", cpumax,
+                        "disk_read", diskread,
+                        "disk_writ", diskwrit,
+                        "net_recv", netrecv,
+                        "net_send", netsend
+                )
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("=====FIRESTORE_QUERR=====", "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("=====FIRESTORE_QUERR=====", "Error updating document", e);
+                    }
+                });
+
     }
+
+
 
 }

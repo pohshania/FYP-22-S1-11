@@ -10,32 +10,101 @@
         android:layout_height="match_parent"
         tools:context=".AdminRulesActivity">
 
-        <Spinner
-            android:id="@+id/spinner_systemType"
-            android:layout_width="345dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:contentDescription="System type"
-            android:spinnerMode="dropdown"
-            android:visibility="invisible"
+        <EditText
+            android:id="@+id/diskreadText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="28dp"
+            android:ems="10"
+            android:hint="Leave blank to disable"
+            android:inputType="numberSigned|numberDecimal"
+            android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toBottomOf="@+id/diskwritText" />
 
-        <LinearLayout
-            android:id="@+id/ruleContainer"
-            android:layout_width="343dp"
-            android:layout_height="414dp"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="4dp"
-            android:orientation="vertical"
-            android:padding="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
+        <TextView
+            android:id="@+id/diskreadLabel"
+            android:layout_width="102dp"
+            android:layout_height="30dp"
+            android:text="Disk read"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/diskreadText"
+            app:layout_constraintEnd_toStartOf="@+id/diskreadText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_systemType"
-            tools:ignore="MissingConstraints"></LinearLayout>
+            app:layout_constraintTop_toTopOf="@+id/diskreadText" />
+
+        <EditText
+            android:id="@+id/diskwritText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="28dp"
+            android:ems="10"
+            android:hint="Leave blank to disable"
+            android:inputType="numberSigned|numberDecimal"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/netsendText" />
+
+        <TextView
+            android:id="@+id/diskwritLabel"
+            android:layout_width="102dp"
+            android:layout_height="30dp"
+            android:text="Disk write"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/diskwritText"
+            app:layout_constraintEnd_toStartOf="@+id/diskwritText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/diskwritText" />
+
+        <EditText
+            android:id="@+id/netsendText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="28dp"
+            android:ems="10"
+            android:hint="Leave blank to disable"
+            android:inputType="numberSigned|numberDecimal"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/netrecvText" />
+
+        <TextView
+            android:id="@+id/netsendLabel"
+            android:layout_width="98dp"
+            android:layout_height="54dp"
+            android:text="Network send"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/netsendText"
+            app:layout_constraintEnd_toStartOf="@+id/netsendText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/netsendText" />
+
+        <TextView
+            android:id="@+id/cpuLabel"
+            android:layout_width="102dp"
+            android:layout_height="30dp"
+            android:text="CPU usage"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/cpumaxText"
+            app:layout_constraintEnd_toStartOf="@+id/cpumaxText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cpumaxText" />
+
+        <EditText
+            android:id="@+id/cpumaxText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="28dp"
+            android:ems="10"
+            android:hint="Leave blank to disable"
+            android:inputType="numberSigned|numberDecimal"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/submitButton"
@@ -43,21 +112,48 @@
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="60dp"
             android:text="Save Change"
-            app:layout_constraintTop_toBottomOf="@+id/ruleContainer"
-            tools:layout_editor_absoluteX="16dp"
-            android:visibility="visible"/>
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/test_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="160dp"
+            android:layout_marginBottom="40dp"
             android:text="test"
+            app:layout_constraintBottom_toTopOf="@+id/submitButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ruleContainer" />
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/diskreadText"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <EditText
+            android:id="@+id/netrecvText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="28dp"
+            android:ems="10"
+            android:hint="Leave blank to disable"
+            android:inputType="numberSigned|numberDecimal"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cpumaxText" />
+
+        <TextView
+            android:id="@+id/netrecvLabel"
+            android:layout_width="98dp"
+            android:layout_height="54dp"
+            android:text="Network receive"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/netrecvText"
+            app:layout_constraintEnd_toStartOf="@+id/netrecvText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/netrecvText" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

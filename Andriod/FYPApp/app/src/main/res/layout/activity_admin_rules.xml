@@ -107,7 +107,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/submitButton"
+            android:id="@+id/adminRules_submit_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:text="test"
-            app:layout_constraintBottom_toTopOf="@+id/submitButton"
+            app:layout_constraintBottom_toTopOf="@+id/adminRules_submit_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"

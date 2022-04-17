@@ -102,7 +102,7 @@ public class AdminDeactivateUserActivity extends AppCompatActivity {
 
 
 
-    // MJ - Popup window to enter password --------------------------------------------------------------------------------------
+    // popup window to enter password --------------------------------------------------------------------------------------
     public void createNewContactDialog(){
         dialogBuilder = new AlertDialog.Builder(this);
         final View passwordPopupView = getLayoutInflater().inflate(R.layout.popup_for_password, null);

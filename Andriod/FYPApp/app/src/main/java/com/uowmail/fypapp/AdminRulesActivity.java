@@ -4,29 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
+import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.DataOutputStream;
@@ -55,6 +48,11 @@ public class AdminRulesActivity extends AppCompatActivity {
     private EditText currentAdminEmai;
     private FirebaseFirestore db;
 
+    // shania
+    private FirebaseAuth fAuth;
+    private EditText userEmail, adminPassword;
+    private String email, currAdminEmail, currAdminPassword;
+
 
 
     @Override
@@ -65,6 +63,7 @@ public class AdminRulesActivity extends AppCompatActivity {
         testbutton.setOnClickListener(testButtonListener);
 
         db = FirebaseFirestore.getInstance();
+        fAuth = FirebaseAuth.getInstance();
 
         // Steven - set rules edittext
         cpumaxText = findViewById(R.id.cpumaxText);
@@ -82,7 +81,7 @@ public class AdminRulesActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // MJ - btn to save rules
-        Button submitBtn = (Button) findViewById(R.id.submitButton);
+        Button submitBtn = (Button) findViewById(R.id.adminRules_submit_btn);
         submitBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -99,7 +98,7 @@ public class AdminRulesActivity extends AppCompatActivity {
         // use the text in a TextView
         if (text != null) {
             // delete save button in rulesActivity
-            saveChange = (Button) findViewById(R.id.submitButton);
+            saveChange = (Button) findViewById(R.id.adminRules_submit_btn);
             saveChange.setVisibility(View.GONE);
         }
 
@@ -216,7 +215,7 @@ public class AdminRulesActivity extends AppCompatActivity {
     }
     */
 
-    // MJ - Popup window to enter password --------------------------------------------------------------------------------------
+/*    // MJ - Popup window to enter password --------------------------------------------------------------------------------------
     public void createNewContactDialog(){
         dialogBuilder = new AlertDialog.Builder(this);
         final View passwordPopupView = getLayoutInflater().inflate(R.layout.popup_for_password, null);
@@ -237,7 +236,7 @@ public class AdminRulesActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-    }
+    }*/
 
 
 // save statusof check box
@@ -361,5 +360,54 @@ public class AdminRulesActivity extends AppCompatActivity {
     }
 
 
+    // popup window to enter password --------------------------------------------------------------------------------------
+    public void createNewContactDialog(){
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View passwordPopupView = getLayoutInflater().inflate(R.layout.popup_for_password, null);
+
+        saveChange = (Button) passwordPopupView.findViewById(R.id.saveButton);
+        cancelBtn = (Button) passwordPopupView.findViewById(R.id.cancelButton);
+
+        dialogBuilder.setView(passwordPopupView);
+        dialog = dialogBuilder.create();
+        dialog.show();
+
+
+        cancelBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // define save button here!
+                dialog.dismiss();
+            }
+        });
+
+        // authentication
+        saveChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                currAdminEmail = fAuth.getCurrentUser().getEmail();
+
+                adminPassword = (EditText) dialog.findViewById(R.id.admin_password);
+                currAdminPassword = adminPassword.getText().toString().trim();
+
+                Log.d("ADMIN INFO", currAdminEmail + currAdminPassword);
+
+                fAuth.signInWithEmailAndPassword(currAdminEmail, currAdminPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(AdminRulesActivity.this, "Correct Admin password! Rules are updated.", Toast.LENGTH_SHORT).show();
+                        updateRules();
+                        dialog.dismiss();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AdminRulesActivity.this, "Incorrect Admin password." + e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
 
 }

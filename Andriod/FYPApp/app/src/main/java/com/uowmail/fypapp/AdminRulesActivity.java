@@ -303,37 +303,47 @@ public class AdminRulesActivity extends AppCompatActivity {
         String diskreadvalue = diskreadText.getText().toString();
         String diskwritvalue = diskwritText.getText().toString();
 
-        if (cpumaxvalue.equals(""))
+        if (cpumaxvalue.equals("")) {
             cpumax.put("enabled", false);
+            cpumax.put("value", 0);
+        }
         else {
             cpumax.put("enabled", true);
             cpumax.put("maximum", Float.parseFloat(cpumaxvalue));
         }
 
-        if (netrecvvalue.equals(""))
+        if (netrecvvalue.equals("")) {
             netrecv.put("enabled", false);
+            netrecv.put("value", 0);
+        }
         else {
             netrecv.put("enabled", true);
-            netrecv.put("value", String.format("%.2f M", Float.parseFloat(netrecvvalue)));
+            netrecv.put("value", Float.parseFloat(netrecvvalue));
         }
-        if (netsendvalue.equals(""))
+        if (netsendvalue.equals("")) {
             netsend.put("enabled", false);
+            netsend.put("value", 0);
+        }
         else {
             netsend.put("enabled", true);
-            netsend.put("value", String.format("%.2f M", Float.parseFloat(netsendvalue)));
+            netsend.put("value", Float.parseFloat(netsendvalue));
         }
 
-        if (diskreadvalue.equals(""))
+        if (diskreadvalue.equals("")) {
             diskread.put("enabled", false);
+            diskread.put("value", 0);
+        }
         else {
             diskread.put("enabled", true);
-            diskread.put("value", String.format("%.2f M", Float.parseFloat(diskreadvalue)));
+            diskread.put("value", Float.parseFloat(diskreadvalue));
         }
-        if (diskwritvalue.equals(""))
+        if (diskwritvalue.equals("")) {
             diskwrit.put("enabled", false);
+            diskwrit.put("value", 0);
+        }
         else {
             diskwrit.put("enabled", true);
-            diskwrit.put("value", String.format("%.2f M", Float.parseFloat(diskwritvalue)));
+            diskwrit.put("value", Float.parseFloat(diskwritvalue));
         }
 
         db.collection("UOW_detection").document("rules")

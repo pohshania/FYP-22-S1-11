@@ -25,9 +25,9 @@
 
         <TextView
             android:id="@+id/diskreadLabel"
-            android:layout_width="102dp"
-            android:layout_height="30dp"
-            android:text="Disk read"
+            android:layout_width="114dp"
+            android:layout_height="54dp"
+            android:text="Disk read (MB)"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/diskreadText"
             app:layout_constraintEnd_toStartOf="@+id/diskreadText"
@@ -49,9 +49,9 @@
 
         <TextView
             android:id="@+id/diskwritLabel"
-            android:layout_width="102dp"
-            android:layout_height="30dp"
-            android:text="Disk write"
+            android:layout_width="114dp"
+            android:layout_height="54dp"
+            android:text="Disk write (MB)"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/diskwritText"
             app:layout_constraintEnd_toStartOf="@+id/diskwritText"
@@ -73,9 +73,9 @@
 
         <TextView
             android:id="@+id/netsendLabel"
-            android:layout_width="98dp"
+            android:layout_width="114dp"
             android:layout_height="54dp"
-            android:text="Network send"
+            android:text="Network send (MB)"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/netsendText"
             app:layout_constraintEnd_toStartOf="@+id/netsendText"
@@ -84,9 +84,9 @@
 
         <TextView
             android:id="@+id/cpuLabel"
-            android:layout_width="102dp"
-            android:layout_height="30dp"
-            android:text="CPU usage"
+            android:layout_width="114dp"
+            android:layout_height="54dp"
+            android:text="CPU usage (%)"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/cpumaxText"
             app:layout_constraintEnd_toStartOf="@+id/cpumaxText"
@@ -146,9 +146,9 @@
 
         <TextView
             android:id="@+id/netrecvLabel"
-            android:layout_width="98dp"
+            android:layout_width="114dp"
             android:layout_height="54dp"
-            android:text="Network receive"
+            android:text="Network receive (MB)"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/netrecvText"
             app:layout_constraintEnd_toStartOf="@+id/netrecvText"

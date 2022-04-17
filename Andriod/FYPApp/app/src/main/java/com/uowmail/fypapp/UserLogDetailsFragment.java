@@ -46,6 +46,7 @@ public class UserLogDetailsFragment extends Fragment {
     private TextView disk_read;
     private TextView disk_write;
     private TextView idling, idling_avg, idling_min, idling_max;
+    private TextView cpu_usage;
     private TextView net_recv;
     private TextView net_send;
     private TextView sys, sys_avg, sys_min, sys_max;
@@ -58,9 +59,11 @@ public class UserLogDetailsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
+    private String mParam2;
 
     public UserLogDetailsFragment() {
         // Required empty public constructor
@@ -74,10 +77,11 @@ public class UserLogDetailsFragment extends Fragment {
      * @return A new instance of fragment UserLogDetailsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static UserLogDetailsFragment newInstance(String param1) {
+    public static UserLogDetailsFragment newInstance(String param1, String param2) {
         UserLogDetailsFragment fragment = new UserLogDetailsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -87,6 +91,7 @@ public class UserLogDetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -111,6 +116,7 @@ public class UserLogDetailsFragment extends Fragment {
         idling_avg = view.findViewById(R.id.userLogDetails_idling_avg);
         idling_min = view.findViewById(R.id.userLogDetails_idling_min);
         idling_max = view.findViewById(R.id.userLogDetails_idling_max);
+        cpu_usage  = view.findViewById(R.id.userLogsDetails_cpu_usage);
         net_recv   = view.findViewById(R.id.userLogDetails_netRecv);
         net_send   = view.findViewById(R.id.userLogDetails_netSend);
         sys        = view.findViewById(R.id.userLogDetails_sys);
@@ -127,7 +133,8 @@ public class UserLogDetailsFragment extends Fragment {
 
         // query
         db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("UOW_log").document(mParam1);
+        String path = mParam2 + "_log";
+        DocumentReference docRef = db.collection(path).document(mParam1);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -145,6 +152,10 @@ public class UserLogDetailsFragment extends Fragment {
                 idling_avg.setText("Avg: " + logDetails.getIdling().get("avg"));
                 idling_min.setText("Min: " + logDetails.getIdling().get("min"));
                 idling_max.setText("Max: " + logDetails.getIdling().get("max"));
+
+                float usage = 100 - logDetails.getIdling().get("min");
+                cpu_usage.setText("CPU usage: " + String.valueOf(usage));
+
                 net_recv.setText("Network recieve: " + logDetails.getNet_recv());
                 net_send.setText("Network send: " + logDetails.getNet_send());
                 sys.setText("System:");

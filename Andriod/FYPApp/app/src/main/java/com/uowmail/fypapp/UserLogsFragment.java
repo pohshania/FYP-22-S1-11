@@ -61,6 +61,7 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
     public static TextView noDataFoundText;
     private TextView filterDateText, filterStartTimeText, filterEndTimeText, filterDateTimeSummaryText;
     private int startTimeHour, startTimeMinute, endTimeHour, endTimeMinute;
+    private static int counter = 0;
 
     public UserLogsFragment() {
         // Required empty public constructor
@@ -309,11 +310,14 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         Log.d("ITEM_CLICK", "Clicked the item: " + position + " and the ID is: " + snapshot.getDocument_id());
         //startActivity(new Intent(getActivity(), LogsDetailActivity.class));
 
-        Fragment fragment = UserLogDetailsFragment.newInstance(snapshot.getDocument_id());
+        Fragment fragment = UserLogDetailsFragment.newInstance(snapshot.getDocument_id(), mParam1);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment, "user_log_details_fragment");
         transaction.addToBackStack(null);
         transaction.commit();
+
+        counter++;
+        Log.d("======== ITEM COUNTER ========", String.valueOf(counter));
     }
 
     // display ALL the logs from firestore

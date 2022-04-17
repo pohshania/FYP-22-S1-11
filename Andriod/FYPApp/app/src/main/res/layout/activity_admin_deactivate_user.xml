@@ -10,19 +10,19 @@
         android:id="@+id/deactivateUser_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
         android:text="Enter the user's email below to deactivate it:"
+        android:textColor="@color/black"
         android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.304" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/deactivateUser_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:background="#e6f0ff"
         android:ems="10"
         android:hint="Email"
@@ -31,20 +31,22 @@
         android:paddingLeft="10dp"
         android:textColor="@color/black"
         android:textColorHint="#33691E"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/deactivateUser_title"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="@+id/deactivateUser_title"
         app:layout_constraintTop_toBottomOf="@+id/deactivateUser_title" />
 
     <Button
         android:id="@+id/deactivateUser_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
         android:text="Deactivate"
-        android:layout_marginTop="50dp"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="379dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deactivateUser_email" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/deactivateUser_email"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="@+id/deactivateUser_email"
+        app:layout_constraintTop_toBottomOf="@+id/deactivateUser_email"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

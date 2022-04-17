@@ -13,7 +13,7 @@
         android:id="@+id/userLogDetails_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="68dp"
         android:background="#D79334"
         android:text="@string/hello_blank_fragment"
         android:textColor="@color/black"
@@ -41,10 +41,10 @@
         android:id="@+id/userLogDetails_idling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="#000080"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/userLogDetails_diskWrite"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/userLogDetails_diskWrite"
         app:layout_constraintTop_toBottomOf="@+id/userLogDetails_diskWrite" />
@@ -172,7 +172,7 @@
         android:id="@+id/userLogDetails_sys"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:text="TextView"
         android:textColor="#000080"
         app:layout_constraintStart_toStartOf="@+id/userLogDetails_netSend"
@@ -194,7 +194,7 @@
         android:id="@+id/userLogDetails_diskWrite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="#000080"
         app:layout_constraintEnd_toEndOf="parent"
@@ -206,19 +206,19 @@
         android:id="@+id/userLogDetails_netRecv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:text="TextView"
         android:textColor="#000080"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/userLogsDetails_cpu_usage"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/userLogDetails_idling"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_idling" />
+        app:layout_constraintStart_toStartOf="@+id/userLogsDetails_cpu_usage"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <TextView
         android:id="@+id/userLogDetails_diskRead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:text="TextView"
         android:textColor="#000080"
         app:layout_constraintEnd_toEndOf="parent"
@@ -237,15 +237,13 @@
         app:layout_constraintTop_toBottomOf="@+id/userLogDetails_netSend" />
 
     <View
+        android:id="@+id/view2"
         android:layout_width="422dp"
         android:layout_height="10dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toTopOf="@+id/userLogDetails_netRecv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_idling" />
+        app:layout_constraintTop_toBottomOf="@+id/userLogsDetails_cpu_usage"
+        tools:layout_editor_absoluteX="-6dp" />
 
     <View
         android:id="@+id/view"
@@ -256,7 +254,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_date" />
+        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_date"
+        app:layout_constraintVertical_bias="0.333" />
 
     <Button
         android:id="@+id/userLogsDetails_download"
@@ -267,8 +266,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userLogsDetails_cpu_usage"
-        app:layout_constraintVertical_bias="0.525" />
+        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_usr"
+        app:layout_constraintVertical_bias="0.178" />
 
     <TextView
         android:id="@+id/userLogsDetails_cpu_usage"
@@ -277,9 +276,9 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="#000080"
-        app:layout_constraintEnd_toEndOf="@+id/userLogDetails_usr"
+        app:layout_constraintEnd_toEndOf="@+id/userLogDetails_idling"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/userLogDetails_usr"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_usr" />
+        app:layout_constraintStart_toStartOf="@+id/userLogDetails_idling"
+        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_idling" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

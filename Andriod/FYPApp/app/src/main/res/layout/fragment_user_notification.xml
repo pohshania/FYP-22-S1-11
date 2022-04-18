@@ -20,6 +20,14 @@
             android:layout_gravity="center" />
 
         <TextView
+            android:id="@+id/userNotifications_loadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Retriving data..."
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"/>
+
+        <TextView
             android:id="@+id/userNotifications_noDataText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

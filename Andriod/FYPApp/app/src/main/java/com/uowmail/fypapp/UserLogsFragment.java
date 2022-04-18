@@ -227,6 +227,7 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         Log.d("===== FORMAT DATE + END TIME ======", selectedDate + " " + selectedEndTime);
 
         Date endDateTime = new Date();
+        Date endDateTime2 = new Date();
         String output = null;
 
         String myDate2 = selectedDate + " " + selectedEndTime; // -> eg. 2022/04/14 12:00 AM
@@ -240,15 +241,25 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
 
         try {
             //Converting the input String to Date
-            endDateTime = df.parse(myDate2);
+            //endDateTime = df.parse(myDate2);
             //Changing the format of date and storing it in String
-            output = outputformat.format(endDateTime);
+            //output = outputformat.format(endDateTime);
+
+            endDateTime = df.parse(myDate2);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(endDateTime);
+            cal.add(Calendar.MINUTE, 1);
+            String newTime = df.format(cal.getTime());
+            endDateTime2 = df.parse(newTime);
+            output = outputformat.format(endDateTime2);
+
+
             Log.d("TEST DATE OUTPUT", output);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return endDateTime;
+        return endDateTime2;
     }
 
     private boolean checkFilterEmpty(){
@@ -418,6 +429,9 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
 
     // display CHOOSEN DATE & TIME logs from firestore
     private void firestoreQueryLogsByDateTime(Date startDateTime, Date endDateTime){
+
+        Log.d("======firestoreQueryLogsByDateTime======", startDateTime.toString() + "   " + endDateTime.toString());
+
         // Query from firebase
         String path = mParam1 + "_log";
         Query query = firebaseFirestore.collection(path) // TODO: filter by organisation ID

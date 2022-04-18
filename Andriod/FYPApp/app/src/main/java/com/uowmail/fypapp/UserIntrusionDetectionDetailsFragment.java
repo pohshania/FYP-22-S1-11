@@ -147,8 +147,9 @@ public class UserIntrusionDetectionDetailsFragment extends Fragment {
                 //Date d = logDetails.getTimestamp().toDate();
                 abnormal.setText("Abnormal: " + intrusionDetails.getAbnormal());
                 abnormal.setTextColor(Color.parseColor("#FF0000"));
+
+
                 disk_read.setText("Disk Read: " + intrusionDetails.getDisk_read());
-                disk_read.setTextColor(Color.parseColor("#FF0000"));
                 disk_write.setText("Disk Write: " + intrusionDetails.getDisk_write());
                 idling.setText("Idling:");
                 idling_avg.setText("Avg: " + intrusionDetails.getIdling().get("avg"));
@@ -156,7 +157,6 @@ public class UserIntrusionDetectionDetailsFragment extends Fragment {
                 idling_max.setText("Max: " + intrusionDetails.getIdling().get("max"));
                 float usage = 100 - intrusionDetails.getIdling().get("min");
                 cpu_usage.setText("CPU usage: " + usage);
-                cpu_usage.setTextColor(Color.parseColor("#FF0000"));
                 net_recv.setText("Network recieve: " + intrusionDetails.getNet_recv());
                 net_send.setText("Network send: " + intrusionDetails.getNet_send());
                 sys.setText("System:");
@@ -169,6 +169,23 @@ public class UserIntrusionDetectionDetailsFragment extends Fragment {
                 usr_max.setText("Max: " + intrusionDetails.getUsr().get("max"));
 
 
+                // higlight the abnormal activity in red
+                int len = intrusionDetails.getAbnormal().size();
+                for(int i = 0; i < len; i++){
+                    String abnormalType = intrusionDetails.getAbnormal().get(i);
+                    Log.d("===== ABNORMAL_TYPE =====", abnormalType);
+
+                    if(abnormalType.equals("CPU"))
+                        cpu_usage.setTextColor(Color.parseColor("#FF0000"));
+                    if(abnormalType.equals("disk_read"))
+                        disk_read.setTextColor(Color.parseColor("#FF0000"));
+                    if(abnormalType.equals("disk_writ"))
+                        disk_write.setTextColor(Color.parseColor("#FF0000"));
+                    if(abnormalType.equals("net_recv"))
+                        net_recv.setTextColor(Color.parseColor("#FF0000"));
+                    if(abnormalType.equals("net_send"))
+                        net_send.setTextColor(Color.parseColor("#FF0000"));
+                }
             }
         });
 

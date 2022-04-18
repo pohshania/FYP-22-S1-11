@@ -29,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 //import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.w3c.dom.Text;
@@ -61,6 +62,11 @@ public class UserHomeActivity extends AppCompatActivity {
 
         // shania
         fStore = FirebaseFirestore.getInstance();
+
+        // firebase cloud function
+        FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
+        firebaseMessaging.subscribeToTopic("intrusion_detected");
+
 
         Fragment homeFragment = UserHomeFragment.newInstance(currentUserInfo.getOrgID());
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

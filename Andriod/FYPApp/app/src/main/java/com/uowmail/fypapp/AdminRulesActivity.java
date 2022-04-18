@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -400,6 +401,11 @@ public class AdminRulesActivity extends AppCompatActivity {
 
                 adminPassword = (EditText) dialog.findViewById(R.id.admin_password);
                 currAdminPassword = adminPassword.getText().toString().trim();
+
+                if(TextUtils.isEmpty(currAdminPassword)){
+                    adminPassword.setError("Password is required!");
+                    return;
+                }
 
                 Log.d("ADMIN INFO", currAdminEmail + currAdminPassword);
 

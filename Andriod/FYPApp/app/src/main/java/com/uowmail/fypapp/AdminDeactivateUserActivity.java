@@ -133,6 +133,11 @@ public class AdminDeactivateUserActivity extends AppCompatActivity {
                 adminPassword = (EditText) dialog.findViewById(R.id.admin_password);
                 currAdminPassword = adminPassword.getText().toString().trim();
 
+                if(TextUtils.isEmpty(currAdminPassword)){
+                    adminPassword.setError("Password is required!");
+                    return;
+                }
+
                 Log.d("ADMIN INFO", currAdminEmail + currAdminPassword);
 
 

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.github.mikephil.charting.charts.LineChart;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,8 +32,10 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
     String oneLine;
     String cpu, net_send, net_recv, disk_read, disk_write;
     private TextView tv_cpu, tv_nets, tv_netr, tv_diskr, tv_diskw, tv_net, tv_disk;
-    // todo - try to add text view dynamically
-//    LinearLayout linearLayout = (LinearLayout) findViewById(R.id.ll_example);
+    // todo - trying to add org id dynamically
+    public CurrentUserInfo currentUserInfo;
+
+
 
 
 
@@ -46,7 +49,25 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         db = FirebaseFirestore.getInstance();
-        getRulesList();
+
+
+        // todo - find org name
+        // pass current user's info
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            currentUserInfo = (CurrentUserInfo) extras.getSerializable("userInfo");
+            Log.d("====CURRENT USER'S ORG ID====", currentUserInfo.getOrgID());
+//            if (currentUserInfo == null)
+//                System.out.println("===================================the current org id is NULL ====");
+        }
+        else
+            System.out.println("===================================the extras is NULL ====");
+
+
+        if (currentUserInfo != null)
+            getRulesList(currentUserInfo);
+        else
+            System.out.println("===================================the \"currentUserInfo\" is NULL ====");
 
         tv_cpu       = findViewById(R.id.rule_cpu);
         tv_net       = findViewById(R.id.rule_network);
@@ -55,7 +76,7 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
 //        tv_netr      = findViewById(R.id.rule_network);
 //        tv_diskr     = findViewById(R.id.rule_disk);
 //        tv_diskw     = findViewById(R.id.rule_disk);
-
+// shania
 
 
 //        //Getting the instance of Spinner and applying OnItemSelectedListener on it
@@ -88,9 +109,12 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
 //        return super.onOptionsItemSelected(item);
     }
 
-    public void getRulesList()
+    public void getRulesList(CurrentUserInfo currentUserInfo)
     {
-        DocumentReference docRef = db.collection("UOW_detection").document("rules");
+//        String path = currentUserInfo.getOrgID() + "_detection";
+        String path = "UOW_detection";
+
+        DocumentReference docRef = db.collection(path).document("rules");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -136,8 +160,6 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
                 displayRule(net_send);
                 displayRule(disk_read);
                 displayRule(disk_write);
-
-
             }
         });
     }

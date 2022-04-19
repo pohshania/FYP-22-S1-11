@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -39,7 +40,7 @@ public class AdminDeleteLogsAdapter extends FirestoreRecyclerAdapter<AdminDelete
         //holder.doc_id.setText(model.getDocument_id());
         //holder.doc_id.setText("HEEHEE");
         holder.doc_id.setText(formatDocumentID(model.getDocument_id()));
-        Log.d("POSITION","Position: " + position);
+        //Log.d("POSITION","Position: " + position);
 
     }
 
@@ -89,6 +90,10 @@ public class AdminDeleteLogsAdapter extends FirestoreRecyclerAdapter<AdminDelete
 
     }
 
+    public void deleteItem(int position){
+        getSnapshots().getSnapshot(position).getReference().delete();
+    }
+
     @Override
     public void updateOptions(@NonNull FirestoreRecyclerOptions<AdminDeleteLogsModel> options) {
         super.updateOptions(options);
@@ -106,7 +111,6 @@ public class AdminDeleteLogsAdapter extends FirestoreRecyclerAdapter<AdminDelete
             super(itemView);
 
             doc_id = itemView.findViewById(R.id.adminDeleteLogs_recyclerView_docID);
-
 
             itemView.setOnClickListener(this);
         }

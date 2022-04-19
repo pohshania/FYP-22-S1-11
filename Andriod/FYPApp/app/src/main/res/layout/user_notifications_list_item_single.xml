@@ -8,7 +8,7 @@
     android:layout_marginEnd="8dp"
     app:cardBackgroundColor="#FFFFE8">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp" >
@@ -17,19 +17,22 @@
             android:id="@+id/userNotifications_warning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_virus_24"
+            android:src="@drawable/ic_baseline_crisis_alert_24"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
             android:layout_centerVertical="true"/>
 
         <TextView
             android:id="@+id/userNotifications_recyclerView_docID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/userNotifications_warning"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="title"
-            android:layout_toEndOf="@+id/userNotifications_warning"
-            android:layout_marginStart="10dp"
-            android:layout_centerInParent="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -38,12 +41,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_toEndOf="@+id/userNotifications_recyclerView_docID"
-            android:src="@drawable/logs_detail"
-            android:layout_marginStart="120dp"
-            android:scaleY="1.2"
-            android:scaleX="1.2"/>
+            android:src="@drawable/logs_detail" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </androidx.cardview.widget.CardView>

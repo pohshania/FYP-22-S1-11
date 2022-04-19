@@ -78,8 +78,8 @@
             android:name=".AdminRulesActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminDeleteLogsActivity"            android:exported="false"
-            android:parentActivityName=".AdminViewUserActivity" />
+            android:name=".AdminDeleteLogsActivity"
+            android:exported="false" />
 
 
         <service android:name=".PushNotificationService" android:exported="false">

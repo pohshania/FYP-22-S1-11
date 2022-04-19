@@ -3,6 +3,8 @@ package com.uowmail.fypapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,7 +32,11 @@ import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.SnapshotParser;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -39,6 +46,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -52,16 +60,25 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
     // shania
     private RecyclerView mFirestoreList;
     private FirebaseFirestore firebaseFirestore;
+    private FirebaseAuth fAuth;
     private AdminDeleteLogsAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private FirestoreRecyclerOptions<AdminDeleteLogsModel> options;
 
+    private EditText userEmail, adminPassword;
+    private String email, currAdminEmail, currAdminPassword;
+
+    private AppCompatImageView deleteImg;
     public static ProgressBar progressBar;
     public static TextView loadingText;
     public static Button deleteLogsBtn, filterLogsBtn;
     public static TextView noDataFoundText;
     private TextView filterDateText, filterStartTimeText, filterEndTimeText, filterDateTimeSummaryText;
     private int startTimeHour, startTimeMinute, endTimeHour, endTimeMinute;
+
+    // deleting
+    private static int counter = 0;
+    private ArrayList<String> idOfSelectedLogs = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +94,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
 
         // Firestore
         firebaseFirestore = FirebaseFirestore.getInstance();
+        fAuth = FirebaseAuth.getInstance();
 
         // XML variables
         progressBar = (ProgressBar) findViewById(R.id.adminDeleteLogs_progress_bar);
@@ -84,6 +102,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
         noDataFoundText = findViewById(R.id.adminDeleteLogs_noDataText);
         filterLogsBtn = findViewById(R.id.adminDeleteLogs_filter_btn);
         deleteLogsBtn = findViewById(R.id.adminDeleteLogs_delete_btn);
+        deleteImg = findViewById(R.id.adminDeleteLogs_delete);
 
 
         firestoreDefaultLogsQuery();
@@ -165,12 +184,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
         deleteLogsBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-                createNewContactDialog();
-
-                // delete logs
-
-                // update rv adapter
+                deleteImg.setVisibility(View.VISIBLE);
             }
         });
 
@@ -188,7 +202,14 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
 
     @Override
     public void onItemClick(AdminDeleteLogsModel snapshot, int position) {
+        Log.d("ITEM_CLICK", "Clicked the item: " + position + " and the ID is: " + snapshot.getDocument_id());
 
+        //adapter.deleteItem(position);
+        createNewContactDialog(position);
+    }
+
+    private void deleteSelectedItem(int position){
+        createNewContactDialog(position);
     }
 
     // display today (default) logs from firestore
@@ -285,24 +306,57 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
     }
 
     // MJ - Popup window to enter password --------------------------------------------------------------------------------------
-    public void createNewContactDialog(){
+    public void createNewContactDialog(int position){
         dialogBuilder = new AlertDialog.Builder(this);
-        final View passwordPopupView = getLayoutInflater().inflate(R.layout.popup_for_delete_logs, null);
+        final View passwordPopupView = getLayoutInflater().inflate(R.layout.popup_for_password, null);
 
         saveChange = (Button) passwordPopupView.findViewById(R.id.saveButton);
         cancelBtn = (Button) passwordPopupView.findViewById(R.id.cancelButton);
-
-        // TODO: handle empty password error
 
         dialogBuilder.setView(passwordPopupView);
         dialog = dialogBuilder.create();
         dialog.show();
 
-        saveChange.setOnClickListener(new View.OnClickListener(){
+        cancelBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 // define save button here!
                 dialog.dismiss();
+            }
+        });
+
+
+        // authentication
+        saveChange.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+                currAdminEmail = fAuth.getCurrentUser().getEmail();
+
+                adminPassword = (EditText) dialog.findViewById(R.id.admin_password);
+                currAdminPassword = adminPassword.getText().toString().trim();
+
+                if(TextUtils.isEmpty(currAdminPassword)){
+                    adminPassword.setError("Password is required!");
+                    return;
+                }
+
+                Log.d("ADMIN INFO", currAdminEmail + currAdminPassword);
+
+
+                fAuth.signInWithEmailAndPassword(currAdminEmail, currAdminPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(AdminDeleteLogsActivity.this, "Log deleted.", Toast.LENGTH_SHORT).show();
+                        adapter.deleteItem(position);
+                        dialog.dismiss();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AdminDeleteLogsActivity.this, "Incorrect Admin password." + e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }

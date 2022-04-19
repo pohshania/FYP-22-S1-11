@@ -4,59 +4,117 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".UserSettingsRulesActivity">
 
-<!--    <Spinner-->
-<!--        android:id="@+id/spinner"-->
-<!--        android:layout_width="322dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:layout_marginEnd="8dp"-->
-<!--        android:layout_marginBottom="8dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.493"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.217" />-->
-
-
-    <TextView
-        android:id="@+id/rule_cpu"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cpu_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Rule 1"
-        android:textColor="#000000"
-        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/rule_network"
+        <TextView
+            android:id="@+id/title_cpu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CPU"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/rule_cpu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Rule 1"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/title_cpu"
+            app:layout_constraintStart_toStartOf="@+id/title_cpu"
+            app:layout_constraintTop_toBottomOf="@+id/title_cpu" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/network_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Rule 1"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/rule_cpu"
-        app:layout_constraintStart_toStartOf="@+id/rule_cpu"
-        app:layout_constraintTop_toBottomOf="@+id/rule_cpu" />
+        app:layout_constraintEnd_toEndOf="@+id/cpu_layout"
+        app:layout_constraintStart_toStartOf="@+id/cpu_layout"
+        app:layout_constraintTop_toBottomOf="@+id/cpu_layout">
+        <TextView
+            android:id="@+id/title_network"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:text="Network"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/rule_disk"
+        <TextView
+            android:id="@+id/rule_network"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Rule 2"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/title_network"
+            app:layout_constraintStart_toStartOf="@+id/title_network"
+            app:layout_constraintTop_toBottomOf="@+id/title_network" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/disk_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Rule 1"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/rule_network"
-        app:layout_constraintStart_toStartOf="@+id/rule_network"
-        app:layout_constraintTop_toBottomOf="@+id/rule_network" />
+        app:layout_constraintEnd_toEndOf="@+id/network_layout"
+        app:layout_constraintStart_toStartOf="@+id/network_layout"
+        app:layout_constraintTop_toBottomOf="@+id/network_layout">
+        <TextView
+            android:id="@+id/title_disk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:text="Disk"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+            android:id="@+id/rule_disk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Rule 3"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/title_disk"
+            app:layout_constraintStart_toStartOf="@+id/title_disk"
+            app:layout_constraintTop_toBottomOf="@+id/title_disk" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_example"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff99ccff"
+        app:layout_constraintTop_toBottomOf="@+id/disk_layout"
+        android:orientation="vertical" >
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,11 +26,13 @@ import java.util.ArrayList;
 
 public class UserSettingsRulesActivity extends AppCompatActivity {
 
-    // TODO read rules from the firebase and print on this page
+    // read rules from the firebase and print on this page
     FirebaseFirestore db;
     String oneLine;
     String cpu, net_send, net_recv, disk_read, disk_write;
     private TextView tv_cpu, tv_nets, tv_netr, tv_diskr, tv_diskw, tv_net, tv_disk;
+    // todo - try to add text view dynamically
+//    LinearLayout linearLayout = (LinearLayout) findViewById(R.id.ll_example);
 
 
 
@@ -84,6 +87,7 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
 //        }
 //        return super.onOptionsItemSelected(item);
     }
+
     public void getRulesList()
     {
         DocumentReference docRef = db.collection("UOW_detection").document("rules");
@@ -95,8 +99,6 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
                     if (doc.exists()) {
                         oneLine= String.valueOf(doc.getData());
                         Log.d("RULES", "Rules data: " + oneLine);
-
-                        // todo - display the rules on the page.
                     }
                     else {
                         Log.d("RULES", "No such document");
@@ -123,13 +125,32 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
 
 //                System.out.print("\n data value:\n"+cpu + " ~ "+ net_recv+ " ~ "+ net_send + " ~ "+ disk_read + " ~ "+ disk_write + "\n");
 
-                // todo - set each data into relavant textview
+                // set each data into relavant textview
                 tv_cpu.setText(cpu);
-                tv_net.setText(net_recv + net_send);
-                tv_disk.setText(disk_read +disk_write);
+                tv_net.setText("net_recv: " + net_recv + "\nnet_send:" + net_send);
+                tv_disk.setText("disk_read: " + disk_read + "\ndisk_write: " +disk_write);
+
+                // todo - call function that create text view dynamically
+                displayRule(cpu);
+                displayRule(net_recv);
+                displayRule(net_send);
+                displayRule(disk_read);
+                displayRule(disk_write);
 
 
             }
         });
+    }
+
+    public void displayRule(String value){
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.ll_example);
+
+        TextView textView1 = new TextView(this);
+        textView1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        textView1.setText(value);
+        textView1.setBackgroundColor(0xff66ff66); // hex color 0xAARRGGBB
+        textView1.setPadding(20, 20, 20, 20);// in pixels (left, top, right, bottom)
+        linearLayout.addView(textView1);
     }
 }

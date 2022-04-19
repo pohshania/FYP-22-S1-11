@@ -534,7 +534,7 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
                             // set summary
                             filterDateTimeSummaryText.setText(filterDateText.getText() + ", FROM " +
                                     filterStartTimeText.getText() + " TO " + filterEndTimeText.getText());
-                            filterDateTimeSummaryText.setTextColor(Color.parseColor("#000000"));
+                            filterDateTimeSummaryText.setTextColor(Color.parseColor("#008000"));
 
                         } catch (ParseException e) {
                             e.printStackTrace();

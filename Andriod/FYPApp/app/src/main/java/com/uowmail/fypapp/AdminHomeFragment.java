@@ -61,7 +61,7 @@ public class AdminHomeFragment extends Fragment {
 
         logsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), AdminViewUserActivity.class));
+                startActivity(new Intent(getActivity(), AdminDeleteLogsActivity.class));
             }
         });
         // MJ - open RulesActivity when button is clicked

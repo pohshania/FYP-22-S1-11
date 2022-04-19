@@ -59,8 +59,9 @@ public class UserHomeFragment extends Fragment  {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private String mParam1;
+    String path;
 
-    // MJ - testing ----------------------------------------------------------------------------------------
+    // MJ - database ----------------------------------------------------------------------------------------
     FirebaseFirestore fStore;
     Task<QuerySnapshot> qs;
     float idling, sys, usr, net_recv, net_send, disk_read, disk_write;
@@ -103,7 +104,9 @@ public class UserHomeFragment extends Fragment  {
             mParam1 = getArguments().getString(ARG_PARAM1);
             Log.d("===== INSIDE USER DASHBOARD FRAG ===== ", mParam1);
         }
+        path = mParam1 + "_log";
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -268,8 +271,7 @@ public class UserHomeFragment extends Fragment  {
         ArrayList<String> dataNameList = new ArrayList<String>();
 
         // shania
-        String path = mParam1 + "_log";
-        //String path = "UOW_log";
+//        path = mParam1 + "_log";
         qs = fStore.collection(path)
                 .orderBy("date", Query.Direction.DESCENDING)
                 .limit(1).get()
@@ -357,7 +359,7 @@ public class UserHomeFragment extends Fragment  {
                                 //load data graph
                                 loadPieChartData(pieChart, dataValueList, dataNameList);
                                 setupPieChart(pieChart, dataType, valueWunit);
-                                System.out.println(dataType);
+//                                System.out.println(dataType);
                             }
                         }
                         else
@@ -414,8 +416,8 @@ public class UserHomeFragment extends Fragment  {
         ArrayList<String> dateValueList = new ArrayList<String>();
         ArrayList<Float> dataValueList = new ArrayList<Float>();
         ArrayList<String> dataNameList = new ArrayList<String>();
-
-        qs = fStore.collection("UOW_log")
+//        path = mParam1 + "_log";
+        qs = fStore.collection(path)
                 .orderBy("date", Query.Direction.ASCENDING)
                 .limitToLast(5)
                 .get()
@@ -423,7 +425,7 @@ public class UserHomeFragment extends Fragment  {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
-                            System.out.println("LineGraph-------->");
+//                            System.out.println("LineGraph-------->");
                             QuerySnapshot querySnapshot = task.getResult();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String str;
@@ -529,8 +531,8 @@ public class UserHomeFragment extends Fragment  {
     private void loadLineChartData(String info, ArrayList<String> dateVal , ArrayList<Float> dataVal, String dataType) {
         for (int i = 0; i < dateVal.size();i++)
         {
-            System.out.print(dateVal.get(i) + " ~ ");
-            System.out.print(dataVal.get(i) + " ~ ");
+//            System.out.print(dateVal.get(i) + " ~ ");
+//            System.out.print(dataVal.get(i) + " ~ ");
 
         }
         ////--> x axis

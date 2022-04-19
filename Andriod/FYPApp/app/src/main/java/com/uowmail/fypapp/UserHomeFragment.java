@@ -532,45 +532,21 @@ public class UserHomeFragment extends Fragment  {
             System.out.print(dataVal.get(i) + " ~ ");
 
         }
-        ////-->
+        ////--> x axis
         XAxis xAxis = mChart.getXAxis();
-        YAxis yAxis = mChart.getAxisLeft();
         XAxis.XAxisPosition position = XAxis.XAxisPosition.TOP;
         xAxis.setPosition(position);
         xAxis.setGranularity(1f);
         xAxis.setValueFormatter(new ClaimsXAxisValueFormatter(dateVal));
 
-//        final ArrayList<String> xAxisLabel = new ArrayList<>();
-//        for(int i=0; i<dateVal.size(); i++)
-//        {
-//            xAxisLabel.add(String.valueOf(dateVal.get(i)));
-//        }
-//
-//        xAxis.setValueFormatter(new ValueFormatter() {
-//            @Override
-//            public String getFormattedValue(float value, AxisBase axis) {
-//                return xAxisLabel.get((int) value);
-//            }
-//        });
-
-        ////-->
 
         // set y axis value
         ArrayList<Entry> yValues = new ArrayList<>();
         for(int i=0; i<dataVal.size(); i++)
         {
-//            yValues.add(new Entry(dateVal.get(i)+i, dataVal.get(i)));
             yValues.add(new Entry(i, dataVal.get(i)));
         }
-//        yValues.add(new Entry(0, 60f));
-//        yValues.add(new Entry(1, 50f));
-//        yValues.add(new Entry(2, 70f));
-//        yValues.add(new Entry(3, 30f));
-//        yValues.add(new Entry(4, 50f));
-//        yValues.add(new Entry(5, 60f));
-//        yValues.add(new Entry(6, 65f));
 
-        // set title of the line graph
         LineDataSet set1 = new LineDataSet(yValues, info);
         set1.setFillAlpha(110);
         set1.setLineWidth(3f);
@@ -587,28 +563,9 @@ public class UserHomeFragment extends Fragment  {
 
 
         dataSets.add(set1);
-
-
         LineData data = new LineData(dataSets);
         mChart.setData(data);
         mChart.invalidate();
-
-
-
-
-    }
-
-    public static long getDateInMilliSeconds(String givenDateString, String format) {
-        String DATE_TIME_FORMAT = format;
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_TIME_FORMAT, Locale.US);
-        long timeInMilliseconds = 1;
-        try {
-            Date mDate = sdf.parse(givenDateString);
-            timeInMilliseconds = mDate.getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return timeInMilliseconds;
     }
 
     private class ClaimsXAxisValueFormatter extends ValueFormatter {
@@ -622,7 +579,10 @@ public class UserHomeFragment extends Fragment  {
             @Override
             public String getAxisLabel(float value, AxisBase axis) {
 /*
-Depends on the position number on the X axis, we need to display the label, Here, this is the logic to convert the float value to integer so that I can get the value from array based on that integer and can convert it to the required value here, month and date as value. This is required for my data to show properly, you can customize according to your needs.
+Depends on the position number on the X axis, we need to display the label, Here, this is the logic
+to convert the float value to integer so that I can get the value from array based on that integer
+and can convert it to the required value here, month and date as value. This is required for my data
+to show properly, you can customize according to your needs.
 */
                 Integer position = Math.round(value);
                 SimpleDateFormat sdf = new SimpleDateFormat("YYYY MMM dd");
@@ -638,7 +598,6 @@ Depends on the position number on the X axis, we need to display the label, Here
                 }
                 if (position < datesList.size())
                     return datesList.get(position);
-//                    return sdf.format(new Date((getDateInMilliSeconds(datesList.get(position), "yyyy-MM-dd"))));
                 return "";
             }
         }

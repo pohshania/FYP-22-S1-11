@@ -17,7 +17,7 @@
         android:layout_height="79dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_corner"
-        android:text="Users Logs" />
+        android:text="Delete Logs" />
 
     <Button
         android:id="@+id/buttonRules"

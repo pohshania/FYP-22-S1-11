@@ -269,6 +269,7 @@ public class UserHomeFragment extends Fragment  {
 
         // shania
         String path = mParam1 + "_log";
+        //String path = "UOW_log";
         qs = fStore.collection(path)
                 .orderBy("date", Query.Direction.DESCENDING)
                 .limit(1).get()

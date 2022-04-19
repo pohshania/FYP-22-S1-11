@@ -8,7 +8,7 @@
     android:layout_marginEnd="8dp"
     app:cardBackgroundColor="#FFFFE8">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp" >
@@ -17,6 +17,7 @@
             android:id="@+id/userLogs_recyclerView_docID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="title"
             android:layout_alignParentStart="true"
             android:maxLines="1"
@@ -30,11 +31,10 @@
             android:layout_centerInParent="true"
             android:layout_toEndOf="@+id/userLogs_recyclerView_docID"
             android:src="@drawable/logs_detail"
-            android:layout_marginStart="150dp"
             android:scaleY="1.2"
             android:scaleX="1.2"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </androidx.cardview.widget.CardView>

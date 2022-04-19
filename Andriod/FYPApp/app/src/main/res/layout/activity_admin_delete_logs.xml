@@ -3,24 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="?android:attr/actionBarSize">
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/adminDeleteLogs_filter_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/adminDeleteLogs_delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="16dp"
+        android:visibility="invisible"/>
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="parent">
+        android:layout_marginTop="50dp">
 
         <ProgressBar
-            android:id="@+id/userNotifications_progress_bar"
+            android:id="@+id/adminDeleteLogs_progress_bar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
         <TextView
-            android:id="@+id/userNotifications_loadingText"
+            android:id="@+id/adminDeleteLogs_loadingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Retriving data..."
@@ -28,7 +47,7 @@
             android:layout_marginTop="100dp"/>
 
         <TextView
-            android:id="@+id/userNotifications_noDataText"
+            android:id="@+id/adminDeleteLogs_noDataText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -36,16 +55,17 @@
             android:text=""/>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/userNotifications_swipeRefreshLayout"
+            android:id="@+id/adminDeleteLogs_swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/userNotifications_firestore_list"
+                android:id="@+id/adminDeleteLogs_firestore_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

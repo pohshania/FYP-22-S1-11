@@ -197,7 +197,8 @@ public class Login extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
                                         Toast.makeText(Login.this, "Logged in successfully to Admin.", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
+                                        //startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
+                                        setCurrentAdminInfo(fAuth, fStore);
                                         finish();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -448,7 +449,74 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    private void setCurrentAdminInfo(FirebaseAuth fAuth, FirebaseFirestore fStore){
+        Intent i = new Intent(Login.this, AdminHomeActivity.class);
 
+        String currentUserEmail = fAuth.getCurrentUser().getEmail();
+        DocumentReference docRef = fStore.collection("Admins Profile").document(currentUserEmail);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+
+                    String fullName = document.getString("Full Name");
+                    String email = document.getString("Email");
+                    String orgID = document.getString("Organisation ID");
+                    boolean isAdmin = document.getBoolean("isAdmin");
+                    boolean isActive = document.getBoolean("isActive");
+
+                    CurrentUserInfo currentUserInfo = new CurrentUserInfo(fullName, email, orgID, isAdmin, isActive);
+
+                    Log.d("ADMIN_INFO", currentUserInfo.getFullName() + currentUserInfo.getEmail() +
+                            currentUserInfo.getOrgID() + currentUserInfo.isAdmin() + currentUserInfo.isActive());
+
+                    i.putExtra("adminInfo", currentUserInfo);
+                    startActivity(i);
+
+
+                    // note to myself - shania
+/*                    Intent intent = new Intent(SendingActivity.this, RecievingActivity.class);
+                    intent.putExtra("keyName", value);  // pass your values and retrieve them in the other Activity using keyName
+                    startActivity(intent);
+
+                    // In RecievingActivity
+                    Bundle extras = intent.getExtras();
+                    if(extras != null)
+                        String data = extras.getString("keyName"); // retrieve the data using keyName
+
+
+                    // shortest way to recieve data..
+                    String data = getIntent().getExtras().getString("keyName","defaultKey");
+
+
+                    // OR
+                    Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
+                    intent.putExtra("int", intValue);
+                    intent.putExtra("Serializable", object);
+                    intent.putExtra("String", stringValue);
+                    intent.putExtra("parcelable", parObject);
+                    startActivity(intent);
+
+                    // In ApplicationActivity
+                    Intent intent = getIntent();
+                    Bundle bundle = intent.getExtras();
+
+                    if(bundle != null){
+                       int mealId = bundle.getInt("int");
+                       Object object = bundle.getSerializable("Serializable");
+                       String string = bundle.getString("String");
+                       T string = <T>bundle.getString("parcelable");
+                       CurrentUserInfo currentUserInfo = (CurrentUserInfo) extras.getSerializable("userInfo");
+                    }*/
+
+
+
+
+                }
+            }
+        });
+    }
 /*
     public void getCurrentUserOrgID(FirebaseAuth fAuth, FirebaseFirestore fStore){
         // get the current's user organisation ID, so that program will only retrieve docs from that organisation

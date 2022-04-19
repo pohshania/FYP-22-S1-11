@@ -38,6 +38,7 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
     private SwipeRefreshLayout swipeRefreshLayout;
     private FirestoreRecyclerOptions<UserNotificationsModel> options;
     public static ProgressBar progressBar;
+    public static TextView loadingText;
 
     public UserNotificationsFragment() {
         // Required empty public constructor
@@ -74,7 +75,7 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
 
         // XML variables
         progressBar = (ProgressBar) view.findViewById(R.id.userNotifications_progress_bar);
-
+        loadingText = view.findViewById(R.id.userNotifications_loadingText);
 
         // Query from firebase
         Query query = firebaseFirestore.collection("UOW_detection")
@@ -109,7 +110,12 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
 
     public static void disableProgressBar(){
         progressBar.setVisibility(View.INVISIBLE);
-        //loadingText.setVisibility(View.INVISIBLE);
+        loadingText.setVisibility(View.INVISIBLE);
+    }
+
+    public static void enableProgressBar(){
+        progressBar.setVisibility(View.VISIBLE);
+        loadingText.setVisibility(View.VISIBLE);
     }
 
     // FirestoreRecyclerView onclick to log details

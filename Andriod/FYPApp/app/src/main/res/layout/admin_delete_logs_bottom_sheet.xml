@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/userLogs_bottomSheetContainer"
+    android:id="@+id/adminDeleteLogs_bottomSheetContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_background"
@@ -14,7 +14,7 @@
         android:padding="5dp" >
 
         <TextView
-            android:id="@+id/userLogs_filterTitle"
+            android:id="@+id/adminDeleteLogs_filterTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Filter date and time"
@@ -23,7 +23,7 @@
             android:padding="15dp" />
 
         <Button
-            android:id="@+id/userLogs_applyFilter_btn"
+            android:id="@+id/adminDeleteLogs_applyFilter_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Apply"
@@ -38,13 +38,13 @@
         android:padding="5dp" >
 
         <Button
-            android:id="@+id/userLogs_filterPickDate_btn"
+            android:id="@+id/adminDeleteLogs_filterPickDate_btn"
             android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:text="Pick Date" />
 
         <TextView
-            android:id="@+id/userLogs_filterDate_txt"
+            android:id="@+id/adminDeleteLogs_filterDate_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp" />
@@ -58,13 +58,13 @@
         android:padding="5dp" >
 
         <Button
-            android:id="@+id/userLogs_filterStartTime_btn"
+            android:id="@+id/adminDeleteLogs_filterStartTime_btn"
             android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:text="Start Time " />
 
         <TextView
-            android:id="@+id/userLogs_filterStartTime_txt"
+            android:id="@+id/adminDeleteLogs_filterStartTime_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"/>
@@ -78,13 +78,13 @@
         android:padding="5dp" >
 
         <Button
-            android:id="@+id/userLogs_filterEndTime_btn"
+            android:id="@+id/adminDeleteLogs_filterEndTime_btn"
             android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:text="End Time " />
 
         <TextView
-            android:id="@+id/userLogs_filterEndTime_txt"
+            android:id="@+id/adminDeleteLogs_filterEndTime_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"/>
@@ -99,7 +99,7 @@
         android:padding="10dp" >
 
         <TextView
-            android:id="@+id/userLogs_filterSummary"
+            android:id="@+id/adminDeleteLogs_filterSummary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

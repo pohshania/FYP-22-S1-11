@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,13 +46,13 @@ public class AdminRulesActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private Button saveChange, cancelBtn;
     private String text;
-    private EditText currentAdminEmai;
     private FirebaseFirestore db;
 
     // shania
     private FirebaseAuth fAuth;
     private EditText userEmail, adminPassword;
     private String email, currAdminEmail, currAdminPassword;
+    private String orgID;
 
 
 
@@ -59,6 +60,15 @@ public class AdminRulesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_rules);
+
+        // pass current user's info
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            orgID = extras.getString("adminOrgID");
+            Log.d("====CURRENT ADMIN'S ORG ID====", orgID);
+        }
+
+
         Button testbutton = findViewById(R.id.test_button);
         testbutton.setOnClickListener(testButtonListener);
 
@@ -346,7 +356,8 @@ public class AdminRulesActivity extends AppCompatActivity {
             diskwrit.put("value", Float.parseFloat(diskwritvalue));
         }
 
-        db.collection("UOW_detection").document("rules")
+        String path = orgID+"_detection";
+        db.collection(path).document("rules")
                 .update(
                         "CPU", cpumax,
                         "disk_read", diskread,
@@ -400,6 +411,11 @@ public class AdminRulesActivity extends AppCompatActivity {
 
                 adminPassword = (EditText) dialog.findViewById(R.id.admin_password);
                 currAdminPassword = adminPassword.getText().toString().trim();
+
+                if(TextUtils.isEmpty(currAdminPassword)){
+                    adminPassword.setError("Password is required!");
+                    return;
+                }
 
                 Log.d("ADMIN INFO", currAdminEmail + currAdminPassword);
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".UserHomeActivity">
 
-    <include layout="@layout/top_toolbar"/>
+    <include layout="@layout/top_toolbar_user"/>
 
     <FrameLayout
         android:id="@+id/container"

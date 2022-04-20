@@ -189,19 +189,6 @@ public class UserIntrusionDetectionDetailsFragment extends Fragment {
             }
         });
 
-/*        // download
-        download = view.findViewById(R.id.userLogsDetails_download);
-        download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                downloadFile(date.getText().toString(), disk_read.getText().toString(), disk_write.getText().toString(),
-                        idling.getText().toString() + " " + idling_avg.getText().toString() + " " + idling_min.getText().toString() + " " + idling_max.getText().toString(),
-                        net_recv.getText().toString(), net_send.getText().toString(),
-                        sys.getText().toString() + " " + sys_avg.getText().toString() + " " + sys_min.getText().toString() + " " + sys_max.getText().toString(),
-                        usr.getText().toString() + " " + usr_avg.getText().toString() + " " + usr_min.getText().toString() + " " + usr_max.getText().toString());
-            }
-        });*/
-
         return view;
     }
 
@@ -217,14 +204,6 @@ public class UserIntrusionDetectionDetailsFragment extends Fragment {
         // Check for Storage Permission
         if(isStoragePermissionGranted()){
 
-            // To access app-specific files from external storage, you can call
-            // getExternalFilesDir() method. It returns the path to
-            // storage > emulated > 0 > Android > data > [package_name] > files > MyFileDir
-            // or,
-            // storage > self > Android > data > [package_name] > files > MyFileDir
-            // directory on the SD card. Once the app is uninstalled files here also get
-            // deleted.
-            // Create a File object like this.
             File myExternalFile = new File(getContext().getExternalFilesDir(filepath), filename);
             // Create an object of FileOutputStream for writing data to myFile.txt
             FileOutputStream fos = null;
@@ -262,49 +241,6 @@ public class UserIntrusionDetectionDetailsFragment extends Fragment {
             // Show a Toast message to inform the user that the operation has been successfully completed.
             Toast.makeText(getContext(), "Information saved to " + getContext().getExternalFilesDir(filepath), Toast.LENGTH_SHORT).show();
         }
-
-
-
-        /*
-        FILE_NAME = mParam1;
-        String nl = "\n";
-
-        try{
-            fos = getContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-
-            fos.write(date.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(disk_read.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(disk_write.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(idling.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(net_recv.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(net_send.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(sys.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(usr.getBytes(StandardCharsets.UTF_8));
-
-
-            Toast.makeText(getContext(), "Saved to " + getContext().getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if(fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-         */
-
     }
 
 

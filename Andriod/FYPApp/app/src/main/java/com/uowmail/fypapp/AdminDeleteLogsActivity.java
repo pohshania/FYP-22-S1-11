@@ -232,7 +232,6 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
 
 
         } catch (java.text.ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -242,8 +241,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
         Query query = firebaseFirestore.collection(path)
                 .orderBy("date", Query.Direction.DESCENDING)
                 .whereGreaterThanOrEqualTo("date", startDate)
-                .whereLessThan("date", endDate)
-                .limit(10); //TODO: remove this
+                .whereLessThan("date", endDate);
 
 
         // FirebaseRecyclerOptions

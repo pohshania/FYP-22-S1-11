@@ -111,7 +111,8 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         adapter = new UserLogsAdapter(options, this);
         mFirestoreList = (RecyclerView) view.findViewById(R.id.firestore_list2);
         mFirestoreList.setHasFixedSize(true);
-        mFirestoreList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        //mFirestoreList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mFirestoreList.setLayoutManager(new WrapContentLinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         adapter.notifyItemRangeChanged(0, adapter.getItemCount());
         adapter.notifyItemChanged(0);
         mFirestoreList.setAdapter(adapter);
@@ -359,8 +360,8 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         adapter = new UserLogsAdapter(options, this);
         mFirestoreList = view.findViewById(R.id.firestore_list2);
         mFirestoreList.setHasFixedSize(true);
-        mFirestoreList.setLayoutManager(new LinearLayoutManager(getContext(),
-                LinearLayoutManager.VERTICAL, false));
+        //mFirestoreList.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false));
+        mFirestoreList.setLayoutManager(new WrapContentLinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         adapter.notifyItemRangeChanged(0, adapter.getItemCount());
         adapter.notifyItemChanged(0);
         mFirestoreList.setAdapter(adapter);

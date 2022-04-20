@@ -1,5 +1,6 @@
 package com.uowmail.fypapp;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -60,9 +61,9 @@ public class AdminLogDetailsActivity extends AppCompatActivity {
             Log.d("====CURRENT ADMIN'S DOC ID====", docID);
         }
 
-        // MJ - set title of the page
-/*        TextView title = (TextView) findViewById(R.id.toolbar_title);
-        title.setText("Log Details");*/
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Logs Details");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TextView titleTV = findViewById(R.id.adminLogDetails_Title);
         titleTV.setText(docID);

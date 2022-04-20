@@ -68,24 +68,26 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
     private EditText userEmail, adminPassword;
     private String email, currAdminEmail, currAdminPassword;
 
-    private AppCompatImageView deleteImg;
     public static ProgressBar progressBar;
     public static TextView loadingText;
-    public static Button deleteLogsBtn, filterLogsBtn;
+    public static Button filterLogsBtn;
     public static TextView noDataFoundText;
     private TextView filterDateText, filterStartTimeText, filterEndTimeText, filterDateTimeSummaryText;
     private int startTimeHour, startTimeMinute, endTimeHour, endTimeMinute;
 
-    // deleting
-    private static int counter = 0;
-    private ArrayList<String> idOfSelectedLogs = new ArrayList<String>();
+    private String orgID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_delete_logs);
 
-        SwipeRefreshLayout swipeRefreshLayout;
+        // pass current user's info
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            orgID = extras.getString("adminOrgID");
+            Log.d("====CURRENT ADMIN'S ORG ID====", orgID);
+        }
 
 
         ActionBar actionBar = getSupportActionBar();
@@ -101,8 +103,6 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
         loadingText = findViewById(R.id.adminDeleteLogs_loadingText);
         noDataFoundText = findViewById(R.id.adminDeleteLogs_noDataText);
         filterLogsBtn = findViewById(R.id.adminDeleteLogs_filter_btn);
-        deleteLogsBtn = findViewById(R.id.adminDeleteLogs_delete_btn);
-        deleteImg = findViewById(R.id.adminDeleteLogs_delete);
 
 
         firestoreDefaultLogsQuery();
@@ -111,7 +111,8 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
         adapter = new AdminDeleteLogsAdapter(options, this);
         mFirestoreList = (RecyclerView) findViewById(R.id.adminDeleteLogs_firestore_list);
         mFirestoreList.setHasFixedSize(true);
-        mFirestoreList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        //mFirestoreList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mFirestoreList.setLayoutManager(new WrapContentLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter.notifyItemRangeChanged(0, adapter.getItemCount());
         adapter.notifyItemChanged(0);
         mFirestoreList.setAdapter(adapter);
@@ -181,14 +182,6 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
             }
         });
 
-        deleteLogsBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                deleteImg.setVisibility(View.VISIBLE);
-            }
-        });
-
-
         swipeRefreshLayout = findViewById(R.id.adminDeleteLogs_swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -205,11 +198,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
         Log.d("ITEM_CLICK", "Clicked the item: " + position + " and the ID is: " + snapshot.getDocument_id());
 
         //adapter.deleteItem(position);
-        createNewContactDialog(position);
-    }
-
-    private void deleteSelectedItem(int position){
-        createNewContactDialog(position);
+        //createNewContactDialog(position);
     }
 
     // display today (default) logs from firestore
@@ -249,11 +238,12 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
 
 
         // Query from firebase
-        String path = "UOW" + "_log";
+        String path = orgID + "_log";
         Query query = firebaseFirestore.collection(path)
                 .orderBy("date", Query.Direction.DESCENDING)
                 .whereGreaterThanOrEqualTo("date", startDate)
-                .whereLessThan("date", endDate);
+                .whereLessThan("date", endDate)
+                .limit(10); //TODO: remove this
 
 
         // FirebaseRecyclerOptions
@@ -278,7 +268,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
         Log.d("======firestoreQueryLogsByDateTime======", startDateTime.toString() + "   " + endDateTime.toString());
 
         // Query from firebase
-        String path = "UOW" + "_log";
+        String path = orgID + "_log";
         Query query = firebaseFirestore.collection(path)
                 .orderBy("date", Query.Direction.DESCENDING)
                 .whereGreaterThanOrEqualTo("date", startDateTime)
@@ -575,14 +565,6 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
         filterLogsBtn.setVisibility(View.INVISIBLE);
     }
 
-    public static void enableDeleteButton(){
-        deleteLogsBtn.setVisibility(View.VISIBLE);
-    }
-
-    public static void disableDeleteButton(){
-        deleteLogsBtn.setVisibility(View.INVISIBLE);
-    }
-
     public static void disableProgressBar(){
         progressBar.setVisibility(View.INVISIBLE);
         loadingText.setVisibility(View.INVISIBLE);
@@ -601,3 +583,4 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
         noDataFoundText.setText("");
     }
 }
+

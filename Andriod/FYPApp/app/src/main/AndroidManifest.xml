@@ -3,7 +3,7 @@
     package="com.uowmail.fypapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,12 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_cd_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FYPApp">
-
-
+        <activity
+            android:name=".AdminLogDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".AdminDeactivateUserActivity"
             android:exported="false" />
-
         <!--
         <activity
             android:name=".DeleteUserActivity"
@@ -29,12 +29,10 @@
             </intent-filter>
         </activity>
         -->
-
-
         <activity
             android:name=".AdminCreateNewUserActivity"
             android:exported="false"
-            android:parentActivityName=".AdminHomeActivity"/>
+            android:parentActivityName=".AdminHomeActivity" />
         <!--
         <activity
             android:name=".CreateNewUserActivity"
@@ -52,22 +50,20 @@
         <activity
             android:name=".UserHomeActivity"
             android:exported="false" />
-        
         <activity
             android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <!--
         <activity
             android:name=".Login"
             android:exported="false" />
         -->
-
         <activity
             android:name=".UserSettingsActivity"
             android:exported="false" />
@@ -81,15 +77,13 @@
             android:name=".AdminDeleteLogsActivity"
             android:exported="false" />
 
-
-        <service android:name=".PushNotificationService" android:exported="false">
+        <service
+            android:name=".PushNotificationService"
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
     </application>
-
-
 
 </manifest>

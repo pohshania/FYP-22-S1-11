@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,12 +16,21 @@ import android.widget.Toast;
 
 public class UserSettingsActivity extends AppCompatActivity {
     Button btn;
+    private String orgID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_user_settings);
+
+        // pass current user's info
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            orgID = extras.getString("adminOrgID");
+            Log.d("====CURRENT ADMIN'S ORG ID====", orgID);
+        }
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("User Settings");
@@ -37,6 +47,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         body = (EditText) findViewById(R.id.rules_et);
         button = (Button) findViewById(R.id.sendButton);
 
+        // send email to admin
         //Sets action for sendButton
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -55,17 +66,23 @@ public class UserSettingsActivity extends AppCompatActivity {
                 }
             }
         });
+
         //rules view
         Button rButton;
         rButton = (Button) findViewById(R.id.rulesButton);
 
+        // view applied rules
         //Sets action for rulesButton
         rButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(UserSettingsActivity.this, UserSettingsRulesActivity.class));
+                //startActivity(new Intent(UserSettingsActivity.this, UserSettingsRulesActivity.class));
 
 //                startActivity( new Intent(UserSettingsActivity.this,
 //                        RulesActivity.class).putExtra(Intent.EXTRA_TEXT, "setInvisible") );
+
+                Intent i = new Intent(UserSettingsActivity.this, UserSettingsRulesActivity.class);
+                i.putExtra("adminOrgID", orgID);
+                startActivity(i);
             }
         });
     }

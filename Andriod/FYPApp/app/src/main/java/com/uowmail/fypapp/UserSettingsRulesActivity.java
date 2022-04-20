@@ -33,10 +33,8 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
     String cpu, net_send, net_recv, disk_read, disk_write;
     private TextView tv_cpu, tv_nets, tv_netr, tv_diskr, tv_diskw, tv_net, tv_disk;
     // todo - trying to add org id dynamically
-    public CurrentUserInfo currentUserInfo;
 
-
-
+    private String orgID;
 
 
     @Override
@@ -51,23 +49,14 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
 
-        // todo - find org name
         // pass current user's info
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            currentUserInfo = (CurrentUserInfo) extras.getSerializable("userInfo");
-            Log.d("====CURRENT USER'S ORG ID====", currentUserInfo.getOrgID());
-//            if (currentUserInfo == null)
-//                System.out.println("===================================the current org id is NULL ====");
+            orgID = extras.getString("adminOrgID");
+            Log.d("====CURRENT ADMIN'S ORG ID====", orgID);
         }
-        else
-            System.out.println("===================================the extras is NULL ====");
 
 
-        if (currentUserInfo != null)
-            getRulesList(currentUserInfo);
-        else
-            System.out.println("===================================the \"currentUserInfo\" is NULL ====");
 
         tv_cpu       = findViewById(R.id.rule_cpu);
         tv_net       = findViewById(R.id.rule_network);
@@ -112,7 +101,7 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
     public void getRulesList(CurrentUserInfo currentUserInfo)
     {
 //        String path = currentUserInfo.getOrgID() + "_detection";
-        String path = "UOW_detection";
+        String path = orgID + "_detection";
 
         DocumentReference docRef = db.collection(path).document("rules");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:paddingVertical="10dp"
         android:paddingLeft="20dp"
-        android:background="#FFB900"
+        android:background="@color/cp_yellow"
         android:text="Rules applied"
         android:textColor="@color/black"
         android:textSize="20sp"

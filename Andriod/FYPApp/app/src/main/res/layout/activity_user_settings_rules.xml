@@ -4,117 +4,136 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
     tools:context=".UserSettingsRulesActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cpu_layout"
+    <TextView
+        android:id="@+id/userRulePage_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:paddingLeft="20dp"
+        android:background="#FFB900"
+        android:text="Rules applied"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/title_cpu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="CPU"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/rule_cpu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Rule 1"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/title_cpu"
-            app:layout_constraintStart_toStartOf="@+id/title_cpu"
-            app:layout_constraintTop_toBottomOf="@+id/title_cpu" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/network_layout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/cpu_layout"
-        app:layout_constraintStart_toStartOf="@+id/cpu_layout"
-        app:layout_constraintTop_toBottomOf="@+id/cpu_layout">
-        <TextView
-            android:id="@+id/title_network"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="33dp"
-            android:text="Network"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="48dp"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@id/userRulePage_title"
+        tools:layout_editor_absoluteX="0dp">
 
-        <TextView
-            android:id="@+id/rule_network"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Rule 2"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/title_network"
-            app:layout_constraintStart_toStartOf="@+id/title_network"
-            app:layout_constraintTop_toBottomOf="@+id/title_network" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/disk_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/network_layout"
-        app:layout_constraintStart_toStartOf="@+id/network_layout"
-        app:layout_constraintTop_toBottomOf="@+id/network_layout">
-        <TextView
-            android:id="@+id/title_disk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="33dp"
-            android:text="Disk"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
 
             <TextView
-            android:id="@+id/rule_disk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Rule 3"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/title_disk"
-            app:layout_constraintStart_toStartOf="@+id/title_disk"
-            app:layout_constraintTop_toBottomOf="@+id/title_disk" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:id="@+id/title_cpu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:text="CPU"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/userRulePage_title"
+                app:layout_constraintStart_toStartOf="@+id/userRulePage_title" />
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/ll_example"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ff99ccff"
-        app:layout_constraintTop_toBottomOf="@+id/disk_layout"
-        android:orientation="vertical" >
+            <LinearLayout
+                android:id="@+id/cpu_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingVertical="10dp"
+                android:paddingLeft="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/title_cpu"
+                app:layout_constraintStart_toStartOf="@+id/title_cpu"
+                app:layout_constraintTop_toBottomOf="@+id/title_cpu"/>
 
-    </LinearLayout>
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cpu_layout" />
 
+
+            <TextView
+                android:id="@+id/title_network"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="33dp"
+                android:text="Network"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/view"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <LinearLayout
+                android:id="@+id/network_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingVertical="10dp"
+                android:paddingLeft="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/title_network"
+                app:layout_constraintStart_toStartOf="@+id/title_network"
+                app:layout_constraintTop_toBottomOf="@+id/title_network"/>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/network_layout" />
+
+
+            <TextView
+                android:id="@+id/title_disk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                android:paddingLeft="20dp"
+                android:text="Disk"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="@+id/view2"
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+            <LinearLayout
+                android:id="@+id/disk_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingVertical="10dp"
+                android:paddingLeft="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/title_disk"
+                app:layout_constraintStart_toStartOf="@+id/title_disk"
+                app:layout_constraintTop_toBottomOf="@+id/title_disk"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

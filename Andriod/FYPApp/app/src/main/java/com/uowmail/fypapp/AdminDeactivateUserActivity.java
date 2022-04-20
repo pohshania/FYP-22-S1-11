@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,7 @@ public class AdminDeactivateUserActivity extends AppCompatActivity {
         // MJ - ActionBar setting
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Deactivate User Account");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.activity_admin_deactivate_user);
 
@@ -156,9 +158,18 @@ public class AdminDeactivateUserActivity extends AppCompatActivity {
                     }
                 });
 
-
-
             }
         });
+    }
+
+    // MJ - enable back button in ActionBar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

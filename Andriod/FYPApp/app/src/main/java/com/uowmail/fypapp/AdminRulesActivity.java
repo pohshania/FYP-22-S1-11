@@ -124,6 +124,7 @@ public class AdminRulesActivity extends AppCompatActivity {
             };
 
 
+    // MJ - enable back button in ActionBar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

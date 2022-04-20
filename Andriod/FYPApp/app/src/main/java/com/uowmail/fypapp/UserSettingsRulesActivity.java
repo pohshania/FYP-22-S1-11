@@ -169,7 +169,7 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
         textView1.setLayoutParams(lp);
 
         textView1.setText(title +" = "+ value);
-        textView1.setPadding(10, 20, 10, 20);// in pixels (left, top, right, bottom)
+        textView1.setPadding(0, 20, 10, 20);// in pixels (left, top, right, bottom)
         textView1.setTextSize(20);
         textView1.setTextColor(Color.BLACK);
 
@@ -180,7 +180,7 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
         checkBox.setText("enabled");
         checkBox.setTextColor(Color.BLACK);
         checkBox.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#009900")));
-        checkBox.setPadding(10, 10, 30, 30);// in pixels (left, top, right, bottom)
+        checkBox.setPadding(0, 10, 90, 30);// in pixels (left, top, right, bottom)
         checkBox.setChecked(true);
         checkBox.setEnabled(false);
 

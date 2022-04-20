@@ -159,14 +159,17 @@ public class UserHomeActivity extends AppCompatActivity {
 
         // shania
         Login main = new Login();
-        popupMenu.getMenu().findItem(R.id.username).setTitle("Username: " + main.getUserName());
+        popupMenu.getMenu().findItem(R.id.username).setTitle(/*"Username: " + */main.getUserName());
         popupMenu.setForceShowIcon(true);
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                if(menuItem.getItemId() == R.id.username)
-                    Toast.makeText( UserHomeActivity.this, "You clicked in the username", Toast.LENGTH_SHORT).show();
+                if(menuItem.getItemId() == R.id.username) {
+                    Toast.makeText(UserHomeActivity.this, "You clicked in the username", Toast.LENGTH_SHORT).show();
+                }
+
+
                 if(menuItem.getItemId() == R.id.settings){
                     // YT open page to user settings
                     //startActivity(new Intent(UserHomeActivity.this, UserSettingsActivity.class));

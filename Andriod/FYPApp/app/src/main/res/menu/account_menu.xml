@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
         android:id="@+id/username"
         android:title="user name"
-        android:icon="@drawable/ic_android_black_24dp"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:iconTint="@color/cp_navy"
         />
     <item
         android:id="@+id/settings"
         android:title="Settings"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:iconTint="@color/black"
+        android:iconTint="@color/cp_navy"
         />
 
     <item
         android:id="@+id/logout"
         android:title="Logout"
         android:icon="@drawable/ic_baseline_logout_24"
-        android:iconTint="@color/black"
+        android:iconTint="@color/cp_navy"
         />
 </menu>

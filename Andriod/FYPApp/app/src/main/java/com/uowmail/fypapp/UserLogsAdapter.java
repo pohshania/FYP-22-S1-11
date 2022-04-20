@@ -32,13 +32,13 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
 
         if(position != RecyclerView.NO_POSITION){
             // Do your binding here
-            holder.doc_id.setText(model.getDocument_id());
+            //holder.doc_id.setText(model.getDocument_id());
 
         }
 
-        holder.doc_id.setText(model.getDocument_id());
+        //holder.doc_id.setText(model.getDocument_id());
         //holder.doc_id.setText("HEEHEE");
-        //holder.doc_id.setText(formatDocumentID(model.getDocument_id()));
+        holder.doc_id.setText(formatDocumentID(model.getDocument_id()));
         Log.d("POSITION","Position: " + position);
 
     }
@@ -95,6 +95,8 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
         UserLogsFragment.enableProgressBar();
         UserLogsFragment.disableFilterButton();
     }
+
+
 
     // Viewholder class for user logs
     protected class UserLogsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

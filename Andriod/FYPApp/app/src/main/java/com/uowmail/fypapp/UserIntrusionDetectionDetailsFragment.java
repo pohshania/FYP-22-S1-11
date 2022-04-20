@@ -189,6 +189,19 @@ public class UserIntrusionDetectionDetailsFragment extends Fragment {
             }
         });
 
+        // download
+        download = view.findViewById(R.id.userIntrusionDetails_download);
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                downloadFile(date.getText().toString(), disk_read.getText().toString(), disk_write.getText().toString(),
+                        idling.getText().toString() + " " + idling_avg.getText().toString() + " " + idling_min.getText().toString() + " " + idling_max.getText().toString(),
+                        net_recv.getText().toString(), net_send.getText().toString(),
+                        sys.getText().toString() + " " + sys_avg.getText().toString() + " " + sys_min.getText().toString() + " " + sys_max.getText().toString(),
+                        usr.getText().toString() + " " + usr_avg.getText().toString() + " " + usr_min.getText().toString() + " " + usr_max.getText().toString());
+            }
+        });
+
         return view;
     }
 

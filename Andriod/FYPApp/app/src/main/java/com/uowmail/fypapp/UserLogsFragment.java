@@ -113,6 +113,7 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         mFirestoreList.setHasFixedSize(true);
         //mFirestoreList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mFirestoreList.setLayoutManager(new WrapContentLinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        adapter.notifyDataSetChanged();
         adapter.notifyItemRangeChanged(0, adapter.getItemCount());
         adapter.notifyItemChanged(0);
         mFirestoreList.setAdapter(adapter);

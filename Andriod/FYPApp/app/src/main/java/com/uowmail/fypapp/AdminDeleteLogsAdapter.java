@@ -1,5 +1,6 @@
 package com.uowmail.fypapp;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -51,7 +52,7 @@ public class AdminDeleteLogsAdapter extends FirestoreRecyclerAdapter<AdminDelete
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull AdminDeleteLogsViewHolder holder, int position, @NonNull AdminDeleteLogsModel model) {
+    protected void onBindViewHolder(@NonNull AdminDeleteLogsViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull AdminDeleteLogsModel model) {
 
         if(position != RecyclerView.NO_POSITION){
             // Do your binding here
@@ -79,9 +80,7 @@ public class AdminDeleteLogsAdapter extends FirestoreRecyclerAdapter<AdminDelete
                                 holder.options.getContext().startActivity(intent);
                                 break;
                             case R.id.adminDeleteLogs_menu_menu_delete:
-                                //deleteItem(getAdapterPosition());
                                 fAuth = FirebaseAuth.getInstance();
-
 
                                 dialogBuilder = new AlertDialog.Builder(holder.options.getContext());
                                 LayoutInflater inflater= LayoutInflater.from(holder.options.getContext());
@@ -126,6 +125,7 @@ public class AdminDeleteLogsAdapter extends FirestoreRecyclerAdapter<AdminDelete
                                             public void onSuccess(AuthResult authResult) {
                                                 Toast.makeText(holder.options.getContext(), "Log deleted.", Toast.LENGTH_SHORT).show();
                                                 getSnapshots().getSnapshot(position).getReference().delete();
+                                                notifyItemRemoved(position);
                                                 dialog.dismiss();
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
@@ -202,6 +202,9 @@ public class AdminDeleteLogsAdapter extends FirestoreRecyclerAdapter<AdminDelete
     @Override
     public void updateOptions(@NonNull FirestoreRecyclerOptions<AdminDeleteLogsModel> options) {
         super.updateOptions(options);
+
+        notifyDataSetChanged();
+
         AdminDeleteLogsActivity.hideNoDateFoundText();
         AdminDeleteLogsActivity.enableProgressBar();
         AdminDeleteLogsActivity.disableFilterButton();

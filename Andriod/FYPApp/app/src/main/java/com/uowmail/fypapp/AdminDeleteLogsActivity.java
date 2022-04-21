@@ -294,62 +294,6 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
         mFirestoreList.setAdapter(adapter);
     }
 
-    // MJ - Popup window to enter password --------------------------------------------------------------------------------------
-    public void createNewContactDialog(int position){
-        dialogBuilder = new AlertDialog.Builder(this);
-        final View passwordPopupView = getLayoutInflater().inflate(R.layout.popup_for_password, null);
-
-        saveChange = (Button) passwordPopupView.findViewById(R.id.saveButton);
-        cancelBtn = (Button) passwordPopupView.findViewById(R.id.cancelButton);
-
-        dialogBuilder.setView(passwordPopupView);
-        dialog = dialogBuilder.create();
-        dialog.show();
-
-        cancelBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                // define save button here!
-                dialog.dismiss();
-            }
-        });
-
-
-        // authentication
-        saveChange.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-
-                currAdminEmail = fAuth.getCurrentUser().getEmail();
-
-                adminPassword = (EditText) dialog.findViewById(R.id.admin_password);
-                currAdminPassword = adminPassword.getText().toString().trim();
-
-                if(TextUtils.isEmpty(currAdminPassword)){
-                    adminPassword.setError("Password is required!");
-                    return;
-                }
-
-                Log.d("ADMIN INFO", currAdminEmail + currAdminPassword);
-
-
-                fAuth.signInWithEmailAndPassword(currAdminEmail, currAdminPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(AdminDeleteLogsActivity.this, "Log deleted.", Toast.LENGTH_SHORT).show();
-                        adapter.deleteItem(position);
-                        dialog.dismiss();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AdminDeleteLogsActivity.this, "Incorrect Admin password." + e.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-    }
-
     public void showDatePickerDialog(View view){
         final Calendar newCalendar = Calendar.getInstance();
         final DatePickerDialog datePickerDialog = new DatePickerDialog(AdminDeleteLogsActivity.this, new DatePickerDialog.OnDateSetListener() {

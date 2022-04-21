@@ -53,6 +53,9 @@ public class UserNotificationsAdapter extends FirestoreRecyclerAdapter<UserNotif
     @Override
     public void onDataChanged() {
         super.onDataChanged();
+
+        notifyDataSetChanged();
+
         UserNotificationsFragment.disableProgressBar();
     }
 

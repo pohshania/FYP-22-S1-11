@@ -76,6 +76,9 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
     @Override
     public void onDataChanged() {
         super.onDataChanged();
+
+        notifyDataSetChanged();
+
         UserLogsFragment.disableProgressBar();
         UserLogsFragment.enableFilterButton();
 
@@ -91,6 +94,9 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
     @Override
     public void updateOptions(@NonNull FirestoreRecyclerOptions<UserLogsModel> options) {
         super.updateOptions(options);
+
+        notifyDataSetChanged();
+
         UserLogsFragment.hideNoDateFoundText();
         UserLogsFragment.enableProgressBar();
         UserLogsFragment.disableFilterButton();

@@ -180,6 +180,9 @@ public class AdminDeleteLogsAdapter extends FirestoreRecyclerAdapter<AdminDelete
     @Override
     public void onDataChanged() {
         super.onDataChanged();
+
+        notifyDataSetChanged();
+
         AdminDeleteLogsActivity.disableProgressBar();
         AdminDeleteLogsActivity.enableFilterButton();
 

@@ -15,12 +15,12 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/userNotifications_warning"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_crisis_alert_24"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
-            android:layout_centerVertical="true"/>
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:scaleX="1.0"
+            android:scaleY="1.0"
+            android:src="@drawable/alert" />
 
         <TextView
             android:id="@+id/userNotifications_recyclerView_docID"

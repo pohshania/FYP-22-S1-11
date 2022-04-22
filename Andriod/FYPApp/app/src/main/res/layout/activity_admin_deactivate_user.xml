@@ -10,7 +10,7 @@
         android:id="@+id/deactivateUser_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="84dp"
         android:text="Enter the user's email below to deactivate it:"
         android:textColor="@color/black"
         android:textSize="18dp"
@@ -20,8 +20,8 @@
 
     <EditText
         android:id="@+id/deactivateUser_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="215dp"
+        android:layout_height="38dp"
         android:layout_marginTop="60dp"
         android:background="#e6f0ff"
         android:ems="10"

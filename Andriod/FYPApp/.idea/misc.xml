@@ -41,16 +41,21 @@
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/user_logs_list_item_single.xml" value="0.1" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/user_logs_list_item_single2.xml" value="0.24378109452736318" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/user_notification_list_item_single.xml" value="0.1" />
-        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/user_notifications_list_item_single.xml" value="0.264" />
+        <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/user_notifications_list_item_single.xml" value="0.1" />
         <entry key="..\:/Users/Shania Poh/Desktop/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/menu/admin_delete_logs_options_menu.xml" value="0.209375" />
         <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/activity_admin_create_new_user.xml" value="0.264" />
         <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/activity_admin_deactivate_user.xml" value="0.264" />
         <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/activity_admin_rules.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/activity_logs.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/activity_user_settings.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/admin_delete_logs_bottom_sheet.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/fragment_admin_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/fragment_user_intrusion_detection_details.xml" value="0.4" />
         <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/fragment_user_log_details.xml" value="0.264" />
         <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/fragment_user_logs.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/popup_for_password.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/user_logs_bottom_sheet.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/leeyt/Desktop/FYPApp/FYPApp/Andriod/FYPApp/app/src/main/res/layout/user_notifications_list_item_single.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/leeyt/Documents/GitHub/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/drawable/back.xml" value="0.1915" />
         <entry key="..\:/Users/leeyt/Documents/GitHub/FYP-22-S1-11/Andriod/FYPApp/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />

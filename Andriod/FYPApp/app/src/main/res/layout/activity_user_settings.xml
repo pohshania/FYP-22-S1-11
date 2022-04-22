@@ -7,43 +7,41 @@
     android:layout_height="match_parent"
     tools:context=".UserSettingsActivity">
 
-
-    <Switch
-        android:id="@+id/volumeToggleSwitch"
-        android:layout_width="333dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="16dp"
-        android:gravity="left|center"
-        android:text="Toggle Notification Volume"
-        android:textSize="16sp"
+    <View
+        android:id="@+id/user_settings_separator"
+        android:layout_width="422dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="24dp"
+        android:background="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/rulesButton" />
 
     <TextView
         android:id="@+id/feedback_tv"
         android:layout_width="333dp"
         android:layout_height="23dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:gravity="left|center"
         android:text="Changing rules? Feedback to admins below!"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rulesButton" />
+        app:layout_constraintTop_toBottomOf="@+id/user_settings_separator" />
 
     <EditText
         android:id="@+id/email_et"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:paddingHorizontal="10dp"
         android:background="#A9A9A9"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="CreepingDonut@gmail.com"
         android:focusable="false"
+        android:inputType="textPersonName"
+        android:paddingHorizontal="10dp"
+        android:text="CreepingDonut@gmail.com"
         android:textColor="#333333"
         app:layout_constraintEnd_toEndOf="@+id/rules_et"
         app:layout_constraintHorizontal_bias="0.0"
@@ -67,11 +65,11 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:paddingHorizontal="10dp"
         android:background="#DEDEDE"
         android:ems="10"
         android:hint="Enter subject"
         android:inputType="textMultiLine"
+        android:paddingHorizontal="10dp"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="@+id/email_et"
         app:layout_constraintHorizontal_bias="0.194"
@@ -83,12 +81,12 @@
         android:layout_width="333dp"
         android:layout_height="221dp"
         android:layout_marginTop="16dp"
-        android:paddingHorizontal="10dp"
         android:background="#DEDEDE"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Enter Feedback Here..."
         android:inputType="textMultiLine"
+        android:paddingHorizontal="10dp"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,10 +98,11 @@
         android:id="@+id/rulesButton"
         android:layout_width="333dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="32dp"
         android:text="Click here to view rules"
-        app:layout_constraintStart_toStartOf="@+id/volumeToggleSwitch"
-        app:layout_constraintTop_toBottomOf="@+id/volumeToggleSwitch" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,8 +18,8 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_centerVertical="true"
-            android:scaleX="1.0"
-            android:scaleY="1.0"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
             android:src="@drawable/alert" />
 
         <TextView
@@ -39,7 +39,7 @@
             android:id="@+id/userNotifications_goToLogDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:paddingTop="5dp"
             android:layout_toEndOf="@+id/userNotifications_recyclerView_docID"
             android:src="@drawable/logs_detail" />
 

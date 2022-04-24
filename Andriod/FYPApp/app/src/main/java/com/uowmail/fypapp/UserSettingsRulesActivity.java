@@ -169,7 +169,7 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
         textView1.setLayoutParams(lp);
 
         textView1.setText(title +" = "+ value);
-        textView1.setPadding(0, 20, 10, 20);// in pixels (left, top, right, bottom)
+        textView1.setPadding(0, 10, 10, 10);// in pixels (left, top, right, bottom)
         textView1.setTextSize(20);
         textView1.setTextColor(Color.BLACK);
 

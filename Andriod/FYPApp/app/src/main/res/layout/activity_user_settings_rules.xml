@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingVertical="20dp"
-                android:paddingLeft="20dp"
+                android:paddingHorizontal="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/title_cpu"
                 app:layout_constraintStart_toStartOf="@+id/title_cpu"
                 app:layout_constraintTop_toBottomOf="@+id/title_cpu">
@@ -49,7 +49,7 @@
                     android:id="@+id/title_cpu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="CPU"
+                    android:text="CPU (%)"
                     android:textColor="#000000"
                     android:textSize="25sp"
                     android:textStyle="bold"
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingVertical="30dp"
-                android:paddingLeft="20dp"
+                android:paddingHorizontal="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/title_network"
                 app:layout_constraintStart_toStartOf="@+id/title_network"
                 app:layout_constraintTop_toBottomOf="@+id/title_network">
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingVertical="20dp"
-                android:paddingLeft="20dp"
+                android:paddingHorizontal="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/title_disk"
                 app:layout_constraintStart_toStartOf="@+id/title_disk"
                 app:layout_constraintTop_toBottomOf="@+id/title_disk">
@@ -116,12 +116,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Disk"
+                    android:justificationMode="inter_word"
                     android:textColor="#000000"
                     android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/view2"
                     app:layout_constraintStart_toStartOf="@+id/view2"
                     app:layout_constraintTop_toBottomOf="@+id/view2" />
+
             </LinearLayout>
 
 

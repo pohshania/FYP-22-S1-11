@@ -146,11 +146,11 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
                 disk_ll = (LinearLayout) findViewById(R.id.disk_layout);
 
                 // todo - call function that create text view dynamically
-                displayRule(cpu_ll, "CPU_max",   cpu_max,    cpu);
-                displayRule(net_ll, "net_send",  net_recv,   netR);
-                displayRule(net_ll, "net_recv",  net_send,   netS);
-                displayRule(disk_ll,"disk_read", disk_read,  diskR);
-                displayRule(disk_ll,"disk_writ", disk_write, diskW);
+                displayRule(cpu_ll, "CPU Maxium",     cpu_max,    cpu);
+                displayRule(net_ll, "Network Send",   net_recv+"M",   netR);
+                displayRule(net_ll, "Network Recieve",net_send+"M",   netS);
+                displayRule(disk_ll,"Disk Read",      disk_read+"M",  diskR);
+                displayRule(disk_ll,"Disk Write",     disk_write+"M", diskW);
             }
         });
     }
@@ -167,17 +167,23 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
         // Text view
         TextView textView1 = new TextView(this);
         textView1.setLayoutParams(lp);
+        TextView textView2 = new TextView(this);
+        textView2.setLayoutParams(lp);
 
-        textView1.setText(title +" = "+ value);
+        textView1.setText(title);
         textView1.setPadding(0, 10, 10, 10);// in pixels (left, top, right, bottom)
         textView1.setTextSize(20);
         textView1.setTextColor(Color.BLACK);
+        textView2.setText(" : "+ value);
+        textView2.setPadding(0, 10, 0, 10);// in pixels (left, top, right, bottom)
+        textView2.setTextSize(20);
+        textView2.setTextColor(Color.BLACK);
 
         // Check Box
         CheckBox checkBox = new CheckBox(this);
 //        checkBox.setLayoutParams(lp);
 
-        checkBox.setText("enabled");
+        checkBox.setText("Enabled");
         checkBox.setTextColor(Color.BLACK);
         checkBox.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#009900")));
         checkBox.setPadding(0, 10, 90, 30);// in pixels (left, top, right, bottom)
@@ -188,7 +194,8 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
         if(enabled.trim().contains("false"))
         {
             textView1.setTextColor(Color.GRAY);
-            checkBox.setText("disabled");
+            textView2.setTextColor(Color.GRAY);
+            checkBox.setText("Disabled");
             checkBox.setChecked(true);
             checkBox.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#9d7b7b")));
             checkBox.setTextColor(Color.GRAY);
@@ -196,6 +203,7 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
         }
         ll.addView(newLL);
         newLL.addView(textView1);
+        newLL.addView(textView2);
         newLL.addView(checkBox);
 
     }

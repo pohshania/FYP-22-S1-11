@@ -21,35 +21,26 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.protobuf.StringValue;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,16 +55,15 @@ public class UserHomeFragment extends Fragment  {
     // MJ - database ----------------------------------------------------------------------------------------
     FirebaseFirestore fStore;
     Task<QuerySnapshot> qs;
-    float idling, sys, usr, net_recv, net_send, disk_read, disk_write;
 
     // MJ - swipte to refresh
     SwipeRefreshLayout refreshLayout;
     Integer num = 0;
 
-    // MJ - PieChart
+    // MJ - donutGraph
     float usageValue = 0;
     String valueWunit;
-    private PieChart pieChart_cpu, pieChart_network, pieChart_disk;
+    private PieChart donutGraph_cpu, donutGraph_network, donutGraph_disk;
     Button cpuBtn, networkBtn, diskBtn;
 
     // MJ - LINE CHART
@@ -141,25 +131,25 @@ public class UserHomeFragment extends Fragment  {
         cpuBtn.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v) {
-                pieChart_cpu.setVisibility(View.VISIBLE);
-                pieChart_network.setVisibility(View.GONE);
-                pieChart_disk.setVisibility(View.GONE);
+                donutGraph_cpu.setVisibility(View.VISIBLE);
+                donutGraph_network.setVisibility(View.GONE);
+                donutGraph_disk.setVisibility(View.GONE);
             }
         });
         networkBtn.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v) {
-                pieChart_cpu.setVisibility(View.GONE);
-                pieChart_network.setVisibility(View.VISIBLE);
-                pieChart_disk.setVisibility(View.GONE);
+                donutGraph_cpu.setVisibility(View.GONE);
+                donutGraph_network.setVisibility(View.VISIBLE);
+                donutGraph_disk.setVisibility(View.GONE);
             }
         });
         diskBtn.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v) {
-                pieChart_cpu.setVisibility(View.GONE);
-                pieChart_network.setVisibility(View.GONE);
-                pieChart_disk.setVisibility(View.VISIBLE);
+                donutGraph_cpu.setVisibility(View.GONE);
+                donutGraph_network.setVisibility(View.GONE);
+                donutGraph_disk.setVisibility(View.VISIBLE);
             }
         });
 
@@ -167,18 +157,15 @@ public class UserHomeFragment extends Fragment  {
         TextView title = (TextView)getActivity().findViewById(R.id.toolbar_title);
         title.setText("Creeping Donut");
 
-        // MJ - adding pieChart-------------------------------------------------------------------------------
-        pieChart_cpu = v.findViewById(R.id.piechart_cpu);
-        getPieChartData(pieChart_cpu, "cpu");
-//        setupPieChart(pieChart_cpu, "CPU", float usageValue);
+        // MJ - adding donutGraph-------------------------------------------------------------------------------
+        donutGraph_cpu = v.findViewById(R.id.donutgraph_cpu);
+        getDonutGraphData(donutGraph_cpu, "cpu");
 
-        pieChart_network = v.findViewById(R.id.piechart_network);
-        getPieChartData(pieChart_network, "network");
-//        setupPieChart(pieChart_network, "Network Usage");
+        donutGraph_network = v.findViewById(R.id.donutgraph_network);
+        getDonutGraphData(donutGraph_network, "network");
 
-        pieChart_disk = v.findViewById(R.id.piechart_disk);
-        getPieChartData(pieChart_disk, "disk");
-//        setupPieChart(pieChart_disk, "Disk Usage");
+        donutGraph_disk = v.findViewById(R.id.donutgraph_disk);
+        getDonutGraphData(donutGraph_disk, "disk");
 
         // MJ - LINE CHART ------------------------------------------------------------------------------
         mChart = (LineChart) v.findViewById(R.id.linechart);
@@ -195,15 +182,15 @@ public class UserHomeFragment extends Fragment  {
         // MJ - Switch ------------------------------------------------------------------------------
         switchCompat = v.findViewById(R.id.switchButton);
         // main graph = donut graph shows on default
-        pieChart_cpu.setVisibility(View.VISIBLE);
+        donutGraph_cpu.setVisibility(View.VISIBLE);
         switchCompat.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){
                 if (switchCompat.isChecked()){
                     // set it as line graph
-                    pieChart_cpu.setVisibility(View.GONE);
-                    pieChart_network.setVisibility(View.GONE);
-                    pieChart_disk.setVisibility(View.GONE);
+                    donutGraph_cpu.setVisibility(View.GONE);
+                    donutGraph_network.setVisibility(View.GONE);
+                    donutGraph_disk.setVisibility(View.GONE);
                     cpuBtn.setVisibility(View.GONE);
                     networkBtn.setVisibility(View.GONE);
                     diskBtn.setVisibility(View.GONE);
@@ -211,9 +198,9 @@ public class UserHomeFragment extends Fragment  {
 
                 }else{
                     // set it as donut graph
-                    pieChart_cpu.setVisibility(View.VISIBLE);
-                    pieChart_network.setVisibility(View.GONE);
-                    pieChart_disk.setVisibility(View.GONE);
+                    donutGraph_cpu.setVisibility(View.VISIBLE);
+                    donutGraph_network.setVisibility(View.GONE);
+                    donutGraph_disk.setVisibility(View.GONE);
                     cpuBtn.setVisibility(View.VISIBLE);
                     networkBtn.setVisibility(View.VISIBLE);
                     diskBtn.setVisibility(View.VISIBLE);
@@ -222,15 +209,15 @@ public class UserHomeFragment extends Fragment  {
             }
         });
 
-        // button to change pieChart graph info (cpu, network or disk)
+        // button to change donutGraph graph info (cpu, network or disk)
 
         // MJ - Swipe to refresh
         refreshLayout = v.findViewById(R.id.refreshLayout);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // get pie chart
-                getPieChartData(pieChart_cpu, "cpu");
+                // get donutGraph
+                getDonutGraphData(donutGraph_cpu, "cpu");
                 // get line graph
                 getLineChartDate("cpu", "sys");
                 getLineChartDate("cpu", "usr");
@@ -247,26 +234,28 @@ public class UserHomeFragment extends Fragment  {
     }
 
 
-    // MJ - adding pieChart-------------------------------------------------------------------------------
-    private void setupPieChart(PieChart pieChart, String info, String usageValue){
-        // Donut not pie
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setUsePercentValues(true);
-        pieChart.setEntryLabelColor(Color.BLACK);
-        pieChart.setCenterText(info+" Usage\n" + usageValue);
-        pieChart.setCenterTextSize(24);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setTouchEnabled(false);
+    // MJ - adding donutGraph-------------------------------------------------------------------------------
+    private void setupDonutGraph(PieChart donutGraph, String info, String usageValue){
+        // Donut graph
+        donutGraph.setNoDataText("Description that you want");
+        donutGraph.setDrawHoleEnabled(true);
+        donutGraph.setUsePercentValues(true);
+        donutGraph.setEntryLabelColor(Color.BLACK);
+        donutGraph.setEntryLabelTextSize(20f);
+        donutGraph.setCenterText(info.toUpperCase()+" USAGE\n" + usageValue);
+        donutGraph.setCenterTextSize(24);
+        donutGraph.getDescription().setEnabled(false);
+        donutGraph.setTouchEnabled(false);
 
         // get legend
-        Legend l = pieChart.getLegend();
+        Legend l = donutGraph.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
         l.setDrawInside(false);
         l.setEnabled(true);
     }
-    private void getPieChartData(PieChart pieChart, final String dataType){
+    private void getDonutGraphData(PieChart donutGraph, final String dataType){
         ArrayList<Float> dataValueList = new ArrayList<Float>();
         ArrayList<String> dataNameList = new ArrayList<String>();
 
@@ -357,8 +346,8 @@ public class UserHomeFragment extends Fragment  {
                                 }
 
                                 //load data graph
-                                loadPieChartData(pieChart, dataValueList, dataNameList);
-                                setupPieChart(pieChart, dataType, valueWunit);
+                                loadDonutGraphData(donutGraph, dataValueList, dataNameList);
+                                setupDonutGraph(donutGraph, dataType, valueWunit);
 //                                System.out.println(dataType);
                             }
                         }
@@ -370,7 +359,7 @@ public class UserHomeFragment extends Fragment  {
                 });
 
     }
-    private void loadPieChartData(PieChart pieChart, ArrayList<Float> dataVal,
+    private void loadDonutGraphData(PieChart donutGraph, ArrayList<Float> dataVal,
                                   ArrayList<String> dataName) {
         ArrayList<PieEntry> entries = new ArrayList<>();
         for(int i=0; i<dataVal.size(); i++)
@@ -379,7 +368,7 @@ public class UserHomeFragment extends Fragment  {
 
         }
 
-        // add colors to the pieChart
+        // add colors to the donutGraph
         ArrayList<Integer> colors = new ArrayList<>();
         for (int color: ColorTemplate.MATERIAL_COLORS) {
             colors.add(color);
@@ -392,12 +381,12 @@ public class UserHomeFragment extends Fragment  {
 
         PieData data = new PieData(dataSet);
         data.setDrawValues(true);
-        data.setValueFormatter(new PercentFormatter(pieChart));
-        data.setValueTextSize(12f);
+        data.setValueFormatter(new PercentFormatter(donutGraph));
+        data.setValueTextSize(20f);
         data.setValueTextColor(Color.BLACK);
 
-        pieChart.setData(data);
-        pieChart.invalidate();
+        donutGraph.setData(data);
+        donutGraph.invalidate();
     }
 
 
@@ -510,15 +499,7 @@ public class UserHomeFragment extends Fragment  {
                                     }
 
                                 }
-
-                                //load data graph
-//                                loadLineChartData(dataNameList.get(0), dateValueList, dataValueList);
-//                                System.out.println(dataType);
                             }
-//                            for(int i=0; i<dataNameList.size(); i++)
-//                            {
-//                                System.out.print(dataNameList.get(i) + "=");
-//                            }
                             loadLineChartData(dataNameList.get(0), dateValueList, dataValueList, dataType);
                         }
                         else

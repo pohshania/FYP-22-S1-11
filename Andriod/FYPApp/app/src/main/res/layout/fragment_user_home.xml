@@ -45,19 +45,19 @@
                         android:id="@+id/layoutForGraphs">
 
                         <com.github.mikephil.charting.charts.PieChart
-                            android:id="@+id/piechart_cpu"
+                            android:id="@+id/donutgraph_cpu"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:layout_weight="1"
                             android:visibility="gone" />
                         <com.github.mikephil.charting.charts.PieChart
-                            android:id="@+id/piechart_network"
+                            android:id="@+id/donutgraph_network"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:layout_weight="1"
                             android:visibility="gone" />
                         <com.github.mikephil.charting.charts.PieChart
-                            android:id="@+id/piechart_disk"
+                            android:id="@+id/donutgraph_disk"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:layout_weight="1"

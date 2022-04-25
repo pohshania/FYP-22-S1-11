@@ -6,27 +6,32 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class UserIntrusionDetectionDetailsModel {
+public class UserAlertEngineDetailsModel {
 
     private ArrayList<String> abnormal;
     private Timestamp date;
+
+    private String detected_by;
     private String disk_read;
     private String disk_write;
+    private String event_status;
     private Map<String, Float> idling;
     private String net_recv;
     private String net_send;
     private Map<String, Float> sys;
     private Map<String, Float> usr;
 
-    public UserIntrusionDetectionDetailsModel(){}
+    public UserAlertEngineDetailsModel(){}
 
-    public UserIntrusionDetectionDetailsModel(ArrayList<String> abnormal, Timestamp date, String disk_read,
-                                              String disk_write, Map<String, Float> idling, String net_recv,
-                                              String net_send, Map<String, Float> sys, Map<String, Float> usr) {
+    public UserAlertEngineDetailsModel(ArrayList<String> abnormal, Timestamp date, String detected_by, String disk_read,
+                                       String disk_write, String event_status, Map<String, Float> idling, String net_recv,
+                                       String net_send, Map<String, Float> sys, Map<String, Float> usr) {
         this.abnormal = abnormal;
         this.date = date;
+        this.detected_by = detected_by;
         this.disk_read = disk_read;
         this.disk_write = disk_write;
+        this.event_status = event_status;
         this.idling = idling;
         this.net_recv = net_recv;
         this.net_send = net_send;
@@ -104,6 +109,22 @@ public class UserIntrusionDetectionDetailsModel {
 
     public void setUsr(Map<String, Float> usr) {
         this.usr = usr;
+    }
+
+    public String getDetected_by() {
+        return detected_by;
+    }
+
+    public void setDetected_by(String detected_by) {
+        this.detected_by = detected_by;
+    }
+
+    public String getEvent_status() {
+        return event_status;
+    }
+
+    public void setEvent_status(String event_status) {
+        this.event_status = event_status;
     }
 
 

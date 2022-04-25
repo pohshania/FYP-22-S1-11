@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserAnalysisEngineDetailsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <!-- ==============================  TITLE ============================== -->
+    <TextView
+        android:id="@+id/userAnalysisEngineDetails_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:background="#D79334"
+        android:text="@string/hello_blank_fragment"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/userAnalysisEngineDetails_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30sp"
+        android:text="date"
+        android:textColor="#000080"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userAnalysisEngineDetails_Title" />
+
+    <TextView
+        android:id="@+id/userAnalysisEngineDetails_detected_range"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30sp"
+        android:text="detected range"
+        android:textColor="#000080"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userAnalysisEngineDetails_date" />
+
+
+    <TextView
+        android:id="@+id/userAnalysisEngineDetails_detected_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30sp"
+        android:text="detected by"
+        android:textColor="#000080"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userAnalysisEngineDetails_detected_range" />
+
+
+    <TextView
+        android:id="@+id/userAnalysisEngineDetails_detection_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30sp"
+        android:text="detection type"
+        android:textColor="#000080"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userAnalysisEngineDetails_detected_by" />
+
+    <TextView
+        android:id="@+id/userAnalysisEngineDetails_event_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30sp"
+        android:text="event status"
+        android:textColor="#000080"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userAnalysisEngineDetails_detection_type" />
+
+
+    <!-- ==============================  DOWNLOAD ============================== -->
+    <Button
+        android:id="@+id/userAlertEngineDetails_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Download"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userAnalysisEngineDetails_event_status" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

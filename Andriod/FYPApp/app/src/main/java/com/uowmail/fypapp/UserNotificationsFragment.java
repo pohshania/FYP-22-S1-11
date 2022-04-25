@@ -299,10 +299,30 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
     public void onItemClick(UserNotificationsModel snapshot, int position) {
         Log.d("ITEM_CLICK", "Clicked the item: " + position + " and the ID is: " + snapshot.getDocument_id());
 
-        Fragment fragment = UserIntrusionDetectionDetailsFragment.newInstance(snapshot.getDocument_id(), mParam1);
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment, "user_intrusion_detecion_details_fragment");
-        transaction.addToBackStack(null);
-        transaction.commit();
+        if(snapshot.getDocument_id().contains("_alert")){
+            Fragment fragment = UserAlertEngineDetailsFragment.newInstance(snapshot.getDocument_id(), mParam1);
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, fragment, "user_alert_engine_details_fragment");
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+
+        if(snapshot.getDocument_id().contains("_analysis")){
+            Fragment fragment = UserAnalysisEngineDetailsFragment.newInstance(snapshot.getDocument_id(), mParam1);
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, fragment, "user_analysis_engine_details_fragment");
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+
+        if(snapshot.getDocument_id().contains("_signature")){
+
+        }
+
+//        Fragment fragment = UserIntrusionDetectionDetailsFragment.newInstance(snapshot.getDocument_id(), mParam1);
+//        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.container, fragment, "user_intrusion_detecion_details_fragment");
+//        transaction.addToBackStack(null);
+//        transaction.commit();
     }
 }

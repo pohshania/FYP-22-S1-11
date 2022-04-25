@@ -31,17 +31,19 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link UserIntrusionDetectionDetailsFragment#newInstance} factory method to
+ * Use the {@link UserAlertEngineDetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserIntrusionDetectionDetailsFragment extends Fragment {
+public class UserAlertEngineDetailsFragment extends Fragment {
 
     private FirebaseFirestore db;
 
     private TextView abnormal;
     private TextView date;
+    private TextView detected_by;
     private TextView disk_read;
     private TextView disk_write;
+    private TextView event_status;
     private TextView idling, idling_avg, idling_min, idling_max;
     private TextView cpu_usage;
     private TextView net_recv;
@@ -62,7 +64,7 @@ public class UserIntrusionDetectionDetailsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public UserIntrusionDetectionDetailsFragment() {
+    public UserAlertEngineDetailsFragment() {
         // Required empty public constructor
     }
 
@@ -74,8 +76,8 @@ public class UserIntrusionDetectionDetailsFragment extends Fragment {
      * @return A new instance of fragment UserLogDetailsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static UserIntrusionDetectionDetailsFragment newInstance(String param1, String param2) {
-        UserIntrusionDetectionDetailsFragment fragment = new UserIntrusionDetectionDetailsFragment();
+    public static UserAlertEngineDetailsFragment newInstance(String param1, String param2) {
+        UserAlertEngineDetailsFragment fragment = new UserAlertEngineDetailsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -97,36 +99,38 @@ public class UserIntrusionDetectionDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_user_intrusion_detection_details, container, false);
+        View view =  inflater.inflate(R.layout.fragment_user_alert_engine_details, container, false);
 
         // MJ - set title of the page
         TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
-        title.setText("Intrusion Details");
+        title.setText("Alert Engine Intrusion Details");
 
 
-        TextView titleTV = view.findViewById(R.id.userIntrusionDetails_Title);
+        TextView titleTV = view.findViewById(R.id.userAlertEngineDetails_Title);
         titleTV.setText(mParam1);
 
 
-        abnormal   = view.findViewById(R.id.userIntrusionDetails_abnormal);
-        date       = view.findViewById(R.id.userIntrusionDetails_date);
-        disk_read  = view.findViewById(R.id.userIntrusionDetails_diskRead);
-        disk_write = view.findViewById(R.id.userIntrusionDetails_diskWrite);
-        idling     = view.findViewById(R.id.userIntrusionDetails_idling);
-        idling_avg = view.findViewById(R.id.userIntrusionDetails_idling_avg);
-        idling_min = view.findViewById(R.id.userIntrusionDetails_idling_min);
-        idling_max = view.findViewById(R.id.userIntrusionDetails_idling_max);
-        cpu_usage  = view.findViewById(R.id.userIntrusionDetails_CPU_usage);
-        net_recv   = view.findViewById(R.id.userIntrusionDetails_netRecv);
-        net_send   = view.findViewById(R.id.userIntrusionDetails_netSend);
-        sys        = view.findViewById(R.id.userIntrusionDetails_sys);
-        sys_avg    = view.findViewById(R.id.userIntrusionDetails_sys_avg);
-        sys_min    = view.findViewById(R.id.userIntrusionDetails_sys_min);
-        sys_max    = view.findViewById(R.id.userIntrusionDetails_sys_max);
-        usr        = view.findViewById(R.id.userIntrusionDetails_usr);
-        usr_avg    = view.findViewById(R.id.userIntrusionDetails_usr_avg);
-        usr_min    = view.findViewById(R.id.userIntrusionDetails_usr_min);
-        usr_max    = view.findViewById(R.id.userIntrusionDetails_usr_max);
+        abnormal   = view.findViewById(R.id.userAlertEngineDetails_abnormal);
+        date       = view.findViewById(R.id.userAlertEngineDetails_date);
+        detected_by= view.findViewById(R.id.userAlertEngineDetails_detectedBy);
+        disk_read  = view.findViewById(R.id.userAlertEngineDetails_diskRead);
+        disk_write = view.findViewById(R.id.userAlertEngineDetails_diskWrite);
+        event_status = view.findViewById(R.id.userAlertEngineDetails_eventStatus);
+        idling     = view.findViewById(R.id.userAlertEngineDetails_idling);
+        idling_avg = view.findViewById(R.id.userAlertEngineDetails_idling_avg);
+        idling_min = view.findViewById(R.id.userAlertEngineDetails_idling_min);
+        idling_max = view.findViewById(R.id.userAlertEngineDetails_idling_max);
+        cpu_usage  = view.findViewById(R.id.userAlertEngineDetails_CPU_usage);
+        net_recv   = view.findViewById(R.id.userAlertEngineDetails_netRecv);
+        net_send   = view.findViewById(R.id.userAlertEngineDetails_netSend);
+        sys        = view.findViewById(R.id.userAlertEngineDetails_sys);
+        sys_avg    = view.findViewById(R.id.userAlertEngineDetails_sys_avg);
+        sys_min    = view.findViewById(R.id.userAlertEngineDetails_sys_min);
+        sys_max    = view.findViewById(R.id.userAlertEngineDetails_sys_max);
+        usr        = view.findViewById(R.id.userAlertEngineDetails_usr);
+        usr_avg    = view.findViewById(R.id.userAlertEngineDetails_usr_avg);
+        usr_min    = view.findViewById(R.id.userAlertEngineDetails_usr_min);
+        usr_max    = view.findViewById(R.id.userAlertEngineDetails_usr_max);
 
 
 
@@ -138,31 +142,44 @@ public class UserIntrusionDetectionDetailsFragment extends Fragment {
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                UserIntrusionDetectionDetailsModel intrusionDetails = documentSnapshot.toObject(UserIntrusionDetectionDetailsModel.class);
+                UserAlertEngineDetailsModel intrusionDetails = documentSnapshot.toObject(UserAlertEngineDetailsModel.class);
 
-                Log.d("TEST_QUERY", intrusionDetails.getAbnormal() + " " + intrusionDetails.getDate() + " " + intrusionDetails.getDisk_read() + " " + intrusionDetails.getDisk_write() + " " +
-                        intrusionDetails.getIdling() + " " + intrusionDetails.getNet_recv() + " " + intrusionDetails.getNet_send() + " " + intrusionDetails.getSys() +
-                        " " + intrusionDetails.getUsr());
-
-                //Date d = logDetails.getTimestamp().toDate();
+                // abnormal
                 abnormal.setText("Abnormal: " + intrusionDetails.getAbnormal());
                 abnormal.setTextColor(Color.parseColor("#FF0000"));
 
+                // date
+                date.setText("Date: " + intrusionDetails.getDate().toDate());
 
+                // detected by
+                detected_by.setText("Detected by: " + intrusionDetails.getDetected_by());
+
+                // disk
                 disk_read.setText("Disk Read: " + intrusionDetails.getDisk_read());
                 disk_write.setText("Disk Write: " + intrusionDetails.getDisk_write());
+
+                // event status
+                event_status.setText("Event status: " + intrusionDetails.getEvent_status());
+
+                // idling
                 idling.setText("Idling:");
                 idling_avg.setText("Avg: " + intrusionDetails.getIdling().get("avg"));
                 idling_min.setText("Min: " + intrusionDetails.getIdling().get("min"));
                 idling_max.setText("Max: " + intrusionDetails.getIdling().get("max"));
                 float usage = 100 - intrusionDetails.getIdling().get("min");
                 cpu_usage.setText("CPU usage: " + usage);
+
+                // network
                 net_recv.setText("Network recieve: " + intrusionDetails.getNet_recv());
                 net_send.setText("Network send: " + intrusionDetails.getNet_send());
+
+                // sys
                 sys.setText("System:");
                 sys_avg.setText("Avg: " + intrusionDetails.getSys().get("avg"));
                 sys_min.setText("Min: " + intrusionDetails.getSys().get("min"));
                 sys_max.setText("Max: " + intrusionDetails.getSys().get("max"));
+
+                // usr
                 usr.setText("User:");
                 usr_avg.setText("Avg: " + intrusionDetails.getUsr().get("avg"));
                 usr_min.setText("Min: " + intrusionDetails.getUsr().get("min"));
@@ -175,7 +192,7 @@ public class UserIntrusionDetectionDetailsFragment extends Fragment {
                     String abnormalType = intrusionDetails.getAbnormal().get(i);
                     Log.d("===== ABNORMAL_TYPE =====", abnormalType);
 
-                    if(abnormalType.equals("CPU"))
+                    if(abnormalType.equals("CPU max"))
                         cpu_usage.setTextColor(Color.parseColor("#FF0000"));
                     if(abnormalType.equals("disk_read"))
                         disk_read.setTextColor(Color.parseColor("#FF0000"));
@@ -190,7 +207,7 @@ public class UserIntrusionDetectionDetailsFragment extends Fragment {
         });
 
         // download
-        download = view.findViewById(R.id.userIntrusionDetails_download);
+        download = view.findViewById(R.id.userAlertEngineDetails_download);
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

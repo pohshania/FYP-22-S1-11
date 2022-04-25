@@ -580,7 +580,7 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         noDataFoundText.setText("There are no logs found in the database on this date.");
     }
 
-    public static void hideNoDateFoundText(){
+    public static void hideNoDataFoundText(){
         noDataFoundText.setText("");
     }
 

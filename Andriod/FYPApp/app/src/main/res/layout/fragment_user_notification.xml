@@ -6,10 +6,84 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?android:attr/actionBarSize">
 
+    <TextView
+        android:id="@+id/userNotifications_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select type of detection engine:"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userNotifications_title"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_allEngines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/userNotifications_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/radio_alertEngine"
+            android:text="All"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radio_alertEngine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/userNotifications_title"
+            app:layout_constraintStart_toEndOf="@+id/radio_allEngines"
+            app:layout_constraintEnd_toStartOf="@+id/radio_analysisEngine"
+            android:text="Alert" />
+
+        <RadioButton
+            android:id="@+id/radio_analysisEngine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/userNotifications_title"
+            app:layout_constraintStart_toEndOf="@+id/radio_alertEngine"
+            app:layout_constraintEnd_toStartOf="@+id/radio_signatureEngine"
+            android:text="Analysis"/>
+
+        <RadioButton
+            android:id="@+id/radio_signatureEngine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/userNotifications_title"
+            app:layout_constraintStart_toEndOf="@+id/radio_analysisEngine"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Signature" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/userNotifications_apply_btn"
+        android:layout_marginStart="30dp"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userNotifications_title"
+        app:layout_constraintStart_toEndOf="@+id/radiogroup"
+        android:text="ok" />
+
+
+
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="85dp"
         app:layout_constraintTop_toBottomOf="parent">
 
         <ProgressBar
@@ -34,6 +108,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="100dp"
             android:text=""/>
+
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/userNotifications_swipeRefreshLayout"

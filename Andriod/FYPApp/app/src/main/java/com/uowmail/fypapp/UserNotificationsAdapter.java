@@ -57,11 +57,21 @@ public class UserNotificationsAdapter extends FirestoreRecyclerAdapter<UserNotif
         notifyDataSetChanged();
 
         UserNotificationsFragment.disableProgressBar();
+
+        if(getItemCount() == 0)
+        {
+            UserNotificationsFragment.showNoDataFoundText();
+        }else{
+            UserNotificationsFragment.hideNoDataFoundText();
+        }
     }
 
     @Override
     public void updateOptions(@NonNull FirestoreRecyclerOptions<UserNotificationsModel> options) {
         super.updateOptions(options);
+
+        UserNotificationsFragment.hideNoDataFoundText();
+        UserNotificationsFragment.enableProgressBar();
     }
 
     private String formatDocumentID(String modelDocID){

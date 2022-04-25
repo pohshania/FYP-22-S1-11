@@ -86,7 +86,7 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
         {
             UserLogsFragment.showNoDataFoundText();
         }else{
-            UserLogsFragment.hideNoDateFoundText();
+            UserLogsFragment.hideNoDataFoundText();
         }
 
     }
@@ -97,7 +97,7 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
 
         notifyDataSetChanged();
 
-        UserLogsFragment.hideNoDateFoundText();
+        UserLogsFragment.hideNoDataFoundText();
         UserLogsFragment.enableProgressBar();
         UserLogsFragment.disableFilterButton();
     }

@@ -75,6 +75,7 @@ public class Login extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
 
 
+
         loginEmail       = findViewById(R.id.login_email);
         loginPassword    = findViewById(R.id.login_password);
         loginBtn         = findViewById(R.id.login_btn);
@@ -689,14 +690,35 @@ public class Login extends AppCompatActivity {
 
         // retrieve all documents id
         CollectionReference colRef = db.collection("UOW_log");
-        colRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        colRef.orderBy("date", Query.Direction.DESCENDING)
+                .whereGreaterThanOrEqualTo("date", "2022/04/01 00:01:00")
+                .whereLessThanOrEqualTo("date", "2022-04-01 00:05:00").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for(DocumentSnapshot d : queryDocumentSnapshots){
-                    Log.d("TEST_QUERY", d.getId());
+                    Log.d("=========TEST_QUERY========", d.getId());
                 }
             }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("=========FAILURE========", e.toString());
+            }
         });
+
+//        colRef.orderBy("date", Query.Direction.DESCENDING)
+//                .whereGreaterThanOrEqualTo("date", "2022-04-01")
+//                .whereLessThan("date", "2022-04-01")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            DocumentSnapshot doc = task.getResult();
+//
+//                        }
+//                    }
+//                });
 
     }
 }

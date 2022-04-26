@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.SnapshotParser;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.chip.Chip;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -62,6 +63,8 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
     private TextView filterDateText, filterStartTimeText, filterEndTimeText, filterDateTimeSummaryText;
     private int startTimeHour, startTimeMinute, endTimeHour, endTimeMinute;
     private static int counter = 0;
+
+    private static Chip userLogsChip;
 
     public UserLogsFragment() {
         // Required empty public constructor
@@ -102,7 +105,7 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
         loadingText = view.findViewById(R.id.userLogs_loadingText);
         noDataFoundText = view.findViewById(R.id.userLogs_noDataText);
         logsFilterBtn = (Button) view.findViewById(R.id.userLogs_filter_btn);
-
+        userLogsChip = view.findViewById(R.id.userLogs_chip);
 
         // Call default firestore recyclerview query
         firestoreDefaultLogsQuery(view);
@@ -171,6 +174,9 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
                             startDateTime = formatFilteredDateAndStartTime(filterDateText.getText().toString(), filterStartTimeText.getText().toString());
                             Date endDateTime = new Date();
                             endDateTime = formatFilteredDateAndEndTime(filterDateText.getText().toString(), filterEndTimeText.getText().toString());
+
+                            // set chip
+                            setChip(filterDateText.getText().toString() + ", " +filterStartTimeText.getText().toString() + " to " +filterEndTimeText.getText().toString());
 
                             // start new query here
                             firestoreQueryLogsByDateTime(startDateTime, endDateTime);
@@ -386,7 +392,7 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             String str_today = format.format(ldt_today);
             Log.d("=====FIRESTORE_DATE_TODAY=====", str_today);
-
+            setChip("Today: " + str_today);
 
             // TOMORROW
             LocalDateTime ldt_tmr = LocalDateTime.now().plusDays(1);
@@ -408,6 +414,7 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
 
 
         // Query from firebase
@@ -433,6 +440,8 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
                     }
                 })
                 .build();
+
+
     }
 
     // display CHOOSEN DATE & TIME logs from firestore
@@ -560,10 +569,12 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
 
     public static void enableFilterButton(){
         logsFilterBtn.setVisibility(View.VISIBLE);
+        userLogsChip.setVisibility(View.VISIBLE);
     }
 
     public static void disableFilterButton(){
         logsFilterBtn.setVisibility(View.INVISIBLE);
+        userLogsChip.setVisibility(View.INVISIBLE);
     }
 
     public static void disableProgressBar(){
@@ -595,6 +606,10 @@ public class UserLogsFragment extends Fragment implements UserLogsAdapter.OnList
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    public static void setChip(String text){
+        userLogsChip.setText(text);
     }
 
 }

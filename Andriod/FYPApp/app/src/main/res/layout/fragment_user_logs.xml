@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?android:attr/actionBarSize">
 
+    <com.google.android.material.chip.Chip
+        android:id="@+id/userLogs_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:text="hello"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:chipIcon="@drawable/ic_baseline_check_circle_outline_24"
+        app:chipBackgroundColor="@android:color/holo_green_light"
+        android:visibility="invisible"/>
+
+
     <Button
         android:id="@+id/userLogs_filter_btn"
         android:layout_width="wrap_content"
@@ -14,6 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="4dp"
         android:visibility="invisible"/>
 
 
@@ -57,25 +74,7 @@
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-<!--
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/firestore_list"
-        android:layout_width="409dp"
-        android:layout_height="673dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
--->

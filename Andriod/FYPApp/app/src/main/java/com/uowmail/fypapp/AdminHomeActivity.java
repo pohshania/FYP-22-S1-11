@@ -1,16 +1,20 @@
 package com.uowmail.fypapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,11 +58,47 @@ public class AdminHomeActivity extends AppCompatActivity {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(AdminHomeActivity.this, "ADMIN CLICK ON LOGOUT", Toast.LENGTH_SHORT).show();
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(), Login.class));
-                finish();
+//                //Toast.makeText(AdminHomeActivity.this, "ADMIN CLICK ON LOGOUT", Toast.LENGTH_SHORT).show();
+//                FirebaseAuth.getInstance().signOut();
+//                startActivity(new Intent(getApplicationContext(), Login.class));
+//                finish();
+                showMenu(view);
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    private void showMenu(View v){
+
+        PopupMenu popupMenu = new PopupMenu(AdminHomeActivity.this, v);
+        popupMenu.getMenuInflater().inflate(R.menu.admin_account_menu, popupMenu.getMenu());
+
+        // shania
+        Login main = new Login();
+        popupMenu.getMenu().findItem(R.id.username).setTitle(currentUserInfo.getEmail());
+        popupMenu.getMenu().findItem(R.id.orgID).setTitle(currentUserInfo.getOrgID());
+        popupMenu.setForceShowIcon(true);
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+
+                if(menuItem.getItemId() == R.id.orgID) {
+                    Toast.makeText(AdminHomeActivity.this, "Your organisation is " + currentUserInfo.getOrgID() + ".", Toast.LENGTH_SHORT).show();
+                }
+
+                if(menuItem.getItemId() == R.id.username) {
+                    Toast.makeText(AdminHomeActivity.this, "Your username is " + main.getUserName(), Toast.LENGTH_SHORT).show();
+                }
+                if(menuItem.getItemId() == R.id.logout)
+                {
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(getApplicationContext(), Login.class));
+                    finish();
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
     }
 }

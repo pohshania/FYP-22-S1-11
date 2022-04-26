@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,15 +23,12 @@ import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
 //import com.google.firebase.messaging.FirebaseMessaging;
 
-import org.w3c.dom.Text;
 
 public class UserHomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -152,7 +148,7 @@ public class UserHomeActivity extends AppCompatActivity {
     private void showMenu(View v){
 
         PopupMenu popupMenu = new PopupMenu(UserHomeActivity.this, v);
-        popupMenu.getMenuInflater().inflate(R.menu.account_menu, popupMenu.getMenu());
+        popupMenu.getMenuInflater().inflate(R.menu.user_account_menu, popupMenu.getMenu());
 
         // shania
         Login main = new Login();

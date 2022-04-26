@@ -231,7 +231,7 @@ public class UserAlertEngineDetailsFragment extends Fragment {
 
         // Get the input from EditText
        String filepath = "MyFileDir";
-       String filename = mParam1 + "_alert_engine_details";
+       String filename = mParam1 + "_alert_log_details";
 
         // Check for Storage Permission
         if(isStoragePermissionGranted()){

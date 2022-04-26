@@ -88,7 +88,6 @@ public class AdminLogDetailsActivity extends AppCompatActivity {
         usr_max    = findViewById(R.id.adminLogDetails_usr_max);
 
 
-
         // query
         db = FirebaseFirestore.getInstance();
         String path = orgID + "_log";
@@ -98,34 +97,38 @@ public class AdminLogDetailsActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 AdminLogDetailsModel logDetails = documentSnapshot.toObject(AdminLogDetailsModel.class);
 
-                Log.d("TEST_QUERY", logDetails.getDate() + " " + logDetails.getDisk_read() + " " + logDetails.getDisk_write() + " " +
-                        logDetails.getIdling() + " " + logDetails.getNet_recv() + " " + logDetails.getNet_send() + " " + logDetails.getSys() +
-                        " " + logDetails.getUsr());
-
-                //Date d = logDetails.getTimestamp().toDate();
+                // date
                 date.setText("Date: " + logDetails.getDate().toDate());
+
+                // disk
                 disk_read.setText("Disk Read: " + logDetails.getDisk_read());
                 disk_write.setText("Disk Write: " + logDetails.getDisk_write());
+
+                // idling
                 idling.setText("Idling:");
                 idling_avg.setText("Avg: " + logDetails.getIdling().get("avg"));
                 idling_min.setText("Min: " + logDetails.getIdling().get("min"));
                 idling_max.setText("Max: " + logDetails.getIdling().get("max"));
 
+                // cpu
                 float usage = 100 - logDetails.getIdling().get("min");
                 cpu_usage.setText("CPU usage: " + String.valueOf(usage));
 
+                // network
                 net_recv.setText("Network recieve: " + logDetails.getNet_recv());
                 net_send.setText("Network send: " + logDetails.getNet_send());
+
+                // sys
                 sys.setText("System:");
                 sys_avg.setText("Avg: " + logDetails.getSys().get("avg"));
                 sys_min.setText("Min: " + logDetails.getSys().get("min"));
                 sys_max.setText("Max: " + logDetails.getSys().get("max"));
+
+                // usr
                 usr.setText("User:");
                 usr_avg.setText("Avg: " + logDetails.getUsr().get("avg"));
                 usr_min.setText("Min: " + logDetails.getUsr().get("min"));
                 usr_max.setText("Max: " + logDetails.getUsr().get("max"));
-
-
             }
         });
 
@@ -147,12 +150,9 @@ public class AdminLogDetailsActivity extends AppCompatActivity {
                               String idling, String net_recv, String net_send,
                               String sys, String usr){
 
-
-
-
         // Get the input from EditText
         String filepath = "MyFileDir";
-        String filename = docID;
+        String filename = docID + "_log_details";
 
         // Check for Storage Permission
         if(isStoragePermissionGranted()){
@@ -175,20 +175,36 @@ public class AdminLogDetailsActivity extends AppCompatActivity {
 
                 // Write to the file
                 String nl = "\n";
+
+                // date
                 fos.write(date.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+
+                // disk read
                 fos.write(disk_read.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+
+                // disk write
                 fos.write(disk_write.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+
+                // idling
                 fos.write(idling.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+
+                // net recv
                 fos.write(net_recv.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+
+                // net send
                 fos.write(net_send.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+
+                // sys
                 fos.write(sys.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+
+                // usr
                 fos.write(usr.getBytes(StandardCharsets.UTF_8));
 
 

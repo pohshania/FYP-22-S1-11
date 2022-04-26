@@ -242,7 +242,8 @@ public class UserHomeFragment extends Fragment  {
         donutGraph.setUsePercentValues(true);
         donutGraph.setEntryLabelColor(Color.BLACK);
         donutGraph.setEntryLabelTextSize(20f);
-        donutGraph.setCenterText(info.toUpperCase()+" USAGE\n" + usageValue);
+        //donutGraph.setCenterText(info.toUpperCase()+" USAGE\n" + usageValue);
+        donutGraph.setCenterText(info.toUpperCase()+" Usage\n" + usageValue);
         donutGraph.setCenterTextSize(24);
         donutGraph.getDescription().setEnabled(false);
         donutGraph.setTouchEnabled(false);

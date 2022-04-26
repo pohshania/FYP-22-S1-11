@@ -197,7 +197,7 @@ public class UserLogDetailsFragment extends Fragment {
 
         // Get the input from EditText
        String filepath = "MyFileDir";
-       String filename = mParam1 + "_user_log_details";
+       String filename = mParam1 + "_log_details";
 
         // Check for Storage Permission
         if(isStoragePermissionGranted()){

@@ -1,14 +1,22 @@
 package com.uowmail.fypapp;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -16,6 +24,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +45,8 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
     private TextView detected_by;
     private TextView detection_type;
     private TextView event_status;
+
+    private Button download;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,15 +101,15 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
         TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
         title.setText("Analysis Engine Intrusion Details");
 
+        // Title -> eg, 202204252157_alert
+        TextView titleTV = view.findViewById(R.id.userAnalysisEngineDetails_Title);
+        titleTV.setText(mParam1);
 
-
-
-
-        date = view.findViewById(R.id.userAnalysisEngineDetails_date);
+        date           = view.findViewById(R.id.userAnalysisEngineDetails_date);
         detected_range = view.findViewById(R.id.userAnalysisEngineDetails_detected_range);
-        detected_by = view.findViewById(R.id.userAnalysisEngineDetails_detected_by);
+        detected_by    = view.findViewById(R.id.userAnalysisEngineDetails_detected_by);
         detection_type = view.findViewById(R.id.userAnalysisEngineDetails_detection_type);;
-        event_status = view.findViewById(R.id.userAnalysisEngineDetails_event_status);;
+        event_status   = view.findViewById(R.id.userAnalysisEngineDetails_event_status);;
 
 
         // query
@@ -123,9 +139,107 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
             }
         });
 
+        // download
+        download = view.findViewById(R.id.userAnalysisEngineDetails_download);
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                downloadFile(date.getText().toString(), detected_range.getText().toString(),
+                        detected_by.getText().toString(), detection_type.getText().toString(),
+                        event_status.getText().toString());
+            }
+        });
 
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void downloadFile(String date, String detected_range, String detected_by,
+                              String detection_type, String event_status){
+
+        // Get the input from EditText
+        String filepath = "MyFileDir";
+        String filename = mParam1 + "_analysis_log_details";
+
+        // Check for Storage Permission
+        if(isStoragePermissionGranted()){
+
+            // To access app-specific files from external storage, you can call
+            // getExternalFilesDir() method. It returns the path to
+            // storage > emulated > 0 > Android > data > [package_name] > files > MyFileDir
+            // or,
+            // storage > self > Android > data > [package_name] > files > MyFileDir
+            // directory on the SD card. Once the app is uninstalled files here also get
+            // deleted.
+            // Create a File object like this.
+            File myExternalFile = new File(getContext().getExternalFilesDir(filepath), filename);
+            // Create an object of FileOutputStream for writing data to myFile.txt
+            FileOutputStream fos = null;
+            try {
+                // Instantiate the FileOutputStream object and pass myExternalFile in constructor
+                fos = new FileOutputStream(myExternalFile);
+
+
+                // Write to the file
+                String nl = "\n";
+                // date
+                fos.write(date.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                // detected range
+                fos.write(detected_range.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                // detected_by
+                fos.write(detected_by.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                // detection type
+                fos.write(detection_type.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                // event status
+                fos.write(event_status.getBytes(StandardCharsets.UTF_8));
+
+
+                // Close the stream
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            // Show a Toast message to inform the user that the operation has been successfully completed.
+            Toast.makeText(getContext(), "Information saved to " + getContext().getExternalFilesDir(filepath), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
+    public boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (getContext().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                //Permission is granted
+                return true;
+            } else {
+                //Permission is revoked
+                ActivityCompat.requestPermissions((Activity) getContext(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else {
+            //permission is automatically granted on sdk<23 upon installation
+            //Permission is granted
+            return true;
+        }
+    }
+
+    private boolean isExternalStorageAvailableForRW() {
+        // Check if the external storage is available for read and write by calling
+        // Environment.getExternalStorageState() method. If the returned state is MEDIA_MOUNTED,
+        // then you can read and write files. So, return true in that case, otherwise, false.
+        String extStorageState = Environment.getExternalStorageState();
+        if(extStorageState.equals(Environment.MEDIA_MOUNTED)){
+            return true;
+        }
+        return false;
     }
 }

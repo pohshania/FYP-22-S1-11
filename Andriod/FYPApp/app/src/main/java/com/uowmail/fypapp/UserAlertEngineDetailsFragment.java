@@ -91,6 +91,7 @@ public class UserAlertEngineDetailsFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            Log.d("===== INSIDE INTUSION DETAILS FRAG ===== ", mParam1);
             Log.d("===== INSIDE INTUSION DETAILS FRAG ===== ", mParam2);
         }
     }
@@ -105,32 +106,32 @@ public class UserAlertEngineDetailsFragment extends Fragment {
         TextView title = (TextView) getActivity().findViewById(R.id.toolbar_title);
         title.setText("Alert Engine Intrusion Details");
 
-
+        // Title -> eg, 202204252157_alert
         TextView titleTV = view.findViewById(R.id.userAlertEngineDetails_Title);
         titleTV.setText(mParam1);
 
 
-        abnormal   = view.findViewById(R.id.userAlertEngineDetails_abnormal);
-        date       = view.findViewById(R.id.userAlertEngineDetails_date);
-        detected_by= view.findViewById(R.id.userAlertEngineDetails_detectedBy);
-        disk_read  = view.findViewById(R.id.userAlertEngineDetails_diskRead);
-        disk_write = view.findViewById(R.id.userAlertEngineDetails_diskWrite);
+        abnormal     = view.findViewById(R.id.userAlertEngineDetails_abnormal);
+        date         = view.findViewById(R.id.userAlertEngineDetails_date);
+        detected_by  = view.findViewById(R.id.userAlertEngineDetails_detectedBy);
+        disk_read    = view.findViewById(R.id.userAlertEngineDetails_diskRead);
+        disk_write   = view.findViewById(R.id.userAlertEngineDetails_diskWrite);
         event_status = view.findViewById(R.id.userAlertEngineDetails_eventStatus);
-        idling     = view.findViewById(R.id.userAlertEngineDetails_idling);
-        idling_avg = view.findViewById(R.id.userAlertEngineDetails_idling_avg);
-        idling_min = view.findViewById(R.id.userAlertEngineDetails_idling_min);
-        idling_max = view.findViewById(R.id.userAlertEngineDetails_idling_max);
-        cpu_usage  = view.findViewById(R.id.userAlertEngineDetails_CPU_usage);
-        net_recv   = view.findViewById(R.id.userAlertEngineDetails_netRecv);
-        net_send   = view.findViewById(R.id.userAlertEngineDetails_netSend);
-        sys        = view.findViewById(R.id.userAlertEngineDetails_sys);
-        sys_avg    = view.findViewById(R.id.userAlertEngineDetails_sys_avg);
-        sys_min    = view.findViewById(R.id.userAlertEngineDetails_sys_min);
-        sys_max    = view.findViewById(R.id.userAlertEngineDetails_sys_max);
-        usr        = view.findViewById(R.id.userAlertEngineDetails_usr);
-        usr_avg    = view.findViewById(R.id.userAlertEngineDetails_usr_avg);
-        usr_min    = view.findViewById(R.id.userAlertEngineDetails_usr_min);
-        usr_max    = view.findViewById(R.id.userAlertEngineDetails_usr_max);
+        idling       = view.findViewById(R.id.userAlertEngineDetails_idling);
+        idling_avg   = view.findViewById(R.id.userAlertEngineDetails_idling_avg);
+        idling_min   = view.findViewById(R.id.userAlertEngineDetails_idling_min);
+        idling_max   = view.findViewById(R.id.userAlertEngineDetails_idling_max);
+        cpu_usage    = view.findViewById(R.id.userAlertEngineDetails_CPU_usage);
+        net_recv     = view.findViewById(R.id.userAlertEngineDetails_netRecv);
+        net_send     = view.findViewById(R.id.userAlertEngineDetails_netSend);
+        sys          = view.findViewById(R.id.userAlertEngineDetails_sys);
+        sys_avg      = view.findViewById(R.id.userAlertEngineDetails_sys_avg);
+        sys_min      = view.findViewById(R.id.userAlertEngineDetails_sys_min);
+        sys_max      = view.findViewById(R.id.userAlertEngineDetails_sys_max);
+        usr          = view.findViewById(R.id.userAlertEngineDetails_usr);
+        usr_avg      = view.findViewById(R.id.userAlertEngineDetails_usr_avg);
+        usr_min      = view.findViewById(R.id.userAlertEngineDetails_usr_min);
+        usr_max      = view.findViewById(R.id.userAlertEngineDetails_usr_max);
 
 
 
@@ -211,8 +212,8 @@ public class UserAlertEngineDetailsFragment extends Fragment {
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                downloadFile(date.getText().toString(), disk_read.getText().toString(), disk_write.getText().toString(),
-                        idling.getText().toString() + " " + idling_avg.getText().toString() + " " + idling_min.getText().toString() + " " + idling_max.getText().toString(),
+                downloadFile(abnormal.getText().toString(), date.getText().toString(), detected_by.getContext().toString(), disk_read.getText().toString(), disk_write.getText().toString(),
+                        event_status.getText().toString(), idling.getText().toString() + " " + idling_avg.getText().toString() + " " + idling_min.getText().toString() + " " + idling_max.getText().toString(),
                         net_recv.getText().toString(), net_send.getText().toString(),
                         sys.getText().toString() + " " + sys_avg.getText().toString() + " " + sys_min.getText().toString() + " " + sys_max.getText().toString(),
                         usr.getText().toString() + " " + usr_avg.getText().toString() + " " + usr_min.getText().toString() + " " + usr_max.getText().toString());
@@ -222,14 +223,15 @@ public class UserAlertEngineDetailsFragment extends Fragment {
         return view;
     }
 
-    private void downloadFile(String date, String disk_read, String disk_write,
+    private void downloadFile(String abnormal, String date, String detected_by,
+                              String disk_read, String disk_write, String event_status,
                               String idling, String net_recv, String net_send,
                               String sys, String usr){
 
 
         // Get the input from EditText
        String filepath = "MyFileDir";
-       String filename = mParam1;
+       String filename = mParam1 + "_alert_engine_details";
 
         // Check for Storage Permission
         if(isStoragePermissionGranted()){
@@ -244,11 +246,17 @@ public class UserAlertEngineDetailsFragment extends Fragment {
 
                 // Write to the file
                 String nl = "\n";
+                fos.write(abnormal.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
                 fos.write(date.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                fos.write(detected_by.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
                 fos.write(disk_read.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
                 fos.write(disk_write.getBytes(StandardCharsets.UTF_8));
+                fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                fos.write(event_status.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
                 fos.write(idling.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));

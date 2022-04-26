@@ -129,8 +129,6 @@ public class UserLogDetailsFragment extends Fragment {
         usr_max    = view.findViewById(R.id.userLogDetails_usr_max);
 
 
-
-
         // query
         db = FirebaseFirestore.getInstance();
         String path = mParam2 + "_log";
@@ -140,28 +138,34 @@ public class UserLogDetailsFragment extends Fragment {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 UserLogDetailsModel logDetails = documentSnapshot.toObject(UserLogDetailsModel.class);
 
-                Log.d("TEST_QUERY", logDetails.getDate() + " " + logDetails.getDisk_read() + " " + logDetails.getDisk_write() + " " +
-                        logDetails.getIdling() + " " + logDetails.getNet_recv() + " " + logDetails.getNet_send() + " " + logDetails.getSys() +
-                        " " + logDetails.getUsr());
-
-                //Date d = logDetails.getTimestamp().toDate();
+                // date
                 date.setText("Date: " + logDetails.getDate().toDate());
+
+                // disk
                 disk_read.setText("Disk Read: " + logDetails.getDisk_read());
                 disk_write.setText("Disk Write: " + logDetails.getDisk_write());
+
+                // idling
                 idling.setText("Idling:");
                 idling_avg.setText("Avg: " + logDetails.getIdling().get("avg"));
                 idling_min.setText("Min: " + logDetails.getIdling().get("min"));
                 idling_max.setText("Max: " + logDetails.getIdling().get("max"));
 
+                // cpu
                 float usage = 100 - logDetails.getIdling().get("min");
                 cpu_usage.setText("CPU usage: " + String.valueOf(usage));
 
+                // net
                 net_recv.setText("Network recieve: " + logDetails.getNet_recv());
                 net_send.setText("Network send: " + logDetails.getNet_send());
+
+                // sys
                 sys.setText("System:");
                 sys_avg.setText("Avg: " + logDetails.getSys().get("avg"));
                 sys_min.setText("Min: " + logDetails.getSys().get("min"));
                 sys_max.setText("Max: " + logDetails.getSys().get("max"));
+
+                // usr
                 usr.setText("User:");
                 usr_avg.setText("Avg: " + logDetails.getUsr().get("avg"));
                 usr_min.setText("Min: " + logDetails.getUsr().get("min"));
@@ -191,12 +195,9 @@ public class UserLogDetailsFragment extends Fragment {
                               String idling, String net_recv, String net_send,
                               String sys, String usr){
 
-
-
-
         // Get the input from EditText
        String filepath = "MyFileDir";
-       String filename = mParam1;
+       String filename = mParam1 + "_user_log_details";
 
         // Check for Storage Permission
         if(isStoragePermissionGranted()){
@@ -219,20 +220,28 @@ public class UserLogDetailsFragment extends Fragment {
 
                 // Write to the file
                 String nl = "\n";
+                // date
                 fos.write(date.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                // disk read
                 fos.write(disk_read.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                // disk write
                 fos.write(disk_write.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                // idling
                 fos.write(idling.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                // net receive
                 fos.write(net_recv.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                // net send
                 fos.write(net_send.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                // sys
                 fos.write(sys.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
+                // usr
                 fos.write(usr.getBytes(StandardCharsets.UTF_8));
 
 
@@ -246,48 +255,6 @@ public class UserLogDetailsFragment extends Fragment {
             // Show a Toast message to inform the user that the operation has been successfully completed.
             Toast.makeText(getContext(), "Information saved to " + getContext().getExternalFilesDir(filepath), Toast.LENGTH_SHORT).show();
         }
-
-
-
-        /*
-        FILE_NAME = mParam1;
-        String nl = "\n";
-
-        try{
-            fos = getContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-
-            fos.write(date.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(disk_read.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(disk_write.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(idling.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(net_recv.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(net_send.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(sys.getBytes(StandardCharsets.UTF_8));
-            fos.write(nl.getBytes(StandardCharsets.UTF_8));
-            fos.write(usr.getBytes(StandardCharsets.UTF_8));
-
-
-            Toast.makeText(getContext(), "Saved to " + getContext().getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if(fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-         */
 
     }
 

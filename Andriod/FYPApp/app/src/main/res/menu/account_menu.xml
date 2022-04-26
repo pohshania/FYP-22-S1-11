@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/orgID"
+        android:title="org id"
+        android:icon="@drawable/ic_baseline_work_24"
+        android:iconTint="@color/cp_navy"
+        />
+
     <item
         android:id="@+id/username"
         android:title="user name"

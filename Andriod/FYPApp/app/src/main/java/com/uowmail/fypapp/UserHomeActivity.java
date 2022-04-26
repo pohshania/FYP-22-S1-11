@@ -77,9 +77,6 @@ public class UserHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_home);
         bottomNavigationView = findViewById(R.id.bottom_navigation_client);
 
-
-
-
         // badge notification alert
         if (bottomNavigationView !=null){
             /*BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.notification);
@@ -160,15 +157,20 @@ public class UserHomeActivity extends AppCompatActivity {
         // shania
         Login main = new Login();
         popupMenu.getMenu().findItem(R.id.username).setTitle(/*"Username: " + */main.getUserName());
+        popupMenu.getMenu().findItem(R.id.orgID).setTitle(currentUserInfo.getOrgID());
         popupMenu.setForceShowIcon(true);
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                if(menuItem.getItemId() == R.id.username) {
-                    Toast.makeText(UserHomeActivity.this, "You clicked in the username", Toast.LENGTH_SHORT).show();
+
+                if(menuItem.getItemId() == R.id.orgID) {
+                    Toast.makeText(UserHomeActivity.this, "Your organisation is " + currentUserInfo.getOrgID() + ".", Toast.LENGTH_SHORT).show();
                 }
 
+                if(menuItem.getItemId() == R.id.username) {
+                    Toast.makeText(UserHomeActivity.this, "Your username is " + main.getUserName(), Toast.LENGTH_SHORT).show();
+                }
 
                 if(menuItem.getItemId() == R.id.settings){
                     // YT open page to user settings

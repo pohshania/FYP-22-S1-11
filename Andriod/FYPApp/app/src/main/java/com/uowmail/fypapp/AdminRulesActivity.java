@@ -69,8 +69,6 @@ public class AdminRulesActivity extends AppCompatActivity {
         }
 
 
-        Button testbutton = findViewById(R.id.test_button);
-        testbutton.setOnClickListener(testButtonListener);
 
         db = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();

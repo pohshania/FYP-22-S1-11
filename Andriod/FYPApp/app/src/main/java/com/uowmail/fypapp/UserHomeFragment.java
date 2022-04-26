@@ -155,7 +155,7 @@ public class UserHomeFragment extends Fragment  {
 
         // MJ - set title of the page
         TextView title = (TextView)getActivity().findViewById(R.id.toolbar_title);
-        title.setText("Creeping Donut");
+        title.setText("Dashboard");
 
         // MJ - adding donutGraph-------------------------------------------------------------------------------
         donutGraph_cpu = v.findViewById(R.id.donutgraph_cpu);

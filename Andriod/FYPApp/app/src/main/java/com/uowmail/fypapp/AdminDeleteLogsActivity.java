@@ -36,6 +36,7 @@ import com.firebase.ui.firestore.SnapshotParser;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.chip.Chip;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -77,6 +78,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
     private int startTimeHour, startTimeMinute, endTimeHour, endTimeMinute;
 
     private String orgID;
+    private static Chip adminLogsChip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +106,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
         loadingText = findViewById(R.id.adminDeleteLogs_loadingText);
         noDataFoundText = findViewById(R.id.adminDeleteLogs_noDataText);
         filterLogsBtn = findViewById(R.id.adminDeleteLogs_filter_btn);
-
+        adminLogsChip = findViewById(R.id.adminDeleteLogs_chip);
 
         firestoreDefaultLogsQuery();
 
@@ -170,6 +172,9 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
                             Date endDateTime = new Date();
                             endDateTime = formatFilteredDateAndEndTime(filterDateText.getText().toString(), filterEndTimeText.getText().toString());
 
+                            // set chip
+                            setChip(filterDateText.getText().toString() + ", " +filterStartTimeText.getText().toString() + " to " +filterEndTimeText.getText().toString());
+
                             // start new query here
                             firestoreQueryLogsByDateTime(startDateTime, endDateTime);
 
@@ -215,6 +220,8 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
             String str_today = format.format(ldt_today);
             Log.d("=====FIRESTORE_DATE_TODAY=====", str_today);
 
+            // set chip
+            setChip("Today: " + str_today);
 
             // TOMORROW
             LocalDateTime ldt_tmr = LocalDateTime.now().plusDays(1);
@@ -502,10 +509,12 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
 
     public static void enableFilterButton(){
         filterLogsBtn.setVisibility(View.VISIBLE);
+        adminLogsChip.setVisibility(View.VISIBLE);
     }
 
     public static void disableFilterButton(){
         filterLogsBtn.setVisibility(View.INVISIBLE);
+        adminLogsChip.setVisibility(View.INVISIBLE);
     }
 
     public static void disableProgressBar(){
@@ -535,6 +544,10 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void setChip(String text){
+        adminLogsChip.setText(text);
     }
 }
 

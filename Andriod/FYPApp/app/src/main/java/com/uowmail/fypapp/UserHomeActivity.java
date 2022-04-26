@@ -146,8 +146,8 @@ public class UserHomeActivity extends AppCompatActivity {
                 showMenu(v);
             }
         });
+        //title.setText("Creeping Donut");
         title.setText("Creeping Donut");
-
     }
 
     // MJ - account menu

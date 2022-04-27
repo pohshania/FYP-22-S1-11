@@ -181,7 +181,7 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
 
         // Check Box
         CheckBox checkBox = new CheckBox(this);
-//        checkBox.setLayoutParams(lp);
+        checkBox.setLayoutParams(lp);
 
         checkBox.setText("Enabled");
         checkBox.setTextColor(Color.BLACK);

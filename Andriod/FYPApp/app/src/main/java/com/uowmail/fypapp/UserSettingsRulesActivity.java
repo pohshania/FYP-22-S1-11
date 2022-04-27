@@ -186,7 +186,7 @@ public class UserSettingsRulesActivity extends AppCompatActivity {
         checkBox.setText("Enabled");
         checkBox.setTextColor(Color.BLACK);
         checkBox.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#009900")));
-        checkBox.setPadding(0, 10, 90, 30);// in pixels (left, top, right, bottom)
+        checkBox.setPadding(0, 10, 0, 30);// in pixels (left, top, right, bottom)
         checkBox.setChecked(true);
         checkBox.setEnabled(false);
 

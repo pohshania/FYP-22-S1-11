@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -78,22 +79,33 @@ public class AdminCreateNewUserActivity extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(fullName)){
                     createUserFullName.setError("Full Name is required!");
+                    createUserFullName.requestFocus();
                     return;
                 }
                 if(TextUtils.isEmpty(email)){
                     createUserEmail.setError("Email is required!");
+                    createUserEmail.requestFocus();
+                    return;
+                }
+                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    createUserEmail.setError("Please provide a valid email address!");
+                    createUserEmail.requestFocus();
                     return;
                 }
                 if(TextUtils.isEmpty(orgID)){
                     createUserOrgID.setError("Organisation ID is required!");
+                    createUserOrgID.requestFocus();
                     return;
                 }
                 if(TextUtils.isEmpty(password)){
                     createUserPassword.setError("Password is required!");
+                    createUserPassword.requestFocus();
+
                     return;
                 }
                 if(password.length() < 6){
                     createUserPassword.setError("Password must be >= 6 characters!");
+                    createUserPassword.requestFocus();
                     return;
                 }
 
@@ -195,6 +207,11 @@ public class AdminCreateNewUserActivity extends AppCompatActivity {
                                 usersProfile.document(user.getEmail()).set(data);
 
                                 createUserProgressBar.setVisibility(View.INVISIBLE);
+
+                                createUserFullName.getText().clear();
+                                createUserEmail.getText().clear();
+                                createUserOrgID.getText().clear();
+                                createUserPassword.getText().clear();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

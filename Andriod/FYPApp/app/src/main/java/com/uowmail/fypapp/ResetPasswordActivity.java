@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -54,6 +55,11 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     emailET.setError("Email cannot be empty!");
                     return;
                 }
+                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    emailET.setError("Please provide a valid email address!");
+                    return;
+                }
+
                 if(TextUtils.isEmpty(password)){
                     passwordET.setError("Password cannot be empty!");
                     return;

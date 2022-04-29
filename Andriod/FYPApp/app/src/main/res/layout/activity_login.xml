@@ -20,13 +20,13 @@
 
     <EditText
         android:id="@+id/login_email"
-        android:layout_width="215dp"
+        android:layout_width="250dp"
         android:layout_height="38dp"
         android:layout_marginTop="40dp"
         android:background="#e6f0ff"
         android:ems="10"
         android:hint="Email"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:padding="5dp"
         android:paddingLeft="10dp"
         android:textColor="@color/black"
@@ -39,7 +39,7 @@
 
     <EditText
         android:id="@+id/login_password"
-        android:layout_width="215dp"
+        android:layout_width="250dp"
         android:layout_height="38dp"
         android:layout_marginTop="24dp"
         android:background="#e6f0ff"
@@ -95,6 +95,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_btn"
         app:layout_constraintVertical_bias="0.203" />
+
+    <TextView
+        android:id="@+id/login_forgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot password?"
+        android:textColor="#FFB900"
+        tools:layout_editor_absoluteX="177dp"
+        tools:layout_editor_absoluteY="543dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_btn"
+        android:layout_marginTop="5dp"
+        android:clickable="true"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

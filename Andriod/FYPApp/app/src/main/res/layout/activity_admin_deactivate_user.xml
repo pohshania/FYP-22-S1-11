@@ -11,32 +11,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
-        android:text="Enter user's email below to deactivate it:"
+        android:text="Deactivate User Account"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:background="#D79334"
-        android:textSize="18dp"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/deactivateUser_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Enter user's email below to deactive their accout:"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deactivateUser_title" />
+
     <EditText
         android:id="@+id/deactivateUser_email"
-        android:layout_width="215dp"
+        android:layout_width="250dp"
         android:layout_height="38dp"
         android:layout_marginTop="30dp"
-        android:background="#e6f0ff"
         android:ems="10"
         android:hint="Email"
-        android:inputType="textPersonName"
-        android:padding="5dp"
+        android:inputType="textEmailAddress"
         android:paddingLeft="10dp"
-        android:textColor="@color/black"
-        android:textColorHint="#33691E"
-        app:layout_constraintEnd_toEndOf="@+id/deactivateUser_title"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="@+id/deactivateUser_title"
-        app:layout_constraintTop_toBottomOf="@+id/deactivateUser_title" />
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/deactivateUser_description"
+        app:layout_constraintStart_toStartOf="@+id/deactivateUser_description"
+        app:layout_constraintTop_toBottomOf="@+id/deactivateUser_description"
+        android:drawableLeft="@drawable/ic_baseline_email_24"
+        android:drawablePadding="5dp"
+        android:background="@drawable/edit_text_border"/>
 
     <Button
         android:id="@+id/deactivateUser_btn"

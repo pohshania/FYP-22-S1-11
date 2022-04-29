@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class UserSettingsActivity extends AppCompatActivity {
-    Button btn;
+    Button btn, resetPasswordBtn;
     private String orgID;
 
     @Override
@@ -46,6 +46,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         subject = (EditText) findViewById(R.id.subject_et);
         body = (EditText) findViewById(R.id.rules_et);
         button = (Button) findViewById(R.id.sendButton);
+        resetPasswordBtn = findViewById(R.id.resetPasswordButton);
 
         // send email to admin
         //Sets action for sendButton
@@ -81,6 +82,15 @@ public class UserSettingsActivity extends AppCompatActivity {
 //                        RulesActivity.class).putExtra(Intent.EXTRA_TEXT, "setInvisible") );
 
                 Intent i = new Intent(UserSettingsActivity.this, UserSettingsRulesActivity.class);
+                i.putExtra("adminOrgID", orgID);
+                startActivity(i);
+            }
+        });
+
+        resetPasswordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(UserSettingsActivity.this, ResetPasswordActivity.class);
                 i.putExtra("adminOrgID", orgID);
                 startActivity(i);
             }

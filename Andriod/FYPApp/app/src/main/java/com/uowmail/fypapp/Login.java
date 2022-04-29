@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,6 +48,7 @@ public class Login extends AppCompatActivity {
     Button loginBtn;
     ProgressBar loginProgressBar;
     Spinner loginUserTypeSpinner;
+    TextView forgotPasswordTV;
 
     // firebase variables
     FirebaseAuth fAuth;
@@ -80,6 +83,8 @@ public class Login extends AppCompatActivity {
         loginPassword    = findViewById(R.id.login_password);
         loginBtn         = findViewById(R.id.login_btn);
         loginProgressBar = findViewById(R.id.login_progressBar);
+        forgotPasswordTV = findViewById(R.id.login_forgotPassword);
+
 
         // set the user types drop down spinner
         loginUserTypeSpinner = (Spinner) findViewById(R.id.login_userType);
@@ -107,7 +112,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,22 +123,38 @@ public class Login extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(email)){
                     loginEmail.setError("Email is required!");
+                    loginEmail.requestFocus();
                     toggleKeyboardAndProgressBar(false, false);
+                    return;
+                }
+                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    loginEmail.setError("Please provide a valid email address!");
+                    loginEmail.requestFocus();
                     return;
                 }
                 if(TextUtils.isEmpty(password)){
                     loginPassword.setError("Password is required!");
+                    loginPassword.requestFocus();
                     toggleKeyboardAndProgressBar(false, false);
                     return;
                 }
                 if(password.length() < 6){
                     loginPassword.setError("Password must be >= 6 characters!");
+                    loginPassword.requestFocus();
                     toggleKeyboardAndProgressBar(false, false);
                     return;
                 }
 
                 // check if the current selected user type is correct
                 checkUserType(fStore, email, password, selectedUserType);
+            }
+        });
+
+        forgotPasswordTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, ForgetPasswordActivity.class);
+                startActivity(intent);
             }
         });
     }

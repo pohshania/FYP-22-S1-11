@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FYPApp">
         <activity
+            android:name=".ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminLogDetailsActivity"
             android:exported="false" />
         <activity

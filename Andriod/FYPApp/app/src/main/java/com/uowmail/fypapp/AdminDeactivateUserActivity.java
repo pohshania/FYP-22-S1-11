@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -63,6 +64,12 @@ public class AdminDeactivateUserActivity extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(email)){
                     userEmail.setError("Email is required!");
+                    userEmail.requestFocus();
+                    return;
+                }
+                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    userEmail.setError("Please provide a valid email address!");
+                    userEmail.requestFocus();
                     return;
                 }
 
@@ -76,6 +83,7 @@ public class AdminDeactivateUserActivity extends AppCompatActivity {
 
     private void deactivateUserFirestore(){
         email = userEmail.getText().toString().trim();
+
 
         // Update an existing document
         DocumentReference docIdRef = fStore.collection("Users Profile").document(email);
@@ -147,7 +155,7 @@ public class AdminDeactivateUserActivity extends AppCompatActivity {
                 fAuth.signInWithEmailAndPassword(currAdminEmail, currAdminPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(AdminDeactivateUserActivity.this, "Correct Admin password!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(AdminDeactivateUserActivity.this, "Correct Admin password!", Toast.LENGTH_SHORT).show();
                         deactivateUserFirestore();
                         dialog.dismiss();
                     }

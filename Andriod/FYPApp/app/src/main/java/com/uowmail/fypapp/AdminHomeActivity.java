@@ -12,13 +12,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminHomeActivity extends AppCompatActivity {
@@ -89,6 +87,9 @@ public class AdminHomeActivity extends AppCompatActivity {
 
                 if(menuItem.getItemId() == R.id.username) {
                     Toast.makeText(AdminHomeActivity.this, "Your username is " + main.getUserName(), Toast.LENGTH_SHORT).show();
+                }
+                if(menuItem.getItemId() == R.id.resetPassword){
+                    startActivity(new Intent(getApplicationContext(), ResetPasswordActivity.class));
                 }
                 if(menuItem.getItemId() == R.id.logout)
                 {

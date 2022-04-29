@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -60,6 +61,10 @@ public class UserHomeFragment extends Fragment  {
     SwipeRefreshLayout refreshLayout;
     Integer num = 0;
 
+    // MJ - progress bar
+    public static ProgressBar progressBar;
+
+
     // MJ - donutGraph
     float usageValue = 0;
     String valueWunit;
@@ -103,6 +108,9 @@ public class UserHomeFragment extends Fragment  {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_user_home, container, false);
+
+        // MJ - progress bar
+        progressBar = (ProgressBar) v.findViewById(R.id.userGraph_progress_bar);
 
         // MJ - to fetch data from database
         fStore = FirebaseFirestore.getInstance();
@@ -225,6 +233,7 @@ public class UserHomeFragment extends Fragment  {
                 getLineChartDate("network", "net_recv");
                 getLineChartDate("disk", "disk_read");
                 getLineChartDate("disk", "disk_write");
+
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -237,7 +246,7 @@ public class UserHomeFragment extends Fragment  {
     // MJ - adding donutGraph-------------------------------------------------------------------------------
     private void setupDonutGraph(PieChart donutGraph, String info, String usageValue){
         // Donut graph
-        donutGraph.setNoDataText("Description that you want");
+        donutGraph.setNoDataText("");
         donutGraph.setDrawHoleEnabled(true);
         donutGraph.setUsePercentValues(true);
         donutGraph.setEntryLabelColor(Color.BLACK);
@@ -257,11 +266,11 @@ public class UserHomeFragment extends Fragment  {
         l.setEnabled(true);
     }
     private void getDonutGraphData(PieChart donutGraph, final String dataType){
+        donutGraph.setNoDataText("");
+
         ArrayList<Float> dataValueList = new ArrayList<Float>();
         ArrayList<String> dataNameList = new ArrayList<String>();
 
-        // shania
-//        path = mParam1 + "_log";
         qs = fStore.collection(path)
                 .orderBy("date", Query.Direction.DESCENDING)
                 .limit(1).get()
@@ -301,9 +310,9 @@ public class UserHomeFragment extends Fragment  {
                                     }
                                     // finding total usage of each data type
                                     for(float value : dataValueList){
-                                        usageValue += value;
+                                        usageValue +=  value;
                                     }
-                                    valueWunit = usageValue + "%";
+                                    valueWunit = Math.round(usageValue * 100.0) / 100.0 + "%";
                                 }
 
                                 else if (dataType == "network")
@@ -323,7 +332,7 @@ public class UserHomeFragment extends Fragment  {
                                     for(float value : dataValueList){
                                         usageValue += value;
                                     }
-                                    valueWunit = usageValue + "M";
+                                    valueWunit = Math.round(usageValue * 100.0) / 100.0 + "M";
                                 }
 
                                 else if (dataType == "disk")
@@ -343,7 +352,7 @@ public class UserHomeFragment extends Fragment  {
                                     for(float value : dataValueList){
                                         usageValue += value;
                                     }
-                                    valueWunit = usageValue + "M";
+                                    valueWunit = Math.round(usageValue * 100.0) / 100.0 + "M";
                                 }
 
                                 //load data graph
@@ -388,6 +397,7 @@ public class UserHomeFragment extends Fragment  {
 
         donutGraph.setData(data);
         donutGraph.invalidate();
+        disableProgressBar();
     }
 
 
@@ -586,4 +596,12 @@ to show properly, you can customize according to your needs.
                 return "";
             }
         }
+
+    public static void disableProgressBar(){
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    public static void enableProgressBar(){
+        progressBar.setVisibility(View.VISIBLE);
+    }
 }

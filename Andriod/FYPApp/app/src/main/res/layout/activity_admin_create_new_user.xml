@@ -10,9 +10,9 @@
         android:id="@+id/createUser_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="140dp"
         android:text="Create a New User"
-        android:textSize="20dp"
+        android:textSize="25dp"
         android:textColor="@color/black"
         android:background="#D79334"
         android:textStyle="bold"
@@ -20,78 +20,94 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/createUser_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Enter the new user's details below:"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createUser_title"/>
+
 
     <EditText
         android:id="@+id/createUser_fullname"
         android:layout_width="250dp"
         android:layout_height="38dp"
         android:layout_marginTop="36dp"
-        android:background="#e6f0ff"
         android:ems="10"
         android:hint="Full Name"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
         android:textColor="#000000"
-        android:textColorHint="#33691E"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/createUser_title"
+        app:layout_constraintEnd_toEndOf="@+id/createUser_description"
         app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="@+id/createUser_title"
-        app:layout_constraintTop_toBottomOf="@+id/createUser_title" />
+        app:layout_constraintStart_toStartOf="@+id/createUser_description"
+        app:layout_constraintTop_toBottomOf="@+id/createUser_description"
+        android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+        android:drawablePadding="5dp"
+        android:background="@drawable/edit_text_border"/>
 
     <EditText
         android:id="@+id/createUser_organisationID"
         android:layout_width="250dp"
         android:layout_height="38dp"
         android:layout_marginTop="12dp"
-        android:background="#e6f0ff"
         android:ems="10"
         android:hint="Organisation ID"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
         android:textColor="#000000"
-        android:textColorHint="#33691E"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/createUser_email"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/createUser_email"
-        app:layout_constraintTop_toBottomOf="@+id/createUser_email" />
+        app:layout_constraintTop_toBottomOf="@+id/createUser_email"
+        android:drawableLeft="@drawable/ic_baseline_work_24"
+        android:drawablePadding="5dp"
+        android:background="@drawable/edit_text_border" />
 
     <EditText
         android:id="@+id/createUser_password"
         android:layout_width="250dp"
         android:layout_height="38dp"
         android:layout_marginTop="12dp"
-        android:background="#e6f0ff"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:paddingLeft="10dp"
         android:textColor="#000000"
-        android:textColorHint="#33691E"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/createUser_organisationID"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/createUser_organisationID"
-        app:layout_constraintTop_toBottomOf="@+id/createUser_organisationID" />
+        app:layout_constraintTop_toBottomOf="@+id/createUser_organisationID"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
+        android:drawablePadding="5dp"
+        android:background="@drawable/edit_text_border"/>
 
     <EditText
         android:id="@+id/createUser_email"
         android:layout_width="250dp"
         android:layout_height="38dp"
         android:layout_marginTop="12dp"
-        android:background="#e6f0ff"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:paddingLeft="10dp"
         android:textColor="#000000"
-        android:textColorHint="#33691E"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/createUser_fullname"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/createUser_fullname"
-        app:layout_constraintTop_toBottomOf="@+id/createUser_fullname" />
+        app:layout_constraintTop_toBottomOf="@+id/createUser_fullname"
+        android:drawableLeft="@drawable/ic_baseline_email_24"
+        android:drawablePadding="5dp"
+        android:background="@drawable/edit_text_border"/>
 
     <Button
         android:id="@+id/createUser_createAcc_btn"

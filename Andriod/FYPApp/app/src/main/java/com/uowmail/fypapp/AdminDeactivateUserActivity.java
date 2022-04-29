@@ -155,7 +155,7 @@ public class AdminDeactivateUserActivity extends AppCompatActivity {
                 fAuth.signInWithEmailAndPassword(currAdminEmail, currAdminPassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(AdminDeactivateUserActivity.this, "Correct Admin password!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(AdminDeactivateUserActivity.this, "Correct Admin password!", Toast.LENGTH_SHORT).show();
                         deactivateUserFirestore();
                         dialog.dismiss();
                     }

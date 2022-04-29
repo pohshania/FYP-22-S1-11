@@ -137,6 +137,8 @@
         <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.20699708454810495" />
         <entry key="app/src/main/res/layout/fragment_rules.xml" value="0.2963302612304688" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.3182291666666667" />
+        <entry key="app/src/main/res/layout/fragment_user_alert_engine_details.xml" value="0.2043859649122807" />
+        <entry key="app/src/main/res/layout/fragment_user_analysis_engine_details.xml" value="0.27355558161149945" />
         <entry key="app/src/main/res/layout/popup.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/pwd_popup.xml" value="0.1" />
         <entry key="app/src/main/res/layout/pwdpopup.xml" value="0.2609375" />

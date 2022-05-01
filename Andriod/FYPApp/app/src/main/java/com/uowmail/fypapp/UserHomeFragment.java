@@ -1,5 +1,6 @@
 package com.uowmail.fypapp;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -145,11 +146,14 @@ public class UserHomeFragment extends Fragment  {
             }
         });
         networkBtn.setOnClickListener(new OnClickListener(){
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 donutGraph_cpu.setVisibility(View.GONE);
                 donutGraph_network.setVisibility(View.VISIBLE);
                 donutGraph_disk.setVisibility(View.GONE);
+//                networkBtn.setBackgroundResource(android.R.drawable.ic_dialog_email);
+//                networkBtn.setBackgroundColor(networkBtn.getContext().getResources().getColor(R.color.cp_yellow));
             }
         });
         diskBtn.setOnClickListener(new OnClickListener(){
@@ -259,11 +263,11 @@ public class UserHomeFragment extends Fragment  {
 
         // get legend
         Legend l = donutGraph.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
-        l.setEnabled(true);
+//        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+//        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+//        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+//        l.setDrawInside(false);
+        l.setEnabled(false);
     }
     private void getDonutGraphData(PieChart donutGraph, final String dataType){
         donutGraph.setNoDataText("");

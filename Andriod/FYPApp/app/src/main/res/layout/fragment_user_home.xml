@@ -6,129 +6,125 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UserHomeFragment"
     android:layout_marginTop="60dp">
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refreshLayout"
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layoutForButtons">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_above="@+id/layoutForButtons">
 
-            <ScrollView
-                android:layout_width="match_parent"
+            <ProgressBar
+                android:id="@+id/userGraph_progress_bar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:overScrollMode="never">
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                />
 
-                <RelativeLayout
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="4dp"
+                android:checked="false"
+                android:gravity="center"
+                android:textOff="donut"
+                android:textOn="line"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:thumb="@drawable/sw_thumb"
+                app:showText="true"
+                app:track="@drawable/sw_track" />
+
+            <LinearLayout
+                android:id="@+id/layoutForGraphs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/switchButton"
+                android:orientation="vertical">
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/donutgraph_cpu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_weight="1"
+                    android:visibility="gone" />
 
-                <ProgressBar
-                    android:id="@+id/userGraph_progress_bar"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/donutgraph_network"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="gone" />
 
-                    />
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switchButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="4dp"
-                    android:gravity="center"
-                    android:textOff="donut"
-                    android:textOn="line"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:thumb="@drawable/sw_thumb"
-                    app:showText="true"
-                    app:track="@drawable/sw_track"
-                    android:checked="false"/>
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/donutgraph_disk"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="gone" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="600dp"
-                        android:orientation="vertical"
-                        android:id="@+id/layoutForGraphs">
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/linechart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="70dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-                        <com.github.mikephil.charting.charts.PieChart
-                            android:id="@+id/donutgraph_cpu"
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:layout_weight="1"
-                            android:visibility="gone" />
-                        <com.github.mikephil.charting.charts.PieChart
-                            android:id="@+id/donutgraph_network"
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:layout_weight="1"
-                            android:visibility="gone" />
-                        <com.github.mikephil.charting.charts.PieChart
-                            android:id="@+id/donutgraph_disk"
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:layout_weight="1"
-                            android:visibility="gone" />
+    <LinearLayout
+        android:id="@+id/layoutForButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
-                        <com.github.mikephil.charting.charts.LineChart
-                            android:id="@+id/linechart"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="70dp"
-                            android:visibility="gone" />
+        <Button
+            android:id="@+id/cpuButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rounded_corner"
+            android:text="CPU"
+            />
+<!--        app:backgroundTint="@color/cp_yellow"-->
 
 
-                    </LinearLayout>
+        <Button
+            android:id="@+id/networkButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rounded_corner"
+            android:text="Network" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:id="@+id/layoutForButtons"
-                        android:layout_below="@+id/layoutForGraphs">
-
-
-                        <Button
-                            android:id="@+id/cpuButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="CPU" />
-
-                        <Button
-                            android:id="@+id/networkButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_weight="1"
-                            android:text="Network" />
-
-                        <Button
-                            android:id="@+id/diskButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Disk" />
-                    </LinearLayout>
-<!--                    <Button-->
-<!--                        android:id="@+id/AlertButton"-->
-<!--                        android:layout_width="100dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignParentStart="true"-->
-<!--                        android:layout_alignParentEnd="true"-->
-<!--                        android:layout_alignParentBottom="true"-->
-<!--                        android:layout_marginStart="130dp"-->
-<!--                        android:layout_marginEnd="130dp"-->
-<!--                        android:layout_marginBottom="552dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:onClick="showAlertDialog"-->
-<!--                        android:text="Alert"-->
-<!--                        />-->
-
-                </RelativeLayout>
-            </ScrollView>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <Button
+            android:id="@+id/diskButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rounded_corner"
+            android:text="Disk" />
+    </LinearLayout>
 </RelativeLayout>

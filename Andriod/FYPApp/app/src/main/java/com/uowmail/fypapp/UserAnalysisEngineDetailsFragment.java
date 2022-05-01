@@ -45,6 +45,8 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
     private TextView detected_by;
     private TextView detection_type;
     private TextView event_status;
+    private Button correctButton;
+    private Button ignoreButton;
 
     private Button download;
 
@@ -108,9 +110,14 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
         date           = view.findViewById(R.id.userAnalysisEngineDetails_date);
         detected_range = view.findViewById(R.id.userAnalysisEngineDetails_detected_range);
         detected_by    = view.findViewById(R.id.userAnalysisEngineDetails_detected_by);
-        detection_type = view.findViewById(R.id.userAnalysisEngineDetails_detection_type);;
-        event_status   = view.findViewById(R.id.userAnalysisEngineDetails_event_status);;
+        detection_type = view.findViewById(R.id.userAnalysisEngineDetails_detection_type);
+        event_status   = view.findViewById(R.id.userAnalysisEngineDetails_event_status);
 
+        // Steven - add feedback button
+        correctButton = view.findViewById(R.id.correctButton);
+        ignoreButton = view.findViewById(R.id.ignoreButton);
+        correctButton.setOnClickListener(correctButtonListener);
+        ignoreButton.setOnClickListener(ignoreButtonListener);
 
         // query
         String path = mParam2 + "_detection";
@@ -154,6 +161,7 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
+
 
     private void downloadFile(String date, String detected_range, String detected_by,
                               String detection_type, String event_status){
@@ -241,5 +249,37 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
             return true;
         }
         return false;
+    }
+
+    // Steven - get feedback and update firebase
+    private final View.OnClickListener correctButtonListener =
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View w)
+                {
+                    updateStatus("confirmed");
+                }
+            };
+    private final View.OnClickListener ignoreButtonListener =
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View w)
+                {
+                    updateStatus("ignored");
+                }
+            };
+
+    public void updateStatus(String status)
+    {
+        String path = mParam2 + "_detection";
+        DocumentReference docRef = fStore.collection(path).document(mParam1);
+
+        docRef.update("event_status", status)
+              .addOnSuccessListener(new OnSuccessListener<Void>() {
+                  @Override
+                  public void onSuccess(Void unused) {
+                      Log.d("=====FIRESTORE_QUERR=====", "DocumentSnapshot successfully updated!");
+                  }
+              });
     }
 }

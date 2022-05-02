@@ -130,10 +130,10 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
 
 
                 // date
-                date.setText("Date: " + intrusionDetails.getDate().toString());
+                date.setText("Date: " + intrusionDetails.getDate().toDate());
 
                 // detected range
-                detected_range.setText("Detected range: " + intrusionDetails.getDetected_range().toString());
+                detected_range.setText("Detected range: " + intrusionDetails.getDetected_range().toDate());
 
                 // detected by
                 detected_by.setText("Detected by: " + intrusionDetails.getDetected_by());

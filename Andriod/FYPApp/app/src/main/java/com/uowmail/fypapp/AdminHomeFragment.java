@@ -49,12 +49,12 @@ public class AdminHomeFragment extends Fragment {
 
 
         // MJ - Buttons for admins
-        Button rulesButton = v.findViewById(R.id.buttonRules);
+        Button rulesButton = v.findViewById(R.id.adminHome_rules_btn);
         //Button logoutButton = v.findViewById(R.id.buttonLogOut);
-        Button logsButton = v.findViewById(R.id.buttonLogs);
+        Button logsButton = v.findViewById(R.id.adminHome_logs_btn);
 
         // Shania
-        createUserBtn = v.findViewById(R.id.createUser_btn);
+        createUserBtn = v.findViewById(R.id.adminHome_createUser_btn);
         deactivateUseBtn = v.findViewById(R.id.adminHome_deactivateUser_btn);
 
 

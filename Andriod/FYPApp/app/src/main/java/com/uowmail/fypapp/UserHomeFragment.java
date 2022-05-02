@@ -1,11 +1,13 @@
 package com.uowmail.fypapp;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -143,6 +145,10 @@ public class UserHomeFragment extends Fragment  {
                 donutGraph_cpu.setVisibility(View.VISIBLE);
                 donutGraph_network.setVisibility(View.GONE);
                 donutGraph_disk.setVisibility(View.GONE);
+                cpuBtn.setSelected(true);
+                networkBtn.setSelected(false);
+                diskBtn.setSelected(false);
+
             }
         });
         networkBtn.setOnClickListener(new OnClickListener(){
@@ -152,6 +158,10 @@ public class UserHomeFragment extends Fragment  {
                 donutGraph_cpu.setVisibility(View.GONE);
                 donutGraph_network.setVisibility(View.VISIBLE);
                 donutGraph_disk.setVisibility(View.GONE);
+                cpuBtn.setSelected(false);
+                networkBtn.setSelected(true);
+                diskBtn.setSelected(false);
+
 //                networkBtn.setBackgroundResource(android.R.drawable.ic_dialog_email);
 //                networkBtn.setBackgroundColor(networkBtn.getContext().getResources().getColor(R.color.cp_yellow));
             }
@@ -162,6 +172,11 @@ public class UserHomeFragment extends Fragment  {
                 donutGraph_cpu.setVisibility(View.GONE);
                 donutGraph_network.setVisibility(View.GONE);
                 donutGraph_disk.setVisibility(View.VISIBLE);
+                cpuBtn.setSelected(false);
+                networkBtn.setSelected(false);
+                diskBtn.setSelected(true);
+
+
             }
         });
 

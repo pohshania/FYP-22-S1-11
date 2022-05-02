@@ -53,23 +53,28 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 // check if the email box or password boxes are empty
                 if(TextUtils.isEmpty(email)){
                     emailET.setError("Email cannot be empty!");
+                    emailET.requestFocus();
                     return;
                 }
                 if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     emailET.setError("Please provide a valid email address!");
+                    emailET.requestFocus();
                     return;
                 }
 
                 if(TextUtils.isEmpty(password)){
                     passwordET.setError("Password cannot be empty!");
+                    passwordET.requestFocus();
                     return;
                 }
                 if(password.length() < 6){
                     passwordET.setError("New password must be >= 6 characters!");
+                    passwordET.requestFocus();
                     return;
                 }
                 if(TextUtils.isEmpty(confirmPassword)){
                     confirmPasswordET.setError("Confirm password cannot be empty!");
+                    confirmPasswordET.requestFocus();
                     return;
                 }
 
@@ -78,12 +83,14 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 if(!email.equals(fAuth.getCurrentUser().getEmail()))
                 {
                     emailET.setError("Email must be your own email address.");
+                    emailET.requestFocus();
                     return;
                 }
 
                 // check if both the password are the same
                 if (!password.equals(confirmPassword)) {
                     confirmPasswordET.setError("Confirm password and password should be the same!");
+                    confirmPasswordET.requestFocus();
                     return;
                 }
 

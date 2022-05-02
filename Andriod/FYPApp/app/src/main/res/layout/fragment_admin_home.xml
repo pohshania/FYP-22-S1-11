@@ -12,46 +12,46 @@
 
 
         <Button
-            android:id="@+id/buttonLogs"
+            android:id="@+id/adminHome_logs_btn"
             android:layout_width="186dp"
             android:layout_height="79dp"
-            android:textSize="18sp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/rounded_corner"
-            android:text="Delete Logs" />
+            android:text="Logs"
+            android:textSize="18sp" />
 
         <Button
-            android:id="@+id/buttonRules"
+            android:id="@+id/adminHome_rules_btn"
             android:layout_width="186dp"
             android:layout_height="79dp"
-            android:textSize="18sp"
-            android:layout_below="@+id/buttonLogs"
+            android:layout_below="@+id/adminHome_logs_btn"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_corner"
-            android:text="@string/rules" />
+            android:text="@string/rules"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/createUser_btn"
-        android:layout_width="186dp"
-        android:layout_height="79dp"
-        android:textSize="18sp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/buttonRules"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"
-        android:text="Create User" />
+        <Button
+            android:id="@+id/adminHome_createUser_btn"
+            android:layout_width="186dp"
+            android:layout_height="79dp"
+            android:layout_below="@+id/adminHome_rules_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner"
+            android:text="Create User"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/adminHome_deactivateUser_btn"
-        android:layout_width="186dp"
-        android:layout_height="79dp"
-        android:textSize="18sp"
-        android:layout_below="@id/createUser_btn"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"
-        android:text="Deactivate User"/>
+        <Button
+            android:id="@+id/adminHome_deactivateUser_btn"
+            android:layout_width="186dp"
+            android:layout_height="79dp"
+            android:layout_below="@id/adminHome_createUser_btn"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner"
+            android:text="Deactivate User"
+            android:textSize="18sp" />
 
 
 

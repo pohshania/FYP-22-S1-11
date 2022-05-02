@@ -95,7 +95,7 @@ public class UserHomeActivity extends AppCompatActivity {
                             transaction.commit();
                             return true;
 
-                        case R.id.notification:
+                        case R.id.intrusion:
                             //getSupportFragmentManager().beginTransaction().replace(R.id.container, userNotificationsFragment).commit();
                             Fragment notificationsFragment = UserNotificationsFragment.newInstance(currentUserInfo.getOrgID());
                             FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
@@ -213,7 +213,7 @@ public class UserHomeActivity extends AppCompatActivity {
     }
 
     private void setNotificationBadgeDrawble(int count){
-        BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.notification);
+        BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.intrusion);
         badgeDrawable.setVisible(true);
         badgeDrawable.setNumber(count);
     }

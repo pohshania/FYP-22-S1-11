@@ -100,7 +100,9 @@
             android:layout_marginTop="2dp"
             android:layout_marginBottom="30dp"
             android:background="@drawable/rounded_corner"
+            app:backgroundTint="@null"
             android:text="CPU"
+
             />
 <!--        app:backgroundTint="@color/cp_yellow"-->
 
@@ -114,6 +116,7 @@
             android:layout_marginTop="2dp"
             android:layout_marginBottom="30dp"
             android:background="@drawable/rounded_corner"
+            app:backgroundTint="@null"
             android:text="Network" />
 
         <Button
@@ -125,6 +128,7 @@
             android:layout_marginTop="2dp"
             android:layout_marginBottom="30dp"
             android:background="@drawable/rounded_corner"
+            app:backgroundTint="@null"
             android:text="Disk" />
     </LinearLayout>
 </RelativeLayout>

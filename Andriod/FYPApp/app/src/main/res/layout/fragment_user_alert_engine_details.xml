@@ -37,41 +37,41 @@
         app:layout_constraintTop_toBottomOf="@+id/userAlertEngineDetails_Title" />
 
 
-<!-- ============================== ABNORMAL ============================== -->
-    <TextView
-        android:id="@+id/userAlertEngineDetails_abnormal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="abnormal[]"
-        android:textColor="#000080"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.147"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userAlertEngineDetails_separator_1" />
-
 <!-- ============================== DATE ============================== -->
     <TextView
         android:id="@+id/userAlertEngineDetails_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="date"
+        android:text="Date: "
         android:textColor="#000080"
-        app:layout_constraintStart_toStartOf="@+id/userAlertEngineDetails_abnormal"
-        app:layout_constraintTop_toBottomOf="@+id/userAlertEngineDetails_abnormal" />
+        app:layout_constraintTop_toBottomOf="@+id/userAlertEngineDetails_separator_1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"/>
+
+    <!-- ============================== ABNORMAL ============================== -->
+    <TextView
+        android:id="@+id/userAlertEngineDetails_abnormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Abnormal(s) Found: "
+        android:textColor="#000080"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userAlertEngineDetails_date"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"/>
 
 <!-- ==============================  DETECTED BY ============================== -->
     <TextView
         android:id="@+id/userAlertEngineDetails_detectedBy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="detected by"
+        android:layout_marginTop="10dp"
+        android:text="Detected By: "
         android:textColor="#000080"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/userAlertEngineDetails_abnormal"
-        app:layout_constraintTop_toBottomOf="@+id/userAlertEngineDetails_date" />
+        app:layout_constraintStart_toStartOf="@+id/userAlertEngineDetails_date"
+        app:layout_constraintTop_toBottomOf="@+id/userAlertEngineDetails_abnormal" />
 
 
 <!-- ==============================  EVENT STATUS ============================== -->
@@ -79,8 +79,8 @@
         android:id="@+id/userAlertEngineDetails_eventStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="event status"
+        android:layout_marginTop="10dp"
+        android:text="Event Status: "
         android:textColor="#000080"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/userAlertEngineDetails_abnormal"
@@ -105,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="disk read"
+        android:text="Disk Read: "
         android:textColor="#000080"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/userAlertEngineDetails_abnormal"
@@ -117,7 +117,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="disk write"
+        android:text="Disk Write: "
         android:textColor="#000080"
         app:layout_constraintStart_toStartOf="@+id/userAlertEngineDetails_abnormal"
         app:layout_constraintTop_toBottomOf="@+id/userAlertEngineDetails_diskRead" />
@@ -130,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="idling"
+        android:text="Idling: "
         android:textColor="#000080"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/userAlertEngineDetails_abnormal"
@@ -142,7 +142,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="avg"
+        android:text="Avg: "
         android:textColor="#883000"
         app:layout_constraintBottom_toBottomOf="@+id/userAlertEngineDetails_idling"
         app:layout_constraintStart_toEndOf="@+id/userAlertEngineDetails_idling"
@@ -154,7 +154,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="max"
+        android:text="Max: "
         android:textColor="#883000"
         app:layout_constraintBottom_toBottomOf="@+id/userAlertEngineDetails_idling_avg"
         app:layout_constraintStart_toEndOf="@+id/userAlertEngineDetails_idling_avg"
@@ -166,7 +166,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="min"
+        android:text="Min: "
         android:textColor="#883000"
         app:layout_constraintBottom_toBottomOf="@+id/userAlertEngineDetails_idling_max"
         app:layout_constraintEnd_toEndOf="parent"
@@ -180,7 +180,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="cpu usage"
+        android:text="CPU Usage: "
         android:textColor="#000080"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/userAlertEngineDetails_abnormal"
@@ -193,7 +193,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="net recv"
+        android:text="Network Receive: "
         android:textColor="#000080"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/userAlertEngineDetails_abnormal"
@@ -204,7 +204,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="net send"
+        android:text="Network Send: "
         android:textColor="#000080"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/userAlertEngineDetails_abnormal"
@@ -217,7 +217,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="sys"
+        android:text="System: "
         android:textColor="#000080"
         app:layout_constraintStart_toStartOf="@+id/userAlertEngineDetails_abnormal"
         app:layout_constraintTop_toBottomOf="@+id/userAlertEngineDetails_netSend" />
@@ -227,7 +227,7 @@
         android:id="@+id/userAlertEngineDetails_sys_avg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="avg"
+        android:text="Avg: "
         android:textColor="#883000"
         app:layout_constraintBottom_toBottomOf="@+id/userAlertEngineDetails_sys"
         app:layout_constraintStart_toStartOf="@+id/userAlertEngineDetails_idling_avg"
@@ -238,8 +238,7 @@
         android:id="@+id/userAlertEngineDetails_sys_max"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:text="max"
+        android:text="Max: "
         android:textColor="#883000"
         app:layout_constraintBottom_toBottomOf="@+id/userAlertEngineDetails_sys_min"
         app:layout_constraintEnd_toEndOf="parent"
@@ -253,7 +252,7 @@
         android:id="@+id/userAlertEngineDetails_sys_min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="min"
+        android:text="Min: "
         android:textColor="#883000"
         app:layout_constraintStart_toStartOf="@id/userAlertEngineDetails_idling_min"
         app:layout_constraintTop_toTopOf="@id/userAlertEngineDetails_sys_avg"/>
@@ -266,7 +265,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="usr"
+        android:text="User: "
         android:textColor="#000080"
         app:layout_constraintStart_toStartOf="@+id/userAlertEngineDetails_abnormal"
         app:layout_constraintTop_toBottomOf="@+id/userAlertEngineDetails_sys" />
@@ -276,7 +275,7 @@
         android:id="@+id/userAlertEngineDetails_usr_avg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="avg"
+        android:text="Avg: "
         android:textColor="#883000"
         app:layout_constraintBottom_toBottomOf="@+id/userAlertEngineDetails_usr"
         app:layout_constraintEnd_toEndOf="@+id/userAlertEngineDetails_sys_avg"
@@ -287,7 +286,7 @@
         android:id="@+id/userAlertEngineDetails_usr_max"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="max"
+        android:text="Max: "
         android:textColor="#883000"
         app:layout_constraintBottom_toBottomOf="@+id/userAlertEngineDetails_usr_min"
         app:layout_constraintEnd_toEndOf="@+id/userAlertEngineDetails_sys_max"
@@ -300,7 +299,7 @@
         android:id="@+id/userAlertEngineDetails_usr_min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="min"
+        android:text="Min: "
         android:textColor="#883000"
         app:layout_constraintBottom_toBottomOf="@+id/userAlertEngineDetails_usr_avg"
         app:layout_constraintEnd_toEndOf="@+id/userAlertEngineDetails_sys_min"

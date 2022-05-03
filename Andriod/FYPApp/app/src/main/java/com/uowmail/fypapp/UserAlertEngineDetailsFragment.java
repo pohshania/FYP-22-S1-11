@@ -2,11 +2,15 @@ package com.uowmail.fypapp;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -146,45 +150,68 @@ public class UserAlertEngineDetailsFragment extends Fragment {
                 UserAlertEngineDetailsModel intrusionDetails = documentSnapshot.toObject(UserAlertEngineDetailsModel.class);
 
                 // abnormal
-                abnormal.setText("Abnormal: " + intrusionDetails.getAbnormal());
+                abnormal.setText("Abnormal(s) Found: " + intrusionDetails.getAbnormal());
                 abnormal.setTextColor(Color.parseColor("#FF0000"));
 
+
                 // date
-                date.setText("Date: " + intrusionDetails.getDate().toDate());
+                //date.setText("Date: " + intrusionDetails.getDate().toDate());
+                date.append(getColoredString(getContext(), intrusionDetails.getDate().toDate().toString(), Color.parseColor("#883000")));
+
 
                 // detected by
-                detected_by.setText("Detected by: " + intrusionDetails.getDetected_by());
+                //detected_by.setText("Detected by: " + intrusionDetails.getDetected_by());
+                detected_by.append(getColoredString(getContext(), intrusionDetails.getDetected_by(), Color.parseColor("#883000")));
+
 
                 // disk
-                disk_read.setText("Disk Read: " + intrusionDetails.getDisk_read());
-                disk_write.setText("Disk Write: " + intrusionDetails.getDisk_write());
+                //disk_read.setText("Disk Read: " + intrusionDetails.getDisk_read());
+                //disk_write.setText("Disk Write: " + intrusionDetails.getDisk_write());
+                disk_read.append(getColoredString(getContext(), intrusionDetails.getDisk_read(), Color.parseColor("#883000")));
+                disk_write.append(getColoredString(getContext(), intrusionDetails.getDisk_write(), Color.parseColor("#883000")));
+
 
                 // event status
-                event_status.setText("Event status: " + intrusionDetails.getEvent_status());
+                //event_status.setText("Event status: " + intrusionDetails.getEvent_status());
+                event_status.append(getColoredString(getContext(), intrusionDetails.getEvent_status(), Color.parseColor("#883000")));
 
                 // idling
                 idling.setText("Idling:");
-                idling_avg.setText("Avg: " + intrusionDetails.getIdling().get("avg"));
-                idling_min.setText("Min: " + intrusionDetails.getIdling().get("min"));
-                idling_max.setText("Max: " + intrusionDetails.getIdling().get("max"));
-                float usage = 100 - intrusionDetails.getIdling().get("min");
-                cpu_usage.setText("CPU usage: " + usage);
+                //idling_avg.setText("Avg: " + intrusionDetails.getIdling().get("avg"));
+                idling_avg.append(getColoredString(getContext(), intrusionDetails.getIdling().get("avg").toString(), Color.parseColor("#883000")));
+                //idling_min.setText("Min: " + intrusionDetails.getIdling().get("min"));
+                idling_min.append(getColoredString(getContext(), intrusionDetails.getIdling().get("min").toString(), Color.parseColor("#883000")));
+                //idling_max.setText("Max: " + intrusionDetails.getIdling().get("max"));
+                idling_max.append(getColoredString(getContext(), intrusionDetails.getIdling().get("max").toString(), Color.parseColor("#883000")));
+                float usage = 100 - intrusionDetails.getIdling().get("avg");
+                //cpu_usage.setText("CPU usage: " + usage);
+                cpu_usage.append(getColoredString(getContext(), String.valueOf(usage), Color.parseColor("#883000")));
+
 
                 // network
-                net_recv.setText("Network recieve: " + intrusionDetails.getNet_recv());
-                net_send.setText("Network send: " + intrusionDetails.getNet_send());
+                //net_recv.setText("Network recieve: " + intrusionDetails.getNet_recv());
+                net_recv.append(getColoredString(getContext(), intrusionDetails.getNet_recv(), Color.parseColor("#883000")));
+                //net_send.setText("Network send: " + intrusionDetails.getNet_send());
+                net_send.append(getColoredString(getContext(), intrusionDetails.getNet_send(), Color.parseColor("#883000")));
 
                 // sys
                 sys.setText("System:");
-                sys_avg.setText("Avg: " + intrusionDetails.getSys().get("avg"));
-                sys_min.setText("Min: " + intrusionDetails.getSys().get("min"));
-                sys_max.setText("Max: " + intrusionDetails.getSys().get("max"));
+                //sys_avg.setText("Avg: " + intrusionDetails.getSys().get("avg"));
+                sys_avg.append(getColoredString(getContext(), intrusionDetails.getSys().get("avg").toString(), Color.parseColor("#883000")));
+                //sys_min.setText("Min: " + intrusionDetails.getSys().get("min"));
+                sys_min.append(getColoredString(getContext(), intrusionDetails.getSys().get("min").toString(), Color.parseColor("#883000")));
+                //sys_max.setText("Max: " + intrusionDetails.getSys().get("max"));
+                sys_max.append(getColoredString(getContext(), intrusionDetails.getSys().get("max").toString(), Color.parseColor("#883000")));
 
                 // usr
                 usr.setText("User:");
-                usr_avg.setText("Avg: " + intrusionDetails.getUsr().get("avg"));
-                usr_min.setText("Min: " + intrusionDetails.getUsr().get("min"));
-                usr_max.setText("Max: " + intrusionDetails.getUsr().get("max"));
+                //usr_avg.setText("Avg: " + intrusionDetails.getUsr().get("avg"));
+                usr_avg.append(getColoredString(getContext(), intrusionDetails.getUsr().get("avg").toString(), Color.parseColor("#883000")));
+                //usr_min.setText("Min: " + intrusionDetails.getUsr().get("min"));
+                usr_min.append(getColoredString(getContext(), intrusionDetails.getUsr().get("min").toString(), Color.parseColor("#883000")));
+                //usr_max.setText("Max: " + intrusionDetails.getUsr().get("max"));
+                usr_max.append(getColoredString(getContext(), intrusionDetails.getUsr().get("max").toString(), Color.parseColor("#883000")));
+
 
 
                 // higlight the abnormal activity in red
@@ -310,6 +337,12 @@ public class UserAlertEngineDetailsFragment extends Fragment {
             return true;
         }
         return false;
+    }
+
+    public static final Spannable getColoredString(Context context, CharSequence text, int color) {
+        Spannable spannable = new SpannableString(text);
+        spannable.setSpan(new ForegroundColorSpan(color), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannable;
     }
 
 }

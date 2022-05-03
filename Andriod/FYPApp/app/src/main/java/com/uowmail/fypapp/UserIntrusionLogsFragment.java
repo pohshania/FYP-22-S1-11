@@ -14,23 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.SnapshotParser;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-public class UserNotificationsFragment extends Fragment implements UserNotificationsAdapter.OnListItemClick{
+public class UserIntrusionLogsFragment extends Fragment implements UserIntrusionLogsAdapter.OnListItemClick{
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,21 +34,21 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
 
     private RecyclerView mFirestoreList;
     private FirebaseFirestore firebaseFirestore;
-    private UserNotificationsAdapter adapter;
+    private UserIntrusionLogsAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private FirestoreRecyclerOptions<UserNotificationsModel> options;
+    private FirestoreRecyclerOptions<UserIntrusionLogsModel> options;
     public static ProgressBar progressBar;
     public static TextView loadingText, noDataText;
 
     private RadioButton allEngines_radio, alertEngine_radio, analysisEngine_radio, signatureEngine_radio;
     private Button applyBtn;
 
-    public UserNotificationsFragment() {
+    public UserIntrusionLogsFragment() {
         // Required empty public constructor
     }
 
-    public static UserNotificationsFragment newInstance(String param1) {
-        UserNotificationsFragment fragment = new UserNotificationsFragment();
+    public static UserIntrusionLogsFragment newInstance(String param1) {
+        UserIntrusionLogsFragment fragment = new UserIntrusionLogsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -73,7 +67,7 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         View view = inflater.inflate(R.layout.fragment_user_notification, container, false);
+         View view = inflater.inflate(R.layout.fragment_user_intrusion_logs, container, false);
 
         TextView title = (TextView)getActivity().findViewById(R.id.toolbar_title);
         title.setText("Intrusion Notifications");
@@ -120,7 +114,7 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
 
         defaultQuery();
         // Set recyclerView adapter
-        adapter = new UserNotificationsAdapter(options, this);
+        adapter = new UserIntrusionLogsAdapter(options, this);
         mFirestoreList = (RecyclerView) view.findViewById(R.id.userNotifications_firestore_list);
         mFirestoreList.setHasFixedSize(true);
         mFirestoreList.setItemAnimator(null);
@@ -150,16 +144,16 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
         Query query = firebaseFirestore.collection(path).orderBy("date", Query.Direction.DESCENDING);
 
         // FirebaseRecyclerOptions
-        options = new FirestoreRecyclerOptions.Builder<UserNotificationsModel>()
+        options = new FirestoreRecyclerOptions.Builder<UserIntrusionLogsModel>()
                 .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<UserNotificationsModel>() {
+                .setQuery(query, new SnapshotParser<UserIntrusionLogsModel>() {
                     @NonNull
                     @Override
-                    public UserNotificationsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        UserNotificationsModel userNotificationsModel = snapshot.toObject(UserNotificationsModel.class);
+                    public UserIntrusionLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
+                        UserIntrusionLogsModel userIntrusionLogsModel = snapshot.toObject(UserIntrusionLogsModel.class);
                         String docId = snapshot.getId();
-                        userNotificationsModel.setDocument_id(docId);
-                        return userNotificationsModel;
+                        userIntrusionLogsModel.setDocument_id(docId);
+                        return userIntrusionLogsModel;
                     }
                 })
                 .build();
@@ -174,16 +168,16 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
                 .whereEqualTo("detected_by", "Alert engine");
 
         // FirebaseRecyclerOptions
-        FirestoreRecyclerOptions<UserNotificationsModel> new_options = new FirestoreRecyclerOptions.Builder<UserNotificationsModel>()
+        FirestoreRecyclerOptions<UserIntrusionLogsModel> new_options = new FirestoreRecyclerOptions.Builder<UserIntrusionLogsModel>()
                 .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<UserNotificationsModel>() {
+                .setQuery(query, new SnapshotParser<UserIntrusionLogsModel>() {
                     @NonNull
                     @Override
-                    public UserNotificationsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        UserNotificationsModel userNotificationsModel = snapshot.toObject(UserNotificationsModel.class);
+                    public UserIntrusionLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
+                        UserIntrusionLogsModel userIntrusionLogsModel = snapshot.toObject(UserIntrusionLogsModel.class);
                         String docId = snapshot.getId(); // TODO: different models for each engine
-                        userNotificationsModel.setDocument_id(docId);
-                        return userNotificationsModel;
+                        userIntrusionLogsModel.setDocument_id(docId);
+                        return userIntrusionLogsModel;
                     }
                 })
                 .build();
@@ -202,16 +196,16 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
                 .whereEqualTo("detected_by", "Analysis engine");
 
         // FirebaseRecyclerOptions
-        FirestoreRecyclerOptions<UserNotificationsModel> new_options = new FirestoreRecyclerOptions.Builder<UserNotificationsModel>()
+        FirestoreRecyclerOptions<UserIntrusionLogsModel> new_options = new FirestoreRecyclerOptions.Builder<UserIntrusionLogsModel>()
                 .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<UserNotificationsModel>() {
+                .setQuery(query, new SnapshotParser<UserIntrusionLogsModel>() {
                     @NonNull
                     @Override
-                    public UserNotificationsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        UserNotificationsModel userNotificationsModel = snapshot.toObject(UserNotificationsModel.class);
+                    public UserIntrusionLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
+                        UserIntrusionLogsModel userIntrusionLogsModel = snapshot.toObject(UserIntrusionLogsModel.class);
                         String docId = snapshot.getId(); // TODO: different models for each engine
-                        userNotificationsModel.setDocument_id(docId);
-                        return userNotificationsModel;
+                        userIntrusionLogsModel.setDocument_id(docId);
+                        return userIntrusionLogsModel;
                     }
                 })
                 .build();
@@ -230,16 +224,16 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
                 .whereEqualTo("detected_by", "Signature engine");
 
         // FirebaseRecyclerOptions
-        FirestoreRecyclerOptions<UserNotificationsModel> new_options = new FirestoreRecyclerOptions.Builder<UserNotificationsModel>()
+        FirestoreRecyclerOptions<UserIntrusionLogsModel> new_options = new FirestoreRecyclerOptions.Builder<UserIntrusionLogsModel>()
                 .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<UserNotificationsModel>() {
+                .setQuery(query, new SnapshotParser<UserIntrusionLogsModel>() {
                     @NonNull
                     @Override
-                    public UserNotificationsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        UserNotificationsModel userNotificationsModel = snapshot.toObject(UserNotificationsModel.class);
+                    public UserIntrusionLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
+                        UserIntrusionLogsModel userIntrusionLogsModel = snapshot.toObject(UserIntrusionLogsModel.class);
                         String docId = snapshot.getId(); // TODO: different models for each engine
-                        userNotificationsModel.setDocument_id(docId);
-                        return userNotificationsModel;
+                        userIntrusionLogsModel.setDocument_id(docId);
+                        return userIntrusionLogsModel;
                     }
                 })
                 .build();
@@ -257,16 +251,16 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
                 .orderBy("date", Query.Direction.DESCENDING);
 
         // FirebaseRecyclerOptions
-        FirestoreRecyclerOptions<UserNotificationsModel> new_options = new FirestoreRecyclerOptions.Builder<UserNotificationsModel>()
+        FirestoreRecyclerOptions<UserIntrusionLogsModel> new_options = new FirestoreRecyclerOptions.Builder<UserIntrusionLogsModel>()
                 .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<UserNotificationsModel>() {
+                .setQuery(query, new SnapshotParser<UserIntrusionLogsModel>() {
                     @NonNull
                     @Override
-                    public UserNotificationsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        UserNotificationsModel userNotificationsModel = snapshot.toObject(UserNotificationsModel.class);
+                    public UserIntrusionLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
+                        UserIntrusionLogsModel userIntrusionLogsModel = snapshot.toObject(UserIntrusionLogsModel.class);
                         String docId = snapshot.getId(); // TODO: different models for each engine
-                        userNotificationsModel.setDocument_id(docId);
-                        return userNotificationsModel;
+                        userIntrusionLogsModel.setDocument_id(docId);
+                        return userIntrusionLogsModel;
                     }
                 })
                 .build();
@@ -296,7 +290,7 @@ public class UserNotificationsFragment extends Fragment implements UserNotificat
 
     // FirestoreRecyclerView onclick to log details
     @Override
-    public void onItemClick(UserNotificationsModel snapshot, int position) {
+    public void onItemClick(UserIntrusionLogsModel snapshot, int position) {
         Log.d("ITEM_CLICK", "Clicked the item: " + position + " and the ID is: " + snapshot.getDocument_id());
 
         if(snapshot.getDocument_id().contains("_alert")){

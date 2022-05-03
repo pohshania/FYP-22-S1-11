@@ -17,18 +17,18 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UserNotificationsAdapter extends FirestoreRecyclerAdapter<UserNotificationsModel, UserNotificationsAdapter.UserNotificationViewHolder> {
+public class UserIntrusionLogsAdapter extends FirestoreRecyclerAdapter<UserIntrusionLogsModel, UserIntrusionLogsAdapter.UserNotificationViewHolder> {
 
     private OnListItemClick onListItemClick;
 
-    public UserNotificationsAdapter(@NonNull FirestoreRecyclerOptions<UserNotificationsModel> options, OnListItemClick onListItemClick) {
+    public UserIntrusionLogsAdapter(@NonNull FirestoreRecyclerOptions<UserIntrusionLogsModel> options, OnListItemClick onListItemClick) {
         super(options);
 
         this.onListItemClick = onListItemClick;
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull UserNotificationViewHolder holder, int position, @NonNull UserNotificationsModel model) {
+    protected void onBindViewHolder(@NonNull UserNotificationViewHolder holder, int position, @NonNull UserIntrusionLogsModel model) {
 
         if(position != RecyclerView.NO_POSITION){
             // Do your binding here
@@ -56,22 +56,22 @@ public class UserNotificationsAdapter extends FirestoreRecyclerAdapter<UserNotif
 
         notifyDataSetChanged();
 
-        UserNotificationsFragment.disableProgressBar();
+        UserIntrusionLogsFragment.disableProgressBar();
 
         if(getItemCount() == 0)
         {
-            UserNotificationsFragment.showNoDataFoundText();
+            UserIntrusionLogsFragment.showNoDataFoundText();
         }else{
-            UserNotificationsFragment.hideNoDataFoundText();
+            UserIntrusionLogsFragment.hideNoDataFoundText();
         }
     }
 
     @Override
-    public void updateOptions(@NonNull FirestoreRecyclerOptions<UserNotificationsModel> options) {
+    public void updateOptions(@NonNull FirestoreRecyclerOptions<UserIntrusionLogsModel> options) {
         super.updateOptions(options);
 
-        UserNotificationsFragment.hideNoDataFoundText();
-        UserNotificationsFragment.enableProgressBar();
+        UserIntrusionLogsFragment.hideNoDataFoundText();
+        UserIntrusionLogsFragment.enableProgressBar();
     }
 
     private String formatDocumentID(String modelDocID){
@@ -116,7 +116,7 @@ public class UserNotificationsAdapter extends FirestoreRecyclerAdapter<UserNotif
     }
 
     public interface OnListItemClick{
-        void onItemClick(UserNotificationsModel snapshot, int position);
+        void onItemClick(UserIntrusionLogsModel snapshot, int position);
     }
 
 

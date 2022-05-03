@@ -34,7 +34,7 @@ public class UserHomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     UserHomeFragment userHomeFragment = new UserHomeFragment();
     AdminHomeFragment adminHomeFragment = new AdminHomeFragment();
-    UserNotificationsFragment userNotificationsFragment = new UserNotificationsFragment();
+    UserIntrusionLogsFragment userIntrusionLogsFragment = new UserIntrusionLogsFragment();
     UserLogsFragment userLogsFragment = new UserLogsFragment();
 
     public CurrentUserInfo currentUserInfo;
@@ -97,7 +97,7 @@ public class UserHomeActivity extends AppCompatActivity {
 
                         case R.id.intrusion:
                             //getSupportFragmentManager().beginTransaction().replace(R.id.container, userNotificationsFragment).commit();
-                            Fragment notificationsFragment = UserNotificationsFragment.newInstance(currentUserInfo.getOrgID());
+                            Fragment notificationsFragment = UserIntrusionLogsFragment.newInstance(currentUserInfo.getOrgID());
                             FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
                             transaction3.replace(R.id.container, notificationsFragment, "user_notifications_fragment");
                             transaction3.addToBackStack(null);

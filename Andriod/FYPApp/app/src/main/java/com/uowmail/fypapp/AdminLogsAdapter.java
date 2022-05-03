@@ -169,7 +169,7 @@ public class AdminLogsAdapter extends FirestoreRecyclerAdapter<AdminLogsModel, A
     @NonNull
     @Override
     public AdminDeleteLogsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_delete_logs_list_item_single, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_logs_list_item_single, parent, false);
         return new AdminDeleteLogsViewHolder(view);
     }
 

@@ -62,7 +62,7 @@
             android:text=""/>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/adminDeleteLogs_swipeRefreshLayout"
+            android:id="@+id/adminLogs_swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

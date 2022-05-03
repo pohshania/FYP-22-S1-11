@@ -180,7 +180,7 @@ public class AdminLogsActivity extends AppCompatActivity implements AdminLogsAda
             }
         });
 
-        swipeRefreshLayout = findViewById(R.id.adminDeleteLogs_swipeRefreshLayout);
+        swipeRefreshLayout = findViewById(R.id.adminLogs_swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

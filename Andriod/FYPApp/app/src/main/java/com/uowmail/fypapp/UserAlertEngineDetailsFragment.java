@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -220,16 +221,31 @@ public class UserAlertEngineDetailsFragment extends Fragment {
                     String abnormalType = intrusionDetails.getAbnormal().get(i);
                     Log.d("===== ABNORMAL_TYPE =====", abnormalType);
 
-                    if(abnormalType.equals("CPU max"))
+                    if(abnormalType.equals("CPU max")){
                         cpu_usage.setTextColor(Color.parseColor("#FF0000"));
-                    if(abnormalType.equals("disk_read"))
+                        cpu_usage.setPaintFlags(cpu_usage.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                    }
+
+                    if(abnormalType.equals("disk_read")){
                         disk_read.setTextColor(Color.parseColor("#FF0000"));
-                    if(abnormalType.equals("disk_writ"))
+                        disk_read.setPaintFlags(disk_read.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                    }
+
+                    if(abnormalType.equals("disk_writ")){
                         disk_write.setTextColor(Color.parseColor("#FF0000"));
-                    if(abnormalType.equals("net_recv"))
+                        disk_write.setPaintFlags(disk_write.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                    }
+
+                    if(abnormalType.equals("net_recv")){
                         net_recv.setTextColor(Color.parseColor("#FF0000"));
-                    if(abnormalType.equals("net_send"))
+                        net_recv.setPaintFlags(net_recv.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                    }
+
+                    if(abnormalType.equals("net_send")){
                         net_send.setTextColor(Color.parseColor("#FF0000"));
+                        net_send.setPaintFlags(net_send.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                    }
+
                 }
             }
         });
@@ -344,5 +360,4 @@ public class UserAlertEngineDetailsFragment extends Fragment {
         spannable.setSpan(new ForegroundColorSpan(color), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannable;
     }
-
 }

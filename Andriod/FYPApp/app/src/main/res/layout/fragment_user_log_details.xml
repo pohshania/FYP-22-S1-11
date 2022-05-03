@@ -15,16 +15,25 @@
         android:id="@+id/userLogDetails_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
         android:background="#D79334"
         android:text="@string/hello_blank_fragment"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="80dp"/>
+
+    <View
+        android:id="@+id/userLogDetails_separator_1"
+        android:layout_width="422dp"
+        android:layout_height="10dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userLogDetails_Title"
+        android:layout_marginTop="25dp"/>
 
 
 <!-- ============================== DATE ============================== -->
@@ -32,40 +41,36 @@
         android:id="@+id/userLogDetails_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:gravity="center"
-        android:text="date"
+        android:text="Date: "
         android:textColor="#000080"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_Title" />
+        app:layout_constraintTop_toBottomOf="@id/userLogDetails_separator_1"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp"/>
 
 <!-- ============================== DISK READ ============================== -->
     <TextView
         android:id="@+id/userLogDetails_diskRead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="disk read"
+        android:text="Disk Read: "
         android:textColor="#000080"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_date" />
+        app:layout_constraintTop_toBottomOf="@id/userLogDetails_date"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp" />
 
 <!-- ============================== DISK WRITE ============================== -->
     <TextView
         android:id="@+id/userLogDetails_diskWrite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="disk write"
+        android:text="Disk Write: "
         android:textColor="#000080"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_diskRead" />
+        app:layout_constraintTop_toBottomOf="@id/userLogDetails_diskRead"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp" />
 
 
 <!-- ============================== IDLING ============================== -->
@@ -73,21 +78,20 @@
         android:id="@+id/userLogDetails_idling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="idling"
+        android:text="Idling"
         android:textColor="#000080"
-        app:layout_constraintEnd_toEndOf="@+id/userLogDetails_diskWrite"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/userLogDetails_diskWrite"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_diskWrite" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userLogDetails_diskWrite"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp" />
 
     <TextView
         android:id="@+id/userLogDetails_idling_avg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="avg"
-        android:textColor="#883000"
+        android:layout_marginStart="35dp"
+        android:text="Avg: "
+        android:textColor="#000080"
         app:layout_constraintBottom_toBottomOf="@+id/userLogDetails_idling"
         app:layout_constraintStart_toEndOf="@+id/userLogDetails_idling"
         app:layout_constraintTop_toTopOf="@+id/userLogDetails_idling" />
@@ -97,63 +101,78 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="max"
-        android:textColor="#883000"
+        android:text="Max: "
+        android:textColor= "#000080"
         app:layout_constraintBottom_toBottomOf="@+id/userLogDetails_idling_avg"
         app:layout_constraintStart_toEndOf="@+id/userLogDetails_idling_avg"
-        app:layout_constraintTop_toTopOf="@+id/userLogDetails_idling" />
+        app:layout_constraintTop_toTopOf="@+id/userLogDetails_idling_avg" />
 
     <TextView
         android:id="@+id/userLogDetails_idling_min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="min"
-        android:textColor="#883000"
+        android:text="Min: "
+        android:textColor="#000080"
         app:layout_constraintBottom_toBottomOf="@+id/userLogDetails_idling_max"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/userLogDetails_idling_max"
-        app:layout_constraintTop_toTopOf="@+id/userLogDetails_idling" />
+        app:layout_constraintTop_toTopOf="@+id/userLogDetails_idling_max" />
 
 <!-- ============================== CPU ============================== -->
     <TextView
-        android:id="@+id/userLogsDetails_cpu_usage"
+        android:id="@+id/userLogDetails_cpu_usage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="cpu"
+        android:text="CPU Usage: "
         android:textColor="#000080"
-        app:layout_constraintEnd_toEndOf="@+id/userLogDetails_idling"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/userLogDetails_idling"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_idling" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userLogDetails_idling"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp" />
 
+    <View
+        android:id="@+id/userLogDetails_separator_2"
+        android:layout_width="422dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_cpu_usage" />
 
 <!-- ============================== NETWORK ============================== -->
     <TextView
         android:id="@+id/userLogDetails_netRecv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="net recv"
+        android:text="Network Receive: "
         android:textColor="#000080"
-        app:layout_constraintEnd_toEndOf="@+id/userLogsDetails_cpu_usage"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/userLogsDetails_cpu_usage"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userLogDetails_separator_2"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp"/>
 
     <TextView
         android:id="@+id/userLogDetails_netSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="net send"
+        android:text="Network Send: "
         android:textColor="#000080"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userLogDetails_netRecv"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp"/>
+
+
+    <View
+        android:id="@+id/userLogDetails_separator_3"
+        android:layout_width="422dp"
+        android:layout_height="10dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/userLogDetails_netRecv"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_netRecv" />
+        app:layout_constraintTop_toBottomOf="@id/userLogDetails_netSend"
+        android:layout_marginTop="15dp"/>
 
 
 
@@ -162,18 +181,19 @@
         android:id="@+id/userLogDetails_sys"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="sys"
+        android:text="System: "
         android:textColor="#000080"
-        app:layout_constraintStart_toStartOf="@+id/userLogDetails_netSend"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_netSend" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_separator_3"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp"/>
 
     <TextView
         android:id="@+id/userLogDetails_sys_avg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="avg"
-        android:textColor="#883000"
+        android:text="Avg: "
+        android:textColor="#000080"
         app:layout_constraintStart_toStartOf="@id/userLogDetails_idling_avg"
         app:layout_constraintTop_toTopOf="@id/userLogDetails_sys"/>
 
@@ -181,8 +201,8 @@
         android:id="@+id/userLogDetails_sys_max"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="max"
-        android:textColor="#883000"
+        android:text="Max: "
+        android:textColor="#000080"
         app:layout_constraintStart_toStartOf="@id/userLogDetails_idling_max"
         app:layout_constraintTop_toTopOf="@id/userLogDetails_sys"/>
 
@@ -190,8 +210,8 @@
         android:id="@+id/userLogDetails_sys_min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="min"
-        android:textColor="#883000"
+        android:text="Min: "
+        android:textColor="#000080"
         app:layout_constraintStart_toStartOf="@id/userLogDetails_idling_min"
         app:layout_constraintTop_toTopOf="@id/userLogDetails_sys" />
 
@@ -201,81 +221,42 @@
         android:id="@+id/userLogDetails_usr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="usr"
+        android:text="User: "
         android:textColor="#000080"
-        app:layout_constraintStart_toStartOf="@+id/userLogDetails_sys"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_sys" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_sys"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp" />
 
     <TextView
         android:id="@+id/userLogDetails_usr_avg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="avg"
-        android:textColor="#883000"
-        app:layout_constraintBottom_toBottomOf="@+id/userLogDetails_usr"
-        app:layout_constraintEnd_toEndOf="@+id/userLogDetails_sys_avg"
-        app:layout_constraintStart_toStartOf="@+id/userLogDetails_sys_avg"
-        app:layout_constraintTop_toTopOf="@+id/userLogDetails_usr" />
+        android:text="Avg: "
+        android:textColor="#000080"
+        app:layout_constraintStart_toStartOf="@id/userLogDetails_idling_avg"
+        app:layout_constraintTop_toTopOf="@id/userLogDetails_usr" />
 
     <TextView
         android:id="@+id/userLogDetails_usr_max"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="max"
-        android:textColor="#883000"
-        app:layout_constraintBottom_toBottomOf="@+id/userLogDetails_usr_min"
-        app:layout_constraintEnd_toEndOf="@+id/userLogDetails_sys_max"
-        app:layout_constraintHorizontal_bias="0.303"
-        app:layout_constraintStart_toStartOf="@+id/userLogDetails_sys_max"
-        app:layout_constraintTop_toTopOf="@+id/userLogDetails_usr_min"
-        app:layout_constraintVertical_bias="0.0" />
+        android:text="Max: "
+        android:textColor="#000080"
+        app:layout_constraintStart_toStartOf="@id/userLogDetails_idling_max"
+        app:layout_constraintTop_toTopOf="@id/userLogDetails_usr" />
 
     <TextView
         android:id="@+id/userLogDetails_usr_min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="min"
-        android:textColor="#883000"
-        app:layout_constraintBottom_toBottomOf="@+id/userLogDetails_usr_avg"
-        app:layout_constraintEnd_toEndOf="@+id/userLogDetails_sys_min"
-        app:layout_constraintStart_toStartOf="@+id/userLogDetails_sys_min"
-        app:layout_constraintTop_toTopOf="@+id/userLogDetails_usr_avg"
-        app:layout_constraintVertical_bias="0.0" />
+        android:text="Min: "
+        android:textColor="#000080"
+        app:layout_constraintStart_toStartOf="@id/userLogDetails_idling_min"
+        app:layout_constraintTop_toTopOf="@id/userLogDetails_usr"/>
 
 
 
-
-    <View
-        android:layout_width="422dp"
-        android:layout_height="10dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toTopOf="@+id/userLogDetails_sys"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_netSend" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="422dp"
-        android:layout_height="10dp"
-        android:layout_marginTop="12dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@+id/userLogsDetails_cpu_usage"
-        tools:layout_editor_absoluteX="-6dp" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="422dp"
-        android:layout_height="10dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toTopOf="@+id/userLogDetails_diskRead"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_date"
-        app:layout_constraintVertical_bias="0.333" />
 
     <Button
         android:id="@+id/userLogsDetails_download"
@@ -284,10 +265,8 @@
         android:text="Download"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userLogDetails_usr"
-        app:layout_constraintVertical_bias="0.178" />
+        app:layout_constraintTop_toBottomOf="@id/userLogDetails_usr"/>
 
 
 

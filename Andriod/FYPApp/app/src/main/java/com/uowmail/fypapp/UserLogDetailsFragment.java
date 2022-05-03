@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -13,6 +14,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -116,7 +120,7 @@ public class UserLogDetailsFragment extends Fragment {
         idling_avg = view.findViewById(R.id.userLogDetails_idling_avg);
         idling_min = view.findViewById(R.id.userLogDetails_idling_min);
         idling_max = view.findViewById(R.id.userLogDetails_idling_max);
-        cpu_usage  = view.findViewById(R.id.userLogsDetails_cpu_usage);
+        cpu_usage  = view.findViewById(R.id.userLogDetails_cpu_usage);
         net_recv   = view.findViewById(R.id.userLogDetails_netRecv);
         net_send   = view.findViewById(R.id.userLogDetails_netSend);
         sys        = view.findViewById(R.id.userLogDetails_sys);
@@ -139,39 +143,54 @@ public class UserLogDetailsFragment extends Fragment {
                 UserLogDetailsModel logDetails = documentSnapshot.toObject(UserLogDetailsModel.class);
 
                 // date
-                date.setText("Date: " + logDetails.getDate().toDate());
+                //date.setText("Date: " + logDetails.getDate().toDate());
+                date.append(getColoredString(getContext(), logDetails.getDate().toDate().toString(), Color.parseColor("#883000")));
 
                 // disk
-                disk_read.setText("Disk Read: " + logDetails.getDisk_read());
-                disk_write.setText("Disk Write: " + logDetails.getDisk_write());
+                //disk_read.setText("Disk Read: " + logDetails.getDisk_read());
+                disk_read.append(getColoredString(getContext(), logDetails.getDisk_read(), Color.parseColor("#883000")));
+                //disk_write.setText("Disk Write: " + logDetails.getDisk_write());
+                disk_write.append(getColoredString(getContext(), logDetails.getDisk_write(), Color.parseColor("#883000")));
 
                 // idling
-                idling.setText("Idling:");
-                idling_avg.setText("Avg: " + logDetails.getIdling().get("avg"));
-                idling_min.setText("Min: " + logDetails.getIdling().get("min"));
-                idling_max.setText("Max: " + logDetails.getIdling().get("max"));
+                //idling.setText("Idling:");
+                //idling_avg.setText("Avg: " + logDetails.getIdling().get("avg"));
+                idling_avg.append(getColoredString(getContext(), logDetails.getIdling().get("avg").toString(), Color.parseColor("#883000")));
+                //idling_min.setText("Min: " + logDetails.getIdling().get("min"));
+                idling_min.append(getColoredString(getContext(), logDetails.getIdling().get("min").toString(), Color.parseColor("#883000")));
+                //idling_max.setText("Max: " + logDetails.getIdling().get("max"));
+                idling_max.append(getColoredString(getContext(), logDetails.getIdling().get("max").toString(), Color.parseColor("#883000")));
 
                 // cpu
-                float usage = 100 - logDetails.getIdling().get("min");
-                cpu_usage.setText("CPU usage: " + String.valueOf(usage));
+                float usage = 100 - logDetails.getIdling().get("avg");
+                //cpu_usage.setText("CPU usage: " + String.valueOf(usage));
+                cpu_usage.append(getColoredString(getContext(), String.valueOf(usage), Color.parseColor("#883000")));
 
                 // net
-                net_recv.setText("Network recieve: " + logDetails.getNet_recv());
-                net_send.setText("Network send: " + logDetails.getNet_send());
+                //net_recv.setText("Network recieve: " + logDetails.getNet_recv());
+                net_recv.append(getColoredString(getContext(), logDetails.getNet_recv(), Color.parseColor("#883000")));
+                //net_send.setText("Network send: " + logDetails.getNet_send());
+                net_send.append(getColoredString(getContext(), logDetails.getNet_send(), Color.parseColor("#883000")));
+
 
                 // sys
-                sys.setText("System:");
-                sys_avg.setText("Avg: " + logDetails.getSys().get("avg"));
-                sys_min.setText("Min: " + logDetails.getSys().get("min"));
-                sys_max.setText("Max: " + logDetails.getSys().get("max"));
+                //sys.setText("System:");
+                //sys_avg.setText("Avg: " + logDetails.getSys().get("avg"));
+                sys_avg.append(getColoredString(getContext(), logDetails.getSys().get("avg").toString(), Color.parseColor("#883000")));
+                //sys_min.setText("Min: " + logDetails.getSys().get("min"));
+                sys_min.append(getColoredString(getContext(), logDetails.getSys().get("min").toString(), Color.parseColor("#883000")));
+                //sys_max.setText("Max: " + logDetails.getSys().get("max"));
+                sys_max.append(getColoredString(getContext(), logDetails.getSys().get("max").toString(), Color.parseColor("#883000")));
+
 
                 // usr
-                usr.setText("User:");
-                usr_avg.setText("Avg: " + logDetails.getUsr().get("avg"));
-                usr_min.setText("Min: " + logDetails.getUsr().get("min"));
-                usr_max.setText("Max: " + logDetails.getUsr().get("max"));
-
-
+                //usr.setText("User:");
+                //usr_avg.setText("Avg: " + logDetails.getUsr().get("avg"));
+                usr_avg.append(getColoredString(getContext(), logDetails.getUsr().get("avg").toString(), Color.parseColor("#883000")));
+                //usr_min.setText("Min: " + logDetails.getUsr().get("min"));
+                usr_min.append(getColoredString(getContext(), logDetails.getUsr().get("min").toString(), Color.parseColor("#883000")));
+                //usr_max.setText("Max: " + logDetails.getUsr().get("max"));
+                usr_max.append(getColoredString(getContext(), logDetails.getUsr().get("max").toString(), Color.parseColor("#883000")));
             }
         });
 
@@ -289,4 +308,9 @@ public class UserLogDetailsFragment extends Fragment {
         return false;
     }
 
+    public static final Spannable getColoredString(Context context, CharSequence text, int color) {
+        Spannable spannable = new SpannableString(text);
+        spannable.setSpan(new ForegroundColorSpan(color), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannable;
+    }
 }

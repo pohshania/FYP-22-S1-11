@@ -2,10 +2,8 @@ package com.uowmail.fypapp;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -18,8 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -34,7 +30,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AdminDeleteLogsAdapter extends FirestoreRecyclerAdapter<AdminDeleteLogsModel, AdminDeleteLogsAdapter.AdminDeleteLogsViewHolder> {
+public class AdminLogsAdapter extends FirestoreRecyclerAdapter<AdminLogsModel, AdminLogsAdapter.AdminDeleteLogsViewHolder> {
 
     private OnListItemClick onListItemClick;
     private TextView doc_id, options;
@@ -45,14 +41,14 @@ public class AdminDeleteLogsAdapter extends FirestoreRecyclerAdapter<AdminDelete
     private FirebaseAuth fAuth;
     private EditText userEmail, adminPassword;
 
-    public AdminDeleteLogsAdapter(@NonNull FirestoreRecyclerOptions<AdminDeleteLogsModel> options, OnListItemClick onListItemClick) {
+    public AdminLogsAdapter(@NonNull FirestoreRecyclerOptions<AdminLogsModel> options, OnListItemClick onListItemClick) {
         super(options);
 
         this.onListItemClick = onListItemClick;
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull AdminDeleteLogsViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull AdminDeleteLogsModel model) {
+    protected void onBindViewHolder(@NonNull AdminDeleteLogsViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull AdminLogsModel model) {
 
         if(position != RecyclerView.NO_POSITION){
             // Do your binding here
@@ -183,14 +179,14 @@ public class AdminDeleteLogsAdapter extends FirestoreRecyclerAdapter<AdminDelete
 
         notifyDataSetChanged();
 
-        AdminDeleteLogsActivity.disableProgressBar();
-        AdminDeleteLogsActivity.enableFilterButton();
+        AdminLogsActivity.disableProgressBar();
+        AdminLogsActivity.enableFilterButton();
 
         if(getItemCount() == 0)
         {
-            AdminDeleteLogsActivity.showNoDataFoundText();
+            AdminLogsActivity.showNoDataFoundText();
         }else{
-            AdminDeleteLogsActivity.hideNoDateFoundText();
+            AdminLogsActivity.hideNoDateFoundText();
         }
 
     }
@@ -200,14 +196,14 @@ public class AdminDeleteLogsAdapter extends FirestoreRecyclerAdapter<AdminDelete
     }
 
     @Override
-    public void updateOptions(@NonNull FirestoreRecyclerOptions<AdminDeleteLogsModel> options) {
+    public void updateOptions(@NonNull FirestoreRecyclerOptions<AdminLogsModel> options) {
         super.updateOptions(options);
 
         notifyDataSetChanged();
 
-        AdminDeleteLogsActivity.hideNoDateFoundText();
-        AdminDeleteLogsActivity.enableProgressBar();
-        AdminDeleteLogsActivity.disableFilterButton();
+        AdminLogsActivity.hideNoDateFoundText();
+        AdminLogsActivity.enableProgressBar();
+        AdminLogsActivity.disableFilterButton();
     }
 
     // Viewholder class for user logs
@@ -255,7 +251,7 @@ public class AdminDeleteLogsAdapter extends FirestoreRecyclerAdapter<AdminDelete
     }
 
     public interface OnListItemClick{
-        void onItemClick(AdminDeleteLogsModel snapshot, int position);
+        void onItemClick(AdminLogsModel snapshot, int position);
     }
 
 }

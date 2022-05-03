@@ -2,7 +2,9 @@ package com.uowmail.fypapp;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -10,6 +12,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +27,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
+import androidx.appcompat.app.AppCompatActivity;
 import org.w3c.dom.Text;
 
 import java.io.File;
@@ -130,19 +135,28 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
 
 
                 // date
-                date.setText("Date: " + intrusionDetails.getDate().toDate());
+                //date.setText("Date: " + intrusionDetails.getDate().toDate());
+                date.append(getColoredString(getContext(), intrusionDetails.getDate().toDate().toString(), Color.parseColor("#883000")));
+
 
                 // detected range
-                detected_range.setText("Detected range: " + intrusionDetails.getDetected_range().toDate());
+                //detected_range.setText("Detected range: " + intrusionDetails.getDetected_range().toDate());
+                detected_range.append(getColoredString(getContext(), intrusionDetails.getDetected_range().toDate().toString(), Color.parseColor("#883000")));
+
 
                 // detected by
-                detected_by.setText("Detected by: " + intrusionDetails.getDetected_by());
+                //detected_by.setText("Detected by: " + intrusionDetails.getDetected_by());
+                detected_by.append(getColoredString(getContext(), intrusionDetails.getDetected_by(), Color.parseColor("#883000")));
+
 
                 // detection type
-                detection_type.setText("Detection type: " + intrusionDetails.getDetection_type());
+                //detection_type.setText("Detection type: " + intrusionDetails.getDetection_type());
+                detection_type.append(getColoredString(getContext(), intrusionDetails.getDetection_type(), Color.parseColor("#883000")));
+
 
                 // event status
-                event_status.setText("Event status: " + intrusionDetails.getEvent_status());
+                //event_status.setText("Event status: " + intrusionDetails.getEvent_status());
+                event_status.append(getColoredString(getContext(), intrusionDetails.getEvent_status(), Color.parseColor("#883000")));
             }
         });
 
@@ -281,5 +295,11 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
                       Log.d("=====FIRESTORE_QUERR=====", "DocumentSnapshot successfully updated!");
                   }
               });
+    }
+
+    public static final Spannable getColoredString(Context context, CharSequence text, int color) {
+        Spannable spannable = new SpannableString(text);
+        spannable.setSpan(new ForegroundColorSpan(color), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannable;
     }
 }

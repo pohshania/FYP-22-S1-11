@@ -80,7 +80,7 @@
             android:name=".AdminRulesActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminDeleteLogsActivity"
+            android:name=".AdminLogsActivity"
             android:exported="false" />
 
         <service

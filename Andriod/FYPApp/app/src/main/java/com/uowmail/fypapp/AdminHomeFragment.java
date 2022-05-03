@@ -61,7 +61,7 @@ public class AdminHomeFragment extends Fragment {
         logsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //startActivity(new Intent(getActivity(), AdminDeleteLogsActivity.class));
-                Intent i = new Intent(getActivity(), AdminDeleteLogsActivity.class);
+                Intent i = new Intent(getActivity(), AdminLogsActivity.class);
                 i.putExtra("adminOrgID",mParam1);
                 startActivity(i);
             }

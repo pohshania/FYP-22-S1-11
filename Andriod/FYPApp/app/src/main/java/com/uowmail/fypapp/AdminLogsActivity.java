@@ -3,10 +3,6 @@ package com.uowmail.fypapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.widget.ImageViewCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -33,11 +29,8 @@ import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.SnapshotParser;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.chip.Chip;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -48,11 +41,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminDeleteLogsAdapter.OnListItemClick{
+public class AdminLogsActivity extends AppCompatActivity implements AdminLogsAdapter.OnListItemClick{
 
     // MJ - Pop up window to enter pwd --------------------------------------------------------------------------------------
     private AlertDialog.Builder dialogBuilder;
@@ -63,9 +55,9 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
     private RecyclerView mFirestoreList;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth fAuth;
-    private AdminDeleteLogsAdapter adapter;
+    private AdminLogsAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private FirestoreRecyclerOptions<AdminDeleteLogsModel> options;
+    private FirestoreRecyclerOptions<AdminLogsModel> options;
 
     private EditText userEmail, adminPassword;
     private String email, currAdminEmail, currAdminPassword;
@@ -83,7 +75,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_delete_logs);
+        setContentView(R.layout.activity_admin_logs);
 
         // pass current user's info
         Bundle extras = getIntent().getExtras();
@@ -102,17 +94,17 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
         fAuth = FirebaseAuth.getInstance();
 
         // XML variables
-        progressBar = (ProgressBar) findViewById(R.id.adminDeleteLogs_progress_bar);
-        loadingText = findViewById(R.id.adminDeleteLogs_loadingText);
-        noDataFoundText = findViewById(R.id.adminDeleteLogs_noDataText);
-        filterLogsBtn = findViewById(R.id.adminDeleteLogs_filter_btn);
-        adminLogsChip = findViewById(R.id.adminDeleteLogs_chip);
+        progressBar = (ProgressBar) findViewById(R.id.adminLogs_progress_bar);
+        loadingText = findViewById(R.id.adminLogs_loadingText);
+        noDataFoundText = findViewById(R.id.adminLogs_noDataText);
+        filterLogsBtn = findViewById(R.id.adminLogs_filter_btn);
+        adminLogsChip = findViewById(R.id.adminLogs_chip);
 
         firestoreDefaultLogsQuery();
 
         // Set recyclerView adapter
-        adapter = new AdminDeleteLogsAdapter(options, this);
-        mFirestoreList = (RecyclerView) findViewById(R.id.adminDeleteLogs_firestore_list);
+        adapter = new AdminLogsAdapter(options, this);
+        mFirestoreList = (RecyclerView) findViewById(R.id.adminLogs_firestore_list);
         mFirestoreList.setHasFixedSize(true);
         //mFirestoreList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mFirestoreList.setLayoutManager(new WrapContentLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -125,8 +117,8 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
         filterLogsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AdminDeleteLogsActivity.this, R.style.BottomSheetDialogTheme);
-                View bottomSheetView = LayoutInflater.from(AdminDeleteLogsActivity.this.getApplicationContext())
+                final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(AdminLogsActivity.this, R.style.BottomSheetDialogTheme);
+                View bottomSheetView = LayoutInflater.from(AdminLogsActivity.this.getApplicationContext())
                         .inflate(R.layout.admin_delete_logs_bottom_sheet, (LinearLayout) view.findViewById(R.id.adminDeleteLogs_bottomSheetContainer)
                         );
 
@@ -164,7 +156,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
                     public void onClick(View view) {
                         // error handling: check if the filter are empty, if not cant apply
                         if(checkFilterEmpty()==false){
-                            Toast.makeText(AdminDeleteLogsActivity.this, "Filters applied!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminLogsActivity.this, "Filters applied!", Toast.LENGTH_SHORT).show();
 
                             // formatting the selected date and time for firestore query
                             Date startDateTime = new Date();
@@ -200,7 +192,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
     }
 
     @Override
-    public void onItemClick(AdminDeleteLogsModel snapshot, int position) {
+    public void onItemClick(AdminLogsModel snapshot, int position) {
         Log.d("ITEM_CLICK", "Clicked the item: " + position + " and the ID is: " + snapshot.getDocument_id());
 
         //adapter.deleteItem(position);
@@ -253,16 +245,16 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
 
 
         // FirebaseRecyclerOptions
-        options = new FirestoreRecyclerOptions.Builder<AdminDeleteLogsModel>()
+        options = new FirestoreRecyclerOptions.Builder<AdminLogsModel>()
                 .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<AdminDeleteLogsModel>() {
+                .setQuery(query, new SnapshotParser<AdminLogsModel>() {
                     @NonNull
                     @Override
-                    public AdminDeleteLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        AdminDeleteLogsModel adminDeleteLogsModel = snapshot.toObject(AdminDeleteLogsModel.class);
+                    public AdminLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
+                        AdminLogsModel adminLogsModel = snapshot.toObject(AdminLogsModel.class);
                         String docId = snapshot.getId();
-                        adminDeleteLogsModel.setDocument_id(docId);
-                        return adminDeleteLogsModel;
+                        adminLogsModel.setDocument_id(docId);
+                        return adminLogsModel;
                     }
                 })
                 .build();
@@ -281,16 +273,16 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
                 .whereLessThanOrEqualTo("date", endDateTime);
 
         // FirebaseRecyclerOptions
-        FirestoreRecyclerOptions<AdminDeleteLogsModel> new_options = new FirestoreRecyclerOptions.Builder<AdminDeleteLogsModel>()
+        FirestoreRecyclerOptions<AdminLogsModel> new_options = new FirestoreRecyclerOptions.Builder<AdminLogsModel>()
                 .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<AdminDeleteLogsModel>() {
+                .setQuery(query, new SnapshotParser<AdminLogsModel>() {
                     @NonNull
                     @Override
-                    public AdminDeleteLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        AdminDeleteLogsModel adminDeleteLogsModel = snapshot.toObject(AdminDeleteLogsModel.class);
+                    public AdminLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
+                        AdminLogsModel adminLogsModel = snapshot.toObject(AdminLogsModel.class);
                         String docId = snapshot.getId();
-                        adminDeleteLogsModel.setDocument_id(docId);
-                        return adminDeleteLogsModel;
+                        adminLogsModel.setDocument_id(docId);
+                        return adminLogsModel;
                     }
                 })
                 .build();
@@ -303,7 +295,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
 
     public void showDatePickerDialog(View view){
         final Calendar newCalendar = Calendar.getInstance();
-        final DatePickerDialog datePickerDialog = new DatePickerDialog(AdminDeleteLogsActivity.this, new DatePickerDialog.OnDateSetListener() {
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(AdminLogsActivity.this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
@@ -317,7 +309,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
     }
 
     public void showStartTimePickerDialog(View view){
-        TimePickerDialog timePickerDialog = new TimePickerDialog(AdminDeleteLogsActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+        TimePickerDialog timePickerDialog = new TimePickerDialog(AdminLogsActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int i, int i1) {
@@ -351,7 +343,7 @@ public class AdminDeleteLogsActivity extends AppCompatActivity implements AdminD
     }
 
     public void showEndTimePickerDialog(View view){
-        TimePickerDialog timePickerDialog = new TimePickerDialog(AdminDeleteLogsActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+        TimePickerDialog timePickerDialog = new TimePickerDialog(AdminLogsActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int i, int i1) {

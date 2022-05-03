@@ -7,7 +7,7 @@
 
 
     <com.google.android.material.chip.Chip
-        android:id="@+id/adminDeleteLogs_chip"
+        android:id="@+id/adminLogs_chip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="16dp"
@@ -22,7 +22,7 @@
         android:visibility="invisible"/>
 
     <Button
-        android:id="@+id/adminDeleteLogs_filter_btn"
+        android:id="@+id/adminLogs_filter_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Filter"
@@ -39,14 +39,14 @@
         android:layout_marginTop="50dp">
 
         <ProgressBar
-            android:id="@+id/adminDeleteLogs_progress_bar"
+            android:id="@+id/adminLogs_progress_bar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
         <TextView
-            android:id="@+id/adminDeleteLogs_loadingText"
+            android:id="@+id/adminLogs_loadingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Retriving data..."
@@ -54,7 +54,7 @@
             android:layout_marginTop="100dp"/>
 
         <TextView
-            android:id="@+id/adminDeleteLogs_noDataText"
+            android:id="@+id/adminLogs_noDataText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -67,7 +67,7 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/adminDeleteLogs_firestore_list"
+                android:id="@+id/adminLogs_firestore_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 

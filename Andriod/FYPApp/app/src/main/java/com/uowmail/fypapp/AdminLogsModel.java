@@ -1,15 +1,15 @@
 package com.uowmail.fypapp;
 
-public class AdminDeleteLogsModel {
+public class AdminLogsModel {
     private String document_id;
 
     // for firebase
-    private AdminDeleteLogsModel(){
+    private AdminLogsModel(){
 
     }
 
     // for us to receive data
-    private AdminDeleteLogsModel(String document_id){
+    private AdminLogsModel(String document_id){
         this.document_id = document_id;
 
     }

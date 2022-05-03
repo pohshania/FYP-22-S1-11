@@ -2,12 +2,10 @@ package com.uowmail.fypapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -220,31 +218,5 @@ public class UserHomeActivity extends AppCompatActivity {
         badgeDrawable.setNumber(count);
     }
 
-
-    @Override
-    public void onBackPressed() {
-
-        AlertDialog.Builder alertdialog=new AlertDialog.Builder(this);
-        alertdialog.setTitle("Warning");
-        alertdialog.setMessage("Are you sure you Want to exit Creeping Donut?");
-        alertdialog.setPositiveButton("yes", new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent=new Intent(UserHomeActivity.this,UserHomeActivity.class);
-                startActivity(intent);
-                UserHomeActivity.this.finish();
-            }
-        });
-
-        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        AlertDialog alert=alertdialog.create();
-        alertdialog.show();
-    }
 
 }

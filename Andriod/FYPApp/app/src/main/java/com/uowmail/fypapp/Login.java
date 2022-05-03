@@ -26,6 +26,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -125,6 +129,7 @@ public class Login extends AppCompatActivity {
                 if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     loginEmail.setError("Please provide a valid email address!");
                     loginEmail.requestFocus();
+                    toggleKeyboardAndProgressBar(false, false);
                     return;
                 }
                 if(TextUtils.isEmpty(password)){
@@ -206,7 +211,18 @@ public class Login extends AppCompatActivity {
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
+                                        // handle error message
+                                        try {
+                                            throw task.getException();
+                                        } catch(FirebaseAuthInvalidCredentialsException e2) {
+                                            Toast.makeText(Login.this, "Login unsuccessful. Invalid credentials.", Toast.LENGTH_SHORT).show();
+                                        } catch(FirebaseAuthInvalidUserException e3){
+                                            Toast.makeText(Login.this, "Login unsuccessful. Invalid user.", Toast.LENGTH_SHORT).show();
+                                        }
+                                        catch(Exception e4) {
+                                            Toast.makeText(Login.this, "Login unsuccessful. Invalid credentials.", Toast.LENGTH_SHORT).show();
+                                        }
+                                        //Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
                                         toggleKeyboardAndProgressBar(false, false);
                                     }
                                 });
@@ -257,7 +273,18 @@ public class Login extends AppCompatActivity {
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
+                                        // handle error message
+                                        try {
+                                            throw task.getException();
+                                        } catch(FirebaseAuthInvalidCredentialsException e2) {
+                                            Toast.makeText(Login.this, "Login unsuccessful. Invalid credentials.", Toast.LENGTH_SHORT).show();
+                                        } catch(FirebaseAuthInvalidUserException e3){
+                                            Toast.makeText(Login.this, "Login unsuccessful. Invalid user.", Toast.LENGTH_SHORT).show();
+                                        }
+                                        catch(Exception e4) {
+                                            Toast.makeText(Login.this, "Login unsuccessful. Invalid credentials.", Toast.LENGTH_SHORT).show();
+                                        }
+                                        //Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
                                         toggleKeyboardAndProgressBar(false, false);
                                     }
                                 });
@@ -518,222 +545,5 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
-    }
-/*
-    public void getCurrentUserOrgID(FirebaseAuth fAuth, FirebaseFirestore fStore){
-        // get the current's user organisation ID, so that program will only retrieve docs from that organisation
-        String currentUserEmail = fAuth.getCurrentUser().getEmail();
-        DocumentReference docRef = fStore.collection("Users Profile").document(currentUserEmail);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot document = task.getResult();
-                    String orgIDValue = document.getString("Organisation ID");
-                    Log.d("TEST_QUERY", orgIDValue);
-                    setCurrentUserOrgID(orgIDValue);
-                }
-            }
-        });
-    }
-*/
-
-
-
-
-
-
-/*=======================================================FOR TESTING=======================================================*/
-    private void insertUsersDataToFirestore(FirebaseFirestore db){
-        CollectionReference usersProfile = db.collection("Users Profile");
-
-        Map<String, Object> data1 = new HashMap<>();
-        data1.put("Full Name", "John Doe");
-        data1.put("Email", "user1@gmail.com");
-        data1.put("Organisation ID", "UOW");
-        data1.put("isAdmin", false);
-        data1.put("Phone Number", Arrays.asList("999", "995"));
-        usersProfile.document("user1@gmail.com").set(data1);
-
-        Map<String, Object> data2 = new HashMap<>();
-        data2.put("Full Name", "Harry Potter");
-        data2.put("Email", "user2@gmail.com");
-        data2.put("Organisation ID", "UOW");
-        data2.put("isAdmin", false);
-        data2.put("Phone Number", Arrays.asList("991", "101"));
-        usersProfile.document("user2@gmail.com").set(data2);
-
-        Map<String, Object> data3 = new HashMap<>();
-        data3.put("Full Name", "Tony Stark");
-        data3.put("Email", "user3@gmail.com");
-        data3.put("Organisation ID", "SIM");
-        data3.put("isAdmin", false);
-        data3.put("Phone Number", Arrays.asList("991", "101"));
-        usersProfile.document("user3@gmail.com").set(data3);
-
-        Map<String, Object> data4 = new HashMap<>();
-        data4.put("Full Name", "Peter Parker");
-        data4.put("Email", "user4@gmail.com");
-        data4.put("Organisation ID", "SIM");
-        data4.put("isAdmin", false);
-        data4.put("Phone Number", Arrays.asList("000", "222"));
-        usersProfile.document("user4@gmail.com").set(data4);
-
-        Map<String, Object> data5 = new HashMap<>();
-        data5.put("Full Name", "James Bond");
-        data5.put("Email", "user5@gmail.com");
-        data5.put("Organisation ID", "SPY");
-        data5.put("isAdmin", false);
-        data5.put("Phone Number", Arrays.asList("007", "700","070"));
-        usersProfile.document("user5@gmail.com").set(data5);
-    }
-
-    private void insertAdminsDataToFirestore2(FirebaseFirestore db){
-        CollectionReference adminsProfile = db.collection("Admins Profile");
-
-        Map<String, Object> data1 = new HashMap<>();
-        data1.put("Full Name", "Jane Doe");
-        data1.put("Email", "admin1@gmail.com");
-        data1.put("Organisation ID", "UOW");
-        data1.put("isAdmin", true);
-        data1.put("Phone Number", Arrays.asList("001", "002"));
-        adminsProfile.document("admin1@gmail.com").set(data1);
-
-        Map<String, Object> data2 = new HashMap<>();
-        data2.put("Full Name", "Lee Hsien Loong");
-        data2.put("Email", "admin2@gmail.com");
-        data2.put("Organisation ID", "SPY");
-        data2.put("isAdmin", true);
-        data2.put("Phone Number", Arrays.asList("003", "004"));
-        adminsProfile.document("admin2@gmail.com").set(data2);
-
-        Map<String, Object> data3 = new HashMap<>();
-        data3.put("Full Name", "Ali Baba");
-        data3.put("Email", "admin3@gmail.com");
-        data3.put("Organisation ID", "SIM");
-        data3.put("isAdmin", true);
-        data3.put("Phone Number", Arrays.asList("005", "006"));
-        adminsProfile.document("admin3@gmail.com").set(data3);
-
-    }
-
-    private void insertTestData(FirebaseFirestore db){
-        CollectionReference cities = db.collection("cities");
-
-        Map<String, Object> data1 = new HashMap<>();
-        data1.put("name", "San Francisco");
-        data1.put("state", "CA");
-        data1.put("country", "USA");
-        data1.put("capital", false);
-        data1.put("population", 860000);
-        data1.put("regions", Arrays.asList("west_coast", "norcal"));
-        cities.document("SF").set(data1);
-
-        Map<String, Object> data2 = new HashMap<>();
-        data2.put("name", "Los Angeles");
-        data2.put("state", "CA");
-        data2.put("country", "USA");
-        data2.put("capital", false);
-        data2.put("population", 3900000);
-        data2.put("regions", Arrays.asList("west_coast", "socal"));
-        cities.document("LA").set(data2);
-
-        Map<String, Object> data3 = new HashMap<>();
-        data3.put("name", "Washington D.C.");
-        data3.put("state", null);
-        data3.put("country", "USA");
-        data3.put("capital", true);
-        data3.put("population", 680000);
-        data3.put("regions", Arrays.asList("east_coast"));
-        cities.document("DC").set(data3);
-
-        Map<String, Object> data4 = new HashMap<>();
-        data4.put("name", "Tokyo");
-        data4.put("state", null);
-        data4.put("country", "Japan");
-        data4.put("capital", true);
-        data4.put("population", 9000000);
-        data4.put("regions", Arrays.asList("kanto", "honshu"));
-        cities.document("TOK").set(data4);
-
-        Map<String, Object> data5 = new HashMap<>();
-        data5.put("name", "Beijing");
-        data5.put("state", null);
-        data5.put("country", "China");
-        data5.put("capital", true);
-        data5.put("population", 21500000);
-        data5.put("regions", Arrays.asList("jingjinji", "hebei"));
-        cities.document("BJ").set(data5);
-    }
-
-    private void testQuery(FirebaseFirestore db){
-
-        /*
-        // Get a document - The following example shows how to retrieve the contents of a single document using get():
-        DocumentReference docRef = db.collection("cities").document("SF");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d("TEST_QUERY", "DocumentSnapshot data: " + document.getData());
-                    } else {
-                        Log.d("TEST_QUERY", "No such document");
-                    }
-                } else {
-                    Log.d("TEST_QUERY", "get failed with ", task.getException());
-                }
-            }
-        });
-         */
-
-
-/*        DocumentReference docRef = db.collection("cities").document("BJ");
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                City city = documentSnapshot.toObject(City.class);
-
-                Log.d("TEST_QUERY", city.getCountry() + " " + city.getName()
-                        + " " + city.getState() + " " + city.getPopulation() + " " + city.getRegions());
-
-
-            }
-        });*/
-
-
-        // retrieve all documents id
-        CollectionReference colRef = db.collection("UOW_log");
-        colRef.orderBy("date", Query.Direction.DESCENDING)
-                .whereGreaterThanOrEqualTo("date", "2022/04/01 00:01:00")
-                .whereLessThanOrEqualTo("date", "2022-04-01 00:05:00").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for(DocumentSnapshot d : queryDocumentSnapshots){
-                    Log.d("=========TEST_QUERY========", d.getId());
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("=========FAILURE========", e.toString());
-            }
-        });
-
-//        colRef.orderBy("date", Query.Direction.DESCENDING)
-//                .whereGreaterThanOrEqualTo("date", "2022-04-01")
-//                .whereLessThan("date", "2022-04-01")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if(task.isSuccessful()){
-//                            DocumentSnapshot doc = task.getResult();
-//
-//                        }
-//                    }
-//                });
-
     }
 }

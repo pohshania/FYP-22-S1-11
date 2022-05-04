@@ -90,7 +90,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         resetPasswordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(UserSettingsActivity.this, ResetPasswordActivity.class);
+                Intent i = new Intent(UserSettingsActivity.this, ChangePasswordActivity.class);
                 i.putExtra("adminOrgID", orgID);
                 startActivity(i);
             }

@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ForgotPasswordActivity extends AppCompatActivity {
+public class RecoverPasswordActivity extends AppCompatActivity {
     private EditText emailET;
     private Button resetBtn;
     private String email;
@@ -25,14 +25,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forget_password);
+        setContentView(R.layout.activity_recover_password);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Reset Password");
+        actionBar.setTitle("Recover Password");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        emailET = findViewById(R.id.forgotPassword_email);
-        resetBtn = findViewById(R.id.forgotPassword_reset_btn);
+        emailET = findViewById(R.id.recoverPassword_email);
+        resetBtn = findViewById(R.id.recoverPassword_recover_btn);
 
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,13 +57,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                Toast.makeText(ForgotPasswordActivity.this, "Check your email to reset your password!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RecoverPasswordActivity.this, "Check your email to recover your password!", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(ForgotPasswordActivity.this, "Unsuccessful. " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RecoverPasswordActivity.this, "Unsuccessful. " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             }

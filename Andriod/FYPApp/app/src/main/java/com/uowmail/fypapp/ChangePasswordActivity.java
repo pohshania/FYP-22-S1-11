@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,7 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class ResetPasswordActivity extends AppCompatActivity {
+public class ChangePasswordActivity extends AppCompatActivity {
 
     private EditText emailET, passwordET, confirmPasswordET;
     private Button submit_btn;
@@ -31,17 +30,17 @@ public class ResetPasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_password);
+        setContentView(R.layout.activity_change_password);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Reset Password");
+        actionBar.setTitle("Change Password");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        emailET = findViewById(R.id.resetPassword_email);
-        passwordET = findViewById(R.id.resetPassword_password_1);
-        confirmPasswordET = findViewById(R.id.resetPassword_password_2);
-        submit_btn = findViewById(R.id.resetPassword_submit_btn);
-        progressBar = findViewById(R.id.resetPassword_progressBar);
+        emailET = findViewById(R.id.changePassword_email);
+        passwordET = findViewById(R.id.changePassword_password_1);
+        confirmPasswordET = findViewById(R.id.changePassword_password_2);
+        submit_btn = findViewById(R.id.changePassword_submit_btn);
+        progressBar = findViewById(R.id.changePassword_progressBar);
 
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +101,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                Toast.makeText(ResetPasswordActivity.this, "Your password has been reset successfully.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ChangePasswordActivity.this, "Your password has been changed successfully.", Toast.LENGTH_SHORT).show();
                                 passwordET.getText().clear();
                                 confirmPasswordET.getText().clear();
                                 disableProgressBar();
@@ -111,7 +110,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(ResetPasswordActivity.this, "Unsuccessul. " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ChangePasswordActivity.this, "Unsuccessul. " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             }

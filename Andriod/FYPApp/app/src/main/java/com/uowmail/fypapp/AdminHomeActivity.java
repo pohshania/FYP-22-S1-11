@@ -27,7 +27,7 @@ public class AdminHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+        getSupportActionBar ().hide();
         setContentView(R.layout.activity_admin_home);
         //getSupportFragmentManager().beginTransaction().replace(R.id.container, adminHomeFragment).commit();
 
@@ -89,7 +89,7 @@ public class AdminHomeActivity extends AppCompatActivity {
                     Toast.makeText(AdminHomeActivity.this, "Your username is " + main.getUserName(), Toast.LENGTH_SHORT).show();
                 }
                 if(menuItem.getItemId() == R.id.resetPassword){
-                    startActivity(new Intent(getApplicationContext(), ResetPasswordActivity.class));
+                    startActivity(new Intent(getApplicationContext(), ChangePasswordActivity.class));
                 }
                 if(menuItem.getItemId() == R.id.logout)
                 {

@@ -111,7 +111,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(ResetPasswordActivity.this, "Your password has been is unsuccessfull. " + e, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ResetPasswordActivity.this, "Unsuccessul. " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             }

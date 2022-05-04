@@ -7,10 +7,15 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -100,37 +105,54 @@ public class AdminLogDetailsActivity extends AppCompatActivity {
                 AdminLogDetailsModel logDetails = documentSnapshot.toObject(AdminLogDetailsModel.class);
 
                 // date
-                date.setText("Date: " + logDetails.getDate().toDate());
+                //date.setText("Date: " + logDetails.getDate().toDate());
+                date.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getDate().toDate().toString(), Color.parseColor("#883000")));
 
                 // disk
-                disk_read.setText("Disk Read: " + logDetails.getDisk_read());
-                disk_write.setText("Disk Write: " + logDetails.getDisk_write());
+                //disk_read.setText("Disk Read: " + logDetails.getDisk_read());
+                disk_read.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getDisk_read(), Color.parseColor("#883000")));
+                //disk_write.setText("Disk Write: " + logDetails.getDisk_write());
+                disk_write.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getDisk_write(), Color.parseColor("#883000")));
 
                 // idling
-                idling.setText("Idling:");
-                idling_avg.setText("Avg: " + logDetails.getIdling().get("avg"));
-                idling_min.setText("Min: " + logDetails.getIdling().get("min"));
-                idling_max.setText("Max: " + logDetails.getIdling().get("max"));
+                //idling.setText("Idling:");
+                //idling_avg.setText("Avg: " + logDetails.getIdling().get("avg"));
+                idling_avg.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getIdling().get("avg").toString(), Color.parseColor("#883000")));
+                //idling_min.setText("Min: " + logDetails.getIdling().get("min"));
+                idling_min.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getIdling().get("min").toString(), Color.parseColor("#883000")));
+                //idling_max.setText("Max: " + logDetails.getIdling().get("max"));
+                idling_max.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getIdling().get("max").toString(), Color.parseColor("#883000")));
 
                 // cpu
-                float usage = 100 - logDetails.getIdling().get("min");
-                cpu_usage.setText("CPU usage: " + String.valueOf(usage));
+                float usage = 100 - logDetails.getIdling().get("avg");
+                //cpu_usage.setText("CPU usage: " + String.valueOf(usage));
+                cpu_usage.append(getColoredString(AdminLogDetailsActivity.this, String.valueOf(usage), Color.parseColor("#883000")));
 
-                // network
-                net_recv.setText("Network recieve: " + logDetails.getNet_recv());
-                net_send.setText("Network send: " + logDetails.getNet_send());
+                // net
+                //net_recv.setText("Network recieve: " + logDetails.getNet_recv());
+                net_recv.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getNet_recv(), Color.parseColor("#883000")));
+                //net_send.setText("Network send: " + logDetails.getNet_send());
+                net_send.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getNet_send(), Color.parseColor("#883000")));
+
 
                 // sys
-                sys.setText("System:");
-                sys_avg.setText("Avg: " + logDetails.getSys().get("avg"));
-                sys_min.setText("Min: " + logDetails.getSys().get("min"));
-                sys_max.setText("Max: " + logDetails.getSys().get("max"));
+                //sys.setText("System:");
+                //sys_avg.setText("Avg: " + logDetails.getSys().get("avg"));
+                sys_avg.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getSys().get("avg").toString(), Color.parseColor("#883000")));
+                //sys_min.setText("Min: " + logDetails.getSys().get("min"));
+                sys_min.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getSys().get("min").toString(), Color.parseColor("#883000")));
+                //sys_max.setText("Max: " + logDetails.getSys().get("max"));
+                sys_max.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getSys().get("max").toString(), Color.parseColor("#883000")));
+
 
                 // usr
-                usr.setText("User:");
-                usr_avg.setText("Avg: " + logDetails.getUsr().get("avg"));
-                usr_min.setText("Min: " + logDetails.getUsr().get("min"));
-                usr_max.setText("Max: " + logDetails.getUsr().get("max"));
+                //usr.setText("User:");
+                //usr_avg.setText("Avg: " + logDetails.getUsr().get("avg"));
+                usr_avg.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getUsr().get("avg").toString(), Color.parseColor("#883000")));
+                //usr_min.setText("Min: " + logDetails.getUsr().get("min"));
+                usr_min.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getUsr().get("min").toString(), Color.parseColor("#883000")));
+                //usr_max.setText("Max: " + logDetails.getUsr().get("max"));
+                usr_max.append(getColoredString(AdminLogDetailsActivity.this, logDetails.getUsr().get("max").toString(), Color.parseColor("#883000")));
             }
         });
 
@@ -261,6 +283,12 @@ public class AdminLogDetailsActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static final Spannable getColoredString(Context context, CharSequence text, int color) {
+        Spannable spannable = new SpannableString(text);
+        spannable.setSpan(new ForegroundColorSpan(color), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannable;
     }
 
 }

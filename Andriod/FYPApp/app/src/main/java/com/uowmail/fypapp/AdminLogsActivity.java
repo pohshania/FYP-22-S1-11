@@ -86,7 +86,7 @@ public class AdminLogsActivity extends AppCompatActivity implements AdminLogsAda
 
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Delete Logs");
+        actionBar.setTitle("Logs");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Firestore

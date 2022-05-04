@@ -162,7 +162,7 @@ public class AdminCreateNewUserActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AdminCreateNewUserActivity.this, "Incorrect Admin password." + e.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminCreateNewUserActivity.this, "Unsuccessful." + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -216,7 +216,7 @@ public class AdminCreateNewUserActivity extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(AdminCreateNewUserActivity.this, "Not successful!" + e.toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AdminCreateNewUserActivity.this, "Unsuccessful. " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                 //toggleKeyboardAndProgressBar(true, false);
                             }
                         });

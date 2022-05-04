@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -218,9 +219,8 @@ public class Login extends AppCompatActivity {
                                             Toast.makeText(Login.this, "Login unsuccessful. Invalid credentials.", Toast.LENGTH_SHORT).show();
                                         } catch(FirebaseAuthInvalidUserException e3){
                                             Toast.makeText(Login.this, "Login unsuccessful. Invalid user.", Toast.LENGTH_SHORT).show();
-                                        }
-                                        catch(Exception e4) {
-                                            Toast.makeText(Login.this, "Login unsuccessful. Invalid credentials.", Toast.LENGTH_SHORT).show();
+                                        } catch(Exception e5) {
+                                            Toast.makeText(Login.this, "Login unsuccessful." + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                         //Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
                                         toggleKeyboardAndProgressBar(false, false);
@@ -282,7 +282,7 @@ public class Login extends AppCompatActivity {
                                             Toast.makeText(Login.this, "Login unsuccessful. Invalid user.", Toast.LENGTH_SHORT).show();
                                         }
                                         catch(Exception e4) {
-                                            Toast.makeText(Login.this, "Login unsuccessful. Invalid credentials.", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Login.this, "Login unsuccessful." + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                         //Toast.makeText(Login.this, "Login unsuccessful. " + e.toString(), Toast.LENGTH_SHORT).show();
                                         toggleKeyboardAndProgressBar(false, false);

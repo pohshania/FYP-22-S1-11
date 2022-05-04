@@ -105,6 +105,7 @@ public class AdminDeactivateUserActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d("FIREBASE QUERY => ", "Failed with: ", task.getException());
+                    Toast.makeText(AdminDeactivateUserActivity.this, "Unsuccessful. " + task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -162,7 +163,7 @@ public class AdminDeactivateUserActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AdminDeactivateUserActivity.this, "Incorrect Admin password." + e.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminDeactivateUserActivity.this, "Unsuccessful. " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 

@@ -121,6 +121,7 @@ public class UserHomeFragment extends Fragment  {
 
 //        Button alertButton = (Button) v.findViewById(R.id.AlertButton);
         cpuBtn = (Button) v.findViewById(R.id.cpuButton);
+        cpuBtn.setSelected(true);
         networkBtn = (Button) v.findViewById(R.id.networkButton);
         diskBtn = (Button) v.findViewById(R.id.diskButton);
 

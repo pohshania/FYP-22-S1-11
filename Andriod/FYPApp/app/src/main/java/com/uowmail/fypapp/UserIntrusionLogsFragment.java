@@ -70,7 +70,7 @@ public class UserIntrusionLogsFragment extends Fragment implements UserIntrusion
          View view = inflater.inflate(R.layout.fragment_user_intrusion_logs, container, false);
 
         TextView title = (TextView)getActivity().findViewById(R.id.toolbar_title);
-        title.setText("Intrusion Notifications");
+        title.setText("Intrusion Logs");
 
 
         // Firestore

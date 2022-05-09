@@ -2,10 +2,17 @@ package com.uowmail.fypapp;
 
 import com.google.firebase.Timestamp;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class UserAnalysisEngineDetailsModel {
+
+    private ArrayList<String> anomaly;
     private Timestamp date;
-    private Timestamp detected_range;
-    private String detected_by;
+    private Timestamp detection_range;
     private String detection_type;
     private String event_status;
 
@@ -13,14 +20,21 @@ public class UserAnalysisEngineDetailsModel {
 
     }
 
-    public UserAnalysisEngineDetailsModel(Timestamp date, Timestamp detected_range, String detected_by, String detection_type, String event_status) {
+    public UserAnalysisEngineDetailsModel(ArrayList<String> anomaly, Timestamp date, Timestamp detection_range, String detection_type, String event_status) {
+        this.anomaly = anomaly;
         this.date = date;
-        this.detected_range = detected_range;
-        this.detected_by = detected_by;
+        this.detection_range = detection_range;
         this.detection_type = detection_type;
         this.event_status = event_status;
     }
 
+    public ArrayList<String> getAnomaly() {
+        return anomaly;
+    }
+
+    public void setAnomaly(ArrayList<String>  anomaly) {
+        this.anomaly = anomaly;
+    }
 
     public Timestamp getDate() {
         return date;
@@ -30,20 +44,12 @@ public class UserAnalysisEngineDetailsModel {
         this.date = date;
     }
 
-    public Timestamp getDetected_range() {
-        return detected_range;
+    public Timestamp getDetection_range() {
+        return detection_range;
     }
 
-    public void setDetected_range(Timestamp detected_range) {
-        this.detected_range = detected_range;
-    }
-
-    public String getDetected_by() {
-        return detected_by;
-    }
-
-    public void setDetected_by(String detected_by) {
-        this.detected_by = detected_by;
+    public void setDetection_range(Timestamp detection_range) {
+        this.detection_range = detection_range;
     }
 
     public String getDetection_type() {

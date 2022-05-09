@@ -34,6 +34,17 @@
         app:layout_constraintTop_toBottomOf="@+id/userAnalysisEngineDetails_Title" />
 
 
+<!-- ============================== ANOMALY ============================== -->
+    <TextView
+        android:id="@+id/userAnalysisEngineDetails_anomaly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30sp"
+        android:text="Anomaly: "
+        android:textColor="#000080"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userAnalysisEngineDetails_separator_1" />
+
 <!-- ============================== DATE ============================== -->
     <TextView
         android:id="@+id/userAnalysisEngineDetails_date"
@@ -43,30 +54,20 @@
         android:text="Date: "
         android:textColor="#000080"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userAnalysisEngineDetails_separator_1" />
+        app:layout_constraintTop_toBottomOf="@id/userAnalysisEngineDetails_anomaly" />
 
 <!-- ============================== DETECTED RANGE ============================== -->
     <TextView
-        android:id="@+id/userAnalysisEngineDetails_detected_range"
+        android:id="@+id/userAnalysisEngineDetails_detection_range"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30sp"
-        android:text="Detected Range: "
+        android:text="Detection Range: "
         android:textColor="#000080"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/userAnalysisEngineDetails_date" />
 
 
-<!-- ============================== DETECTED BY ============================== -->
-    <TextView
-        android:id="@+id/userAnalysisEngineDetails_detected_by"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30sp"
-        android:text="Detected By: "
-        android:textColor="#000080"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userAnalysisEngineDetails_detected_range" />
 
 
 <!-- ============================== DETECTION TYPE ============================== -->
@@ -78,7 +79,7 @@
         android:text="Detection Type: "
         android:textColor="#000080"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userAnalysisEngineDetails_detected_by" />
+        app:layout_constraintTop_toBottomOf="@id/userAnalysisEngineDetails_detection_range" />
 
 <!-- ============================== EVENT STATUS ============================== -->
     <TextView

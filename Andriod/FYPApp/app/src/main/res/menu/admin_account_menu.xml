@@ -18,7 +18,7 @@
 
     <item
         android:id="@+id/resetPassword"
-        android:title="Reset Password"
+        android:title="Change Password"
         android:icon="@drawable/ic_baseline_lock_reset_24"
         android:iconTint="@color/cp_navy"
         />

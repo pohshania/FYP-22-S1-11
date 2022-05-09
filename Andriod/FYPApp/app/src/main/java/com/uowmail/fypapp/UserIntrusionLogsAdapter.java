@@ -38,7 +38,8 @@ public class UserIntrusionLogsAdapter extends FirestoreRecyclerAdapter<UserIntru
 
         //holder.doc_id.setText(model.getDocument_id());
         //holder.doc_id.setText("HEEHEE");
-        holder.doc_id.setText(formatDocumentID(model.getDocument_id()));
+        holder.doc_id.setText(this.formatDocumentID(model.getDocument_id()));
+        //holder.doc_id.setText(model.getDocument_id());
         Log.d("POSITION","Position: " + position);
 
     }
@@ -75,21 +76,34 @@ public class UserIntrusionLogsAdapter extends FirestoreRecyclerAdapter<UserIntru
     }
 
     private String formatDocumentID(String modelDocID){
-        Date date = new Date();
+        Date d = new Date();
         String output = null;
+
+        Log.d("===========MODELDOCID1=========", modelDocID);
 
         //Format of the date defined in the input String
         DateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
 
         //Desired format: 24 hour format: Change the pattern as per the need
-        DateFormat outputformat = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
+        DateFormat outputformat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 
         try {
             //Converting the input String to Date
-            date = df.parse(modelDocID);
+
+            //Date d = df.parse("202204291230");
+            //d = df.parse(modelDocID);
+//            if(modelDocID.trim().equals("202204291230")){
+//                d = df.parse("202204291230");
+//                Log.d("=======HEY======", "WTF");
+//            }else{
+//                d = df.parse(modelDocID);
+//                Log.d("=======HEY======", "HAHAHAHAA");
+//            }
+            d = df.parse(modelDocID.trim());
             //Changing the format of date and storing it in String
-            output = outputformat.format(date);
+            output = outputformat.format(d);
+
         } catch (ParseException e) {
             e.printStackTrace();
         }

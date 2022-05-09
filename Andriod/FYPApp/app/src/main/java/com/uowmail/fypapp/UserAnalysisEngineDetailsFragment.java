@@ -44,9 +44,9 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
 
     private FirebaseFirestore fStore;
 
+    private TextView anomaly;
     private TextView date;
-    private TextView detected_range;
-    private TextView detected_by;
+    private TextView detection_range;
     private TextView detection_type;
     private TextView event_status;
     private Button correctButton;
@@ -111,9 +111,9 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
         TextView titleTV = view.findViewById(R.id.userAnalysisEngineDetails_Title);
         titleTV.setText(mParam1);
 
+        anomaly        = view.findViewById(R.id.userAnalysisEngineDetails_anomaly);
         date           = view.findViewById(R.id.userAnalysisEngineDetails_date);
-        detected_range = view.findViewById(R.id.userAnalysisEngineDetails_detected_range);
-        detected_by    = view.findViewById(R.id.userAnalysisEngineDetails_detected_by);
+        detection_range = view.findViewById(R.id.userAnalysisEngineDetails_detection_range);
         detection_type = view.findViewById(R.id.userAnalysisEngineDetails_detection_type);
         event_status   = view.findViewById(R.id.userAnalysisEngineDetails_event_status);
 
@@ -130,23 +130,26 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot snapshot) {
+
+                Log.d("=====SNAPSHOT==========", snapshot.getData().toString());
+
                 UserAnalysisEngineDetailsModel intrusionDetails = snapshot.toObject(UserAnalysisEngineDetailsModel.class);
 
+                Log.d("======MODEL======", intrusionDetails.getAnomaly().toString());
+                // anomaly
+                //anomaly.append(getColoredString(getContext(), intrusionDetails.getAnomaly(), Color.parseColor("#0000FF")));
+                //anomaly.setText("Abnormal(s) Found: " + intrusionDetails.getAnomaly());
+                //anomaly.setTextColor(Color.parseColor("#FF0000"));
 
                 // date
                 //date.setText("Date: " + intrusionDetails.getDate().toDate());
                 date.append(getColoredString(getContext(), intrusionDetails.getDate().toDate().toString(), Color.parseColor("#883000")));
 
 
-                // detected range
+                // detection range
                 //detected_range.setText("Detected range: " + intrusionDetails.getDetected_range().toDate());
-                detected_range.append(getColoredString(getContext(), intrusionDetails.getDetected_range().toDate().toString(), Color.parseColor("#883000")));
-
-
-                // detected by
-                //detected_by.setText("Detected by: " + intrusionDetails.getDetected_by());
-                detected_by.append(getColoredString(getContext(), intrusionDetails.getDetected_by(), Color.parseColor("#883000")));
-
+                detection_range.append(getColoredString(getContext(), intrusionDetails.getDetection_range().toDate().toString(), Color.parseColor("#883000")));
+                //Log.d("============DETECTION RANGE=======", intrusionDetails.getDetection_range().toDate().toString());
 
                 // detection type
                 //detection_type.setText("Detection type: " + intrusionDetails.getDetection_type());
@@ -164,8 +167,7 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                downloadFile(date.getText().toString(), detected_range.getText().toString(),
-                        detected_by.getText().toString(), detection_type.getText().toString(),
+                downloadFile(date.getText().toString(), detection_range.getText().toString(), detection_type.getText().toString(),
                         event_status.getText().toString());
             }
         });
@@ -176,7 +178,7 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
     }
 
 
-    private void downloadFile(String date, String detected_range, String detected_by,
+    private void downloadFile(String date, String detection_range,
                               String detection_type, String event_status){
 
         // Get the input from EditText
@@ -207,11 +209,8 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
                 // date
                 fos.write(date.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
-                // detected range
-                fos.write(detected_range.getBytes(StandardCharsets.UTF_8));
-                fos.write(nl.getBytes(StandardCharsets.UTF_8));
-                // detected_by
-                fos.write(detected_by.getBytes(StandardCharsets.UTF_8));
+                // detection range
+                fos.write(detection_range.getBytes(StandardCharsets.UTF_8));
                 fos.write(nl.getBytes(StandardCharsets.UTF_8));
                 // detection type
                 fos.write(detection_type.getBytes(StandardCharsets.UTF_8));

@@ -40,9 +40,6 @@ public class UserIntrusionLogsFragment extends Fragment implements UserIntrusion
     public static ProgressBar progressBar;
     public static TextView loadingText, noDataText;
 
-    private RadioButton allEngines_radio, alertEngine_radio, analysisEngine_radio, signatureEngine_radio;
-    private Button applyBtn;
-
     public UserIntrusionLogsFragment() {
         // Required empty public constructor
     }
@@ -81,38 +78,12 @@ public class UserIntrusionLogsFragment extends Fragment implements UserIntrusion
         loadingText = view.findViewById(R.id.userNotifications_loadingText);
         noDataText = view.findViewById(R.id.userNotifications_noDataText);
 
-        allEngines_radio = view.findViewById(R.id.radio_allEngines);
-        alertEngine_radio = view.findViewById(R.id.radio_alertEngine);
-        analysisEngine_radio = view.findViewById(R.id.radio_analysisEngine);
-        signatureEngine_radio = view.findViewById(R.id.radio_signatureEngine);
-        applyBtn = view.findViewById(R.id.userNotifications_apply_btn);
-
-        applyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(allEngines_radio.isChecked()){
-                    queryForAllEngines();
-                }
-
-                if(alertEngine_radio.isChecked()){
-                    queryForAlertEngine();
-                }
-
-                if(analysisEngine_radio.isChecked()){
-                    queryForAnalysisEngine();
-                }
-
-                if(signatureEngine_radio.isChecked()){
-                    queryForSignatureEngine();
-                }
-            }
-        });
-
-
 
 
 
         defaultQuery();
+
+
         // Set recyclerView adapter
         adapter = new UserIntrusionLogsAdapter(options, this);
         mFirestoreList = (RecyclerView) view.findViewById(R.id.userNotifications_firestore_list);
@@ -152,6 +123,7 @@ public class UserIntrusionLogsFragment extends Fragment implements UserIntrusion
                     public UserIntrusionLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
                         UserIntrusionLogsModel userIntrusionLogsModel = snapshot.toObject(UserIntrusionLogsModel.class);
                         String docId = snapshot.getId();
+                        Log.d("===============.GETID============", snapshot.getId());
                         userIntrusionLogsModel.setDocument_id(docId);
                         return userIntrusionLogsModel;
                     }
@@ -159,116 +131,6 @@ public class UserIntrusionLogsFragment extends Fragment implements UserIntrusion
                 .build();
     }
 
-    private void queryForAlertEngine(){
-        String path = mParam1 + "_detection";
-
-        // Query from firebase
-        Query query = firebaseFirestore.collection(path)
-                .orderBy("date", Query.Direction.DESCENDING)
-                .whereEqualTo("detected_by", "Alert engine");
-
-        // FirebaseRecyclerOptions
-        FirestoreRecyclerOptions<UserIntrusionLogsModel> new_options = new FirestoreRecyclerOptions.Builder<UserIntrusionLogsModel>()
-                .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<UserIntrusionLogsModel>() {
-                    @NonNull
-                    @Override
-                    public UserIntrusionLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        UserIntrusionLogsModel userIntrusionLogsModel = snapshot.toObject(UserIntrusionLogsModel.class);
-                        String docId = snapshot.getId(); // TODO: different models for each engine
-                        userIntrusionLogsModel.setDocument_id(docId);
-                        return userIntrusionLogsModel;
-                    }
-                })
-                .build();
-
-        // update recycler adapter
-        adapter.updateOptions(new_options);
-        mFirestoreList.setAdapter(adapter);
-    }
-
-    private void queryForAnalysisEngine(){
-        String path = mParam1 + "_detection";
-
-        // Query from firebase
-        Query query = firebaseFirestore.collection(path)
-                .orderBy("date", Query.Direction.DESCENDING)
-                .whereEqualTo("detected_by", "Analysis engine");
-
-        // FirebaseRecyclerOptions
-        FirestoreRecyclerOptions<UserIntrusionLogsModel> new_options = new FirestoreRecyclerOptions.Builder<UserIntrusionLogsModel>()
-                .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<UserIntrusionLogsModel>() {
-                    @NonNull
-                    @Override
-                    public UserIntrusionLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        UserIntrusionLogsModel userIntrusionLogsModel = snapshot.toObject(UserIntrusionLogsModel.class);
-                        String docId = snapshot.getId(); // TODO: different models for each engine
-                        userIntrusionLogsModel.setDocument_id(docId);
-                        return userIntrusionLogsModel;
-                    }
-                })
-                .build();
-
-        // update recycler adapter
-        adapter.updateOptions(new_options);
-        mFirestoreList.setAdapter(adapter);
-    }
-
-    private void queryForSignatureEngine(){
-        String path = mParam1 + "_detection";
-
-        // Query from firebase
-        Query query = firebaseFirestore.collection(path)
-                .orderBy("date", Query.Direction.DESCENDING)
-                .whereEqualTo("detected_by", "Signature engine");
-
-        // FirebaseRecyclerOptions
-        FirestoreRecyclerOptions<UserIntrusionLogsModel> new_options = new FirestoreRecyclerOptions.Builder<UserIntrusionLogsModel>()
-                .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<UserIntrusionLogsModel>() {
-                    @NonNull
-                    @Override
-                    public UserIntrusionLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        UserIntrusionLogsModel userIntrusionLogsModel = snapshot.toObject(UserIntrusionLogsModel.class);
-                        String docId = snapshot.getId(); // TODO: different models for each engine
-                        userIntrusionLogsModel.setDocument_id(docId);
-                        return userIntrusionLogsModel;
-                    }
-                })
-                .build();
-
-        // update recycler adapter
-        adapter.updateOptions(new_options);
-        mFirestoreList.setAdapter(adapter);
-    }
-
-    private void queryForAllEngines(){
-        String path = mParam1 + "_detection";
-
-        // Query from firebase
-        Query query = firebaseFirestore.collection(path)
-                .orderBy("date", Query.Direction.DESCENDING);
-
-        // FirebaseRecyclerOptions
-        FirestoreRecyclerOptions<UserIntrusionLogsModel> new_options = new FirestoreRecyclerOptions.Builder<UserIntrusionLogsModel>()
-                .setLifecycleOwner(this)
-                .setQuery(query, new SnapshotParser<UserIntrusionLogsModel>() {
-                    @NonNull
-                    @Override
-                    public UserIntrusionLogsModel parseSnapshot(@NonNull DocumentSnapshot snapshot) {
-                        UserIntrusionLogsModel userIntrusionLogsModel = snapshot.toObject(UserIntrusionLogsModel.class);
-                        String docId = snapshot.getId(); // TODO: different models for each engine
-                        userIntrusionLogsModel.setDocument_id(docId);
-                        return userIntrusionLogsModel;
-                    }
-                })
-                .build();
-
-        // update recycler adapter
-        adapter.updateOptions(new_options);
-        mFirestoreList.setAdapter(adapter);
-    }
 
     public static void disableProgressBar(){
         progressBar.setVisibility(View.INVISIBLE);
@@ -293,25 +155,12 @@ public class UserIntrusionLogsFragment extends Fragment implements UserIntrusion
     public void onItemClick(UserIntrusionLogsModel snapshot, int position) {
         Log.d("ITEM_CLICK", "Clicked the item: " + position + " and the ID is: " + snapshot.getDocument_id());
 
-        if(snapshot.getDocument_id().contains("_alert")){
-            Fragment fragment = UserAlertEngineDetailsFragment.newInstance(snapshot.getDocument_id(), mParam1);
-            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.container, fragment, "user_alert_engine_details_fragment");
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
 
-        if(snapshot.getDocument_id().contains("_analysis")){
-            Fragment fragment = UserAnalysisEngineDetailsFragment.newInstance(snapshot.getDocument_id(), mParam1);
-            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.container, fragment, "user_analysis_engine_details_fragment");
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
-
-        if(snapshot.getDocument_id().contains("_signature")){
-
-        }
+        Fragment fragment = UserAnalysisEngineDetailsFragment.newInstance(snapshot.getDocument_id(), mParam1);
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment, "user_analysis_engine_details_fragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
 
 //        Fragment fragment = UserIntrusionDetectionDetailsFragment.newInstance(snapshot.getDocument_id(), mParam1);
 //        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

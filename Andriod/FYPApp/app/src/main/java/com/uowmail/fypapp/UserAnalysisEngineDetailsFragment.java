@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -138,8 +139,9 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
                 Log.d("======MODEL======", intrusionDetails.getAnomaly().toString());
                 // anomaly
                 //anomaly.append(getColoredString(getContext(), intrusionDetails.getAnomaly(), Color.parseColor("#0000FF")));
-                //anomaly.setText("Abnormal(s) Found: " + intrusionDetails.getAnomaly());
-                //anomaly.setTextColor(Color.parseColor("#FF0000"));
+                anomaly.setText("Abnormal(s) Found: " + intrusionDetails.getAnomaly());
+                anomaly.setTextColor(Color.parseColor("#FF0000"));
+                anomaly.setTypeface(anomaly.getTypeface(), Typeface.BOLD);
 
                 // date
                 //date.setText("Date: " + intrusionDetails.getDate().toDate());

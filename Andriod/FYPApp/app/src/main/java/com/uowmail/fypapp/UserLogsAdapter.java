@@ -53,7 +53,6 @@ public class UserLogsAdapter extends FirestoreRecyclerAdapter<UserLogsModel, Use
         //Desired format: 24 hour format: Change the pattern as per the need
         DateFormat outputformat = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 
-
         try {
             //Converting the input String to Date
             date = df.parse(modelDocID);

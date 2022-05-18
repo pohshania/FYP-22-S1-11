@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,8 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class RecoverPasswordActivity extends AppCompatActivity {
@@ -51,9 +54,10 @@ public class RecoverPasswordActivity extends AppCompatActivity {
                     return;
                 }
 
-                FirebaseAuth auth = FirebaseAuth.getInstance();
+                FirebaseAuth fAuth = FirebaseAuth.getInstance();
                 email = emailET.getText().toString();
-                auth.sendPasswordResetEmail(email)
+                Log.d("===RECOVER PASSWORD====", email);
+                fAuth.sendPasswordResetEmail(email)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
@@ -66,6 +70,18 @@ public class RecoverPasswordActivity extends AppCompatActivity {
                                 Toast.makeText(RecoverPasswordActivity.this, "Unsuccessful. " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
+
+//                fAuth.sendPasswordResetEmail(email)
+//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                if(task.isSuccessful()){
+//                                    Toast.makeText(RecoverPasswordActivity.this, "Check your email to recover your password!", Toast.LENGTH_SHORT).show();
+//                                }else{
+//                                    Toast.makeText(RecoverPasswordActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+//                        });
             }
         });
     }

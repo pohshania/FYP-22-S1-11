@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
     private Button ignoreButton;
 
     private Button download;
+    private String path;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -125,7 +127,7 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
         ignoreButton.setOnClickListener(ignoreButtonListener);
 
         // query
-        String path = mParam2 + "_detection";
+        path = mParam2 + "_detection";
         fStore = FirebaseFirestore.getInstance();
         DocumentReference docRef = fStore.collection(path).document(mParam1);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -160,7 +162,16 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
 
                 // event status
                 //event_status.setText("Event status: " + intrusionDetails.getEvent_status());
-                event_status.append(getColoredString(getContext(), intrusionDetails.getEvent_status(), Color.parseColor("#883000")));
+                //event_status.append(getColoredString(getContext(), intrusionDetails.getEvent_status(), Color.parseColor("#883000")));
+                if(intrusionDetails.getEvent_status().equals("ignored")){
+                    event_status.append(getColoredString(getContext(), "Ignored", Color.parseColor("#883000")));
+                }
+                if(intrusionDetails.getEvent_status().equals("standby")){
+                    event_status.append(getColoredString(getContext(), "Stand By", Color.parseColor("#883000")));
+                }
+                if(intrusionDetails.getEvent_status().equals("confirmed")){
+                    event_status.append(getColoredString(getContext(), "Confirmed", Color.parseColor("#883000")));
+                }
             }
         });
 
@@ -179,6 +190,65 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
         return view;
     }
 
+    private void updateFeedback(){
+        fStore = FirebaseFirestore.getInstance();
+        DocumentReference docRef = fStore.collection(path).document(mParam1);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot snapshot) {
+
+                Log.d("=====SNAPSHOT==========", snapshot.getData().toString());
+
+                UserAnalysisEngineDetailsModel intrusionDetails = snapshot.toObject(UserAnalysisEngineDetailsModel.class);
+
+                Log.d("======MODEL======", intrusionDetails.getAnomaly().toString());
+                // anomaly
+                //anomaly.append(getColoredString(getContext(), intrusionDetails.getAnomaly(), Color.parseColor("#0000FF")));
+                anomaly.setText("Abnormal(s) Found: " + intrusionDetails.getAnomaly());
+                anomaly.setTextColor(Color.parseColor("#FF0000"));
+                anomaly.setTypeface(anomaly.getTypeface(), Typeface.BOLD);
+
+                // date
+                //date.setText("Date: " + intrusionDetails.getDate().toDate());
+                date.setText("");
+                date.setText("Date: ");
+                date.setTextColor(Color.parseColor("#000080"));
+                date.append(getColoredString(getContext(), intrusionDetails.getDate().toDate().toString(), Color.parseColor("#883000")));
+
+
+                // detection range
+                //detected_range.setText("Detected range: " + intrusionDetails.getDetected_range().toDate());
+                detection_range.setText("");
+                detection_range.setText("Detection Range: ");
+                detection_range.setTextColor(Color.parseColor("#000080"));
+                detection_range.append(getColoredString(getContext(), intrusionDetails.getDetection_range().toDate().toString(), Color.parseColor("#883000")));
+                //Log.d("============DETECTION RANGE=======", intrusionDetails.getDetection_range().toDate().toString());
+
+                // detection type
+                //detection_type.setText("Detection type: " + intrusionDetails.getDetection_type());
+                detection_type.setText("");
+                detection_type.setText("Detection Type: ");
+                detection_type.setTextColor(Color.parseColor("#000080"));
+                detection_type.append(getColoredString(getContext(), intrusionDetails.getDetection_type(), Color.parseColor("#883000")));
+
+
+                // event status
+                //event_status.setText("Event status: " + intrusionDetails.getEvent_status());
+                event_status.setText("");
+                event_status.setText("Event Status: ");
+                event_status.setTextColor(Color.parseColor("#000080"));
+                if(intrusionDetails.getEvent_status().equals("ignored")){
+                    event_status.append(getColoredString(getContext(), "Ignored", Color.parseColor("#883000")));
+                }
+                if(intrusionDetails.getEvent_status().equals("standby")){
+                    event_status.append(getColoredString(getContext(), "Stand By", Color.parseColor("#883000")));
+                }
+                if(intrusionDetails.getEvent_status().equals("confirmed")){
+                    event_status.append(getColoredString(getContext(), "Confirmed", Color.parseColor("#883000")));
+                }
+            }
+        });
+    }
 
     private void downloadFile(String date, String detection_range,
                               String detection_type, String event_status){
@@ -293,6 +363,7 @@ public class UserAnalysisEngineDetailsFragment extends Fragment {
                   @Override
                   public void onSuccess(Void unused) {
                       Log.d("=====FIRESTORE_QUERR=====", "DocumentSnapshot successfully updated!");
+                      updateFeedback();
                   }
               });
     }
